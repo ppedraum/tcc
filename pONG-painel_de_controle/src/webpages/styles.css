@@ -1,0 +1,86 @@
+body{
+    background-color: #52A5E0;
+    font-size: 20px;
+    font-family: 'Helvetica';
+    color: #00223a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+a{
+    color: #00223a;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.filtros{
+    display: flex;
+    flex-direction: row;
+}
+
+header{
+    margin-top: 10vh;
+    margin-bottom: 20vh;
+}
+input, select, button{
+    background-color: white;
+    border-style: none;
+    border-radius: 0px;
+    padding: 9px;
+    margin: 8px;
+}
+input[type="text"]{
+    font-size: 20px;
+    font-family: 'Helvetica';
+    width: 50ch;
+
+}
+select{
+    font-size: 20px;
+    font-family: 'Helvetica';
+}
+#sel_tipo_publicacao{
+    padding: 9px;
+    width:20ch;
+}
+input[type="checkbox"], input[type="radio"]{
+    scale: 1.7;
+}
+button, input[type="submit"], input[type="reset"]{
+    font-family: 'Helvetica';
+    font-size: 20px;
+    width: 20ch;
+}
+
+#table_publi {
+    font-family: 'Helvetica';
+    border-collapse: collapse;
+    width: 1000px;
+    margin: 8px;
+}
+
+#table_publi td, #table_publi th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#table_publi tr{background-color: white;}
+
+#table_publi tr:hover {background-color: #ddd;}
+
+#table_publi th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #004475;
+    color: white;
+}
+.opt_publi{
+    font-size:12px;
+}

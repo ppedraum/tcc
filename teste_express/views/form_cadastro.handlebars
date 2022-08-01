@@ -1,0 +1,14 @@
+<!-- Action envia os dados recebidos para outra rota, no caso, a rota do tipo
+     POST '/add'
+-->
+<form action="/add_post" method="POST" >
+
+    <label for="titulo">Título</label><br>
+    <input type="text" name="titulo" required><br>
+
+    <label for="conteudo">Conteúdo</label><br>
+    <textarea name="conteudo" required></textarea><br>
+
+    <button type="submit" name="bt_submit" >Enviar</button>
+
+</form>
