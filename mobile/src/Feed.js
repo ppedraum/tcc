@@ -3,6 +3,15 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList } from 'react-native';
 import styles from '../styles'
 
+/*
+    NÃO estou autorizado pela API para pegar as publicações devido à autenticação por token,
+    sendo assim, preciso mandar pelo fetch de cada um o header Authorization com o token para conseguir
+    acessar o JSON com elas.
+
+*/
+
+
+
 
 function Feed() {
 
@@ -13,7 +22,7 @@ function Feed() {
 
 
     function getPublicacoes(){
-        fetch('http://localhost:3001/publicacoes')
+        fetch('http://localhost:3001/projeto/publicacoes')
         .then(res => res.json())
         .then(result => {
             setPublicacoes(result);
@@ -24,7 +33,7 @@ function Feed() {
     
     function getPublicacoesByName(nome){
         setLoading(true);
-        fetch('http://localhost:3001/publicacoes/'+nome)
+        fetch('http://localhost:3001/projeto/publicacoes'+nome)
         .then(res => res.json())
         .then(result => {
             setPublicacoes(result);

@@ -23,7 +23,7 @@ function Login({navigation}){
     ) */
 
     function login(){
-        fetch('http://localhost:3001/usuarios', {
+        fetch('http://localhost:3001/auth/login', {
             method: 'POST',
             headers: { 
                 'Content-Type':'application/json'
