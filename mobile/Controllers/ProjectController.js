@@ -6,7 +6,6 @@ router.use(authMiddleware);
 const Publicacao = require('../models/Publicacao');
 const { Op } = require("sequelize");
 
-
 router.get('/publicacoes', async (req, res)=>{
     let publicacoes = await Publicacao.findAll({
         order:[

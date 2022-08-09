@@ -55,13 +55,11 @@ router.post('/login', async (req, res)=>{
         }
     });
 
-    //Não mostrar a senha no JSON (segurança)
-    usuario.senha = undefined;
-
-
     if(usuario == null){
         res.status(400).send(JSON.stringify({error:"Usuário não encontrado"}));
     }else{
+        //Não mostrar a senha no JSON (segurança)
+        usuario.senha = undefined;
         res.send({
             usuario,
             /*
