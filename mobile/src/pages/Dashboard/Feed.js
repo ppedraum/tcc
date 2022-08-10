@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList } from 'react-native';
 import styles from '../styles'
+
+import AuthContext from '../../contexts/auth';
 
 /*
     NÃO estou autorizado pela API para pegar as publicações devido à autenticação por token,
@@ -20,9 +22,21 @@ function Feed() {
     const [publicacoes, setPublicacoes] = useState([]);
     const [searchInput, setSearchInput] = useState('');
 
+    /*
+    Ver como usar o axios para não precisar passar o token pelo AuthContext (fica não-profissional)
+    */
+
+    const { token } = useContext(AuthContext);
+
 
     function getPublicacoes(){
-        fetch('http://localhost:3001/projeto/publicacoes')
+        fetch('http://localhost:3001/projeto/publicacoes', {
+            method:'GET',
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+            
+        })
         .then(res => res.json())
         .then(result => {
             setPublicacoes(result);
