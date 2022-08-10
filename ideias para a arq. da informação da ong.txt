@@ -1,0 +1,7 @@
+lista de acordo com o tipo de ong -> natureza, animais, social, etc. -> logo
+icones para cada coisa
+implementar mais possíveis pesquisas dentro da área de busca, probabilizar erros de digitação
+Pessoas raramente vão buscar publicações específicas, mais nomes de ONGs, tipos de evento, tipos das ONGs, etc.
+Pesquisa mostrada em uma tela diferente do feed -> melhor, dps volta pro mesmo estado
+
+Sisteminha de salvar o estado do feed para quando voltar estar ali, depois clicar num botãozinho para atualizá-lo.
