@@ -26,5 +26,10 @@ export default function Routes(){
         return <View style={styles.container} ><ActivityIndicator size='large' color='blue'/></View>
     }
 
-    return isSigned? <AppRoutes/> : <AuthRoutes/> ;
+    if(isSigned === 'true'){
+        return <AppRoutes/>
+    }
+    else{
+        return <AuthRoutes/>
+    }
 }

@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //O que é passado na função não é o valor default, mas sim o formato dos atributos dela.
 //Bom para que o react entenda quais são os attrs
 const AuthContext = createContext({
-    isSigned:false, 
+    isSigned:'false', 
     usuario:{}, 
     login:()=>{},
     logout:()=>{},
@@ -58,7 +58,7 @@ export function AuthProvider({children}){
         setLoading(false);
     }, [])
 
-    const [isSigned, setSigned] = useState(false)
+    const [isSigned, setSigned] = useState('false')
     const [usuario, setUsuario] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const [token, setToken] = useState('');
@@ -68,7 +68,7 @@ export function AuthProvider({children}){
     mandá-lo pelo AuthProvider
     */
     function login(email, senha){
-        fetch('http://localhost:3001/auth/login', {
+        fetch('http://192.168.0.111:3001/auth/login', {
             method: 'POST',
             headers: { 
                 'Content-Type':'application/json'
@@ -83,14 +83,18 @@ export function AuthProvider({children}){
             if(result.error != null){
                 console.log('O usuário não foi encontrado!');
             }else{
-                setSigned(true);
+                setSigned('true');
                 setUsuario(result.usuario);
                 setToken(result.token)
                 AsyncStorage.setItem('@RNAuth:usuario', JSON.stringify(result.usuario));
                 AsyncStorage.setItem('@RNAuth:is_signed', isSigned);
                 AsyncStorage.setItem('@RNAuth:token', result.token);
             }
-        });
+        })
+        .catch(err=>{
+            alert(err);
+        })
+        ;
     
     }
 
@@ -103,7 +107,7 @@ export function AuthProvider({children}){
 
     function logout(){
         AsyncStorage.clear().then(()=>{
-            setSigned(false);
+            setSigned('false');
             setUsuario(null);
         });
     }

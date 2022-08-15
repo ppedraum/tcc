@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import styles from '../styles'
 
 import AuthContext from '../../contexts/auth';
@@ -28,9 +28,10 @@ function Feed() {
 
     const { token } = useContext(AuthContext);
 
+    
 
     function getPublicacoes(){
-        fetch('http://localhost:3001/projeto/publicacoes', {
+        fetch('http://192.168.0.111:3001/projeto/publicacoes', {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`
@@ -40,6 +41,7 @@ function Feed() {
         .then(res => res.json())
         .then(result => {
             setPublicacoes(result);
+            console.log(`Bearer ${token}`);
             setLoading(false);
         })
         .catch(err => console.log(err));
@@ -47,10 +49,17 @@ function Feed() {
     
     function getPublicacoesByName(nome){
         setLoading(true);
-        fetch('http://localhost:3001/projeto/publicacoes'+nome)
+        fetch('http://192.168.0.111:3001/projeto/publicacoes/'+nome, {
+            method:'GET',
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+            
+        })
         .then(res => res.json())
         .then(result => {
             setPublicacoes(result);
+            console.log(`Bearer ${token}`);
             setLoading(false);
         })
         .catch(err => console.log(err));
@@ -58,8 +67,8 @@ function Feed() {
     }
 
     useEffect(()=>{
-        getPublicacoes()
-    }, []);
+        getPublicacoes();
+    }, [token]);
 
     return(
         <View style={styles.container}>
@@ -84,10 +93,12 @@ function Feed() {
                 data={publicacoes}
                 keyExtractor={(item)=>item.id}
                 renderItem={({ item, index })=> (
-                    <View style={styles.post_cell}>
-                    <Text style={styles.titulo} >{item.titulo}</Text>
-                    <Text style={styles.conteudo} >{item.descricao}</Text>
-                    </View>
+                    <TouchableOpacity>
+                        <View style={styles.post_cell}>
+                            <Text style={styles.titulo} >{item.titulo}</Text>
+                            <Text style={styles.conteudo} >{item.descricao}</Text>
+                            </View>
+                    </TouchableOpacity>
                 )}
                 />
                 

@@ -1,8 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { Checkbox } from 'react-native-paper';
+
 import styles from '../styles';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -19,7 +23,7 @@ function Cadastro({navigation}){
     const [ uf, setUf] = useState('');
     const [ cpf, setCpf] = useState('');
     const [ fotoperfil, setFotoperfil] = useState('');
-    const [ isvoluntario, setIsvoluntario] = useState('');
+    const [ isvoluntario, setIsvoluntario] = useState(false);
 
     function CadastroBasico({navigation}){
         return (
@@ -43,7 +47,9 @@ function Cadastro({navigation}){
 
     function CadastroDados({navigation}){
         return (
-            <ScrollView  >
+            
+            <ScrollView contentContainerStyle={styles.container} >
+                <KeyboardAvoidingView>
                 <View>
                     <Text>telefone</Text>
                     <TextInput style={styles.input} onChangeText={(telefone)=>setTelefone(telefone)} />
@@ -54,19 +60,62 @@ function Cadastro({navigation}){
                 </View> 
                 <View>
                     <Text>Sexo</Text>
-                    <TextInput style={styles.input} onChangeText={(datanasc)=>setDatanasc(datanasc)} />
+                    <Picker
+                    style={styles.pickerInput} 
+                    dropdownIconColor='white'
+                    selectedValue={sexo}
+                    onValueChange={(value, index) =>
+                        setSexo(value)
+                    }>
+                        <Picker.Item label="Masculino" value="MASC" />
+                        <Picker.Item label="Feminino" value="FEMN" />
+                        <Picker.Item label="Outro" value="OUTR" />
+                    </Picker>
                 </View>
                 <View>
-                    <Text>profissao</Text>
+                    <Text>Profissão</Text>
                     <TextInput style={styles.input} onChangeText={(profissao)=>setProfissao(profissao)} />
                 </View>
                 <View>
-                    <Text>cidade</Text>
+                    <Text>Cidade</Text>
                     <TextInput style={styles.input} onChangeText={(cidade)=>setCidade(cidade)} />
                 </View>
                 <View>
                     <Text>UF</Text>
-                    <TextInput style={styles.input} onChangeText={(uf)=>setUf(uf)} />
+                    <Picker 
+                    style={styles.pickerInput} 
+                    dropdownIconColor='white'
+                    selectedValue={uf}
+                    onValueChange={(value, index) =>
+                        setUf(value)
+                    }>
+                        <Picker.Item label="AC" value="AC" />
+                        <Picker.Item label="AL" value="AL" />
+                        <Picker.Item label="AP" value="AP" />
+                        <Picker.Item label="AM" value="AM" />
+                        <Picker.Item label="BA" value="BA" />
+                        <Picker.Item label="CE" value="CE" />
+                        <Picker.Item label="DF" value="DF" />
+                        <Picker.Item label="ES" value="ES" />
+                        <Picker.Item label="GO" value="GO" />
+                        <Picker.Item label="MA" value="MA" />
+                        <Picker.Item label="MG" value="MG" />
+                        <Picker.Item label="MS" value="MS" />
+                        <Picker.Item label="MT" value="MT" />
+                        <Picker.Item label="PA" value="PA" />
+                        <Picker.Item label="PB" value="PB" />
+                        <Picker.Item label="PE" value="PE" />
+                        <Picker.Item label="PI" value="PI" />
+                        <Picker.Item label="PR" value="PR" />
+                        <Picker.Item label="RJ" value="RJ" />
+                        <Picker.Item label="RO" value="RO" />
+                        <Picker.Item label="RR" value="RR" />
+                        <Picker.Item label="RS" value="RS" />
+                        <Picker.Item label="SC" value="SC" />
+                        <Picker.Item label="SE" value="SE" />
+                        <Picker.Item label="SP" value="SP" />
+                        <Picker.Item label="TO" value="TO" />
+                    </Picker>
                 </View>
                 <View>
                     <Text>CPF</Text>
@@ -76,11 +125,17 @@ function Cadastro({navigation}){
                     <Text>Foto de Perfil</Text>
                     <TextInput style={styles.input} onChangeText={(fotoPerfil)=>setFotoperfil(fotoPerfil)} />
                 </View>
-                <View>
+                <View style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
                     <Text>Você é um profissional voluntário?</Text>
-                    <TextInput style={styles.input} onChangeText={(isvoluntario)=>setIsvoluntario(isvoluntario)} />
+                    <Checkbox
+                    status={isvoluntario ? 'checked' : 'unchecked'}
+                    onPress={() => {
+                        setIsvoluntario(!isvoluntario);
+                    }}
+                    />
                 </View>
                 <Button onPress={()=>navigation.navigate('Login')}  title='Completar Iscrição'/>
+                </KeyboardAvoidingView>
             </ScrollView>
         );
     }
@@ -123,7 +178,9 @@ function Cadastro({navigation}){
             }
             />
             <Stack.Screen name='CadastroDados' component={CadastroDados}
-
+            options={
+                {headerShown:false}
+            }
             />
         </Stack.Navigator>
     );

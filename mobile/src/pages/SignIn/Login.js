@@ -14,7 +14,7 @@ function Login({navigation}){
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    const { isSigned, usuario, login } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
 
     function handleLogin(){
         login(email, senha);
@@ -34,13 +34,14 @@ function Login({navigation}){
                 <TextInput style={styles.input} value={senha} onChangeText={(senha)=>setSenha(senha)} />
             </View>
             <View>
-                <Text>{isSigned? 'true':'false'}</Text>
-                <Text>{usuario!=null?usuario.nome:'usuario é null'}</Text>
+                <Text>{errMsg}</Text>
             </View>
             <View>
                 <Button title='Login' onPress={()=>handleLogin()} />
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} ><Text>Não tem conta? Cadastre-se</Text></TouchableOpacity>
+            <View style={{margin:20}} >
+                <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} ><Text>Não tem conta? Cadastre-se</Text></TouchableOpacity>
+            </View>
             
         </View>
 
