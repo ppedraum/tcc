@@ -53,7 +53,7 @@ Usuario = db.sequelize.define('Usuario',{
     },
     is_voluntario:{
         type: db.Sequelize.BOOLEAN,
-        null: true,
+        null: false,
     },
 
 

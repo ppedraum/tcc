@@ -68,7 +68,7 @@ export function AuthProvider({children}){
     mandá-lo pelo AuthProvider
     */
     function login(email, senha){
-        fetch('http://192.168.0.111:3001/auth/login', {
+        fetch('http://10.107.0.33:3001/auth/login', {
             method: 'POST',
             headers: { 
                 'Content-Type':'application/json'

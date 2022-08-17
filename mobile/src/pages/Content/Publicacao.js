@@ -16,7 +16,7 @@ function Publicacao({ route, navigation }){
     const idPublicacao = JSON.stringify(route.params.id);
 
     function getPublicacaoById(){
-        fetch('http://192.168.0.111:3001/projeto/publicacao/'+ idPublicacao, {
+        fetch('http://10.107.0.33:3001/projeto/publicacao/'+ idPublicacao, {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`

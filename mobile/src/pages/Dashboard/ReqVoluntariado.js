@@ -31,7 +31,7 @@ function Feed({navigation}) {
     
 
     function getReqsVoluntariado(){
-        fetch('http://192.168.0.111:3001/projeto/voluntariado', {
+        fetch('http://10.107.0.33:3001/projeto/voluntariado', {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`

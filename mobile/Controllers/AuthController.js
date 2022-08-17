@@ -81,18 +81,15 @@ router.post('/login', async (req, res)=>{
 router.post('/cadastro', async (req, res)=>{
     let ver = await Usuario.findOne({
         where:{
-            [Op.or]:[
-                {e_mail : req.body.e_mail},
-                {cpf : req.body.cpf}
-            ]
+            e_mail : req.body.e_mail,
         }
-    })
+    });
     if (ver != null){
         res.send(JSON.stringify('error'))
     }else{
         Usuario.create({
             nome : req.body.nome,
-            e_mail : req.body.email,
+            e_mail : req.body.e_mail,
             senha : req.body.senha,
             telefone : req.body.telefone,
             data_nasc : req.body.data_nasc,
@@ -106,14 +103,20 @@ router.post('/cadastro', async (req, res)=>{
         })
         
         const usuario = Usuario.findOne({
-            order: [
-                [ 'id', 'DESC' ]
-            ],
+            where:{
+                e_mail : req.body.e_mail,
+                senha: req.body.senha
+            }
         });
-        res.send({
-            usuario,
-            token: gerarToken({ id: usuario.id })
-        })
+        if(usuario == null){
+            res.status(500).send(JSON.stringify({error:"Erro no Servidor"}));
+        }else{
+            res.send({
+                usuario,
+                token: gerarToken({ id: usuario.id })
+            })
+        }
+
     }
 })
 

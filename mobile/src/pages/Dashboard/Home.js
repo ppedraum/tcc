@@ -13,6 +13,7 @@ const Bttn = createBottomTabNavigator();
 export default function Home({navigation}){
 
     const { usuario } = useContext(AuthContext);
+
     return(
         <>
         <Bttn.Navigator
@@ -34,34 +35,6 @@ export default function Home({navigation}){
                 )}
             }}
             />
-            {/*tirar ponto de exclamação*/}
-            {
-                usuario.is_voluntario?
-                <Bttn.Screen name='ReqVoluntariado' component={ReqVoluntariado} 
-                options={{
-                    tabBarIcon: home => {return(
-                        <Ionicons
-                        name="hand-left"
-                        size={28}
-                        color="#3F3F3F"
-                        />
-                    )}
-                }}
-                />
-                :
-                <Bttn.Screen name='ReqVoluntariado' component={ReqVoluntariado} 
-                options={{
-                    tabBarIcon: home => {return(
-                        <Ionicons
-                        name="hand-left"
-                        size={28}
-                        color="#3F3F3F"
-                        />
-                    )}
-                }}
-                />
-
-            }
             <Bttn.Screen name='PerfilUsuario' component={PerfilUsuario} 
             options={{
                 tabBarIcon: home => {return(

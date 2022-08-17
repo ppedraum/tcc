@@ -8,6 +8,11 @@ const { Op } = require("sequelize");
 
 router.get('/publicacoes', async (req, res)=>{
     let publicacoes = await Publicacao.findAll({
+        where:{
+            tipo_publicacao:{
+                [Op.not]:'REQUISICAO'
+            }
+        },
         order:[
             ['datetime_publicacao', 'DESC']
         ]

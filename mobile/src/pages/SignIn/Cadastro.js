@@ -8,35 +8,34 @@ import styles from '../styles';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-function cadastrar(nome, email, senha, telefone, datanasc, sexo, profissao, cidade, uf, cpf, fotoperfil, isvoluntario){
-    fetch('http://192.168.0.111:3001/auth/cadastro', {
+function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario){
+    fetch('http://10.107.0.33:3001/auth/cadastro', {
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             nome : nome,
-            e_mail : email,
+            e_mail : e_mail,
             senha : senha,
             telefone : telefone,
-            data_nasc : datanasc,
+            data_nasc : data_nasc,
             sexo : sexo,
             profissao : profissao,
             cidade : cidade,
             uf : uf,
             cpf : cpf,
-            foto_perfil : fotoperfil,
-            is_voluntario : isvoluntario,
+            foto_perfil : foto_perfil,
+            is_voluntario : is_voluntario,
         })
     }).then(res => res.json())
-    .then(res=>console.log(res))
-    .catch(err => console.log(err))
-    ;
+    .then(res=>{console.log(res)})
+    .catch(err => console.log(err));
 }
 
 function CadastroBasico({navigation}){
     const [ nome, setNome] = useState('');
-    const [ email, setEmail] =  useState('');
+    const [ e_mail, setEmail] =  useState('');
     const [ senha, setSenha] = useState('');
     return (
     <View style={styles.container}>       
@@ -46,7 +45,7 @@ function CadastroBasico({navigation}){
         </View>
         <View>
             <Text>e-mail</Text>
-            <TextInput style={styles.input} onChangeText={(email)=>setEmail(email)} />
+            <TextInput style={styles.input} onChangeText={(e_mail)=>setEmail(e_mail)} />
         </View>
         <View>
             <Text>senha</Text>
@@ -54,7 +53,7 @@ function CadastroBasico({navigation}){
         </View>
     <Button onPress={()=>navigation.navigate('CadastroDados', {
         nome:nome,
-        email:email,
+        e_mail:e_mail,
         senha:senha
 
     })}  title='Seguinte'/>
@@ -64,16 +63,16 @@ function CadastroBasico({navigation}){
 
 function CadastroDados({ route, navigation }){
 
-    const { nome, email, senha } = route.params;
+    const { nome, e_mail, senha } = route.params;
     const [ telefone, setTelefone] = useState('');
-    const [ datanasc, setDatanasc] = useState('');
+    const [ data_nasc, setDatanasc] = useState('');
     const [ sexo, setSexo] = useState('');
     const [ profissao, setProfissao] = useState('');
     const [ cidade, setCidade] = useState('');
     const [ uf, setUf] = useState('');
     const [ cpf, setCpf] = useState('');
-    const [ fotoperfil, setFotoperfil] = useState('');
-    const [ isvoluntario, setIsvoluntario] = useState(false);
+    const [ foto_perfil, setFotoperfil] = useState('');
+    const [ is_voluntario, setIsvoluntario] = useState(false);
 
     return (
         
@@ -85,7 +84,7 @@ function CadastroDados({ route, navigation }){
             </View>
             <View>
                 <Text>data de nascimento</Text>
-                <TextInput style={styles.input} onChangeText={(datanasc)=>setDatanasc(datanasc)} />
+                <TextInput style={styles.input} onChangeText={(data_nasc)=>setDatanasc(new Date(data_nasc))} />
             </View> 
             <View>
                 <Text>Sexo</Text>
@@ -162,21 +161,24 @@ function CadastroDados({ route, navigation }){
             </View>
 {/*             <View>
                 <Text>Foto de Perfil</Text>
-                <TextInput style={styles.input} onChangeText={(fotoPerfil)=>setFotoperfil(fotoPerfil)} />
+                <TextInput style={styles.input} onChangeText={(foto_Perfil)=>setFotoperfil(foto_Perfil)} />
             </View> */}
             <View style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
                 <Text>Você é um profissional voluntário?</Text>
                 <Checkbox
-                status={isvoluntario ? 'checked' : 'unchecked'}
+                status={is_voluntario ? 'checked' : 'unchecked'}
                 onPress={() => {
-                    setIsvoluntario(!isvoluntario);
+                    setIsvoluntario(!is_voluntario);
                 }}
                 />
             </View>
             <Button onPress={()=>{
 
-                cadastrar(nome, email, senha, telefone, datanasc, sexo, profissao, cidade, uf, cpf, fotoperfil, isvoluntario)
-                console.log('cadastrado!');
+                cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, 
+                          profissao, cidade, uf, cpf, foto_perfil, is_voluntario)
+
+                console.log('Entrou aqui!');
+                navigation.navigate('Login');
 
             }}  title='Completar Iscrição'/>
             </KeyboardAvoidingView>
