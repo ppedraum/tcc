@@ -30,8 +30,8 @@ function Feed({navigation}) {
 
     
 
-    function getPublicacoes(){
-        fetch('http://192.168.0.111:3001/projeto/publicacoes', {
+    function getReqsVoluntariado(){
+        fetch('http://192.168.0.111:3001/projeto/voluntariado', {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`
@@ -47,9 +47,9 @@ function Feed({navigation}) {
         .catch(err => console.log(err));
     }
     
-    function getPublicacoesByName(nome){
+    function getReqsByName(nome){
         setLoading(true);
-        fetch('http://192.168.0.111:3001/projeto/publicacoes/'+nome, {
+        fetch('http://192.168.0.111:3001/projeto/voluntariado/'+nome, {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`
@@ -67,15 +67,15 @@ function Feed({navigation}) {
     }
 
     useEffect(()=>{
-        getPublicacoes();
+        getReqsVoluntariado();
     }, [token]);
 
     return(
         <View style={styles.container}>
-            <Text style={styles.titulo}>Meu Feed</Text>
+            <Text style={styles.titulo}>Oportunidades</Text>
             <View style={styles.searchContainer} >
                 <TextInput style={styles.input} placeholder='Procurar publicacoes' onChangeText={(text)=>setSearchInput(text)} />
-                <Button title='Procurar' onPress={()=>getPublicacoesByName(searchInput)} />
+                <Button title='Procurar' onPress={()=>getReqsByName(searchInput)} />
             </View>
             
             {

@@ -95,14 +95,24 @@ router.post('/cadastro', async (req, res)=>{
             e_mail : req.body.email,
             senha : req.body.senha,
             telefone : req.body.telefone,
-            data_nasc : req.body.datanasc,
+            data_nasc : req.body.data_nasc,
             sexo : req.body.sexo,
             profissao : req.body.profissao,
             cidade : req.body.cidade,
             uf : req.body.uf,
             cpf : req.body.cpf,
-            foto_perfil : req.body.fotoperfil,
-            is_voluntario : req.body.isvoluntario,
+            foto_perfil : req.body.foto_perfil,
+            is_voluntario : req.body.is_voluntario,
+        })
+        
+        const usuario = Usuario.findOne({
+            order: [
+                [ 'id', 'DESC' ]
+            ],
+        });
+        res.send({
+            usuario,
+            token: gerarToken({ id: usuario.id })
         })
     }
 })

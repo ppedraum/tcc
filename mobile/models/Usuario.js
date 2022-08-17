@@ -65,5 +65,4 @@ Usuario = db.sequelize.define('Usuario',{
     }
 );
 
-
 module.exports = Usuario;
