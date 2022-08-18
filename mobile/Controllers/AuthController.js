@@ -92,7 +92,7 @@ router.post('/cadastro', async (req, res)=>{
     }else{
         Usuario.create({
             nome : req.body.nome,
-            e_mail : req.body.email,
+            e_mail : req.body.e_mail,
             senha : req.body.senha,
             telefone : req.body.telefone,
             data_nasc : req.body.data_nasc,

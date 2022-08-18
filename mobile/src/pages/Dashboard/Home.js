@@ -35,7 +35,7 @@ export default function Home({navigation}){
             }}
             />
             {/*tirar ponto de exclamação*/}
-            {
+{/*             {
                 usuario.is_voluntario?
                 <Bttn.Screen name='ReqVoluntariado' component={ReqVoluntariado} 
                 options={{
@@ -49,19 +49,9 @@ export default function Home({navigation}){
                 }}
                 />
                 :
-                <Bttn.Screen name='ReqVoluntariado' component={ReqVoluntariado} 
-                options={{
-                    tabBarIcon: home => {return(
-                        <Ionicons
-                        name="hand-left"
-                        size={28}
-                        color="#3F3F3F"
-                        />
-                    )}
-                }}
-                />
+                null
 
-            }
+            } */}
             <Bttn.Screen name='PerfilUsuario' component={PerfilUsuario} 
             options={{
                 tabBarIcon: home => {return(

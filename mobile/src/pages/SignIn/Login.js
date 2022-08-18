@@ -6,18 +6,27 @@ import AuthContext from '../../contexts/auth'
 
 import styles from '../styles'
 
-function Login({navigation}){
+function Login({route, navigation}){
 
     
     const [isLoading, setLoading] = useState(true);
-    const [errMsg, setErrMsg] = useState('');
+    const [errMsg, setErrMsg] = useState([]);
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
     const { login } = useContext(AuthContext);
 
     function handleLogin(){
-        login(email, senha);
+        let arr = [];
+        let reEmail = /\S+@\S+\.\S+/;
+
+        if(!reEmail.test(email)){
+            arr.push('E-Mail Inválido!')
+            console.log(arr)
+            setErrMsg(arr);
+        }else
+            setErrMsg([])
+            login(email, senha);
     }
 
     return (
@@ -28,13 +37,12 @@ function Login({navigation}){
             <View>
                 <Text>E-Mail</Text>
                 <TextInput style={styles.input} placeholder='exemplo@mail.com' onChangeText={(email)=>setEmail(email)} />
+                <Text>{errMsg[0]}</Text>
             </View>
             <View>
                 <Text>Senha</Text>
-                <TextInput style={styles.input} value={senha} onChangeText={(senha)=>setSenha(senha)} />
-            </View>
-            <View>
-                <Text>{errMsg}</Text>
+                <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
+                <Text>{errMsg[1]}</Text>
             </View>
             <View>
                 <Button title='Login' onPress={()=>handleLogin()} />

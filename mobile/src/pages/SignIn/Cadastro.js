@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { RNDateTimePicker, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper';
 
@@ -8,7 +9,15 @@ import styles from '../styles';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-function cadastrar(nome, email, senha, telefone, datanasc, sexo, profissao, cidade, uf, cpf, fotoperfil, isvoluntario){
+function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario){
+
+    /* function handleCadastro(){
+        let regSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+        if(!regSenha.test(senha)){
+            console.log('senha inválida')
+        }
+    } */
+
     fetch('http://192.168.0.111:3001/auth/cadastro', {
         method: 'POST',
         headers:{
@@ -16,17 +25,17 @@ function cadastrar(nome, email, senha, telefone, datanasc, sexo, profissao, cida
         },
         body: JSON.stringify({
             nome : nome,
-            e_mail : email,
+            e_mail : e_mail,
             senha : senha,
             telefone : telefone,
-            data_nasc : datanasc,
+            data_nasc : data_nasc,
             sexo : sexo,
             profissao : profissao,
             cidade : cidade,
             uf : uf,
             cpf : cpf,
-            foto_perfil : fotoperfil,
-            is_voluntario : isvoluntario,
+            foto_perfil : foto_perfil,
+            is_voluntario : is_voluntario,
         })
     }).then(res => res.json())
     .then(res=>console.log(res))
@@ -36,8 +45,11 @@ function cadastrar(nome, email, senha, telefone, datanasc, sexo, profissao, cida
 
 function CadastroBasico({navigation}){
     const [ nome, setNome] = useState('');
-    const [ email, setEmail] =  useState('');
+    const [ e_mail, setEmail] =  useState('');
     const [ senha, setSenha] = useState('');
+    /* const [errMsg, setErrMsg] = useState([]) */
+    
+    // regex senha ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/
     return (
     <View style={styles.container}>       
         <View>
@@ -46,34 +58,48 @@ function CadastroBasico({navigation}){
         </View>
         <View>
             <Text>e-mail</Text>
-            <TextInput style={styles.input} onChangeText={(email)=>setEmail(email)} />
+            <TextInput style={styles.input} onChangeText={(e_mail)=>setEmail(e_mail)} />
         </View>
         <View>
             <Text>senha</Text>
             <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
         </View>
-    <Button onPress={()=>navigation.navigate('CadastroDados', {
-        nome:nome,
-        email:email,
-        senha:senha
+        <Button onPress={()=>
+            navigation.navigate('CadastroDados', {
+                nome:nome,
+                e_mail:e_mail,
+                senha:senha
 
-    })}  title='Seguinte'/>
+            })}
+        title='Seguinte'/>
     </View> 
     );
 }
 
 function CadastroDados({ route, navigation }){
 
-    const { nome, email, senha } = route.params;
+    const { nome, e_mail, senha } = route.params;
     const [ telefone, setTelefone] = useState('');
-    const [ datanasc, setDatanasc] = useState('');
+    const [ data_nasc, setDatanasc] = useState(new Date(2022, 1, 1));
     const [ sexo, setSexo] = useState('');
     const [ profissao, setProfissao] = useState('');
     const [ cidade, setCidade] = useState('');
     const [ uf, setUf] = useState('');
     const [ cpf, setCpf] = useState('');
-    const [ fotoperfil, setFotoperfil] = useState('');
-    const [ isvoluntario, setIsvoluntario] = useState(false);
+    const [ foto_perfil, setFotoperfil] = useState('');
+    const [ is_voluntario, setIsvoluntario] = useState(false);
+    /* const [errMsg, setErrMsg] = useState([]); */
+
+    function showDatePicker(){
+        DateTimePickerAndroid.open({
+            value: data_nasc,
+            onChange: (event, date)=>{
+                setDatanasc(date);
+            },
+          });
+    }
+
+
 
     return (
         
@@ -85,7 +111,7 @@ function CadastroDados({ route, navigation }){
             </View>
             <View>
                 <Text>data de nascimento</Text>
-                <TextInput style={styles.input} onChangeText={(datanasc)=>setDatanasc(datanasc)} />
+                <Button title='Selecione...' onPress={()=>showDatePicker()}/>
             </View> 
             <View>
                 <Text>Sexo</Text>
@@ -162,21 +188,21 @@ function CadastroDados({ route, navigation }){
             </View>
 {/*             <View>
                 <Text>Foto de Perfil</Text>
-                <TextInput style={styles.input} onChangeText={(fotoPerfil)=>setFotoperfil(fotoPerfil)} />
+                <TextInput style={styles.input} onChangeText={(foto_perfil)=>setFotoperfil(foto_perfil)} />
             </View> */}
             <View style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
                 <Text>Você é um profissional voluntário?</Text>
                 <Checkbox
-                status={isvoluntario ? 'checked' : 'unchecked'}
+                status={is_voluntario ? 'checked' : 'unchecked'}
                 onPress={() => {
-                    setIsvoluntario(!isvoluntario);
+                    setIsvoluntario(!is_voluntario);
                 }}
                 />
             </View>
             <Button onPress={()=>{
-
-                cadastrar(nome, email, senha, telefone, datanasc, sexo, profissao, cidade, uf, cpf, fotoperfil, isvoluntario)
+                cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario)
                 console.log('cadastrado!');
+                navigation.navigate('Login');
 
             }}  title='Completar Iscrição'/>
             </KeyboardAvoidingView>
@@ -187,6 +213,8 @@ function CadastroDados({ route, navigation }){
 
 const Stack = createNativeStackNavigator();
 function Cadastro({navigation}){
+
+
 
     return (
         <Stack.Navigator
