@@ -12,6 +12,15 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
 
     },
+    scrollContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#fff',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+  
+    },
     post_cell:{
       display: 'flex',
       alignItems: 'flex-start',

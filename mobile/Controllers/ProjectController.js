@@ -1,7 +1,10 @@
 const Express = require('express');
 const router = Express.Router();
+
 const authMiddleware = require('../middlewares/auth')
 router.use(authMiddleware);
+
+const multer = require('multer');
 
 const Publicacao = require('../models/Publicacao');
 const { Op } = require("sequelize");
@@ -67,6 +70,10 @@ router.get('/voluntariado/:titulo', async (req, res)=>{
     });
     res.json(publicacao);
 });
+
+/* router.update('/user/pfp', async (req, res)=>{
+
+}) */
 
 
 module.exports = app => app.use('/projeto', router);

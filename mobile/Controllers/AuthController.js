@@ -20,9 +20,6 @@ permitindo assim verificar se o token é válido, para finalmente prosseguir par
 const Usuario = require('../models/Usuario');
 const { Op } = require("sequelize");
 
-
-
-
 /*
 Uma função para gerar um token para o usuário ao logar no app
 
@@ -37,6 +34,16 @@ function gerarToken(params = {}){
         expiresIn : 86400,
     });
 }
+
+const multer = require('multer');
+const path = require('path')
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, '../src/user_imgs'),
+    filename: (req, file, cb)=>{
+        cb(null, file.fieldname + Date.now() + path.extname(file.filename) );
+    }
+});
+const upload = multer({multerStorage});
 
 
 router.get('/usuarios', async (req, res)=>{
@@ -78,7 +85,7 @@ router.post('/login', async (req, res)=>{
 // Cadastros
 
 
-router.post('/cadastro', async (req, res)=>{
+/* router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
     let ver = await Usuario.findOne({
         where:{
             [Op.or]:[
@@ -101,7 +108,6 @@ router.post('/cadastro', async (req, res)=>{
             cidade : req.body.cidade,
             uf : req.body.uf,
             cpf : req.body.cpf,
-            foto_perfil : req.body.foto_perfil,
             is_voluntario : req.body.is_voluntario,
         })
         
@@ -115,6 +121,11 @@ router.post('/cadastro', async (req, res)=>{
             token: gerarToken({ id: usuario.id })
         })
     }
+}) */
+
+router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
+    console.log(req.files);
+    console.log(req.body);
 })
 
 module.exports = app => app.use('/auth', router);

@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView, Image, Platform } from 'react-native';
 import { RNDateTimePicker, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper';
+
+import * as ImagePicker from 'expo-image-picker';
+import mime from "mime";
 
 import styles from '../styles';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,13 +20,31 @@ function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, ci
             console.log('senha inválida')
         }
     } */
+    
+    const createFormData = (foto_perfil, body = {}) => {
+        const data = new FormData();
+        
+        fotoUri = Platform.OS === 'ios' ? foto_perfil.uri.replace('file://', '') : foto_perfil.uri
+
+        data.append('foto_perfil', {
+          name: fotoUri.split('/').pop(),
+          type: mime.getType(fotoUri),
+          uri: fotoUri
+        });
+      
+        Object.keys(body).forEach((key) => {
+          data.append(key, body[key]);
+        });
+      
+        return data;
+      };
 
     fetch('http://192.168.0.111:3001/auth/cadastro', {
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: createFormData(foto_perfil, {
             nome : nome,
             e_mail : e_mail,
             senha : senha,
@@ -34,9 +55,9 @@ function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, ci
             cidade : cidade,
             uf : uf,
             cpf : cpf,
-            foto_perfil : foto_perfil,
             is_voluntario : is_voluntario,
         })
+
     }).then(res => res.json())
     .then(res=>console.log(res))
     .catch(err => console.log(err))
@@ -86,7 +107,7 @@ function CadastroDados({ route, navigation }){
     const [ cidade, setCidade] = useState('');
     const [ uf, setUf] = useState('');
     const [ cpf, setCpf] = useState('');
-    const [ foto_perfil, setFotoperfil] = useState('');
+    const [ foto_perfil, setFotoperfil] = useState(null);
     const [ is_voluntario, setIsvoluntario] = useState(false);
     /* const [errMsg, setErrMsg] = useState([]); */
 
@@ -99,11 +120,27 @@ function CadastroDados({ route, navigation }){
           });
     }
 
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 4],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+            setFotoperfil(result);
+        }
+      };
+
 
 
     return (
         
-        <ScrollView contentContainerStyle={styles.container} >
+        <ScrollView contentContainerStyle={styles.scrollContainer} >
             <KeyboardAvoidingView>
             <View>
                 <Text>telefone</Text>
@@ -112,6 +149,7 @@ function CadastroDados({ route, navigation }){
             <View>
                 <Text>data de nascimento</Text>
                 <Button title='Selecione...' onPress={()=>showDatePicker()}/>
+                <Text>{data_nasc.toISOString()}</Text>
             </View> 
             <View>
                 <Text>Sexo</Text>
@@ -186,10 +224,12 @@ function CadastroDados({ route, navigation }){
                 <Text>CPF</Text>
                 <TextInput style={styles.input} onChangeText={(cpf)=>setCpf(cpf)} />
             </View>
-{/*             <View>
+            <View>
                 <Text>Foto de Perfil</Text>
-                <TextInput style={styles.input} onChangeText={(foto_perfil)=>setFotoperfil(foto_perfil)} />
-            </View> */}
+                <Button title='escolha' onPress={pickImage} />
+                {foto_perfil && <Image source={{ uri: foto_perfil.uri }} style={{ width: 200, height: 200 }} />}
+
+            </View>
             <View style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
                 <Text>Você é um profissional voluntário?</Text>
                 <Checkbox
