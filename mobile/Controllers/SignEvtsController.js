@@ -7,22 +7,26 @@ const { Op } = require("sequelize");
 const Inscricao = require('../models/Inscricao');
 
 router.post('/evento', async(req, res)=>{
-    const ver = Inscricao.findOne({
+    const ver = await Inscricao.findOne({
         where:{
-            id_usuario : req.body.id_usuario
+            id_usuario : req.body.id_usuario,
+            id_evento : req.body.id_evento
         }
-    })
+    });
 
-    if (ver != null)
+    if (ver != null){
         res.status(400).send(JSON.stringify({'error': 'Você ja se inscreveu!'}));
-    else
+
+    }
+    else{
+        console.log('ok')
         Inscricao.create({
             id_evento : req.body.id_evento,
             id_usuario : req.body.id_usuario
             
         });
+    }
     
-    console.log('ok')
 });
 
 

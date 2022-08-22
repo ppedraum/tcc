@@ -31,7 +31,7 @@ function Feed({navigation}) {
     
 
     function getReqsVoluntariado(){
-        fetch('http://192.168.0.111:3001/projeto/voluntariado', {
+        fetch( NODE_PORT + '/projeto/voluntariado', {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`
@@ -49,7 +49,7 @@ function Feed({navigation}) {
     
     function getReqsByName(nome){
         setLoading(true);
-        fetch('http://192.168.0.111:3001/projeto/voluntariado/'+nome, {
+        fetch( NODE_PORT + '/projeto/voluntariado/'+nome, {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`

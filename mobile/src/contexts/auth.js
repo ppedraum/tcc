@@ -20,7 +20,8 @@ const AuthContext = createContext({
     login:()=>{},
     logout:()=>{},
     isLoading:true,
-    token:''
+    token:'',
+    NODE_PORT: '',
 });
 
 
@@ -29,6 +30,9 @@ Provider -> Provê as informações daquele contexto
 Exportamos o Provider com o parâmetro children, que recebe pelo react todos os componentes
 que vão estar dentro desse componente, e assim repassamos normalmente os valores para lá
 */
+
+const { NODE_PORT } = require('../../config/port.json');
+
 export function AuthProvider({children}){
 
     /*
@@ -68,7 +72,7 @@ export function AuthProvider({children}){
     mandá-lo pelo AuthProvider
     */
     function login(email, senha){
-        fetch('http://192.168.0.111:3001/auth/login', {
+        fetch( NODE_PORT + '/auth/login', {
             method: 'POST',
             headers: { 
                 'Content-Type':'application/json'
@@ -113,7 +117,7 @@ export function AuthProvider({children}){
     }
 
     return (
-        <AuthContext.Provider value={{isSigned, usuario, login, logout, isLoading, token}} >
+        <AuthContext.Provider value={{isSigned, usuario, login, logout, isLoading, token, NODE_PORT }} >
             {children}
         </AuthContext.Provider>
     );

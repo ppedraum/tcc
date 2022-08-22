@@ -20,6 +20,6 @@ const Inscricao = db.sequelize.define('Inscricao', {
         freezeTableName: true,
     }
 
-)
+);
 
 module.exports = Inscricao;

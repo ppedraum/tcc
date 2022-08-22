@@ -26,12 +26,12 @@ function Feed({navigation}) {
     Ver como usar o axios para não precisar passar o token pelo AuthContext (fica não-profissional)
     */
 
-    const { token } = useContext(AuthContext);
+    const { token, NODE_PORT } = useContext(AuthContext);
 
     
 
     function getPublicacoes(){
-        fetch('http://192.168.0.111:3001/projeto/publicacoes', {
+        fetch( NODE_PORT + '/projeto/publicacoes', {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`
@@ -49,7 +49,7 @@ function Feed({navigation}) {
     
     function getPublicacoesByName(nome){
         setLoading(true);
-        fetch('http://192.168.0.111:3001/projeto/publicacoes/'+nome, {
+        fetch( NODE_PORT + '/projeto/publicacoes/'+nome, {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`

@@ -9,13 +9,16 @@ import AuthContext from '../../contexts/auth';
 function Publicacao({ route, navigation }){
 
     const [publicacao, setPublicacao] = useState([]);
+    const [evento, setEvento] = useState([]);
+    const [msgEvento, setMsgEvento] = useState('');
+
     const [msg, setMsg] = useState('');
-    const { usuario, token } = useContext(AuthContext);
+    const { usuario, token, NODE_PORT } = useContext(AuthContext);
 
     const idPublicacao = JSON.stringify(route.params.id);
 
     function getPublicacaoById(){
-        fetch('http://192.168.0.111:3001/projeto/publicacao/'+ idPublicacao, {
+        fetch( NODE_PORT + '/projeto/publicacao/'+ idPublicacao, {
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`
@@ -25,9 +28,22 @@ function Publicacao({ route, navigation }){
         .then(res => res.json())
         .then(result => {
             setPublicacao(result);
+            getEvento(result.id_evento)
             
         })
         .catch(err => console.log(err));
+    }
+
+    function getEvento(id){
+        fetch( NODE_PORT + '/projeto/evento/' + id, {
+            method: 'GET',
+            headers:{
+                Authorization : `Bearer ${token}`
+            }
+        } )
+        .then(res => res.json())
+        .then(result => setEvento(result))
+        .catch(err => console.log(err))
     }
     
     useEffect(()=>{
@@ -35,7 +51,7 @@ function Publicacao({ route, navigation }){
     }, [token]);
 
     function inscrever(){
-        fetch('http://192.168.0.111:3001/inscricoes/evento', {
+        fetch( NODE_PORT + '/inscricoes/evento', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,8 +62,8 @@ function Publicacao({ route, navigation }){
                 id_usuario : usuario.id
             })
         })
-        .then(()=>console.log('chegou aqui'))
-        .catch(err => console.log(err))
+        .then(()=>setMsgEvento('Sucesso!'))
+        .catch(err => setMsgEvento('Houve um problema na inscrição.'))
     }
 
 
@@ -60,7 +76,33 @@ function Publicacao({ route, navigation }){
                 publicacao.tipo_publicacao == 'EVENTO' && publicacao.id_evento != null ?
                 (
                 <View>
-                <Button title='Inscrever-se' onPress={inscrever} />
+                    <View>
+                        <Text style={styles.titulo}>
+                            Detalhes do Evento
+                        </Text>
+                        <Text style={styles.conteudo}>
+                            Endereço: {evento.endereco}
+                        </Text>
+                        <Text style={styles.conteudo}>
+                            Cidade: {evento.cidade}
+                        </Text>
+                        <Text style={styles.conteudo}>
+                            Estado: {evento.uf}
+                        </Text>
+                        <Text style={styles.conteudo}>
+
+                            {/*Ver certinho como formata essa bagaça*/}
+
+                            Horário : {'\n'}
+                            De {new Date(evento.datetime_inicio).toLocaleDateString()} às {''}
+                            {new Date(evento.datetime_inicio).toLocaleTimeString()} {'\n'}
+                            
+                            Até {new Date(evento.datetime_fim).toLocaleDateString()} às {''}
+                            {new Date(evento.datetime_fim).toLocaleTimeString()} {'\n'}
+
+                        </Text>
+                    </View>
+                    <Button title='Inscrever-se' onPress={inscrever} />
                 </View>
                 )
                 :

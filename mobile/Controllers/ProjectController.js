@@ -7,6 +7,7 @@ router.use(authMiddleware);
 const multer = require('multer');
 
 const Publicacao = require('../models/Publicacao');
+const Evento = require('../models/Evento');
 const { Op } = require("sequelize");
 
 router.get('/publicacoes', async (req, res)=>{
@@ -45,6 +46,16 @@ router.get('/publicacao/:id', async (req, res)=>{
     });
     res.json(publicacao);
 });
+
+router.get('/evento/:id', async(req, res)=>{
+    let evento = await Evento.findOne({
+        where:{
+            id : req.params.id
+        }
+    })
+
+    res.json(evento);
+})
 
 router.get('/voluntariado', async (req, res)=>{
     let publicacoes = await Publicacao.findAll({
