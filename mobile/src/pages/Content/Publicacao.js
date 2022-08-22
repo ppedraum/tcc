@@ -1,6 +1,5 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { Button } from 'react-native-paper';
+import { View, Text, Button } from 'react-native';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
@@ -10,8 +9,8 @@ import AuthContext from '../../contexts/auth';
 function Publicacao({ route, navigation }){
 
     const [publicacao, setPublicacao] = useState([]);
-
-    const { token } = useContext(AuthContext);
+    const [msg, setMsg] = useState('');
+    const { usuario, token } = useContext(AuthContext);
 
     const idPublicacao = JSON.stringify(route.params.id);
 
@@ -36,11 +35,39 @@ function Publicacao({ route, navigation }){
         getPublicacaoById()
     }, [token]);
 
+    function inscrever(){
+        fetch('http://192.168.0.111:3001/inscricoes/evento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization' : `Bearer ${token}`
+            },
+            body: {
+                id_evento : publicacao.id_evento,
+                id_usuario : usuario.id
+            }
+        })
+        .then(()=>console.log('chegou aqui'))
+        .catch(err => console.log(err))
+    }
+
+
     return (
         <>
         <View style={styles.container} >
             <Text style={styles.titulo}>{publicacao.titulo} </Text>
             <Text style={styles.conteudo}>{publicacao.descricao} </Text>
+            {
+                publicacao.tipo_publicacao == 'EVENTO' && publicacao.id_evento != null ?
+                (
+                <View>
+                <Button title='Inscrever-se' onPress={()=>inscrever()} />
+                </View>
+                )
+                :
+                null
+            }
+            
         </View>
         </>
     );

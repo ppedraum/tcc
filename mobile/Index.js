@@ -9,6 +9,7 @@ const cors = require('cors');
 app.use(cors());
 
 require('./Controllers/AuthController')(app);
+require('./Controllers/SignEvtsController')(app);
 require('./Controllers/projectController')(app);
 
 app.get('/', async (req, res)=>{

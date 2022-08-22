@@ -1,1 +1,7 @@
 DatePicker não está otimizado para iOS (Cadastro.js)
+
+22-08-19 ->
+	Implementar a foto de perfil e terminar cadastro
+	Fazer restrições para o cadastro
+	Começar a modelar as publicações e fazer a inscrição em eventos
+	Mudar o Banco de Dados para a ONG poder ter foto de perfil

@@ -27,7 +27,7 @@ function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, ci
         fotoUri = Platform.OS === 'ios' ? foto_perfil.uri.replace('file://', '') : foto_perfil.uri
 
         data.append('foto_perfil', {
-          name: fotoUri.split('/').pop(),
+          name: fotoUri.split('/').pop,
           type: mime.getType(fotoUri),
           uri: fotoUri
         });
