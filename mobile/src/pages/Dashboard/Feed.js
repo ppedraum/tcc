@@ -100,6 +100,8 @@ function Feed({navigation}) {
                             </View>
                     </TouchableOpacity>
                 )}
+                refreshing={isLoading}
+                onRefresh={()=>getPublicacoes()}
                 />
                 
             }

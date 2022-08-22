@@ -12,7 +12,8 @@ function Publicacao({ route, navigation }){
     const [evento, setEvento] = useState([]);
     const [msgEvento, setMsgEvento] = useState('');
 
-    const [msg, setMsg] = useState('');
+    const [isInscrito, setInscrito] = useState(true);
+
     const { usuario, token, NODE_PORT } = useContext(AuthContext);
 
     const idPublicacao = JSON.stringify(route.params.id);
@@ -34,6 +35,22 @@ function Publicacao({ route, navigation }){
         .catch(err => console.log(err));
     }
 
+    function verInscEvento(){
+        fetch( NODE_PORT + '/inscricoes/evt_verify/' + usuario.id + '/' + publicacao.id_evento, {
+            method: 'GET',
+            headers:{
+                Authorization : `Bearer ${token}`
+            },
+
+        } )
+        .then(res => res.json())
+        .then(result => {
+            setInscrito(result)
+            alert(result)
+        })
+        .catch(err => alert(err))
+    }
+
     function getEvento(id){
         fetch( NODE_PORT + '/projeto/evento/' + id, {
             method: 'GET',
@@ -47,8 +64,11 @@ function Publicacao({ route, navigation }){
     }
     
     useEffect(()=>{
-        getPublicacaoById()
+        getPublicacaoById();
+        verInscEvento();
     }, [token]);
+
+
 
     function inscrever(){
         fetch( NODE_PORT + '/inscricoes/evento', {
@@ -64,6 +84,20 @@ function Publicacao({ route, navigation }){
         })
         .then(()=>setMsgEvento('Sucesso!'))
         .catch(err => setMsgEvento('Houve um problema na inscrição.'))
+    }
+
+    function cancelInscricao(){
+        fetch( NODE_PORT + '/inscricoes/evento', {
+            method: 'DELETE',
+            headers:{
+                'Content-Type' : 'application/json',
+                Authorization : `Bearer ${token}` 
+            },
+            body:{
+                id_evento : publicacao.id_evento,
+                id_usuario : usuario.id
+            }
+        } )
     }
 
 
