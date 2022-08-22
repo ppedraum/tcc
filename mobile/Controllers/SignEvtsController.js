@@ -9,21 +9,21 @@ const Inscricao = require('../models/Inscricao');
 router.post('/evento', async(req, res)=>{
     const ver = Inscricao.findOne({
         where:{
-            id_usuario : req.body.id
+            id_usuario : req.body.id_usuario
         }
     })
 
-    if (ver != null){
-        
+    if (ver != null)
         res.status(400).send(JSON.stringify({'error': 'Você ja se inscreveu!'}));
-    }
-    Inscricao.create({
-        id_usuario : req.body.id_usuario,
-        id_publicacao : req.body.id_publicacao
-    })
+    else
+        Inscricao.create({
+            id_evento : req.body.id_evento,
+            id_usuario : req.body.id_usuario
+            
+        });
     
     console.log('ok')
-})
+});
 
 
 

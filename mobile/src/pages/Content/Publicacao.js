@@ -25,7 +25,6 @@ function Publicacao({ route, navigation }){
         .then(res => res.json())
         .then(result => {
             setPublicacao(result);
-            //console.log(publicacao);
             
         })
         .catch(err => console.log(err));
@@ -40,12 +39,12 @@ function Publicacao({ route, navigation }){
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'authorization' : `Bearer ${token}`
+                Authorization : `Bearer ${token}`
             },
-            body: {
+            body: JSON.stringify({
                 id_evento : publicacao.id_evento,
                 id_usuario : usuario.id
-            }
+            })
         })
         .then(()=>console.log('chegou aqui'))
         .catch(err => console.log(err))
@@ -61,7 +60,7 @@ function Publicacao({ route, navigation }){
                 publicacao.tipo_publicacao == 'EVENTO' && publicacao.id_evento != null ?
                 (
                 <View>
-                <Button title='Inscrever-se' onPress={()=>inscrever()} />
+                <Button title='Inscrever-se' onPress={inscrever} />
                 </View>
                 )
                 :

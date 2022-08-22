@@ -5,10 +5,12 @@ const Inscricao = db.sequelize.define('Inscricao', {
         id_evento : {
             type: db.Sequelize.INTEGER(11),
             primaryKey : true,
+            null: false,
         },
         id_usuario : {
             type: db.Sequelize.INTEGER(11),
             primaryKey : true,
+            null: false,
         },
     },
     {
