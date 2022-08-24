@@ -8,6 +8,7 @@ const multer = require('multer');
 
 const Publicacao = require('../models/Publicacao');
 const Evento = require('../models/Evento');
+const Instituicao = require('../models/Instituicao');
 const { Op } = require("sequelize");
 
 router.get('/publicacoes', async (req, res)=>{
@@ -82,9 +83,25 @@ router.get('/voluntariado/:titulo', async (req, res)=>{
     res.json(publicacao);
 });
 
-/* router.update('/user/pfp', async (req, res)=>{
+router.get('/instituicoes', async (req, res)=>{
+    let instituicoes = await Instituicao.findAll();
+    res.json(instituicoes);
+});
 
-}) */
-
+router.get('/instituicoes/:nome', async (req, res)=>{
+    let instituicao = await Instituicao.findAll({
+        where:{
+            nome_fantasia:{[Op.substring]:req.params.nome}
+            /* [Op.or]:[
+            {
+            nome:{[Op.substring]:req.params.nome},
+            nome_fantasia:{[Op.substring]:req.params.nome}
+            },
+            ] */
+        }
+    },
+    );
+    res.json(instituicao);
+});
 
 module.exports = app => app.use('/projeto', router);
