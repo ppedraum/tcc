@@ -36,7 +36,7 @@ function Publicacao({ route, navigation }){
     }
 
     function verInscEvento(){
-        fetch( NODE_PORT + '/inscricoes/evt_verify/' + usuario.id + '/' + publicacao.id_evento, {
+        fetch( NODE_PORT + '/inscricoes/ver_evento/' + usuario.id + '/' + publicacao.id_evento, {
             method: 'GET',
             headers:{
                 Authorization : `Bearer ${token}`
@@ -45,8 +45,7 @@ function Publicacao({ route, navigation }){
         } )
         .then(res => res.json())
         .then(result => {
-            setInscrito(result)
-            alert(result)
+            console.log('Inscrito? ' + result.ver)
         })
         .catch(err => alert(err))
     }
@@ -63,13 +62,6 @@ function Publicacao({ route, navigation }){
         .catch(err => console.log(err))
     }
     
-    useEffect(()=>{
-        getPublicacaoById();
-        verInscEvento();
-    }, [token]);
-
-
-
     function inscrever(){
         fetch( NODE_PORT + '/inscricoes/evento', {
             method: 'POST',
@@ -100,6 +92,9 @@ function Publicacao({ route, navigation }){
         } )
     }
 
+    useEffect(()=>{
+        getPublicacaoById();
+    }, []);
 
     return (
         <>
@@ -137,6 +132,7 @@ function Publicacao({ route, navigation }){
                         </Text>
                     </View>
                     <Button title='Inscrever-se' onPress={inscrever} />
+                    <Text>{msgEvento}</Text>
                 </View>
                 )
                 :

@@ -6,17 +6,20 @@ router.use(authMiddleware);
 const { Op } = require("sequelize");
 const Inscricao = require('../models/Inscricao');
 
-router.get('/evt_verify/:id_usuario/:id_evento', async(req, res)=>{
+router.get('/ver_evento/:id_usuario/:id_evento', async(req, res)=>{
     const ver = await Inscricao.findOne({
-        where:{
+        where: {
             id_usuario : req.params.id_usuario,
             id_evento : req.params.id_evento
         }
     });
-    if(ver != null)
-        res.json(true);
-    else
-        res.json(false);
+    if(ver != null){
+        console.log('true')
+        res.json({ver : true});
+    }
+    else{
+        res.json({ver : false});
+    }
 });
 
 router.post('/evento', async(req, res)=>{

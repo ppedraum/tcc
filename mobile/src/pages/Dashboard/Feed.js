@@ -75,7 +75,7 @@ function Feed({navigation}) {
             <Text style={styles.titulo}>Meu Feed</Text>
             <View style={styles.searchContainer} >
                 <TextInput style={styles.input} placeholder='Procurar publicacoes' onChangeText={(text)=>setSearchInput(text)} />
-                <Button title='Procurar' onPress={()=>getPublicacoesByName(searchInput)} />
+                <Button title='Procurar' onPress={()=>navigation.navigate('ResultScreen', { searchInput })} />
             </View>
             
             {
