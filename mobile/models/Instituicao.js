@@ -27,6 +27,10 @@ const Instituicao = db.sequelize.define('ong',
         type: db.Sequelize.STRING(144),
         null: false,
     },
+    apresentacao:{
+        type: db.Sequelize.STRING(255),
+        null: false,
+    },
     sede:{
         type: db.Sequelize.STRING(144),
         null: false,

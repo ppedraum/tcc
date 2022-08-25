@@ -72,7 +72,7 @@ function ResultScreen({ route, navigation }){
 
             {
             isLoading ? <ActivityIndicator size='large'/> :
-            tipoResultado == 'Publicacao' ?
+            tipoResultado == 'Publicacao'?
                 <FlatList
                 data={resultados}
                 keyExtractor={(item)=>item.id}
@@ -88,12 +88,12 @@ function ResultScreen({ route, navigation }){
                 onRefresh={()=>getPublicacoesByName()}
                 />
                 :
-                tipoResultado == 'Instituicao' ? 
+                tipoResultado == 'Instituicao'? 
                     <FlatList
                     data={resultados}
                     keyExtractor={(item)=>item.id}
                     renderItem={({ item, index })=> (
-                        <TouchableOpacity onPress={()=>navigation.navigate('Instituicao', {id:item.id})} >
+                        <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {id:item.id})} >
                             <View style={styles.post_cell}>
                                 <Text style={styles.titulo} >{item.nome_fantasia}</Text>
                                 <Text style={styles.conteudo} >{item.cnpj}</Text>

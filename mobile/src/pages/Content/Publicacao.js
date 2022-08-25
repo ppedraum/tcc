@@ -1,5 +1,5 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ActivityIndicator } from 'react-native';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
@@ -8,6 +8,7 @@ import AuthContext from '../../contexts/auth';
 
 function Publicacao({ route, navigation }){
 
+    const [isLoading, setLoading] = useState(true);
     const [publicacao, setPublicacao] = useState([]);
     const [evento, setEvento] = useState([]);
     const [msgEvento, setMsgEvento] = useState('');
@@ -29,28 +30,36 @@ function Publicacao({ route, navigation }){
         .then(res => res.json())
         .then(result => {
             setPublicacao(result);
-            getEvento(result.id_evento)
-            
+            if(result.tipo_publicacao == 'EVENTO'){
+                getEventoById(result.id_evento);
+                verInscEvento(usuario.id, result.id_evento);
+                
+            }
+            setLoading(false);
         })
         .catch(err => console.log(err));
+        
     }
 
-    function verInscEvento(){
-        fetch( NODE_PORT + '/inscricoes/ver_evento/' + usuario.id + '/' + publicacao.id_evento, {
+    function verInscEvento(id_usuario, id_evento){
+        fetch( NODE_PORT + '/inscricoes/ver_evento/' + id_usuario + '/' + id_evento, {
             method: 'GET',
             headers:{
                 Authorization : `Bearer ${token}`
             },
-
         } )
         .then(res => res.json())
         .then(result => {
-            console.log('Inscrito? ' + result.ver)
+            console.log('Inscrito? ' + result.ver);
+            console.log('Id do usuário : ' + usuario.id);
+            console.log('id do evento : ' + id_evento);
+            setInscrito(result.ver);
         })
         .catch(err => alert(err))
     }
 
-    function getEvento(id){
+    function getEventoById(id){
+        console.log(id)
         fetch( NODE_PORT + '/projeto/evento/' + id, {
             method: 'GET',
             headers:{
@@ -63,19 +72,23 @@ function Publicacao({ route, navigation }){
     }
     
     function inscrever(){
-        fetch( NODE_PORT + '/inscricoes/evento', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization : `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                id_evento : publicacao.id_evento,
-                id_usuario : usuario.id
+        if(!isInscrito)
+            fetch( NODE_PORT + '/inscricoes/evento', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization : `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id_evento : publicacao.id_evento,
+                    id_usuario : usuario.id
+                })
             })
-        })
-        .then(()=>setMsgEvento('Sucesso!'))
-        .catch(err => setMsgEvento('Houve um problema na inscrição.'))
+            .then(()=>setMsgEvento('Sucesso!'))
+            .catch(err => setMsgEvento('Houve um problema na inscrição.'));
+
+        else setMsgEvento('Você já se inscreveu!');
+        getPublicacaoById();
     }
 
     function cancelInscricao(){
@@ -97,7 +110,8 @@ function Publicacao({ route, navigation }){
     }, []);
 
     return (
-        <>
+        isLoading ? <ActivityIndicator size='large' color='blue'/>
+        :
         <View style={styles.container} >
             <Text style={styles.titulo}>{publicacao.titulo} </Text>
             <Text style={styles.conteudo}>{publicacao.descricao} </Text>
@@ -131,7 +145,7 @@ function Publicacao({ route, navigation }){
 
                         </Text>
                     </View>
-                    <Button title='Inscrever-se' onPress={inscrever} />
+                    <Button disabled={isInscrito} title={isInscrito?'Inscrito':'Inscrever-se'} onPress={inscrever} />
                     <Text>{msgEvento}</Text>
                 </View>
                 )
@@ -140,7 +154,6 @@ function Publicacao({ route, navigation }){
             }
             
         </View>
-        </>
     );
 }
 

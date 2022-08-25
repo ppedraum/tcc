@@ -62,6 +62,14 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         alignItems:'center'
+    },
+    galeria_cell:{
+        borderColor: '#4490F5',
+        borderWidth: 1,
+        display: 'flex',
+        alignItems: 'flex-start',
+        width: 130,
+        height: 'auto'
     }
   });
 

@@ -37,6 +37,18 @@ router.get('/publicacoes/:titulo', async (req, res)=>{
     res.json(publicacao);
 });
 
+router.get('/galeria/:id_ong', async (req, res)=>{
+    let publicacao = await Publicacao.findAll({
+        where:{
+            id_ong : req.params.id_ong,
+        },
+        order:[
+            ['datetime_publicacao', 'DESC']
+        ]
+    });
+    res.json(publicacao);
+});
+
 //sendo assim, essa rota tem que ser /publicacao e não /publicacoes
 
 router.get('/publicacao/:id', async (req, res)=>{
@@ -98,6 +110,16 @@ router.get('/instituicoes/:nome', async (req, res)=>{
             nome_fantasia:{[Op.substring]:req.params.nome}
             },
             ] */
+        }
+    },
+    );
+    res.json(instituicao);
+});
+
+router.get('/instituicao/:id', async (req, res)=>{
+    let instituicao = await Instituicao.findOne({
+        where:{
+            id : req.params.id
         }
     },
     );
