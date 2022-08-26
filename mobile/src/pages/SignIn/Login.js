@@ -17,16 +17,10 @@ function Login({route, navigation}){
     const { login } = useContext(AuthContext);
 
     function handleLogin(){
-        let arr = [];
-        let reEmail = /\S+@\S+\.\S+/;
 
-        if(!reEmail.test(email)){
-            arr.push('E-Mail Inválido!')
-            console.log(arr)
-            setErrMsg(arr);
-        }else
-            setErrMsg([])
-            login(email, senha);
+        setErrMsg([]);
+        login(email, senha);
+        
     }
 
     return (

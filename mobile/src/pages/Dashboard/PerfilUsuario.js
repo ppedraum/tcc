@@ -6,10 +6,22 @@ import AuthContext from '../../contexts/auth';
 
 function PerfilUsuario(){
 
-    const { usuario, logout } = useContext(AuthContext);
+    const { usuario, token, NODE_PORT, logout } = useContext(AuthContext);
 
     function handleLogout(){
         logout();
+    }
+
+    function getInscricoes(){
+        fetch( NODE_PORT + '/perfil/inscricoes', {
+            method: 'GET',
+            headers:{
+                Authorization : `Bearer ${token} `
+            }
+        })
+        .then(res=>res.json())
+        .then(inscricoes => console.log(inscricoes))
+        ;
     }
 
     return (
@@ -19,6 +31,7 @@ function PerfilUsuario(){
             </View>
             <View>
                 <Button onPress={()=>{handleLogout()}} title='logout' />
+                <Button onPress={getInscricoes} title='balblalb'/>
             </View>
         </View>
     )

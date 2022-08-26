@@ -1,0 +1,6 @@
+Botão desativa qnd clicar em inscrever-se OK
+instituições e publicações aparecem juntas
+bloquear pesquisa vazia (confuso) OK
+fazer perfil da ONG OK
+Divisão do feed entre ongs inscritas / últimas publicações
+dar informações sobre os erros do usuário

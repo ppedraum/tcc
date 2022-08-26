@@ -10,7 +10,8 @@ app.use(cors());
 
 require('./Controllers/AuthController')(app);
 require('./Controllers/SignEvtsController')(app);
-require('./Controllers/projectController')(app);
+require('./Controllers/ProjectController')(app);
+require('./Controllers/ProfileController')(app);
 
 app.get('/', async (req, res)=>{
     res.send('ok');
