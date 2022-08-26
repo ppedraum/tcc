@@ -46,6 +46,25 @@ router.post('/evento', async(req, res)=>{
     
 });
 
+router.delete('/evento', async(req, res)=>{
+    const ver = await Inscricao.findOne({
+        where:{
+            id_usuario : req.body.id_usuario,
+            id_evento : req.body.id_evento
+        }
+    });
+
+    if (ver == null){
+        res.status(400).send(JSON.stringify({'error': 'Você não está inscrito!'}));
+
+    }
+    else{
+        console.log('ok')
+        Inscricao.destroy();
+    }
+    
+});
+
 router.get('/ver_follow/:id_inst/:id_usuario', async(req, res)=>{
     const ver = await OngFollow.findOne({
         where: {
@@ -87,6 +106,24 @@ router.post('/inst', async(req, res)=>{
     
 });
 
+router.delete('/inst', async(req, res)=>{
+    const ver = await OngFollow.findOne({
+        where:{
+            id_ong : req.body.id_inst,
+            id_usuario : req.body.id_usuario
+        }
+    });
+
+    if (ver == null){
+        res.status(400).send(JSON.stringify({'error': 'Você não está inscrito!'}));
+
+    }
+    else{
+        console.log('ok')
+        ver.destroy();
+    }
+    
+});
 
 
 module.exports = app => app.use('/inscricoes', router);

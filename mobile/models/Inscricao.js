@@ -1,5 +1,7 @@
 const db = require('./db');
 
+const Usuario = require('./Usuario')
+const Evento = require('./Evento')
 
 const Inscricao = db.sequelize.define('Inscricao', {
         id_evento : {

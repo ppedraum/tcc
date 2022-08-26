@@ -114,9 +114,10 @@ function Publicacao({ route, navigation }){
     }
 
     function handleInscModal(){
-        if(isInscrito)
+        if(isInscrito){
             setMsgEvento('Você já está inscrito :D');
-        
+            setTimeout(()=>setMsgEvento(''), 5000);
+        }
         else
             setInscModalVisible(true);
         
@@ -141,6 +142,7 @@ function Publicacao({ route, navigation }){
                     <Modal
                     visible={inscModalVisible}
                     transparent={true}
+                    animationType='fade'
                     onRequestClose={()=>setInscModalVisible(!inscModalVisible)}
                     >
                         <View style={styles.container} >

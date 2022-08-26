@@ -24,7 +24,7 @@ function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, ci
     const createFormData = (foto_perfil, body = {}) => {
         const data = new FormData();
         
-        fotoUri = Platform.OS === 'ios' ? foto_perfil.uri.replace('file://', '') : foto_perfil.uri
+        const fotoUri = Platform.OS === 'ios' ? foto_perfil.uri.replace('file://', '') : foto_perfil.uri
 
         data.append('foto_perfil', {
           name: fotoUri.split('/').pop,
@@ -59,8 +59,8 @@ function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, ci
         })
 
     }).then(res => res.json())
-    .then(res=>console.log(res))
-    .catch(err => console.log(err))
+    .then(res=>alert(res))
+    .catch(err => alert(err))
     ;
 }
 

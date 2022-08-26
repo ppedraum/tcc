@@ -13,7 +13,7 @@ function PerfilUsuario(){
     }
 
     function getInscricoes(){
-        fetch( NODE_PORT + '/perfil/inscricoes', {
+        fetch( NODE_PORT + '/perfil/follows', {
             method: 'GET',
             headers:{
                 Authorization : `Bearer ${token} `
@@ -31,7 +31,7 @@ function PerfilUsuario(){
             </View>
             <View>
                 <Button onPress={()=>{handleLogout()}} title='logout' />
-                <Button onPress={getInscricoes} title='balblalb'/>
+                {/* <Button onPress={getInscricoes} title='Pegar Inscrições'/> */}
             </View>
         </View>
     )

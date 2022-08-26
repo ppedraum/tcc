@@ -85,7 +85,7 @@ router.post('/login', async (req, res)=>{
 // Cadastros
 
 
-/* router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
+router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
     let ver = await Usuario.findOne({
         where:{
             [Op.or]:[
@@ -108,6 +108,7 @@ router.post('/login', async (req, res)=>{
             cidade : req.body.cidade,
             uf : req.body.uf,
             cpf : req.body.cpf,
+            foto_perfil : req.files.foto_perfil,
             is_voluntario : req.body.is_voluntario,
         })
         
@@ -121,12 +122,12 @@ router.post('/login', async (req, res)=>{
             token: gerarToken({ id: usuario.id })
         })
     }
-}) */
+})
 
-router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
+/* router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
     console.log(req.files);
     console.log(req.body);
-})
+}) */
 
 module.exports = app => app.use('/auth', router);
 
