@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect } from 'react';
-import { View, Text, FlatList, TextInput, Button, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TextInput, Button, TouchableOpacity, Pressable } from 'react-native';
 import styles from '../styles';
 import AuthContext from '../../contexts/auth';
 import { ActivityIndicator } from 'react-native-paper';
@@ -64,7 +64,7 @@ function ResultScreen({ route, navigation }){
                 <Button title='Procurar' onPress={()=>getPublicacoesByName()} />
             </View>
             <View style={styles.filtros_container} >
-                <Button title='Publicacoes' onPress={getPublicacoesByName}/>
+                <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
                 <Button title='Instituições' onPress={getInstituicoesByName}/>
             </View>
             {
