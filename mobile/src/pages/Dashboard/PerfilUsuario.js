@@ -30,6 +30,14 @@ function PerfilUsuario(){
                 <Text>Olá, {usuario.nome} !</Text>
             </View>
             <View>
+                <Text style={styles.titulo}>Dados Pessoais</Text>
+                <Text>E-Mail : {usuario.e_mail}</Text>
+                <Text>Telefone : {usuario.telefone}</Text>
+                <Text>Cidade : {usuario.cidade}, {usuario.uf}</Text>
+                <Text>Profissão Atual : {usuario.profissao}</Text>
+            </View>
+            <View>
+                <Button title='Torne-se Voluntário'/>
                 <Button onPress={()=>{handleLogout()}} title='logout' />
                 {/* <Button onPress={getInscricoes} title='Pegar Inscrições'/> */}
             </View>

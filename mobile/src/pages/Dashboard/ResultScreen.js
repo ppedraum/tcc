@@ -27,11 +27,11 @@ function ResultScreen({ route, navigation }){
         .then(res => res.json())
         .then(publicacoes => {
             setResultados(publicacoes);
-            console.log(publicacoes);
+            setLoading(false);
         })
         .catch(err => console.log(err));
         setTipoResultado('Publicacao')
-        setLoading(false);
+        
     }
 
     useEffect(()=>{
@@ -49,27 +49,24 @@ function ResultScreen({ route, navigation }){
         .then(res => res.json())
         .then(insts => {
             setResultados(insts);
+            setLoading(false);
         })
         .catch(err => console.log(err));
         setTipoResultado('Instituicao');
-        console.log(resultados);
-        setLoading(false);
 
     }
 
     return(
         <View style={styles.container}>
-
             <Text style={styles.titulo}>Resultados</Text>
             <View style={styles.searchContainer} >
-                <TextInput style={styles.input} placeholder='Procurar resultados' onChangeText={(text)=>setSearchInput(text)} />
+                <TextInput style={styles.input} value={searchInput} placeholder='Procurar resultados' onChangeText={(text)=>setSearchInput(text)} />
                 <Button title='Procurar' onPress={()=>getPublicacoesByName()} />
             </View>
             <View style={styles.filtros_container} >
                 <Button title='Publicacoes' onPress={getPublicacoesByName}/>
                 <Button title='Instituições' onPress={getInstituicoesByName}/>
             </View>
-
             {
             isLoading ? <ActivityIndicator size='large'/> :
             tipoResultado == 'Publicacao'?

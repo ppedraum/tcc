@@ -91,7 +91,7 @@ function Publicacao({ route, navigation }){
         getPublicacaoById();
     }
 
-    function cancelInscricao(){
+/*     function cancelInscricao(){
         fetch( NODE_PORT + '/inscricoes/evento', {
             method: 'DELETE',
             headers:{
@@ -103,7 +103,7 @@ function Publicacao({ route, navigation }){
                 id_usuario : usuario.id
             }
         } )
-    }
+    } */
 
     function handleInscricao(){
         if(isInscrito)

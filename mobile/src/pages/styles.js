@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         width: 130,
         height: 'auto'
-    }
+    },
   });
 
   export default styles;
