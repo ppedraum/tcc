@@ -1,0 +1,95 @@
+body {
+    margin : 0px ;
+}
+
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right,  #3297df,#afd3eb );
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+img{ 
+    filter: saturate(140%)
+}
+#logo {
+    width : 20;
+    height: 30;
+    margin-bottom: 450;
+    margin-left: 30;
+
+}
+
+.form{
+    font-weight: bold;
+    font-family : 'Trebuchet MS';
+    margin-top: 150;
+    margin-left: 30;
+    margin-right: 30;
+}
+.botao{
+    align-items: center;
+    justify-content : center;
+    display : flex;
+    margin-left: 60;
+}
+.cadastro{
+    align-items: center;
+    justify-content : center;
+    display : flex;
+}
+.login {
+    align-items: center;
+    justify-content : center;
+    display : flex;
+    font-weight: bold;
+    font-family : 'Trebuchet MS';
+}
+
+input[type="text"] {
+    margin-right: 40;
+    justify-content : center;
+    align-items: center;
+    border-radius: 30px;
+    width : 300px;
+    height : 40px;
+    background : #EEE5DE;
+    border: 2.5px solid black;
+}
+
+input[type="password"] {
+    border-radius: 30px;
+    width : 300px;
+    height : 40px;
+    background : #EEE5DE;
+    border: 2.5px solid black;
+}
+input[type="submit"]{
+    font-size: bold;
+    border-radius: 30px;
+    width : 90px;
+    height : 45px;
+    justify-content : center;
+    align-items: center;
+    display : center;
+    background : #EEE5DE;
+    color : black ;
+    display: block;
+    cursor: pointer;
+    transition: .5s;
+    border: 2.5px solid black;
+}
+input[type="submit"]:hover {
+    color : black;
+    background: #6dabd6;
+}
+.plz{
+    align-items: center;
+    justify-content : center;
+    display : flex;
+}
+
+
