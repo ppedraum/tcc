@@ -14,17 +14,20 @@
     ?>
     <!-- <link rel="stylesheet" href="./styles.css"> -->
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
-    <link rel="stylesheet" href="estilopublicacoes.css" type="text/css">
+    <link rel="stylesheet" href="estilopubs.css" type="text/css">
 </head>
 <body>
-    <div class="container">
+<div class="container">
     <header>
+        <div class="box1">
         <p><a href="../../menu.php"> Mundo </a>- Gerenciar Publicações</p>
+        </div>
     </header>
-    <div class='conteudo'>
+    <div id='quadrado'>
+    <div id='conteudo'>
         <div id='sct_ger_publicacoes'>
             <form method='get'>
-
+                <br>
                 <div id='sct_txt_pesquisa'>
                     Pesquisar <input type="text" name='txt_pesquisar_publicacoes' id='txt_pesquisar_publicacoes'>
                 </div>
@@ -150,12 +153,14 @@
                                 </tr>";
                             }
                         }
-                        
+                    
                         
                     ?>
             </table>
+            <br>
         </div>
     </div>
+</div>
 </div>
 
 
