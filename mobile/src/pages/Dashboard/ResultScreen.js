@@ -1,17 +1,16 @@
 import { React, useState, useContext, useEffect } from 'react';
-import { View, Text, FlatList, TextInput, Button, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, FlatList, TextInput, Button, TouchableOpacity, ScrollView } from 'react-native';
 import styles from '../styles';
 import AuthContext from '../../contexts/auth';
 import { ActivityIndicator } from 'react-native-paper';
-
-
 
 function ResultScreen({ route, navigation }){
 
     const { token, NODE_PORT } = useContext(AuthContext);
 
     const [isLoading, setLoading] = useState(true);
-    const [resultados, setResultados] = useState([]);
+    const [instituicoes, setInstituicoes] = useState([]);
+    const [publicacoes, setPublicacoes] = useState([]);
     const [tipoResultado, setTipoResultado] = useState('Publicacao');
     const [searchInput, setSearchInput] = useState(route.params.searchInput);
 
@@ -26,16 +25,16 @@ function ResultScreen({ route, navigation }){
         })
         .then(res => res.json())
         .then(publicacoes => {
-            setResultados(publicacoes);
+            setPublicacoes(publicacoes);
             setLoading(false);
         })
         .catch(err => console.log(err));
-        setTipoResultado('Publicacao')
+        setTipoResultado('Publicacao');
         
     }
 
     useEffect(()=>{
-        getPublicacoesByName();
+        handleSearchAll();
     }, [])
 
     function getInstituicoesByName(){
@@ -48,7 +47,7 @@ function ResultScreen({ route, navigation }){
         })
         .then(res => res.json())
         .then(insts => {
-            setResultados(insts);
+            setInstituicoes(insts);
             setLoading(false);
         })
         .catch(err => console.log(err));
@@ -56,50 +55,113 @@ function ResultScreen({ route, navigation }){
 
     }
 
+    function handleSearchAll(){
+        getInstituicoesByName();
+        getPublicacoesByName();
+        setTipoResultado('All');
+    }
+
+    function HandleListAll(){
+        return (
+        <ScrollView>
+            <Text style={styles.titulo} >Instituições</Text>
+            {
+            instituicoes.map((inst)=>
+            <TouchableOpacity key={inst.id} >
+                <View >
+                    <Text style={styles.titulo} >
+                        {inst.nome_fantasia}
+                    </Text>
+                    <Text style={styles.conteudo}>
+                        {inst.apresentacao}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+            )
+            }
+            <Text style={styles.titulo} >Publicações</Text>
+            {
+            publicacoes.map((publi)=>
+            <TouchableOpacity key={publi.id} >
+                <View>
+                    <Text style={styles.titulo} >
+                        {publi.titulo}
+                    </Text>
+                    <Text style={styles.conteudo} >
+                        {publi.descricao}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+            )
+            }
+        </ScrollView>    
+        );
+    }
+
     return(
+        isLoading ? <ActivityIndicator size='Large'/> : 
         <View style={styles.container}>
             <Text style={styles.titulo}>Resultados</Text>
             <View style={styles.searchContainer} >
-                <TextInput style={styles.input} value={searchInput} placeholder='Procurar resultados' onChangeText={(text)=>setSearchInput(text)} />
-                <Button title='Procurar' onPress={()=>getPublicacoesByName()} />
+                <TextInput style={styles.input} 
+                value={searchInput} 
+                placeholder='Procurar resultados' 
+                onChangeText={(text)=>setSearchInput(text)} 
+                />
+                <Button title='Procurar' onPress={handleSearchAll} />
             </View>
             <View style={styles.filtros_container} >
+            <Button title='Tudo' onPress={handleSearchAll} />
                 <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
                 <Button title='Instituições' onPress={getInstituicoesByName}/>
+                
             </View>
+            
             {
-            isLoading ? <ActivityIndicator size='large'/> :
-            tipoResultado == 'Publicacao'?
-                <FlatList
-                data={resultados}
-                keyExtractor={(item)=>item.id}
-                renderItem={({ item, index })=> (
-                    <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.id})} >
-                        <View style={styles.post_cell}>
-                            <Text style={styles.titulo} >{item.titulo}</Text>
-                            <Text style={styles.conteudo} >{item.descricao}</Text>
-                            </View>
-                    </TouchableOpacity>
-                )}
-                refreshing={isLoading}
-                onRefresh={()=>getPublicacoesByName()}
-                />
-                :
-                tipoResultado == 'Instituicao'? 
-                    <FlatList
-                    data={resultados}
+                tipoResultado == 'Publicacao' ? 
+                    <FlatList 
+                    data={publicacoes}
                     keyExtractor={(item)=>item.id}
-                    renderItem={({ item, index })=> (
-                        <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {id:item.id})} >
-                            <View style={styles.post_cell}>
-                                <Text style={styles.titulo} >{item.nome_fantasia}</Text>
-                                <Text style={styles.conteudo} >{item.cnpj}</Text>
-                                </View>
-                        </TouchableOpacity>
-                    )}
+                    renderItem={({item})=>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {
+                        id:item.id
+                    })} >
+                        <View>
+                            <Text style={styles.titulo} >{item.titulo}</Text>
+                            <Text style={styles.conteudo}>{item.descricao}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    }
                     refreshing={isLoading}
-                    onRefresh={()=>getInstituicoesByName()}
+                    onRefresh={getPublicacoesByName}
                     />
+                :
+                null
+            }
+            {
+                tipoResultado == 'Instituicao' ? 
+                    <FlatList 
+                    data={instituicoes}
+                    keyExtractor={(item)=>item.id}
+                    renderItem={({item})=>
+                    <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {
+                        id:item.id
+                    })} >
+                        <View>
+                            <Text style={styles.titulo} >{item.nome_fantasia}</Text>
+                            <Text style={styles.conteudo}>{item.apresentacao}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    }
+                    refreshing={isLoading}
+                    onRefresh={getInstituicoesByName}
+                    />
+                :
+                null
+            }
+            {
+                tipoResultado == 'All' ?
+                <HandleListAll/>
                 :
                 null
             }
