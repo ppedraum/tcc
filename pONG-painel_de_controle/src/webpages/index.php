@@ -26,7 +26,7 @@
     </form>
 </div>
 <br><br><br>
-    <div class="plz">
+
     <?php
     require_once './src/php_stuff/datab.php';
 
@@ -47,7 +47,6 @@
 
 
     ?>
-    </div>
 
     </div>
     </div>

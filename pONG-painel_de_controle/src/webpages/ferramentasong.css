@@ -1,0 +1,26 @@
+body {
+    margin : 0px ;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right,  #3297df,#afd3eb );
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.fundo{
+    width: 360px;
+    height: 500px;
+    background: #61b3ed;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin-left: 30px;
+    border: 2.5px solid black;
+    
+}

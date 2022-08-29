@@ -5,23 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundo - Gerenciar Publicações</title>
-
     <?php
     require_once('../php_stuff/datab.php');
 
     $inst = mysqli_query($conn, 'select nome_fantasia, id from ONG');
 
     ?>
-    <!-- <link rel="stylesheet" href="./styles.css"> -->
+    <link rel="stylesheet" href="estilopubs.css"> 
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
-    <link rel="stylesheet" href="estilopublicacoes.css" type="text/css">
+
 </head>
 <body>
-    <div class="container">
+<div class="container">
     <header>
         <p><a href="../../menu.php"> Mundo </a>- Gerenciar Publicações</p>
     </header>
-    <div class='conteudo'>
+    <div id='conteudo'>
         <div id='sct_ger_publicacoes'>
             <form method='get'>
 
@@ -156,9 +155,10 @@
             </table>
         </div>
     </div>
-</div>
+
 
 
     <script>keyBindAll()</script>
+</div>
 </body>
 </html>
