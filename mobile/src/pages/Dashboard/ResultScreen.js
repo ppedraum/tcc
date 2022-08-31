@@ -56,9 +56,11 @@ function ResultScreen({ route, navigation }){
     }
 
     function handleSearchAll(){
-        getInstituicoesByName();
-        getPublicacoesByName();
-        setTipoResultado('All');
+        if(searchInput.trim() != 0){
+            getInstituicoesByName();
+            getPublicacoesByName();
+            setTipoResultado('All');
+        }
     }
 
     function HandleListAll(){
@@ -67,7 +69,9 @@ function ResultScreen({ route, navigation }){
             <Text style={styles.titulo} >Instituições</Text>
             {
             instituicoes.map((inst)=>
-            <TouchableOpacity key={inst.id} >
+            <TouchableOpacity key={inst.id} onPress={()=>navigation.navigate('PerfilInst', {
+                id: inst.id
+            })} >
                 <View >
                     <Text style={styles.titulo} >
                         {inst.nome_fantasia}
@@ -82,7 +86,9 @@ function ResultScreen({ route, navigation }){
             <Text style={styles.titulo} >Publicações</Text>
             {
             publicacoes.map((publi)=>
-            <TouchableOpacity key={publi.id} >
+            <TouchableOpacity key={publi.id} onPress={()=>navigation.navigate('Publicacao', {
+                id: publi.id
+            })} >
                 <View>
                     <Text style={styles.titulo} >
                         {publi.titulo}
@@ -112,8 +118,8 @@ function ResultScreen({ route, navigation }){
             </View>
             <View style={styles.filtros_container} >
             <Button title='Tudo' onPress={handleSearchAll} />
-                <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
-                <Button title='Instituições' onPress={getInstituicoesByName}/>
+            <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
+            <Button title='Instituições' onPress={getInstituicoesByName}/>
                 
             </View>
             

@@ -32,6 +32,7 @@ function Publicacao({ route, navigation }){
         .then(res => res.json())
         .then(result => {
             setPublicacao(result);
+            verLike(result.id, usuario.id);
             if(result.tipo_publicacao == 'EVENTO'){
                 getEventoById(result.id_evento);
                 verInscEvento(usuario.id, result.id_evento);
@@ -122,6 +123,29 @@ function Publicacao({ route, navigation }){
             setInscModalVisible(true);
         
     }
+
+    function verLike(id_inst, id_usuario){
+        fetch( NODE_PORT + '/postinteraction/ver_like/' + id_inst + '/' + id_usuario,{
+            method: 'GET',
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(res=>res.json())
+        .then((like)=>console.log(like.ver));
+    }
+
+/*     function like(){
+        fetch( NODE_PORT + '/postinteraction/like', {
+            method: 'POST',
+            headers:{
+                Authorization: `Bearer ${token}`
+            },
+            body:{
+                id_ong: 
+            }
+        })
+    } */
 
     useEffect(()=>{
         getPublicacaoById();

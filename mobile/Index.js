@@ -12,6 +12,7 @@ require('./Controllers/AuthController')(app);
 require('./Controllers/SignEvtsController')(app);
 require('./Controllers/ProjectController')(app);
 require('./Controllers/ProfileController')(app);
+require('./Controllers/PostInteractionController')(app);
 
 app.get('/', async (req, res)=>{
     res.send('ok');
