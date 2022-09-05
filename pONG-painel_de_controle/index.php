@@ -5,28 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="estilo.css" type="text/css">
 </head>
 <body>
-<div class="container">
-<div class="login">
-<div class="logo">
-<img src = "logo.svg" alt="LOGO" width="400" height="150">
-</div>
-<div class ="form">
     <form action="" method="get">
-    Login: <input type="text" name='login'> <br>
-    <br>
-    Senha: <input type="password" name="senha"> <br>
-    <br><br>
-    <div class="botao">
-    <input type="submit" value="Enviar" name='bt_login'>    
-    </div>
+    login: <input type="text" name='login'> <br>
+    senha: <input type="password" name="senha"> <br>
+    <input type="submit" value="Enviar" name='bt_login'>
 
     </form>
-</div>
-<br><br><br>
-    <div class="plz">
     <?php
     require_once './src/php_stuff/datab.php';
 
@@ -47,9 +33,5 @@
 
 
     ?>
-    </div>
-
-    </div>
-    </div>
 </body>
 </html>

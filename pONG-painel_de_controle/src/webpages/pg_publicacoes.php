@@ -14,14 +14,12 @@
     ?>
     <!-- <link rel="stylesheet" href="./styles.css"> -->
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
-    <link rel="stylesheet" href="estilopublicacoes.css" type="text/css">
 </head>
 <body>
-    <div class="container">
     <header>
         <p><a href="../../menu.php"> Mundo </a>- Gerenciar Publicações</p>
     </header>
-    <div class='conteudo'>
+    <div id='conteudo'>
         <div id='sct_ger_publicacoes'>
             <form method='get'>
 
@@ -156,7 +154,7 @@
             </table>
         </div>
     </div>
-</div>
+
 
 
     <script>keyBindAll()</script>
