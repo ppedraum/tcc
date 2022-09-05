@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mundo - Adicionar Publicação</title>
-
+    <link rel="stylesheet" href="estilopubs.css" type="text/css">
     <script>
 
         function mudarForm(){
@@ -44,16 +44,19 @@
     </style>
 </head>
 
+
 <body onload="mudarForm()">
-    
     <header>
-        <p><a href="../../menu.php"> Mundo </a>- Adicionar Publicação...</p>
+    <div class="box1">
+        <p><a href="../../menu.php"> Mundo </a>- Adicionar Publicação</p>
+    </div>
     </header>
 
+    <div id="container">
     <!-- action="../php_stuff/add_publicacao.php"  -->
+    <div id='quadrado'>
     <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php" >
-
-        
+        <br>
         Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
         Descrição<br>
         <textarea name="txt_descricao" id="txt_descricao" cols="30" rows="10" style='resize:none;' ></textarea>
@@ -165,8 +168,10 @@
             <input type="submit" name="bt_submit_publicacao" id="bt_submit_publicacao" value="Enviar">
             <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar" onclick="">
         </div>
+        <br>
         
-
     </form>
+    </div>
+</div>
 </body>
 </html>

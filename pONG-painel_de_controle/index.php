@@ -11,7 +11,7 @@
 <div class="container">
 <div class="login">
 <div class="logo">
-<img src = "logo.svg" alt="LOGO" width="400" height="150">
+<img src = "logo.svg" alt="LOGO" width="600" height="300">
 </div>
 <div class ="form">
     <form action="" method="get">

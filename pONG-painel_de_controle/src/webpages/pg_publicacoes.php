@@ -14,30 +14,29 @@
     ?>
     <!-- <link rel="stylesheet" href="./styles.css"> -->
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
-    <link rel="stylesheet" href="estilopublicacoes.css" type="text/css">
+    <link rel="stylesheet" href="estilopubs.css" type="text/css">
 </head>
 <body>
-    <div class="container">
-    <header>
-        <p><a href="../../menu.php"> Mundo </a>- Gerenciar Publicações</p>
-    </header>
-    <div class='conteudo'>
+<h2><a href="../../menu.php"><img src="homeicon.png" width=50 height=50></a> Gerenciar Publicações</h2>
+<div class="container">
+    <div id='quadrado'>
+    <div id='conteudo'>
         <div id='sct_ger_publicacoes'>
             <form method='get'>
-
-                <div id='sct_txt_pesquisa'>
-                    Pesquisar <input type="text" name='txt_pesquisar_publicacoes' id='txt_pesquisar_publicacoes'>
+                <br>
+                <div id='pesquisa'>
+                    <input type="text" name='txt_pesquisar_publicacoes' id='txt_pesquisar_publicacoes' placeholder="Pesquisar">
+                    <input type="submit" value="Pesquisar" name='bt_pesquisar_publicacao' id='bt_pesquisar_publicacao'>
                 </div>
                 
                 <div class='filtros' >
                     <div id='filtro_tipo'>
-
                         <input type="checkbox" name="ch_filtro_tipo" id="ch_filtro_tipo" onclick="isFiltroChecked( this['id'], 'sel_tipo_publicacao')">
                         <label for="ch_filtro_tipo">Tipo</label>
                         <select name="sel_tipo_publicacao" id="sel_tipo_publicacao" hidden>
-                            <option value="PUBLICACAO">PUBLICAÇÃO</option>
-                            <option value="REQUISICAO">REQUISIÇÃO</option>
-                            <option value="EVENTO">EVENTO</option>
+                            <option value="PUBLICACAO">Publicação</option>
+                            <option value="REQUISICAO">Requisição</option>
+                            <option value="EVENTO">Evento</option>
                         </select>
                     </div>
                     <div id='filtro_data'>
@@ -50,10 +49,11 @@
                         </div>
                     </div>
                 </div>
-                <input type="submit" value="Pesquisar" name='bt_pesquisar_publicacao' id='bt_pesquisar_publicacao'>
             </form>
         </div>
-        <a href="pg_add_publicacao.php"><button>Adicionar Publicação...</button></a>
+        <div class="addpub">
+        <a href="pg_add_publicacao.php"><button>Adicionar Publicação</button></a>
+        </div>
         <div id='sct_view_publicacoes'>
                 <table id='table_publi'>
                     <tr>
@@ -150,12 +150,14 @@
                                 </tr>";
                             }
                         }
-                        
+                    
                         
                     ?>
             </table>
+            <br>
         </div>
     </div>
+</div>
 </div>
 
 

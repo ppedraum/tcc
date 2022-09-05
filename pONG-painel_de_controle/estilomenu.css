@@ -1,11 +1,15 @@
 body {
     margin : 0px ;
+    background-image: linear-gradient(to bottom right,  #3297df,#afd3eb );
 }
 
+h2{
+    padding-left: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 .container {
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(to bottom right,  #3297df,#afd3eb );
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -25,40 +29,42 @@ body {
 
 }
 .fundo{
-    width: 360px;
-    height: 500px;
+    height: 400px;
     background: #61b3ed;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: left;
-    margin-left: 30px;
-    border: 2.5px solid black;
-    
+    align-items: center;
+    border: 2.5px solid #3f78a0;
+    margin-bottom: 450px;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
 
 .escrita{
     font-size: 20px;
     font-size: bold;
-    display: flex;
-    justify-content: center;
+    display: block;
+    flex-direction: row;
+    justify-content: left;
     align-items: left;
     color : black ;
-
+    padding-bottom: 400px;
 }
 
 .botoes {
     border-radius: 30px;
-    border: 1px black;
+    border: 1px #3f78a0;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: left;
+    padding: 5px 5px;
 }
 
 .botaosair{
     border-radius: 30px;
-    border: 1px black;
+    border: 1px #3f78a0;
     display: flex;
     justify-content: center;
     align-items: left;
@@ -77,10 +83,10 @@ input[type="submit"]{
     display: block;
     cursor: pointer;
     transition: .5s;
-    border: 2.5px solid black;
+    border: 2.5px solid #3f78a0;
 }
 
 input[type="submit"]:hover {
     color : black;
     background: #6dabd6;
-}
+}       

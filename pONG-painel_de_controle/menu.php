@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="estilomenu.css" type="text/css">
 </head>
 <body>
+<h2> pONG - Painel de Controle <br><img src = "logo.svg" alt="LOGO" width="300" height="150"></h2>
+
 <div class="container">
 <div class="fundo">
   <?php session_start(); echo "<div class=\"echo\"> <font size=6>",("Olá, ".$_SESSION['login']."!"),"</font></div>"; ?>
@@ -15,11 +17,7 @@
     <div class="fotouser">
     <img src="user.png" width=100 height=100> <!-- aqui vai a foto do usuário  -->
     </div>
-    <br><br><br>
-    <div class="escrita">
-    <b>pONG - Painel de Controle</b>
-    </div>
-    <br><br><br>
+    <br><br>
     <div class="botoes">
     <a href="src\webpages\pg_publicacoes.php"><input type="submit" value="Gerenciar Publicações" /></a>
     <a href="src\webpages\pg_ferramentas_ong.php"><input type="submit" value="Ferramentas da instituição" /></a>

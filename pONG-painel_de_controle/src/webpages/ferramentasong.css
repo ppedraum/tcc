@@ -22,16 +22,5 @@ body {
     align-items: left;
     margin-left: 30px;
     border: 2.5px solid black;
-}
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.form{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    
 }

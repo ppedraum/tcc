@@ -10,15 +10,14 @@
 <body>
 <div class="container">
 <div class="fundo">
-    <div class="header"><b>
-        <p><a href="../../menu.php"> Mundo </a>- Ferramentas da ONG</p></b>
-    </div>
-    <div class="form">
+    <header>
+        <p><a href="../../menu.php"> Mundo </a>- Ferramentas da ONG</p>
+    </header>
     <form action="" method="post">
         Mande para nós uma sugestão de: Área de Atuação <br>
         Título da área: <input type="text" value="digite..."> <br>
-        Descrição: <input type="text" value="digite...">
-</div>
+        descrição: <input type="text" value="digite...">
+    </form>
 </div>
 </div>
 </body>
