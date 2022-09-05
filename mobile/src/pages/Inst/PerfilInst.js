@@ -58,7 +58,7 @@ function PerfilInst({route, navigation}){
         } )
         .then(res => res.json())
         .then(result => {
-            console.log('Follow? ' + result.ver);
+            /* console.log('Follow? ' + result.ver); */
             setFollowing(result.ver);
         })
         .catch(err => alert(err))

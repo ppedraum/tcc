@@ -87,6 +87,7 @@ export function AuthProvider({children}){
             if(result.error != null){
                 console.log('O usuário não foi encontrado!');
             }else{
+                console.log('ok')
                 setSigned('true');
                 setUsuario(result.usuario);
                 setToken(result.token)

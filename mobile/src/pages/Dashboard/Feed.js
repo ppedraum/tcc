@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList,
 import styles from '../styles'
 
 import AuthContext from '../../contexts/auth';
+import { Ionicons } from '@expo/vector-icons';
 
 /*
     NÃO estou autorizado pela API para pegar as publicações devido à autenticação por token,
@@ -46,25 +47,7 @@ function Feed({navigation}) {
         })
         .catch(err => console.log(err));
     }
-    
-    function getPublicacoesByName(nome){
-        setLoading(true);
-        fetch( NODE_PORT + '/projeto/publicacoes/'+nome, {
-            method:'GET',
-            headers:{
-                Authorization: `Bearer ${token}`
-            }
-            
-        })
-        .then(res => res.json())
-        .then(result => {
-            setPublicacoes(result);
-            //console.log(result);
-            setLoading(false);
-        })
-        .catch(err => console.log(err));
-        setLoading(false);
-    }
+
 
     useEffect(()=>{
         getPublicacoes();
@@ -103,6 +86,7 @@ function Feed({navigation}) {
                         <View style={styles.post_cell}>
                             <Text style={styles.titulo} >{item.titulo}</Text>
                             <Text style={styles.conteudo} >{item.descricao}</Text>
+
                             </View>
                     </TouchableOpacity>
                 )}
