@@ -115,12 +115,12 @@ router.delete('/inst', async(req, res)=>{
     });
 
     if (ver == null){
-        res.status(400).send(JSON.stringify({'error': 'Você não está inscrito!'}));
+        res.status(400);
 
     }
     else{
-        console.log('ok')
         ver.destroy();
+        res.status(200);
     }
     
 });

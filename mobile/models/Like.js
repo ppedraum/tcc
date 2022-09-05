@@ -2,7 +2,7 @@ const db = require('./db');
 
 const Like = db.sequelize.define('Like', 
     {
-        id_ong:{
+        id_publicacao:{
             type: db.Sequelize.INTEGER(11),
             primaryKey: true
         },
