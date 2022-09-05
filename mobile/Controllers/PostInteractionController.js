@@ -4,8 +4,8 @@ const router = Express.Router();
 const authMiddleware = require('../middlewares/auth')
 router.use(authMiddleware);
 
-const Instituicao = require('../models/Instituicao');
-const Publicacao = require('../models/Publicacao');
+const Usuario = require('../models/Usuario');
+const Comentario = require('../models/Comentario');
 const Like = require('../models/Like');
 const { Op } = require("sequelize");
 
@@ -66,8 +66,31 @@ router.get('/ver_like/:id_publicacao/:id_usuario', async(req, res)=>{
 });
 
 
-router.get('/comentarios', async(req, res)=>{
-    cons
+router.get('/comentarios/:id_publicacao', async(req, res)=>{
+
+    var commFinais = []
+
+    const comentarios = await Comentario.findAll({
+        where:{
+            id_publicacao : req.params.id_publicacao
+        }
+    });
+    for(let i = 0; i<comentarios.length;i++){
+        
+        const commUser = await Usuario.findAll({
+            where:{
+                id : comentarios[i].id_usuario
+            }
+        })
+        const commFinal = structuredClone(comentarios[i]);
+        commFinal['nome_usuario'] = commUser.nome;
+        commFinal['foto_perfil'] = commUser.foto_perfil;
+        commFinais.push(commFinal);
+    }
+    console.log(commFinais);
+    res.json(comentarios);
+
+
 })
 
 

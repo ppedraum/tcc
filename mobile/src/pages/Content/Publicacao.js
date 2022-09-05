@@ -1,6 +1,9 @@
 import { React, useContext, useEffect, useState } from 'react';
 import { View, Text, Button, ActivityIndicator, Modal, TouchableOpacity } from 'react-native';
 import styles from '../styles';
+
+import Comentarios from './Comentarios';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import AuthContext from '../../contexts/auth';
@@ -23,6 +26,8 @@ function Publicacao({ route, navigation }){
 
     const idPublicacao = JSON.stringify(route.params.id);
 
+
+
     function getPublicacaoById(){
         setLoading(true);
         fetch( NODE_PORT + '/projeto/publicacao/'+ idPublicacao, {
@@ -36,7 +41,7 @@ function Publicacao({ route, navigation }){
         .then(result => {
             setPublicacao(result);
             verLike(result.id, usuario.id);
-            getInstById(result.id_ong)
+            getInstById(result.id_ong);
             if(result.tipo_publicacao == 'EVENTO'){
                 getEventoById(result.id_evento);
                 verInscEvento(usuario.id, result.id_evento);
@@ -268,6 +273,7 @@ function Publicacao({ route, navigation }){
                 :
                 null
             }
+            <Comentarios id_publicacao={publicacao.id}/>
         </>
         }
         </View>
