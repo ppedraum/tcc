@@ -1,10 +1,9 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { View, Text, Button, ActivityIndicator, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Button, ActivityIndicator, Modal, TouchableOpacity, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 
 import Comentarios from './Comentarios';
-
-import { Ionicons } from '@expo/vector-icons';
 
 import AuthContext from '../../contexts/auth';
 
@@ -196,6 +195,7 @@ function Publicacao({ route, navigation }){
     }, []);
 
     return (
+        <ScrollView>
         <View style={styles.container} >
         {
         isLoading ? <ActivityIndicator size='large' color='blue'/>
@@ -277,6 +277,7 @@ function Publicacao({ route, navigation }){
         </>
         }
         </View>
+        </ScrollView>
     );
 }
 

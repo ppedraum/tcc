@@ -91,6 +91,20 @@ router.get('/comentarios/:id_publicacao', async(req, res)=>{
     console.log(commFinais);
     res.json(comentarios);
 
+});
+
+router.post('/comentarios', async(req, res)=>{
+    
+    const comentario = await Comentario.create({
+        conteudo : req.body.conteudo,
+        id_publicacao : req.body.id_publicacao,
+        id_usuario : req.body.id_usuario,
+        id_pai : req.body.id_pai,
+        datetime_post : new Date()
+    })
+
+    console.log(comentario);
+
 })
 
 

@@ -1,10 +1,11 @@
 import { React, useState, useContext } from 'react';
 import { Text, TextInput, View, Button, KeyboardAvoidingView, Touchable, TouchableOpacity, Modal } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
 
-function FormComentario({id_publicacao, id_pai}){
+function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
     const { usuario, token, NODE_PORT } = useContext(AuthContext);
     const [text, setText] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
@@ -22,49 +23,80 @@ function FormComentario({id_publicacao, id_pai}){
                     conteudo: text,
                     id_publicacao: id_publicacao,
                     id_usuario: usuario.id,
-                    id_pai: null
+                    id_pai: id_pai
                 })
             })
-            .then(res => res.json())
-            .then(console.log(res))
             .catch(err => alert(err));
         }
-        else{
-            setPlaceholder('O comentário não pode estar vazio!');
-        }
+        setModalVisible(false);
 
     }
 
-    return(
-        <KeyboardAvoidingView>
+    if(tipo == 'textinput')
+        return(
+            <KeyboardAvoidingView>
+                <Modal
+                visible={modalVisible}
+                transparent={true}
+                animationType='fade'
+                onRequestClose={()=>setModalVisible(!modalVisible)}
+                >
+                    <View>
+                        <TouchableOpacity onPress={()=>setModalVisible(false)} >
+                            <Ionicons name="chevron-back-circle" size={24} color="#4490F5" />
+                        </TouchableOpacity>
+                        
+                    </View>
+                    <View style={styles.container} >
+                        <TextInput 
+                        multiline={true} 
+                        numberOfLines={5} 
+                        onChangeText={(text)=>setText(text)}
+                        placeholder='Comentar...'
+                        />
+                        <Button title='Comentar' onPress={comentar}/>
+                    </View>
+                    
+                </Modal>
+                <TouchableOpacity onPress={()=>setModalVisible(true)} >
+                    <Text>{text!=''?text:'Comentar...'}</Text>
+                </TouchableOpacity>
+
+            </KeyboardAvoidingView>
+        );
+    else if(tipo == 'icon')
+        return(
+            <>
             <Modal
             visible={modalVisible}
             transparent={true}
             animationType='fade'
             onRequestClose={()=>setModalVisible(!modalVisible)}
             >
+                <View>
+                    <TouchableOpacity onPress={()=>setModalVisible(false)} >
+                        <Ionicons name="chevron-back-circle" size={24} color="#4490F5" />
+                    </TouchableOpacity>
+                    
+                </View>
                 <View style={styles.container} >
                     <TextInput 
                     multiline={true} 
                     numberOfLines={5} 
-                    placeholder={placeholder} 
                     onChangeText={(text)=>setText(text)}
                     value={text}
+                    placeholder='Comentar...'
                     />
-                    <Button title='Comentar' onPress={()=>setModalVisible(false)}/>
+                    <Button title='Comentar' onPress={comentar}/>
                 </View>
                 
             </Modal>
-            <TouchableOpacity onPress={()=>setModalVisible(true)} >
-                <Text>{text!=''?text:'Comentar...'}</Text>
+            <TouchableOpacity onPress={()=>setModalVisible(true)}>
+                <Ionicons name="chatbubble-ellipses" size={24} color="#4490F5" />
             </TouchableOpacity>
-
-
+            </>
             
-
-        </KeyboardAvoidingView>
-    );
-
+        );
 
 }
 
