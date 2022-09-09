@@ -82,14 +82,14 @@ router.get('/comentarios/:id_publicacao', async(req, res)=>{
                 id : comentarios[i].id_usuario
             }
         })
-        const commFinal = structuredClone(comentarios[i]);
+        /* const commFinal = [];
+        commFinal['estrutura'] = comentarios[i];
         commFinal['nome_usuario'] = commUser.nome;
-        commFinal['foto_perfil'] = commUser.foto_perfil;
-        commFinais.push(commFinal);
+        commFinal['foto_perfil'] = commUser.foto_perfil; */
+        commFinais.push({estrutura:comentarios[i], nome_usuario:commUser.nome, foto_perfil:commUser.foto_perfil});
     }
     console.log(commFinais);
     res.json(comentarios);
-
 
 })
 

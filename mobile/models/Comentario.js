@@ -25,7 +25,7 @@ const Comentario = db.sequelize.define('Comentario',
             type: db.Sequelize.INTEGER(11),
             null: true
         },
-        data_post:{
+        datetime_post:{
             type: db.Sequelize.DATE,
             null: false
         }
