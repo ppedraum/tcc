@@ -8,7 +8,7 @@ import AuthContext from '../../contexts/auth';
 function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
     const { usuario, token, NODE_PORT } = useContext(AuthContext);
     const [text, setText] = useState('');
-    const [modalVisible, setModalVisible] = useState(false);
+    const [commAreaVisible, setCommAreaVisible] = useState(false);
     const [placeholder, setPlaceholder] = useState('Comentar...')
 
     function comentar(){
@@ -28,74 +28,51 @@ function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
             })
             .catch(err => alert(err));
         }
-        setModalVisible(false);
+        setCommAreaVisible(false);
 
     }
 
     if(tipo == 'textinput')
         return(
-            <KeyboardAvoidingView>
-                <Modal
-                visible={modalVisible}
-                transparent={true}
-                animationType='fade'
-                onRequestClose={()=>setModalVisible(!modalVisible)}
-                >
-                    <View>
-                        <TouchableOpacity onPress={()=>setModalVisible(false)} >
-                            <Ionicons name="chevron-back-circle" size={24} color="#4490F5" />
-                        </TouchableOpacity>
-                        
-                    </View>
-                    <View style={styles.container} >
-                        <TextInput 
-                        multiline={true} 
-                        numberOfLines={5} 
-                        onChangeText={(text)=>setText(text)}
-                        placeholder='Comentar...'
-                        />
-                        <Button title='Comentar' onPress={comentar}/>
-                    </View>
-                    
-                </Modal>
-                <TouchableOpacity onPress={()=>setModalVisible(true)} >
-                    <Text>{text!=''?text:'Comentar...'}</Text>
-                </TouchableOpacity>
 
+            <KeyboardAvoidingView>
+                <TextInput 
+                multiline={true} 
+                numberOfLines={5} 
+                onChangeText={(text)=>setText(text)}
+                value={text}
+                placeholder='Comentar...'
+                style={{maxWidth:200}}
+                />
+                <Button title='Comentar...' onPress={comentar} />
             </KeyboardAvoidingView>
+
+
         );
     else if(tipo == 'icon')
         return(
             <>
-            <Modal
-            visible={modalVisible}
-            transparent={true}
-            animationType='fade'
-            onRequestClose={()=>setModalVisible(!modalVisible)}
-            >
-                <View>
-                    <TouchableOpacity onPress={()=>setModalVisible(false)} >
-                        <Ionicons name="chevron-back-circle" size={24} color="#4490F5" />
-                    </TouchableOpacity>
-                    
-                </View>
-                <View style={styles.container} >
-                    <TextInput 
-                    multiline={true} 
-                    numberOfLines={5} 
-                    onChangeText={(text)=>setText(text)}
-                    value={text}
-                    placeholder='Comentar...'
-                    />
-                    <Button title='Comentar' onPress={comentar}/>
-                </View>
-                
-            </Modal>
-            <TouchableOpacity onPress={()=>setModalVisible(true)}>
+            <TouchableOpacity onPress={()=>setCommAreaVisible(!commAreaVisible)}>
                 <Ionicons name="chatbubble-ellipses" size={24} color="#4490F5" />
             </TouchableOpacity>
+            {
+            commAreaVisible ?
+            <KeyboardAvoidingView>
+                <TextInput 
+                multiline={true} 
+                numberOfLines={5} 
+                onChangeText={(text)=>setText(text)}
+                value={text}
+                placeholder='Comentar...'
+                style={{maxWidth:200}}
+                />
+                <Button title='Comentar...' onPress={comentar} />
+            </KeyboardAvoidingView>
+            :
+            null
+            }
             </>
-            
+
         );
 
 }
