@@ -6,7 +6,7 @@ body {
 .container {
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(to bottom right,  #3297df,#afd3eb );
+    background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
     display: flex;
     flex-direction: row;
     justify-content: center;

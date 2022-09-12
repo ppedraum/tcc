@@ -5,38 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundo - Gerenciar Publicações</title>
-
     <?php
     require_once('../php_stuff/datab.php');
 
     $inst = mysqli_query($conn, 'select nome_fantasia, id from ONG');
 
     ?>
-    <!-- <link rel="stylesheet" href="./styles.css"> -->
+    <link rel="stylesheet" href="estilopubs.css"> 
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
-    <link rel="stylesheet" href="estilopubs.css" type="text/css">
+
 </head>
 <body>
-<h2>pONG - Gerenciar Publicações<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2>
 <div class="container">
-    <div id='quadrado'>
+    <header>
+        <p><a href="../../menu.php"> Mundo </a>- Gerenciar Publicações</p>
+    </header>
     <div id='conteudo'>
         <div id='sct_ger_publicacoes'>
             <form method='get'>
-                <br>
-                <div id='pesquisa'>
-                    <input type="text" name='txt_pesquisar_publicacoes' id='txt_pesquisar_publicacoes' placeholder="Pesquisar">
-                    <input type="submit" value="Pesquisar" name='bt_pesquisar_publicacao' id='bt_pesquisar_publicacao'>
+
+                <div id='sct_txt_pesquisa'>
+                    Pesquisar <input type="text" name='txt_pesquisar_publicacoes' id='txt_pesquisar_publicacoes'>
                 </div>
                 
                 <div class='filtros' >
                     <div id='filtro_tipo'>
-                        <input type="checkbox" name="ch_filtro_tipo" id="add" onclick="isFiltroChecked( this['id'], 'sel_tipo_publicacao')">
+
+                        <input type="checkbox" name="ch_filtro_tipo" id="ch_filtro_tipo" onclick="isFiltroChecked( this['id'], 'sel_tipo_publicacao')">
                         <label for="ch_filtro_tipo">Tipo</label>
                         <select name="sel_tipo_publicacao" id="sel_tipo_publicacao" hidden>
-                            <option value="PUBLICACAO">Publicação</option>
-                            <option value="REQUISICAO">Requisição</option>
-                            <option value="EVENTO">Evento</option>
+                            <option value="PUBLICACAO">PUBLICAÇÃO</option>
+                            <option value="REQUISICAO">REQUISIÇÃO</option>
+                            <option value="EVENTO">EVENTO</option>
                         </select>
                     </div>
                     <div id='filtro_data'>
@@ -49,11 +49,10 @@
                         </div>
                     </div>
                 </div>
+                <input type="submit" value="Pesquisar" name='bt_pesquisar_publicacao' id='bt_pesquisar_publicacao'>
             </form>
         </div>
-        <div class="addpub">
-        <a href="pg_add_publicacao.php"><button>Adicionar Publicação</button></a>
-        </div>
+        <a href="pg_add_publicacao.php"><button>Adicionar Publicação...</button></a>
         <div id='sct_view_publicacoes'>
                 <table id='table_publi'>
                     <tr>
@@ -150,17 +149,16 @@
                                 </tr>";
                             }
                         }
-                    
+                        
                         
                     ?>
             </table>
-            <br>
         </div>
     </div>
-</div>
-</div>
+
 
 
     <script>keyBindAll()</script>
+</div>
 </body>
 </html>
