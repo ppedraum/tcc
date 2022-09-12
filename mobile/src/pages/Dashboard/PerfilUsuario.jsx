@@ -3,8 +3,11 @@ import { Text, View, Button, FlatList, TouchableOpacity, ActivityIndicator } fro
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
+import { useIsFocused } from '@react-navigation/native';
 
 function PerfilUsuario({navigation}){
+
+    const isFocused = useIsFocused();
 
     const { usuario, token, NODE_PORT, logout } = useContext(AuthContext);
     const [ isLoading, setLoading ] = useState(true);
@@ -31,7 +34,7 @@ function PerfilUsuario({navigation}){
 
     useEffect(()=>{
         getFollows();
-    }, [])
+    }, [isFocused])
 
     return (
         <View style={styles.container} >
