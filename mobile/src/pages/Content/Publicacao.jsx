@@ -6,6 +6,7 @@ import styles from '../styles';
 import Comentarios from './Comentarios';
 
 import AuthContext from '../../contexts/auth';
+import { CommProvider } from '../../contexts/comentario';
 
 
 
@@ -273,7 +274,9 @@ function Publicacao({ route, navigation }){
                 :
                 null
             }
-            <Comentarios id_publicacao={publicacao.id}/>
+            <CommProvider>
+                <Comentarios id_publicacao={publicacao.id}/>
+            </CommProvider>
         </>
         }
         </View>

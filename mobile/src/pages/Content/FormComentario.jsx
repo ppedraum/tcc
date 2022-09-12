@@ -4,12 +4,13 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
+import CommContext from '../../contexts/comentario';
 
 function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
     const { usuario, token, NODE_PORT } = useContext(AuthContext);
+    const { refresh, toRefresh } = useContext(CommContext);
     const [text, setText] = useState('');
     const [commAreaVisible, setCommAreaVisible] = useState(false);
-    const [placeholder, setPlaceholder] = useState('Comentar...')
 
     function comentar(){
         if(text.trim() !=0){
@@ -29,7 +30,7 @@ function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
             .catch(err => alert(err));
         }
         setCommAreaVisible(false);
-
+        toRefresh(true);
     }
 
     if(tipo == 'textinput')

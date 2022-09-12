@@ -107,6 +107,37 @@ router.post('/comentarios', async(req, res)=>{
 
 })
 
+router.delete('/comentarios', async(req, res)=>{
+    
+    const ver = await Comentario.findOne({
+        where:{
+            id : req.body.id,
+            id_usuario : req.body.id_usuario
+        }
+    });
+
+    if(ver == null){
+        res.status(400).json({err:'user not allowed'});
+    }
+    else{
+
+        const filhos = await Comentario.findAll({
+            where:{
+                id_pai : req.body.id
+            }
+        });
+
+        if(filhos.length != 0)
+            for(let i = 0; i< filhos.length; i++){
+                filhos[i].destroy();
+            }
+
+
+        ver.destroy();
+        res.status(200).json({msg:'deletion complete'});
+    }
+
+})
 
 
 

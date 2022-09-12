@@ -54,13 +54,14 @@ export default function Home({navigation}){
             } */}
             <Bttn.Screen name='PerfilUsuario' component={PerfilUsuario} 
             options={{
-                tabBarIcon: home => {return(
+                tabBarIcon : home => {return(
                     <Ionicons
                     name="md-person"
                     size={28}
                     color="#3F3F3F"
                     />
-                )}
+                )},
+                lazy : false
             }}
             />
             
