@@ -103,7 +103,7 @@ router.post('/comentarios', async(req, res)=>{
         datetime_post : new Date()
     })
 
-    console.log(comentario);
+    console.log('comentario criado');
 
 })
 
@@ -132,8 +132,8 @@ router.delete('/comentarios', async(req, res)=>{
                 filhos[i].destroy();
             }
 
-
         ver.destroy();
+        console.log('comentario deletado');
         res.status(200).json({msg:'deletion complete'});
     }
 

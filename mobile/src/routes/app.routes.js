@@ -4,6 +4,7 @@ import Home from '../pages/Dashboard/Home';
 import Publicacao from '../pages/Content/Publicacao';
 import PerfilInst from '../pages/Inst/PerfilInst';
 import ResultScreen from '../pages/Dashboard/ResultScreen';
+import PerfilUsuario from '../pages/Dashboard/PerfilUsuario';
 
 const AppStack = createNativeStackNavigator();
 export default function AppRoutes(){

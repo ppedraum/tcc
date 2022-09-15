@@ -1,20 +1,32 @@
 import { React, useContext, useState, useEffect } from 'react'
-import { Text, View, Button, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View, Image, Button, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
 import { useIsFocused } from '@react-navigation/native';
+
+import base64ArrayBuffer from '../../handy_tools/imgManipulation';
 
 function PerfilUsuario({navigation}){
 
     const isFocused = useIsFocused();
 
     const { usuario, token, NODE_PORT, logout } = useContext(AuthContext);
+    const [fotoPerfil, setFotoPerfil] = useState('');
     const [ isLoading, setLoading ] = useState(true);
     const [follows, setFollows] = useState([]);
 
     function handleLogout(){
         logout();
+    }
+
+    function prepareImg(){
+        const imgStr =  base64ArrayBuffer(usuario.foto_perfil) ;
+        const base64Flag = 'data:image/png;base64,';
+
+        setFotoPerfil(imgStr);
+
+        console.log(fotoPerfil);
     }
 
     function getFollows(){
@@ -34,25 +46,13 @@ function PerfilUsuario({navigation}){
 
     useEffect(()=>{
         getFollows();
+        prepareImg();
     }, [isFocused])
 
     return (
         <View style={styles.container} >
-            <View style={{alignSelf:'center'}} >
-                <Text>Olá, {usuario.nome} !</Text>
-            </View>
-            <View>
-                <Text style={styles.titulo}>Dados Pessoais</Text>
-                <Text>E-Mail : {usuario.e_mail}</Text>
-                <Text>Telefone : {usuario.telefone}</Text>
-                <Text>Cidade : {usuario.cidade}, {usuario.uf}</Text>
-                <Text>Profissão Atual : {usuario.profissao}</Text>
-            </View>
-            <View style={styles.filtros_container} >
-                <Button onPress={()=>{handleLogout()}} title='logout' />
-                
-            </View>
-            <Text style={styles.titulo} >Instituições Seguidas</Text>
+            <Text>Olá {usuario.nome}!</Text>
+            <Image source={{uri:fotoPerfil}} style={{width:50, height:50}} />
             {
             isLoading ? <ActivityIndicator size='large'/> :
             follows.length != 0?
