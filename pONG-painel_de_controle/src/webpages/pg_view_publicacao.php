@@ -5,84 +5,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste view</title>
+    <link rel="stylesheet" href="estilopubs.css" type="text/css">
     <?php
     require_once('../php_stuff/datab.php');
+    require_once('../php_stuff/criar_csv.php');
+    
+    $id_publicacao = $_GET['id'];
 
-    $id_usuario = 1;
-    $id_evento = 13;
-
-    $query_publi = mysqli_query($conn, "
-    select pb.titulo as pb_titulo, pb.descricao, te.titulo as te_titulo, ong.nome_fantasia, evt.datetime_inicio, evt.datetime_fim, pb.datetime_publicacao, pb.qtd_likes, pb.qtd_compartilhamentos, pb.tipo_publicacao
-    from evento as evt, publicacao as pb, tipo_evento as te, ong 
-    where evt.id = $id_evento
-    and evt.id = pb.id_evento 
-    and te.id = evt.id_tipo_evento
-    and pb.id_ong = ong.id
-    ;
+    $query = mysqli_query($conn, "
+    select * from publicacao as p where p.id = $id_publicacao
     ");
+    $query = $query->fetch_assoc();
 
-    $query_inscritos = mysqli_query($conn, "
-    select u.nome, u.e_mail, u.telefone, u.cidade, u.UF, u.cpf 
-    from usuario as u, inscricao as i 
-    where i.id_evento = $id_evento
-    ;
-    ");
+    
 
 
 
-    /* $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] 
-                === 'on' ? "https" : "http") . 
-                "://" . $_SERVER['HTTP_HOST'] . 
-                $_SERVER['REQUEST_URI'];
 
-    $params = parse_url($url);
-    parse_str($url['query'], $params);
-    echo($params['n']); */
+
+
     ?>
 
 </head>
 <body>
 
-    <h1>Teste</h1>
+    <h3>Título: </h3>
+    <?php echo $query['titulo'] ?>
 
-    <?php
+    <h3>Descrição: </h3>
+    <?php echo $query['descricao'] ?>
 
-    while($row = $query_publi->fetch_assoc()){
-        echo "ONG: ".$row['nome_fantasia']."<br>";
-        echo "Tipo de Publicação: ".$row['tipo_publicacao']."<br>";
-        echo "Título: ".$row['pb_titulo']."<br>";
-        echo "Desc: ".$row['descricao']."<br>";
-        echo "Início: ".$row['datetime_inicio']."<br>";
-        echo "Fim: ".$row['datetime_fim']."<br>";
-        echo "Tipo de Evento: ".$row['te_titulo']."<br>";
-        echo "Likes: ".$row['qtd_likes']."<br>";
-        echo "Compartilhamentos: ".$row['qtd_compartilhamentos']."<br>";
-    }
-    echo "<br><br>";
+    <h3>Tipo de publicação: </h3>
+    <?php 
+    echo $query['tipo_publicacao'];
+    
+    if($query['id_evento'] != null){
+        $query_evento = mysqli_query($conn, "
+        select * from evento as e where e.id = ".$query['id_evento']);
+        $query_evento = $query_evento->fetch_assoc();
+        $query_tipo_evento = mysqli_query($conn, "select titulo from tipo_evento where id=".$query_evento['id_tipo_evento']);
+        $query_tipo_evento = $query_tipo_evento->fetch_assoc();
 
-    ?>
+        echo "<h3> Tipo do evento: </h3>";
+        echo $query_tipo_evento['titulo'];
+        echo "<br>";
 
-    <table>
+        echo "<h3> Mídia: </h3>";
+        echo " <img src='data:image/jpeg;base64,".base64_encode($query_evento['foto'])."'> ";
+
+        $query_inscricoes = mysqli_query($conn, "
+        select usuario.* from inscricao, usuario
+        where inscricao.id_usuario = usuario.id and inscricao.id_evento = ".$query_evento['id']);
+
+        echo "<h3>Inscrições</h3>";
+
+        echo "
+        <table>
+
+        <th></th>
         <th>Nome</th>
         <th>E-Mail</th>
         <th>Telefone</th>
+        <th>Data de Nascimento</th>
+        <th>Profissão</th>
+        <th>Sexo</th>
         <th>Cidade</th>
-        <th>UF</th>
-        <th>CPF</th>
+        <th>Estado</th>
+        ";
 
-        <?php
-        while($row = $query_inscritos->fetch_assoc()){
-            echo '<tr>';
+        $num = 1;
+        while($row = $query_inscricoes->fetch_assoc()){
+            
+            echo "<tr>";
+            echo "<td>".$num."</td>";
             echo "<td>".$row['nome']."</td>";
             echo "<td>".$row['e_mail']."</td>";
             echo "<td>".$row['telefone']."</td>";
+            echo "<td>".$row['data_nasc']."</td>";
+            echo "<td>".$row['profissao']."</td>";
+            echo "<td>".$row['sexo']."</td>";
             echo "<td>".$row['cidade']."</td>";
             echo "<td>".$row['UF']."</td>";
-            echo "<td>".$row['cpf']."</td>";
+            echo "</tr>";
+            $num++;
         }
-        ?>
 
-    </table>
+        echo "</table>";
+        echo "<button onPress=<?php criarCsv() ?>Gerar Excel</button>";
+
+
+    }
+
+    ?>
 
 
 

@@ -55,7 +55,7 @@
         <a href="pg_add_publicacao.php"><button>Adicionar Publicação</button></a>
         </div>
         <div id='sct_view_publicacoes'>
-                <table id='table_publi'>
+                <table id='table_publi' class="table_default">
                     <tr>
                         <th>Título</th>
                         <th>Likes</th>
@@ -71,10 +71,14 @@
                             $query = mysqli_query($conn, "select * from Publicacao order by datetime_publicacao desc");
                             
                             while($row = $query->fetch_assoc()){
+                                $query_like = mysqli_query($conn, 
+                                "select count(`like`.id_publicacao) from `like` where `like`.id_publicacao=".$row['id']);
+                                
                                 echo "
                                 <tr name='publi-".$row['id']."' id='publi-".$row['id']."'>
-                                    <td>"
-                                        .$row['titulo']."
+                                    <td><a href='pg_view_publicacao.php?id=".$row['id']."' >"
+                                    .$row['titulo']
+                                    ."</a>
                                     </td>
                                     <td>"
                                         .$row['qtd_likes']."
