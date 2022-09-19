@@ -89,6 +89,7 @@ export function AuthProvider({children}){
             }else{
                 console.log('ok')
                 setSigned('true');
+                console.log('id do usuário: ' + result.usuario.id)
                 setUsuario(result.usuario);
                 setToken(result.token)
                 AsyncStorage.setItem('@RNAuth:usuario', JSON.stringify(result.usuario));

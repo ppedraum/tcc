@@ -10,7 +10,7 @@
 <body>
 <h2> pONG - Painel de Controle <br><img src = "logo.svg" alt="LOGO" width="300" height="150"></h2>
 
-<div class="container">
+<div class="container"> 
 <div class="fundo">
   <?php session_start(); echo "<div class=\"echo\"> <font size=6>",("Olá, ".$_SESSION['login']."!"),"</font></div>"; ?>
     <br><br>

@@ -1,11 +1,13 @@
 body {
     margin : 0px ;
-    background-image: linear-gradient(to bottom right,  #3297df,#afd3eb );
+    background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
 }
 
 h2{
     padding-left: 30px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    filter: saturate(150%);
+
 }
 .container {
     width: 100vw;

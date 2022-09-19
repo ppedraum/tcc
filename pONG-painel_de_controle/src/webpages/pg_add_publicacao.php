@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mundo - Adicionar Publicação</title>
-    <link rel="stylesheet" href="estilopubs.css" type="text/css">
+    <link rel="stylesheet" href="estiloaddpub.css" type="text/css">
     <script>
 
         function mudarForm(){
@@ -46,35 +46,29 @@
 
 
 <body onload="mudarForm()">
-    <header>
-    <div class="box1">
-        <p><a href="../../menu.php"> Mundo </a>- Adicionar Publicação</p>
-    </div>
-    </header>
-
-    <div id="container">
+<h2>pONG - Adicionar Publicações<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2>
+    <div class="container">
     <!-- action="../php_stuff/add_publicacao.php"  -->
-    <div id='quadrado'>
-    <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php" >
-        <br>
-        Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
-        Descrição<br>
-        <textarea name="txt_descricao" id="txt_descricao" cols="30" rows="10" style='resize:none;' ></textarea>
-
-        <section id="sct_tipo_publicacao">
-            <span>
-                <label for="rd_tipo_publicacao_publicacao">Publicação</label>
-                <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_publicacao" value="publicacao" onclick="mudarForm()" checked>
-            </span>
-            <span>
-                <label for="rd_tipo_publicacao_evento">Evento</label>
-                <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_evento" value="evento" onclick="mudarForm()">
-            </span>
-            <span>
-                <label for="rd_tipo_publicacao_requisicao">requisição</label>
-                <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_requisicao" value="requisicao" onclick="mudarForm()">
-            </span>
-        </section>
+        <div id='quadrado'> 
+        <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php" >
+            <br>
+            Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
+            Descrição<br>
+            <textarea name="txt_descricao" id="txt_descricao" cols="30" rows="10" style='resize:none;' ></textarea>
+            <section id="sct_tipo_publicacao">
+                <span>
+                    <label for="rd_tipo_publicacao_publicacao">Publicação</label>
+                    <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_publicacao" value="publicacao" onclick="mudarForm()" checked>
+                </span>
+                <span>
+                    <label for="rd_tipo_publicacao_evento">Evento</label>
+                    <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_evento" value="evento" onclick="mudarForm()">
+                </span>
+                <span>
+                    <label for="rd_tipo_publicacao_requisicao">Requisição</label>
+                    <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_requisicao" value="requisicao" onclick="mudarForm()">
+                </span>
+            </section>
         
         <div id="div_form_evento" hidden>
             <!-- <form action="" method="post"> -->
@@ -101,6 +95,7 @@
                 </div>
                 <div>
                     <label for="sel_estado_evento">Estado</label><br>
+                    <div class="select">
                     <select name="sel_estado_evento" id="sel_estado_evento" 
                     onmousedown="/* delArrIndex('sel_estado_evento') */">
                         <option value="nl" selected>Selecione...</option>
@@ -164,7 +159,7 @@
                 </select>
             <!-- </form> -->
         </div>
-        <div>
+        <div id="botao">
             <input type="submit" name="bt_submit_publicacao" id="bt_submit_publicacao" value="Enviar">
             <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar" onclick="">
         </div>

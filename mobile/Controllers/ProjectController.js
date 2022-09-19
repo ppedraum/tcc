@@ -10,6 +10,7 @@ const Publicacao = require('../models/Publicacao');
 const Evento = require('../models/Evento');
 const Instituicao = require('../models/Instituicao');
 const { Op } = require("sequelize");
+const Foto_Publicacao = require('../models/Foto_Publicacao');
 
 router.get('/publicacoes', async (req, res)=>{
     let publicacoes = await Publicacao.findAll({
@@ -57,6 +58,16 @@ router.get('/publicacao/:id', async (req, res)=>{
             id: req.params.id
         }
     });
+
+    /* let foto = await Foto_Publicacao.findOne({
+        where:{
+            id : 1
+        }
+    });
+    console.log('--------------------------------------------------------------------------------------');
+    console.log(foto);
+    console.log('--------------------------------------------------------------------------------------'); */
+
     res.json(publicacao);
 });
 
@@ -66,6 +77,8 @@ router.get('/evento/:id', async(req, res)=>{
             id : req.params.id
         }
     })
+
+    
 
     res.json(evento);
 })
