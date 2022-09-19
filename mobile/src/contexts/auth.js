@@ -63,7 +63,7 @@ export function AuthProvider({children}){
     }, [])
 
     const [isSigned, setSigned] = useState('false')
-    const [usuario, setUsuario] = useState(null);
+    const [usuario, setUsuario] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [token, setToken] = useState('');
 
