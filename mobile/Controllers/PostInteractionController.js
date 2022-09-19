@@ -117,10 +117,11 @@ router.delete('/comentarios', async(req, res)=>{
     });
 
     if(ver == null){
+        console.log('a')
         res.status(400).json({err:'user not allowed'});
     }
     else{
-
+        console.log('b')
         const filhos = await Comentario.findAll({
             where:{
                 id_pai : req.body.id

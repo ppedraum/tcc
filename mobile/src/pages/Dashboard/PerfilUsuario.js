@@ -2,10 +2,13 @@ import { React, useContext, useState, useEffect } from 'react'
 import { Text, View, Image, Button, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import styles from '../styles';
 
+var Buffer = require('@craftzdog/react-native-buffer').Buffer;
+
 import AuthContext from '../../contexts/auth';
 import { useIsFocused } from '@react-navigation/native';
 
-import base64ArrayBuffer from '../../handy_tools/imgManipulation';
+import {decode as atob, encode as btoa} from 'base-64';
+import arrayBufferToBase64 from '../../handy_tools/imgManipulation';
 
 function PerfilUsuario({navigation}){
 
@@ -20,14 +23,25 @@ function PerfilUsuario({navigation}){
         logout();
     }
 
-    function prepareImg(){
-        const imgStr =  base64ArrayBuffer(usuario.foto_perfil) ;
-        const base64Flag = 'data:image/png;base64,';
+    /* const arrayBufferToBase64 = buffer => {
+        let binary;
+        let bytes = new Uint8Array(buffer);
+        let len = bytes.byteLength;
+        
+        for (let i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+          console.log(binary);
+        }
+        return btoa(binary);
+      }; */
 
-        setFotoPerfil(imgStr);
-
+    /* function prepareImg(){
+        const imageBuffer = Buffer.from(JSON.stringify(usuario.foto_perfil))
+        const imgFlag = 'data:image/jpeg;base64,'
+        const imageBase64 = imageBuffer.toString('base64')
+        setFotoPerfil(imageBase64);
         console.log(fotoPerfil);
-    }
+    } */
 
     function getFollows(){
         setLoading(true);
@@ -46,13 +60,22 @@ function PerfilUsuario({navigation}){
 
     useEffect(()=>{
         getFollows();
-        prepareImg();
+        //console.log( 'Buffer : ' + arrayBufferToBase64(usuario.foto_perfil));
     }, [isFocused])
 
     return (
         <View style={styles.container} >
-            <Text>Olá {usuario.nome}!</Text>
-            <Image source={{uri:fotoPerfil}} style={{width:50, height:50}} />
+            {/* <Text>Olá {usuario.nome}!</Text> */}
+            <Button title='Logout' onPress={logout}/>
+            {/* 
+            <Image source={{
+                  uri:
+                    'data:image/jpg;base64,' + arrayBufferToBase64(usuario.foto_perfil)
+                     //data.data in your case
+                }} 
+                style={{width:200, height:200}} 
+            /> 
+            */}
             {
             isLoading ? <ActivityIndicator size='large'/> :
             follows.length != 0?

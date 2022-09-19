@@ -59,14 +59,14 @@ router.get('/publicacao/:id', async (req, res)=>{
         }
     });
 
-    let foto = await Foto_Publicacao.findOne({
+    /* let foto = await Foto_Publicacao.findOne({
         where:{
             id : 1
         }
     });
     console.log('--------------------------------------------------------------------------------------');
     console.log(foto);
-    console.log('--------------------------------------------------------------------------------------');
+    console.log('--------------------------------------------------------------------------------------'); */
 
     res.json(publicacao);
 });

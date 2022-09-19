@@ -35,7 +35,11 @@ function Comentarios({id_publicacao}){
                 id_usuario: usuario.id
             })
         })
-        //.then(res => console.log(res.status))
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            
+        })
         .catch(err => console.log(err))
         toRefresh(true);
         setDelModalVisible(false);
@@ -85,7 +89,6 @@ function Comentarios({id_publicacao}){
                     filhos.map(commFilho=>{
                         if(commFilho.id_pai == commPai.id)
                             return(
-                                
                                 <View key={commFilho.id} >
                                     <DeleteModal id_comentario={commFilho.id} />
                                     <Text>
