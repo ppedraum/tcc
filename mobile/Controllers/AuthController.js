@@ -112,11 +112,12 @@ router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
             is_voluntario : req.body.is_voluntario,
         })
         
-        const usuario = Usuario.findOne({
+        const usuario = await Usuario.findOne({
             order: [
                 [ 'id', 'DESC' ]
             ],
         });
+        console.log(usuario);
         res.send({
             usuario,
             token: gerarToken({ id: usuario.id })

@@ -1,31 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Routes from './src/routes/index.routes';
+import Feed from './src/Feed';
+import Cadastro from './src/Cadastro';
+import Login from './src/Login';
+import Home from './src/Home';
 
-import { AuthProvider } from './src/contexts/auth';
-
-//Async Storage serve apenas para gravar informações no refresh da pag, não usar para autenticação
+import styles from './styles';
 
 
+const Stack = createNativeStackNavigator();
 function App() {
   return (
     <>
         <StatusBar/>
-        {/*
-        O próprio NavigationContainer usa Context para possibilitar que as rotas tenham as informações
-        necessárias para serem navegadas
-        */}
         <NavigationContainer>
-            {/*
-            Passando nosso Provider do AuthContext para autenticação das rotas
-            */}
-            <AuthProvider>
-                <Routes/>
-            </AuthProvider>
+            <Stack.Navigator
+            initialRouteName='Login'
+            >
+                <Stack.Screen name='Login' component={Login} 
+                options={{headerShown:false}}
+                />
+                <Stack.Screen name='Cadastro' component={Cadastro} 
+                options={{headerShown:false}}
+                />
+                <Stack.Screen name='Home' component={Home} 
+                options={{headerShown:false}}
+                />
+            </Stack.Navigator>
         </NavigationContainer>
     </>
     

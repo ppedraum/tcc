@@ -63,7 +63,7 @@ export function AuthProvider({children}){
     }, [])
 
     const [isSigned, setSigned] = useState('false')
-    const [usuario, setUsuario] = useState(null);
+    const [usuario, setUsuario] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [token, setToken] = useState('');
 
@@ -89,6 +89,7 @@ export function AuthProvider({children}){
             }else{
                 console.log('ok')
                 setSigned('true');
+                console.log('id do usuário: ' + result.usuario.id)
                 setUsuario(result.usuario);
                 setToken(result.token)
                 AsyncStorage.setItem('@RNAuth:usuario', JSON.stringify(result.usuario));

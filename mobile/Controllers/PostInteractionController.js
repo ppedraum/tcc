@@ -103,7 +103,7 @@ router.post('/comentarios', async(req, res)=>{
         datetime_post : new Date()
     })
 
-    console.log(comentario);
+    console.log('comentario criado');
 
 })
 
@@ -117,10 +117,11 @@ router.delete('/comentarios', async(req, res)=>{
     });
 
     if(ver == null){
+        console.log('a')
         res.status(400).json({err:'user not allowed'});
     }
     else{
-
+        console.log('b')
         const filhos = await Comentario.findAll({
             where:{
                 id_pai : req.body.id
@@ -132,8 +133,8 @@ router.delete('/comentarios', async(req, res)=>{
                 filhos[i].destroy();
             }
 
-
         ver.destroy();
+        console.log('comentario deletado');
         res.status(200).json({msg:'deletion complete'});
     }
 

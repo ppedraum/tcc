@@ -159,6 +159,7 @@
                 </select>
             <!-- </form> -->
         </div>
+        <BR>
         <div id="botao">
             <input type="submit" name="bt_submit_publicacao" id="bt_submit_publicacao" value="Enviar">
             <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar" onclick="">

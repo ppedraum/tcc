@@ -64,44 +64,59 @@ function ResultScreen({ route, navigation }){
     }
 
     function HandleListAll(){
-        return (
-        <ScrollView>
-            <Text style={styles.titulo} >Instituições</Text>
-            {
-            instituicoes.map((inst)=>
-            <TouchableOpacity key={inst.id} onPress={()=>navigation.navigate('PerfilInst', {
-                id: inst.id
-            })} >
-                <View >
-                    <Text style={styles.titulo} >
-                        {inst.nome_fantasia}
-                    </Text>
-                    <Text style={styles.conteudo}>
-                        {inst.apresentacao}
-                    </Text>
-                </View>
-            </TouchableOpacity>
-            )
-            }
-            <Text style={styles.titulo} >Publicações</Text>
-            {
-            publicacoes.map((publi)=>
-            <TouchableOpacity key={publi.id} onPress={()=>navigation.navigate('Publicacao', {
-                id: publi.id
-            })} >
-                <View>
-                    <Text style={styles.titulo} >
-                        {publi.titulo}
-                    </Text>
-                    <Text style={styles.conteudo} >
-                        {publi.descricao}
-                    </Text>
-                </View>
-            </TouchableOpacity>
-            )
-            }
-        </ScrollView>    
-        );
+        if(instituicoes.length == 0 && publicacoes.length == 0)
+            return (
+            <Text style={styles.conteudo}>
+                Não foi encontrado nenhum resultado para essa pesquisa. Tente refazê-la em outras palavras.
+            </Text>
+            );
+        
+        else
+            return (
+            <ScrollView>
+                <Text style={styles.titulo} >Instituições</Text>
+                {
+                    instituicoes.length == 0 ?
+                    <Text style={styles.conteudo} >Não foi encontrado nehuma instituição.</Text>
+                    :
+                    instituicoes.map((inst)=>
+                    <TouchableOpacity key={inst.id} onPress={()=>navigation.navigate('PerfilInst', {
+                        id: inst.id
+                    })} >
+                        <View >
+                            <Text style={styles.titulo} >
+                                {inst.nome_fantasia}
+                            </Text>
+                            <Text style={styles.conteudo}>
+                                {inst.apresentacao}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                    )
+
+                }
+                <Text style={styles.titulo} >Publicações</Text>
+                {
+                    publicacoes.length == 0 ?
+                    <Text style={styles.conteudo} >Não foi encontrado nehuma publicação.</Text>
+                    :
+                    publicacoes.map((publi)=>
+                    <TouchableOpacity key={publi.id} onPress={()=>navigation.navigate('Publicacao', {
+                        id: publi.id
+                    })} >
+                        <View>
+                            <Text style={styles.titulo} >
+                                {publi.titulo}
+                            </Text>
+                            <Text style={styles.conteudo} >
+                                {publi.descricao}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                    )
+                }
+            </ScrollView>    
+            );
     }
 
     return(
@@ -125,6 +140,11 @@ function ResultScreen({ route, navigation }){
             
             {
                 tipoResultado == 'Publicacao' ? 
+                    publicacoes.length == 0 ?
+                    <Text style={styles.conteudo} >
+                        Não foi encontrado nenhuma publicação com essa pesquisa. Tente refazê-la com outras palavras. 
+                    </Text>
+                    :
                     <FlatList 
                     data={publicacoes}
                     keyExtractor={(item)=>item.id}
@@ -146,6 +166,11 @@ function ResultScreen({ route, navigation }){
             }
             {
                 tipoResultado == 'Instituicao' ? 
+                    instituicoes.length == 0 ?
+                    <Text style={styles.conteudo} >
+                        Não foi encontrado nenhuma instituição com essa pesquisa. Tente refazê-la com outras palavras. 
+                    </Text>
+                    :
                     <FlatList 
                     data={instituicoes}
                     keyExtractor={(item)=>item.id}
