@@ -48,9 +48,7 @@ table, td{
 }
 
 th{
-    border: 1px solid;
-    background: #5291be;
-    border-color: #3f78a0 ;
+    background: #3f78a0
 }
 
 input[type="text"] {
