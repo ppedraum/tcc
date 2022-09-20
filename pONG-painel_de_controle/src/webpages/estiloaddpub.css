@@ -71,7 +71,7 @@ input[type="date"]{
     justify-content : center;
     align-items: center;
     border-radius: 30px;
-    width : 120px;
+    width : 140px;
     height : 20px;
     background : #ffffff;
     border: 2.5px solid #3f78a0;
@@ -101,7 +101,6 @@ input[type="reset"]{
 
 select {
     appearance: none;
-    background-color: transparent;
     border: none;
     padding: 0 1em 0 0;
     margin: 0;
