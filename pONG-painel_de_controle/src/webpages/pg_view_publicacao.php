@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="estilopubs.css" type="text/css">
     <?php
     require_once('../php_stuff/datab.php');
-    require_once('../php_stuff/criar_csv.php');
     
     $id_publicacao = $_GET['id'];
 
@@ -88,18 +87,32 @@
             echo "<td>".$row['UF']."</td>";
             echo "</tr>";
             $num++;
+
+            if($num == 10){
+                break;
+            }
         }
 
         echo "</table>";
-        echo "<button onPress=<?php criarCsv() ?>Gerar Excel</button>";
+        echo "<button onclick='openTab()' >Gerar Excel</button>";
 
+        echo "
+        
+        <script>
+
+        function openTab(){
+            window.open('../php_stuff/criar_csv.php?id=$id_publicacao');
+        }
+
+        </script>
+
+        ";
 
     }
 
     ?>
 
-
-
+    
 
 
 </body>
