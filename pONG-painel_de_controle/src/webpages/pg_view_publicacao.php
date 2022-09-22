@@ -95,13 +95,12 @@
 
         echo "</table>";
         echo "<button onclick='openTab()' >Gerar Excel</button>";
-
         echo "
         
         <script>
 
         function openTab(){
-            window.open('../php_stuff/criar_csv.php?id=$id_publicacao');
+            window.open('../php_stuff/criar_xlsx.php?id_publi=$id_publicacao&id_evt=".$query['id_evento']."');
         }
 
         </script>
