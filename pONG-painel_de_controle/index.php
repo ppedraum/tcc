@@ -23,6 +23,10 @@
     <input type="submit" value="Enviar" name='bt_login'>    
     </div>
 
+<!--     <a href='./src/webpages/cadastro.php'>
+        Não possui conta? Cadastre-se
+    </a> -->
+
     </form>
 </div>
 <br><br><br>

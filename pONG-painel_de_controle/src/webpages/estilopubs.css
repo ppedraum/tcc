@@ -37,6 +37,7 @@ h2{
     margin-bottom: 300px;
     padding-left: 10px;
     padding-right: 10px;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
 
 table, td{

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="estilomenu.css" type="text/css">
 </head>
 <body>
-<h2> pONG - Painel de Controle <br><img src = "logo.svg" alt="LOGO" width="300" height="150"></h2>
+    <h2>pONG - Adicionar Publicações<br><a href="../../menu.php"><img src = "./src/webpages/logo.svg" alt="LOGO" width="300" height="150"></a></h2>
 
 <div class="container"> 
 <div class="fundo">
@@ -19,11 +19,11 @@
     </div>
     <br><br>
     <div class="botoes">
-    <a href="src\webpages\pg_publicacoes.php"><input type="submit" value="Gerenciar Publicações" /></a>
-    <a href="src\webpages\pg_ferramentas_ong.php"><input type="submit" value="Ferramentas da instituição" /></a>
+    <a href="src\webpages\pg_publicacoes.php"><button>Gerenciar Publicações</button></a>
+    <a href="src\webpages\pg_ferramentas_ong.php"><button>Ferramentas da instituição</button></a>
     </div><br><br>
-    <div class="botaosair">
-    <a href="./src/php_stuff/logout.php"><input type="submit" value="Sair" /></a>
+    <div class="botoes">
+    <a href="./src/php_stuff/logout.php"><button>Sair</button></a>
 </div>
 </div>
 </div>

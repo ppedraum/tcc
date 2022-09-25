@@ -1,6 +1,8 @@
 body {
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
+    font-family: Arial;
+    font-size: 18px;
 }
 
 h2{
@@ -64,28 +66,25 @@ h2{
     padding: 5px 5px;
 }
 
-.botaosair{
-    border-radius: 30px;
-    border: 1px #3f78a0;
-    display: flex;
-    justify-content: center;
-    align-items: left;
+a{
+    text-decoration: none;
 }
 
-input[type="submit"]{
+button{
+    font-style: none;
     font-size: bold;
     border-radius: 30px;
     width : 170px;
-    height : 35px;
+    height : auto;
+    margin: 10px;
+    padding: 5px 10px 5px 10px;
     justify-content : center;
     align-items: center;
-    display : center;
     background : #EEE5DE;
     color : black ;
-    display: block;
-    cursor: pointer;
-    transition: .5s;
     border: 2.5px solid #3f78a0;
+    font-family: Arial;
+    font-size: 18px;
 }
 
 input[type="submit"]:hover {
