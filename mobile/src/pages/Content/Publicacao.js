@@ -5,6 +5,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import AuthContext from '../../contexts/auth';
 
+import Comentarios from './Comentarios';
+import { CommProvider } from '../../contexts/comentario';
+
 
 
 function Publicacao({ route, navigation }){
@@ -268,6 +271,10 @@ function Publicacao({ route, navigation }){
                 :
                 null
             }
+            <CommProvider>
+                <Comentarios id_publicacao={idPublicacao} />
+            </CommProvider>
+            
         </>
         }
         </View>
