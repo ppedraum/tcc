@@ -8,14 +8,23 @@
     <link rel="stylesheet" href="estilomenu.css" type="text/css">
 </head>
 <body>
-    <h2>pONG - Adicionar Publicações<br><a href="../../menu.php"><img src = "./src/webpages/logo.svg" alt="LOGO" width="300" height="150"></a></h2>
+    <h2>MUNDO - Painel de Controle<br><img src = "./src/webpages/logo.svg" alt="LOGO" width="300" height="150"></h2>
 
 <div class="container"> 
 <div class="fundo">
-  <?php session_start(); echo "<div class=\"echo\"> <font size=6>",("Olá, ".$_SESSION['login']."!"),"</font></div>"; ?>
+  <?php session_start(); echo "<div class=\"echo\"> <font size=6>",("Olá, ".$_SESSION['inst']['login']."!"),"</font></div>"; ?>
     <br><br>
     <div class="fotouser">
-    <img src="user.png" width=100 height=100> <!-- aqui vai a foto do usuário  -->
+    <?php
+    if($_SESSION['inst']['foto_perfil'] != null){
+        echo " <img width='100' src='data:image/jpeg;base64,".base64_encode($_SESSION['inst']['foto_perfil'])."'> ";
+    }
+    else{
+        echo "<img src='user.png' width=100 height=100>";
+    }
+    ?>
+    
+    
     </div>
     <br><br>
     <div class="botoes">

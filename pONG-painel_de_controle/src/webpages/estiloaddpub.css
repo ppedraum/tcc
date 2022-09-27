@@ -42,15 +42,15 @@ input[type="text"], textarea {
     border-radius: 30px;
     background : #ffffff;
     border: 2.5px solid #3f78a0;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 5px 10px 5px 10px;
+    width: 300px;
     font-size: 18px;
 }
 
 input[type="submit"], input[type="reset"]{
     border-radius: 30px;
     width : 100px;
-    height : 25px;
+    padding: 5px 10px 5px 10px;
     background : #ffffff;
     color : black ;
     cursor: pointer;
@@ -77,13 +77,11 @@ input[type="date"], input[type="time"]{
     border-radius: 30px;
     background : #ffffff;
     border: 2.5px solid #3f78a0;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 5px 10px 5px 10px;
     font-size: 18px;
 }
 
 select {
     font-size: 18px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 5px 10px 5px 10px;
 }

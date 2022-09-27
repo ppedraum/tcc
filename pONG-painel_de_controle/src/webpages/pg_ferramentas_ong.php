@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="ferramentasong.css" type="text/css">
 </head>
 <body>
-<h2>pONG - Ferramentas da ONG<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2>
+<h2>MUNDO - Ferramentas da Instituição<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2>
 <div class="container">
 <div class="fundo">
     <form action="" method="post">

@@ -5,42 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste view</title>
-    <link rel="stylesheet" href="estilopubs.css" type="text/css">
+    <!-- <link rel="stylesheet" href="estilopubs.css" type="text/css"> -->
     <?php
     require_once('../php_stuff/datab.php');
     
     $id_publicacao = $_GET['id'];
 
-    $query = mysqli_query($conn, "
+    $query_publicacao = mysqli_query($conn, "
     select * from publicacao as p where p.id = $id_publicacao
     ");
-    $query = $query->fetch_assoc();
-
-    
-
-
-
-
-
-
+    $query_publicacao = $query_publicacao->fetch_assoc();
     ?>
 
 </head>
 <body>
 
     <h3>Título: </h3>
-    <?php echo $query['titulo'] ?>
+    <?php echo $query_publicacao['titulo'] ?>
 
     <h3>Descrição: </h3>
-    <?php echo $query['descricao'] ?>
+    <?php echo $query_publicacao['descricao'] ?>
 
     <h3>Tipo de publicação: </h3>
     <?php 
-    echo $query['tipo_publicacao'];
+    echo $query_publicacao['tipo_publicacao'];
     
-    if($query['id_evento'] != null){
+    if($query_publicacao['id_evento'] != null){
         $query_evento = mysqli_query($conn, "
-        select * from evento as e where e.id = ".$query['id_evento']);
+        select * from evento as e where e.id = ".$query_publicacao['id_evento']);
         $query_evento = $query_evento->fetch_assoc();
         $query_tipo_evento = mysqli_query($conn, "select titulo from tipo_evento where id=".$query_evento['id_tipo_evento']);
         $query_tipo_evento = $query_tipo_evento->fetch_assoc();
@@ -50,7 +42,7 @@
         echo "<br>";
 
         echo "<h3> Mídia: </h3>";
-        echo " <img src='data:image/jpeg;base64,".base64_encode($query_evento['foto'])."'> ";
+        echo " <img width='750' src='data:image/jpeg;base64,".base64_encode($query_evento['foto'])."'> ";
 
         $query_inscricoes = mysqli_query($conn, "
         select usuario.* from inscricao, usuario
@@ -95,24 +87,57 @@
 
         echo "</table>";
         echo "<button onclick='openTab()' >Gerar Excel</button>";
-        echo "
-        
-        <script>
-
-        function openTab(){
-            window.open('../php_stuff/criar_xlsx.php?id_publi=$id_publicacao&id_evt=".$query['id_evento']."');
-        }
-
-        </script>
-
-        ";
 
     }
 
     ?>
+    <button onclick='showDelForm(true)' id='bt_del_form' >Deletar Publicação</button>
+    <div id='del_form' hidden>
+        <form method="POST" >
+            <p>Você realmente quer deletar essa publicação? Esse processo não pode ser desfeito!</p>
+            <input name='bt_deletar' type='submit' value='Deletar'>
+        </form>
+        <button onclick='showDelForm(false)'>Não Deletar</button>
+        <?php
+        
+        if(isset($_POST['bt_deletar'])){
+            $del_likes = mysqli_query($conn, "delete from `like` where id_publicacao = $id_publicacao");
+            $del_publicacao = mysqli_query($conn, "delete from publicacao where id = $id_publicacao");
 
-    
-
+            if($del_likes){
+                if($del_publicacao){
+                    header('Location: ./pg_publicacoes.php');
+                }
+                else{
+                    echo 'Ocorreu um erro no servidor. Tente novamente ou contate-nos sobre isso.';
+                }
+                
+            }
+            else{
+                echo 'Ocorreu um erro no servidor. Tente novamente ou contate-nos sobre isso.';
+            }
+        }
+        ?>
+    </div>
+    <script>
+        <?php
+        echo "
+        function openTab(){
+            window.open('../php_stuff/criar_xlsx.php?id_publi=$id_publicacao&id_evt=".$query_publicacao['id_evento']."');
+        }
+        ";
+        ?>
+        function showDelForm(show){
+            if(show){
+                document.getElementById('del_form').removeAttribute('hidden');
+                document.getElementById('bt_del_form').setAttribute('hidden', true);
+            }
+            else{
+                document.getElementById('del_form').setAttribute('hidden', true);
+                document.getElementById('bt_del_form').removeAttribute('hidden');
+            }
+        }
+    </script>
 
 </body>
 </html>

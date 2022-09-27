@@ -63,7 +63,7 @@
 
 
 <body onload="mudarForm()">
-<h2>pONG - Adicionar Publicações<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2>
+<h2>MUNDO - Adicionar Publicações<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2>
             <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php" class="container">
                 <div class="border_container" >
                     <div class='cell' >
@@ -95,6 +95,7 @@
                             <input type="submit" name="bt_submit_publicacao" id="bt_submit_publicacao" value="Enviar">
                             <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar" onclick="">
                         </div>
+                        <p>Entradas com * no final são obrigatórias.</p>
                     </div>
                     <div id="div_form_evento" class='cell' hidden>
                         <div class='cell' >

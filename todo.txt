@@ -16,3 +16,9 @@ Coisas para terminar
 
 
 -------------------------Aplicativo-------------------------
+
+* Colocar as imagens
+* Estilo
+* Eventos inscritos
+* Editar info. do perfil
+* LGPD

@@ -6,7 +6,7 @@ date_default_timezone_set('America/Sao_Paulo');
 require_once ('datab.php');
 
 session_start();
-$id_ONG = 1;
+$id_ONG = $_SESSION['inst']['id'];
 
 $titulo = $_POST['txt_titulo'];
 $descricao = $_POST['txt_descricao'];
