@@ -1,12 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style type="text/css" >
+
+        .preview{
+            display: inline-block;
+            text-align: center;
+            width: 400px;
+            height: 564px;
+            scale: 1;
+        }
+
+        .prev_header{
+            margin: 20px;
+        }
+
+        .prev_ctt{
+            height: 30vh;
+        }
+
+        .prev_footer{
+            text-align: center;
+        }
+
+        .img{
+            margin-top: 20px;
+        }
+
+
+    </style>
+
 </head>
 <body>
-    <img src='./imagem.php' width="200">
+    <section class="preview" >
+        <div class="prev_header" >
+            <h2>
+                <p id="pch_titulo" >
+                Aqui vai o título do seu pôster.
+                </p>
+            </h2>
+        </div>
+
+        <hr>
+        <div>
+            <p id="pch_conteudo" class="prev_ctt"  >
+            Aqui vai o conteúdo do seu pôster.
+            </p>
+        </div>
+        <img src="">
+        <hr>
+        <div class="prev_footer" >
+            <img src="./logo_cut.svg" width="200" class="img" >
+            <p>Gerado por - MUNDO App</p> 
+        </div>
+    </section>
 </body>
 </html>
