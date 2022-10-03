@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferramentas da ONG</title>
     <link rel="stylesheet" href="ferramentasong.css" type="text/css">
+    <?php
+    require "../php_stuff/ver_session.php";
+    ver_session("../../index.php");
+    ?>
 </head>
 <body>
 <h2>MUNDO - Ferramentas da Instituição<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2>
 <div class="container">
 <div class="fundo">
-    <form action="" method="post">
-        Mande para nós uma sugestão de: <b>Área de Atuação</b> <br><br>
-        Título da área: <input type="text" placeholder="Digite aqui"> <br><br>
-        Descrição: <input type="text" placeholder="Digite aqui">
-    </form>
+    <a href="./pg_criar_pdf.php"><button>Criar PDF</button></a>
 </div>
 </div>
 </body>

@@ -11,6 +11,9 @@
     session_start();
     $id_inst = $_SESSION['inst']['id'];
 
+    require "../php_stuff/ver_session.php";
+    ver_session("../../index.php");
+
     ?>
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
     <link rel="stylesheet" href="estilopubs.css" type="text/css">

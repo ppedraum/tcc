@@ -5,6 +5,32 @@ require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+$titulo = $_POST["txt_titulo"];
+$conteudo = $_POST["txt_conteudo"];
+$blob_poster = $_FILES['blob_poster']['tmp_name'];
+
+$placeholders = [
+    "PLACEHOLDER_TITULO", 
+    "PLACEHOLDER_CONTEUDO",
+    "PLACEHOLDER_IMG_TAG"
+];
+
+$conteudos = [
+    $titulo, 
+    $conteudo,
+    ""
+];
+
+if(!empty($blob_poster)){
+    $blob_poster = file_get_contents($blob_poster);
+    $blob_poster = base64_encode($blob_poster);
+
+    $conteudos[2] = "<img src='data:image/jpeg;base64,$blob_poster' width='700' >";
+}
+
+
+$ctt = file_get_contents('./layout.html');
+
 $options = new Options();
 
 //seta a root padrão do dompdf para que ele possa pegar arquivos (qualquer arquivo fora da pasta não vai poder ser renderizada)
@@ -17,101 +43,12 @@ $options->setIsRemoteEnabled(true);
 // instantiate and use the dompdf class
 $dompdf = new Dompdf($options);
 
-$dompdf->loadHtml('
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poster</title>
+$ctt = str_replace(
+    $placeholders,
+    $conteudos,
+    $ctt );
 
-    <style type="text/css" >
-
-        #pch_titulo{
-            font-weight: bold;
-            font-size: 26px;
-        }
-
-        #pch_conteudo{
-            font-size: 18px;
-        }
-
-        html{
-        margin: 0px;
-        padding: 0px;
-        }
-
-        body{
-            text-align:center;
-            background-color: #afd3eb;
-            padding-left:20px;
-            padding-right:20px;
-            
-        }
-
-        hr{
-        }
-
-        .preview{
-            display: inline-block;
-            text-align: center;
-            width: 100%;
-            height: auto;
-        }
-
-        .prev_header{
-            height: 5%;
-        }
-
-        .prev_ctt{
-            height: 70%;
-        }
-
-        .prev_ctt p{
-            text-align: left;
-        }
-
-        .prev_footer{
-            text-align: center;
-            height: 10%;
-        }
-
-        .img{
-            margin-top: 20px;
-        }
-
-
-    </style>
-
-</head>
-<body>
-    <section class="preview" >
-        <div class="prev_header" >
-                <p id="pch_titulo" >
-                Aqui vai o título do seu pôster.
-                </p>
-        </div>
-
-        <hr>
-        <div class="prev_ctt" >
-            <p id="pch_conteudo">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
-            </p>
-            <img src="./isalinda.jpg" >
-        </div>
-        <img src="">
-        <hr>
-        <div class="prev_footer" >
-            <img src="./logo_cut.svg" width=200 >
-            <p>Gerado por - MUNDO App</p> 
-        </div>
-    </section>
-</body>
-</html>
-');
+$dompdf->loadHtml($ctt);
 
 // (Optional) Setup the paper size and orientation
 $dompdf->setPaper('A4', 'portrait');
@@ -120,10 +57,9 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 header('Content-type: application/pdf');
-
 // Só mostra no browser
-echo $dompdf->output();
+//echo $dompdf->output();
 
 //Baixa o arquivo no computador
-//$dompdf->stream();
+$dompdf->stream('poster.pdf');
 ?>

@@ -11,12 +11,13 @@
     require_once('../php_stuff/datab.php');
 
     $areas_atuacao = mysqli_query($conn, 'select * from area_atuacao');
-
+    require "../php_stuff/ver_session.php";
+    ver_session("../../index.php");
 ?>
 
 <body>
     <h1>Cadastro</h1>
-    <form action="../php_stuff/cadastrar.php" method="post">
+    <form action="" method="post">
 
     <h3>Dados de Login</h3>
     Login: <input type="text" name="txt_login" > <br>

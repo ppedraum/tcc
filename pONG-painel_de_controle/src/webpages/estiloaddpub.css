@@ -4,6 +4,8 @@ body {
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
     align-content: center;
+    justify-content: center;
+    align-items: center;
     font-family: 'Arial';
     font-size: 18px;
 }
@@ -12,12 +14,6 @@ h2{
     margin: 30px;
     font-family: 'Arial';
     filter: saturate(150%);
-}
-
-.container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .border_container{
@@ -47,7 +43,7 @@ input[type="text"], textarea {
     font-size: 18px;
 }
 
-input[type="submit"], input[type="reset"]{
+input[type="submit"], input[type="reset"], button{
     border-radius: 30px;
     width : 100px;
     padding: 5px 10px 5px 10px;
@@ -60,7 +56,7 @@ input[type="submit"], input[type="reset"]{
     font-size: 16px;
 }
 
-input[type="submit"]:hover, input[type="reset"]:hover{
+input[type="submit"]:hover, input[type="reset"]:hover, button:hover{
     color : black;
     background: #6dabd6;
 }
@@ -84,4 +80,42 @@ input[type="date"], input[type="time"]{
 select {
     font-size: 18px;
     padding: 5px 10px 5px 10px;
+}
+
+#pch_titulo{
+    font-weight: bold;
+    font-size: 26px;
+}
+
+#pch_conteudo{
+    font-size: 18px;
+}
+.preview{
+    background-color: #3297df;
+    text-align: center;
+    width: 494;
+    height: 691;
+    margin: 50px;
+    scale: 1.2;
+}
+
+.prev_header{
+    height: 5%;
+}
+
+.prev_ctt{
+    height: 70%;
+}
+
+.prev_ctt p{
+    text-align: left;
+}
+
+.prev_footer{
+    text-align: center;
+    height: 10%;
+}
+
+.img{
+    margin-top: 20px;
 }

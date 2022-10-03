@@ -3,28 +3,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Poster</title>
 
     <style type="text/css" >
+
+        #pch_titulo{
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        #pch_conteudo{
+            font-size: 18px;
+        }
+
+        html{
+        margin: 0px;
+        padding: 0px;
+        }
+
+        body{
+            text-align:center;
+            background-color: #afd3eb;
+            padding-left:20px;
+            padding-right:20px;
+            
+        }
 
         .preview{
             display: inline-block;
             text-align: center;
-            width: 400px;
-            height: 564px;
-            scale: 1;
+            width: 100%;
+            height: auto;
         }
 
         .prev_header{
-            margin: 20px;
+            height: 5%;
         }
 
         .prev_ctt{
-            height: 30vh;
+            height: 70%;
+        }
+
+        .prev_ctt p{
+            text-align: left;
         }
 
         .prev_footer{
             text-align: center;
+            height: 10%;
         }
 
         .img{
@@ -38,23 +64,21 @@
 <body>
     <section class="preview" >
         <div class="prev_header" >
-            <h2>
                 <p id="pch_titulo" >
-                Aqui vai o título do seu pôster.
+                PLACEHOLDER_TITULO
                 </p>
-            </h2>
         </div>
 
         <hr>
-        <div>
-            <p id="pch_conteudo" class="prev_ctt"  >
-            Aqui vai o conteúdo do seu pôster.
+        <div class="prev_ctt" >
+            <p id="pch_conteudo">
+                PLACEHOLDER_CONTEUDO
             </p>
+            PLACEHOLDER_IMG_TAG
         </div>
-        <img src="">
         <hr>
         <div class="prev_footer" >
-            <img src="./logo_cut.svg" width="200" class="img" >
+            <img src="./logo_cut.svg" width=200 >
             <p>Gerado por - MUNDO App</p> 
         </div>
     </section>

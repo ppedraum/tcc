@@ -20,6 +20,24 @@ if (!$conn) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
 
+$statusMsg = 'erro na imagem'; 
+if(!empty($_FILES["blob_publicacao"]["name"])) { 
+    // Get file info 
+    $fileName = basename($_FILES["blob_publicacao"]["name"]); 
+    $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+    
+    // Allow certain file formats 
+    $allowTypes = array('jpg','png','jpeg'); 
+    if(in_array($fileType, $allowTypes)){ 
+        $image = $_FILES['blob_publicacao']['tmp_name']; 
+        $imgContent = addslashes(file_get_contents($image)); 
+
+    }else{ 
+        $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
+    } 
+}else{ 
+    $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
+}
 
 if(isset($_POST['bt_submit_publicacao'])){
 
@@ -46,25 +64,6 @@ if(isset($_POST['bt_submit_publicacao'])){
         $date_fim_evento = $_POST['date_fim_evento'];
         $hor_inicio_evento = $_POST['time_inicio_evento'];
         $hor_fim_evento = $_POST['time_fim_evento'];
-
-        $status = $statusMsg = 'erro na imagem'; 
-        if(!empty($_FILES["blob_evento"]["name"])) { 
-            // Get file info 
-            $fileName = basename($_FILES["blob_evento"]["name"]); 
-            $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
-            
-            // Allow certain file formats 
-            $allowTypes = array('jpg','png','jpeg'); 
-            if(in_array($fileType, $allowTypes)){ 
-                $image = $_FILES['blob_evento']['tmp_name']; 
-                $imgContent = addslashes(file_get_contents($image)); 
-
-            }else{ 
-                $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
-            } 
-        }else{ 
-            $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
-        }
 
         $id_tipo_evento = $_POST['sel_tipo_evento'];
 

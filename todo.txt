@@ -6,10 +6,7 @@ Coisas para terminar
 
 
 * Toda publicação vai ter foto, independente se é evento
-* Gerar PDF
 * Alterar info do perfil
-* Sessão
-* 
 
 
 

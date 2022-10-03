@@ -4,50 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mundo - Criar PDF</title>
+    <link rel="stylesheet" href="./estiloaddpub.css" type="text/css" >
     <script type="text/javascript" src="../scripts/preview_pdf.js"></script>
-
-    <style type="text/css" >
-
-        .preview{
-            display: inline-block;
-            text-align: center;
-            width: 400px;
-            height: 564px;
-            scale: 1;
-        }
-
-        .prev_header{
-            margin: 20px;
-        }
-
-        .prev_ctt{
-            height: 30vh;
-        }
-
-        .prev_footer{
-            text-align: center;
-        }
-
-        .img{
-            margin-top: 20px;
-        }
-
-
-    </style>
-
-
+    <?php
+    require "../php_stuff/ver_session.php";
+    ver_session("../../index.php");
+    ?>
 </head>
 <body>
-    <div >
-        <form method="GET" action="../pdf/criar_pdf.php" style="display: inline-block;">
+    <div>
+    <h2>
+        MUNDO - Painel de Controle<br>
+        <a href="../../menu.php">
+            <img src = "./logo.svg" alt="LOGO" width="300" height="150">
+        </a>
+        
+    </h2>
+    </div>
+
+    <div class="border_container" >
+        <form method="post" enctype="multipart/form-data" action="../pdf/criar_pdf.php" class="cell">
             <div>
-                <label for="txt_titulo">Título</label><br>
-                <input type="text" id="txt_titulo" name="txt_titulo" >
+                <label for="txt_titulo">Título*</label><br>
+                <input type="text" id="txt_titulo" name="txt_titulo" required >
             </div>
             <div>
-                <label for="txt_conteudo">Conteúdo</label><br>
-                <textarea id="txt_conteudo" name="txt_conteudo" rows="5" cols="30" ></textarea>
+                <label for="txt_conteudo">Conteúdo*</label><br>
+                <textarea id="txt_conteudo" name="txt_conteudo" rows="15" cols="50" required ></textarea>
             </div>
             <div>
                 <label for="blob_poster">Imagem</label>
@@ -55,34 +39,12 @@
             </div>
             <div>
                 <input type="submit" value="Gerar" name="bt_gerar_pdf" >
+                <input type="reset" value="Resetar">
             </div>
         </form>
-        <input onclick="alterarValores()" type="submit" value="Aplicar" name="bt_ctt_pdf" >
-        <section class="preview" >
-            <div class="prev_header" >
-                <h2>
-                    <p id="pch_titulo" >
-                    Aqui vai o título do seu pôster.
-                    </p>
-                </h2>
-            </div>
-
-            <hr>
-            <div>
-                <p id="pch_conteudo" class="prev_ctt"  >
-                Aqui vai o conteúdo do seu pôster.
-                </p>
-            </div>
-            <img src="">
-            <hr>
-            <div class="prev_footer" >
-                <img src="./logo_cut.svg" width="200" class="img" >
-                <p>Gerado por - MUNDO App</p> 
-            </div>
-            
-            
-        </section>
+        <div class="cell" >
+        </div>
+        
     </div>
-
 </body>
 </html>

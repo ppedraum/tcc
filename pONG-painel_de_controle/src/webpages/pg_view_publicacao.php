@@ -8,6 +8,9 @@
     <!-- <link rel="stylesheet" href="estilopubs.css" type="text/css"> -->
     <?php
     require_once('../php_stuff/datab.php');
+
+    require "../php_stuff/ver_session.php";
+    ver_session("../../index.php");
     
     $id_publicacao = $_GET['id'];
 
