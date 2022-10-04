@@ -18,6 +18,9 @@
     select * from publicacao as p where p.id = $id_publicacao
     ");
     $query_publicacao = $query_publicacao->fetch_assoc();
+
+    $foto = mysqli_query($conn, 'select * from foto_publicacao where id_publicacao = '.$query_publicacao['id']);
+    $foto = $foto->fetch_assoc();
     ?>
 
 </head>
@@ -30,9 +33,16 @@
     <?php echo $query_publicacao['descricao'] ?>
 
     <h3>Tipo de publicação: </h3>
-    <?php 
-    echo $query_publicacao['tipo_publicacao'];
-    
+    <?php echo $query_publicacao['tipo_publicacao']; ?>
+
+
+    <?php
+
+    if($foto != null){
+        echo "<h3> Mídia: </h3>";
+        echo "<img width='750' src='data:image/jpeg;base64,".base64_encode($foto['foto'])."'>";
+    }
+
     if($query_publicacao['id_evento'] != null){
         $query_evento = mysqli_query($conn, "
         select * from evento as e where e.id = ".$query_publicacao['id_evento']);
@@ -43,9 +53,6 @@
         echo "<h3> Tipo do evento: </h3>";
         echo $query_tipo_evento['titulo'];
         echo "<br>";
-
-        echo "<h3> Mídia: </h3>";
-        echo " <img width='750' src='data:image/jpeg;base64,".base64_encode($query_evento['foto'])."'> ";
 
         $query_inscricoes = mysqli_query($conn, "
         select usuario.* from inscricao, usuario
@@ -105,19 +112,19 @@
         
         if(isset($_POST['bt_deletar'])){
             $del_likes = mysqli_query($conn, "delete from `like` where id_publicacao = $id_publicacao");
+            if($foto != null){
+                $del_foto = mysqli_query($conn, "delete from foto_publicacao where id_publicacao = $id_publicacao");
+            }
             $del_publicacao = mysqli_query($conn, "delete from publicacao where id = $id_publicacao");
 
             if($del_likes){
                 if($del_publicacao){
-                    header('Location: ./pg_publicacoes.php');
+                    echo "<script>window.location.assign('./pg_publicacoes.php')</script>";
                 }
-                else{
-                    echo 'Ocorreu um erro no servidor. Tente novamente ou contate-nos sobre isso.';
-                }
-                
             }
+
             else{
-                echo 'Ocorreu um erro no servidor. Tente novamente ou contate-nos sobre isso.';
+                echo 'Ocorreu um problema';
             }
         }
         ?>
