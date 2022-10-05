@@ -4,12 +4,8 @@ Coisas para terminar
 
 ---------------------Painel de controle---------------------
 
-
-* Toda publicação vai ter foto, independente se é evento
-* Alterar info do perfil
-
-
-
+* Estilização
+* Organização dos estilos
 
 
 -------------------------Aplicativo-------------------------

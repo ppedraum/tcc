@@ -7,6 +7,10 @@ require_once("./datab.php");
 
 ver_session('../../index.php');
 
+if(isset($_POST["bt_resetar"])){
+    
+}
+
 if(isset($_POST["bt_cancelar"])){
     header('Location: ../../menu.php');
 }
@@ -17,6 +21,28 @@ if(isset($_POST["bt_alterar"])){
 
     if($ver_senha == $_SESSION["inst"]["senha"]){
         $update = 'update ong set ';
+
+        if(isset($_POST['chb_foto_perfil'])){
+            $statusMsg = 'erro na imagem'; 
+            if(!empty($_FILES["blob_perfil"]["name"])) { 
+    
+                $fileName = basename($_FILES["blob_perfil"]["name"]); 
+                $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+                
+                // Allow certain file formats 
+                $allowTypes = array('jpg','png','jpeg'); 
+                if(in_array($fileType, $allowTypes)){ 
+                    $image = $_FILES['blob_perfil']['tmp_name']; 
+                    $imgContent = addslashes(file_get_contents($image)); 
+        
+                }else{ 
+                    $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
+                }
+            }else{ 
+                $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
+            }
+            $update .= "foto_perfil = '$imgContent', " ;
+        }
 
         if(isset($_POST['chb_apresentacao'])){
             $update .= "apresentacao = '".$_POST['txt_apresentacao']."', "  ;
@@ -35,8 +61,15 @@ if(isset($_POST["bt_alterar"])){
         }
 
         if(isset($_POST['chb_senha'])){
-            $update .= "senha = '".$_POST['txt_nova_senha']."', "  ;
+            if($_POST['txt_nova_senha'] === $_POST['txt_confirmar_senha'] ){
+                $update .= "senha = '".$_POST['txt_nova_senha']."', "  ;
+            }
+            else{
+                header('Location: ../webpages/pg_perfil_alterar.php?errs=senha');
+                exit(400);
+            }
         }
+        
 
         if($update == 'update ong set '){
             echo 'nada foi alterado';
@@ -46,16 +79,16 @@ if(isset($_POST["bt_alterar"])){
 
             $update .= 'where id = '.$_SESSION["inst"]["id"];
 
-            echo $update;
+            //echo $update;
 
             $query = mysqli_query($conn, $update);
 
             if($query){
                 echo '<br>';
-                echo $update;
+                //echo $update;
                 $inst = mysqli_query($conn, 'select * from ong where id = '.$_SESSION['inst']['id']);
                 $inst = $inst->fetch_assoc();
-                echo 'saindao';
+                echo 'deu certo';
                 $_SESSION['inst'] = $inst;
                 header('Location: ../webpages/pg_perfil.php');
             }
