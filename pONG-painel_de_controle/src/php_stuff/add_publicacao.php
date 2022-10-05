@@ -6,7 +6,7 @@ date_default_timezone_set('America/Sao_Paulo');
 require_once ('datab.php');
 
 session_start();
-$id_ONG = 1;
+$id_ONG = $_SESSION['inst']['id'];
 
 $titulo = $_POST['txt_titulo'];
 $descricao = $_POST['txt_descricao'];
@@ -47,30 +47,11 @@ if(isset($_POST['bt_submit_publicacao'])){
         $hor_inicio_evento = $_POST['time_inicio_evento'];
         $hor_fim_evento = $_POST['time_fim_evento'];
 
-        $status = $statusMsg = 'erro na imagem'; 
-        if(!empty($_FILES["blob_evento"]["name"])) { 
-            // Get file info 
-            $fileName = basename($_FILES["blob_evento"]["name"]); 
-            $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
-            
-            // Allow certain file formats 
-            $allowTypes = array('jpg','png','jpeg'); 
-            if(in_array($fileType, $allowTypes)){ 
-                $image = $_FILES['blob_evento']['tmp_name']; 
-                $imgContent = addslashes(file_get_contents($image)); 
-
-            }else{ 
-                $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
-            } 
-        }else{ 
-            $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
-        }
-
         $id_tipo_evento = $_POST['sel_tipo_evento'];
 
         $query_evento = "insert into Evento 
         (endereco, cidade, UF, datetime_inicio, datetime_fim,
-        qtd_inscricoes, foto, id_tipo_evento, id_ONG)
+        qtd_inscricoes, id_tipo_evento, id_ONG)
 
         values (
             '$endereco_evento',
@@ -79,7 +60,6 @@ if(isset($_POST['bt_submit_publicacao'])){
             '$date_inicio_evento $hor_inicio_evento:00 ',
             '$date_fim_evento $hor_fim_evento:00',
             0,
-            '$imgContent',
             $id_tipo_evento,
             $id_ONG
         ) ";
@@ -151,6 +131,35 @@ if(isset($_POST['bt_submit_publicacao'])){
 
 if (mysqli_query($conn, $query_publicacao)) {
     debug_log( "Valores alterados com sucesso!");
+    $statusMsg = 'erro na imagem'; 
+    if(!empty($_FILES["blob_publicacao"]["name"])) { 
+        
+        $id_publicacao = $conn->insert_id;
+
+        $fileName = basename($_FILES["blob_publicacao"]["name"]); 
+        $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+        
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg'); 
+        if(in_array($fileType, $allowTypes)){ 
+            $image = $_FILES['blob_publicacao']['tmp_name']; 
+            $imgContent = addslashes(file_get_contents($image)); 
+
+        }else{ 
+            $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
+        }
+        
+        $query_foto = mysqli_query($conn, "insert into foto_publicacao(foto, descricao, id_publicacao) values (
+            '$imgContent',
+            'Uma Foto',
+            $id_publicacao
+        )
+        ");
+
+    }else{ 
+        $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
+    }
+    echo "<script>alert($statusMsg)</script>";
 } else {
     debug_log( "Erro: ".$query_publicacao."<br>".mysqli_error($conn));
 }

@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="estilo.css" type="text/css">
+    <?php
+    require "./src/php_stuff/ver_session.php";
+    ver_session("../../index.php");
+    ?>
 </head>
 <body>
 <div class="container">

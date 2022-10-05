@@ -1,8 +1,17 @@
-Formulários
-Usuário e voluntário
-tabela de inscrições
-ver como as ongs manejam as inscrições para um evento
-ver mais ongs
-sistema de comentários
-sistema de compartilhar e entrar numa publicação específica
-tags para publicações das ONGs
+
+
+Coisas para terminar
+
+---------------------Painel de controle---------------------
+
+* Estilização
+* Organização dos estilos
+
+
+-------------------------Aplicativo-------------------------
+
+* Colocar as imagens
+* Estilo
+* Eventos inscritos
+* Editar info. do perfil
+* LGPD

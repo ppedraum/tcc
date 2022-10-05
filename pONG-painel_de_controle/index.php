@@ -11,7 +11,7 @@
 <div class="container">
 <div class="login">
 <div class="logo">
-<img src = "logo.svg" alt="LOGO" width="600" height="300">
+<img src = "./src/webpages/logo.svg" alt="LOGO" width="600" height="300">
 </div>
 <div class ="form">
     <form action="" method="get">
@@ -22,6 +22,10 @@
     <div class="botao">
     <input type="submit" value="Enviar" name='bt_login'>    
     </div>
+
+<!--     <a href='./src/webpages/cadastro.php'>
+        Não possui conta? Cadastre-se
+    </a> -->
 
     </form>
 </div>
@@ -35,10 +39,9 @@
         $senha = $_GET['senha'];
         $query = mysqli_query($conn, "select * from ONG where login = '$login' and senha = '$senha' ");
         if(mysqli_num_rows($query) != 0){
+            $query = $query->fetch_assoc();
             session_start();
-            $_SESSION['login'] = $login;
-            $_SESSION['senha'] = $senha;
-            $_SESSION['id_ong'] = $query->fetch_assoc();
+            $_SESSION['inst'] = $query;
             header('Location:menu.php');
         }else{
             echo('Login ou senha inválidos!');

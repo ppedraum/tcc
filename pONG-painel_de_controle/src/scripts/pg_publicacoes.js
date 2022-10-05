@@ -13,7 +13,6 @@ function keyBindAll(){
 
 function takeNGo(titulo, descricao, tipo_publicacao, qtd_likes, qtd_compartilhamentos, id){
 
-    
 
 }
 

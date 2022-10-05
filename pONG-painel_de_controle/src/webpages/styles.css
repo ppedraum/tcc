@@ -58,23 +58,23 @@ button, input[type="submit"], input[type="reset"]{
     width: 20ch;
 }
 
-#table_publi {
+.table_default {
     font-family: 'Helvetica';
     border-collapse: collapse;
     width: 1000px;
     margin: 8px;
 }
 
-#table_publi td, #table_publi th {
+.table_default td, .table_default th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#table_publi tr{background-color: white;}
+.table_default tr{background-color: white;}
 
-#table_publi tr:hover {background-color: #ddd;}
+.table_default tr:hover {background-color: #ddd;}
 
-#table_publi th {
+.table_default th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
