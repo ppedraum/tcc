@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Feed from './Feed';
 import PerfilUsuario from './PerfilUsuario';
 import ReqVoluntariado from './ReqVoluntariado'
+import Inscricoes from './Inscricoes';
 
 import AuthContext from '../../contexts/auth';
 
@@ -53,6 +54,18 @@ export default function Home({navigation}){
 
             } */}
             <Bttn.Screen name='PerfilUsuario' component={PerfilUsuario} 
+            options={{
+                tabBarIcon : home => {return(
+                    <Ionicons
+                    name="md-person"
+                    size={28}
+                    color="#3F3F3F"
+                    />
+                )},
+                lazy : false
+            }}
+            />
+            <Bttn.Screen name='Inscricoes' component={Inscricoes} 
             options={{
                 tabBarIcon : home => {return(
                     <Ionicons
