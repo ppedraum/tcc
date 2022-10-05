@@ -19,7 +19,8 @@ export default function Home({navigation}){
         screenOptions={{
             headerShown:false,
             tabBarStyle:{
-                height:'10%',
+                height:'9%',
+                backgroundColor: '#004475'
             }
         }}
         >
@@ -28,8 +29,8 @@ export default function Home({navigation}){
                 tabBarIcon: home => {return(
                     <Ionicons
                     name="md-home"
-                    size={28}
-                    color="#3F3F3F"
+                    size={45}
+                    color="#D0EBFF"
                     />
                 )}
             }}
@@ -57,8 +58,8 @@ export default function Home({navigation}){
                 tabBarIcon : home => {return(
                     <Ionicons
                     name="md-person"
-                    size={28}
-                    color="#3F3F3F"
+                    size={45}
+                    color="#D0EBFF"
                     />
                 )},
                 lazy : false

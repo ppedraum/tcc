@@ -9,7 +9,18 @@ import PerfilUsuario from '../pages/Dashboard/PerfilUsuario';
 const AppStack = createNativeStackNavigator();
 export default function AppRoutes(){
     return (
-        <AppStack.Navigator>
+        <AppStack.Navigator screenOptions={
+            {
+                headerStyle: {
+                    backgroundColor: '#004475',
+                    height: 350
+                  },
+                  headerTintColor: '#D0EBFF',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+            }
+        } >
             <AppStack.Screen name='Home' component={Home} />
             <AppStack.Screen name='Publicacao' component={Publicacao} />
             <AppStack.Screen name='ResultScreen' component={ResultScreen} />

@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection : 'row',
         alignItems : 'center',
+        backgroundColor: '#FFFFFF',
     },
     filtros_container:{
         display:'flex',

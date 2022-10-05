@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Banco",
-    "slug": "Banco",
+    "name": "MUNDO",
+    "slug": "MUNDO",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+        [
+            "expo-image-picker",
+            {"PhotosPermission" : "Allow MUNDO to access your photos"}
+        ]
+    ]
   }
 }
