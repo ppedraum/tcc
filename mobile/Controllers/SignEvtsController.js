@@ -60,7 +60,7 @@ router.delete('/evento', async(req, res)=>{
     }
     else{
         console.log('ok')
-        Inscricao.destroy();
+        ver.destroy();
     }
     
 });

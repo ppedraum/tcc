@@ -35,10 +35,6 @@ const Evento = db.sequelize.define('Evento', {
             type: db.Sequelize.BOOLEAN,
             null: false,
         },
-        foto:{
-            type: db.Sequelize.BLOB('medium'),
-            null: false,
-        },
         id_tipo_evento:{
             type: db.Sequelize.INTEGER(11),
             null: false,
