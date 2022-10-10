@@ -9,11 +9,8 @@ const Comentario = require('../models/Comentario');
 const Like = require('../models/Like');
 const { Op } = require("sequelize");
 
-
-//Nunca esquecer do await!!!!
-//Sempre retornar algo com res.json/send/text !!!!
 router.post('/like', async(req, res)=>{
-    console.log('like')
+    //console.log('like')
     const ver = await Like.findOne({
         where:{
             id_publicacao : req.body.id_publicacao,
@@ -33,7 +30,7 @@ router.post('/like', async(req, res)=>{
 });
 
 router.delete('/like', async(req, res)=>{
-    console.log('unlike')
+    //console.log('unlike')
     const ver = await Like.findOne({
         where:{
             id_publicacao : req.body.id_publicacao,
@@ -88,7 +85,7 @@ router.get('/comentarios/:id_publicacao', async(req, res)=>{
         commFinal['foto_perfil'] = commUser.foto_perfil; */
         commFinais.push({estrutura:comentarios[i], nome_usuario:commUser.nome, foto_perfil:commUser.foto_perfil});
     }
-    console.log(commFinais);
+    //console.log(commFinais);
     res.json(comentarios);
 
 });
@@ -103,7 +100,7 @@ router.post('/comentarios', async(req, res)=>{
         datetime_post : new Date()
     })
 
-    console.log('comentario criado');
+    //console.log('comentario criado');
 
 })
 
@@ -117,11 +114,11 @@ router.delete('/comentarios', async(req, res)=>{
     });
 
     if(ver == null){
-        console.log('a')
+        //console.log('a')
         res.status(400).json({err:'user not allowed'});
     }
     else{
-        console.log('b')
+        //console.log('b')
         const filhos = await Comentario.findAll({
             where:{
                 id_pai : req.body.id
@@ -134,7 +131,7 @@ router.delete('/comentarios', async(req, res)=>{
             }
 
         ver.destroy();
-        console.log('comentario deletado');
+        //console.log('comentario deletado');
         res.status(200).json({msg:'deletion complete'});
     }
 

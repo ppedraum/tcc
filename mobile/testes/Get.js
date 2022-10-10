@@ -7,8 +7,8 @@ function Get(){
     function getPessoas(){
         fetch('http://localhost:3001/pessoas')
         .then(res => {
-            console.log(res.headers);
-            console.log(res.status);
+            //console.log(res.headers);
+            //console.log(res.status);
             return res.json();
         })
         .then(result => console.log(result))

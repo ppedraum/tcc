@@ -31,7 +31,7 @@ router.get('/follows/:id_usuario', async(req, res)=>{
             
         }
     }
-    console.log(follows);
+    //console.log(follows);
     res.json(follows);
     
 });
@@ -56,14 +56,14 @@ router.get('/inscricoes/:id_usuario', async(req, res)=>{
         });
 
         if(inscricao != null){
-            console.log('id evento', inscricao.id_evento);
+            //console.log('id evento', inscricao.id_evento);
             const publicacao = await Publicacao.findOne({
                 where:{
                     id_evento : inscricao.id_evento
                 }
             });
             if(publicacao != null){
-                console.log('id publicacao', publicacao.id);
+                //console.log('id publicacao', publicacao.id);
                 publiInscritas.push(publicacao);
             }
         }

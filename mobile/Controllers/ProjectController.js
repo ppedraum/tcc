@@ -59,16 +59,16 @@ router.get('/publicacao/:id', async (req, res)=>{
         }
     });
 
-    /* let foto = await Foto_Publicacao.findOne({
+    let foto = await Foto_Publicacao.findOne({
         where:{
-            id : 1
+            id_publicacao : req.params.id,
         }
     });
     console.log('--------------------------------------------------------------------------------------');
     console.log(foto);
-    console.log('--------------------------------------------------------------------------------------'); */
+    console.log('--------------------------------------------------------------------------------------');
 
-    res.json(publicacao);
+    res.json({publicacao: publicacao, foto_publicacao : foto});
 });
 
 router.get('/evento/:id', async(req, res)=>{

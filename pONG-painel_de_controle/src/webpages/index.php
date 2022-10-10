@@ -18,15 +18,16 @@
 <img src = "logo.svg" alt="LOGO" width="400" height="150">
 </div>
 <div class ="form">
-    <form action="" method="get">
-    Login: <input type="text" name='login'> <br>
-    <br>
-    Senha: <input type="password" name="senha"> <br>
-    <br><br>
-    <div class="botao">
-    <input type="submit" value="Enviar" name='bt_login'>    
+    <div class ="box_table">
+        <form action="" method="get">
+        Login <input type="text" name='login' > <br>
+        <br>
+        Senha <input type="password" name="senha"> <br>
+        <br><br>
+        <div class="botao">
+        <input type="submit" value="Enviar" name='bt_login'>    
+        </div>
     </div>
-
     </form>
 </div>
 <br><br><br>

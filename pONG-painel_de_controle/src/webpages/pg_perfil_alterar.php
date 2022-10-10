@@ -9,9 +9,9 @@
     require("../php_stuff/ver_session.php");
     ver_session("../../index.php");
     
-    $curr_errs = ['senha'=>''];
+    //$curr_errs = ['senha'=>''];
 
-    if(isset($_GET['errs'])){
+    /* if(isset($_GET['errs'])){
         $errs = $_GET['errs'];
         $errs = explode(',', $errs);
         foreach($errs as $err){
@@ -19,7 +19,7 @@
                $curr_errs['senha'] = 'As senhas não coicidem.';
             }
         }
-    }
+    } */
 
 
     ?>
@@ -64,7 +64,7 @@
         </div>
         <div>
             <div>
-                <?php echo $curr_errs['senha'].'<br>' ?>
+                <?php /* echo $curr_errs['senha'].'<br>' */ ?>
                 Senha
                 <input type="checkbox" onclick="show_senha()" name="chb_senha" id="chb_senha">
                 <br>

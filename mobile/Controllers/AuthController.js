@@ -117,7 +117,7 @@ router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
                 [ 'id', 'DESC' ]
             ],
         });
-        console.log(usuario);
+        //console.log(usuario);
         res.send({
             usuario,
             token: gerarToken({ id: usuario.id })

@@ -6,9 +6,9 @@ const sequelize = new Sequelize('pong', 'root', '', {
 });
 
 sequelize.authenticate().then(()=> {
-    console.log('Conectado ao bd PostApp no mysql da porta 3306')
+    //console.log('Conectado ao bd PostApp no mysql da porta 3306')
     }).catch((erro)=>{
-        console.log('Houve um erro: '+erro);
+        //console.log('Houve um erro: '+erro);
 });
 
 module.exports = {

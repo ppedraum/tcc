@@ -1,5 +1,6 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { View, Text, Button, ActivityIndicator, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Button, ActivityIndicator, Modal, TouchableOpacity, ScrollView, Image } from 'react-native';
+import base64 from 'react-native-base64';
 import styles from '../styles';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -14,6 +15,7 @@ function Publicacao({ route, navigation }){
 
     const [isLoading, setLoading] = useState(true);
     const [publicacao, setPublicacao] = useState([]);
+    const [fotoPublicacao, setFotoPublicacao] = useState([]);
     const [inst, setInst] = useState([]);
     const [evento, setEvento] = useState([]);
     const [msgEvento, setMsgEvento] = useState('');
@@ -37,18 +39,31 @@ function Publicacao({ route, navigation }){
         })
         .then(res => res.json())
         .then(result => {
-            setPublicacao(result);
-            verLike(result.id, usuario.id);
-            getInstById(result.id_ong)
-            if(result.tipo_publicacao == 'EVENTO'){
-                getEventoById(result.id_evento);
-                verInscEvento(usuario.id, result.id_evento);
+            setPublicacao(result.publicacao);
+
+            if(result.foto_publicacao != null){
+                let fotoStr = '';
+                for(let i = 0; i < result.foto_publicacao.foto.data.length; i++){
+                    fotoStr += result.foto_publicacao.foto.data[i];
+                }
+                let fotoBase = base64.encode(fotoStr);
+                setFotoPublicacao(fotoBase);
+                console.log(fotoBase);
+            }
+                
+
+            verLike(result.publicacao.id, usuario.id);
+            getInstById(result.publicacao.id_ong)
+            if(result.publicacao.tipo_publicacao == 'EVENTO'){
+                getEventoById(result.publicacao.id_evento);
+                verInscEvento(usuario.id, result.publicacao.id_evento);
                 
             }
             setTimeout(()=>{setLoading(false)}, 200)
         })
         .catch(err => console.log(err));
         
+
     }
 
     function getInstById(id){
@@ -198,13 +213,14 @@ function Publicacao({ route, navigation }){
         {
         isLoading ? <ActivityIndicator size='large' color='blue'/>
         :
-        <>  
+        <ScrollView>  
             <View style={styles.filtros_container} >
                 <Text style={styles.titulo}>Por: </Text>
                 <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {id : inst.id})}>
                     <Text style={styles.titulo}>{inst.nome_fantasia}</Text>
                 </TouchableOpacity>
             </View>
+            {/* <Image source={{uri:fotoPublicacao}} style={{width:100, height:100}}  /> */}
             <Text style={styles.titulo}>{publicacao.titulo} </Text>
             <Text style={styles.conteudo}>{publicacao.descricao} </Text>
             <TouchableOpacity onPress={isLiked? unlike : like}>
@@ -275,7 +291,7 @@ function Publicacao({ route, navigation }){
                 <Comentarios id_publicacao={idPublicacao} />
             </CommProvider>
             
-        </>
+        </ScrollView>
         }
         </View>
     );

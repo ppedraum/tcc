@@ -67,8 +67,8 @@ function Comentarios({id_publicacao}){
     }
 
     function HandleComentarios(){
-        const filhos = comentarios.filter(comentario=>comentario.id_pai !== null).sort((a, b)=>a.datetime_post - b.datetime_post >= 0);
-        const pais = comentarios.filter(comentario=>comentario.id_pai === null).sort((a, b)=>a.datetime_post - b.datetime_post >= 0);
+        const filhos = comentarios.filter(comentario=>comentario.id_pai != null);
+        const pais = comentarios.filter(comentario=>comentario.id_pai == null);
         return pais.map((commPai)=>(
             <View key={commPai.id} style={styles.post_cell} >
                 <DeleteModal id_comentario={commPai.id} />

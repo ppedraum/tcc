@@ -15,7 +15,7 @@ router.get('/ver_evento/:id_usuario/:id_evento', async(req, res)=>{
         }
     });
     if(ver != null){
-        console.log('true')
+        //console.log('true')
         res.json({ver : true});
     }
     else{
@@ -36,7 +36,12 @@ router.post('/evento', async(req, res)=>{
 
     }
     else{
-        console.log('ok')
+        console.log('-----------------------------------------------');
+        console.log('-----------------------------------------------');
+        console.log('O id do usuário : ' + req.body.id_usuario);
+        console.log('O id do evento : ' + req.body.id_evento);
+        console.log('-----------------------------------------------');
+        console.log('-----------------------------------------------');
         Inscricao.create({
             id_evento : req.body.id_evento,
             id_usuario : req.body.id_usuario
@@ -55,11 +60,18 @@ router.delete('/evento', async(req, res)=>{
     });
 
     if (ver == null){
+        
         res.status(400).send(JSON.stringify({'error': 'Você não está inscrito!'}));
 
     }
     else{
-        console.log('ok')
+        console.log('-----------------------------------------------');
+        console.log('-----------------------------------------------');
+        console.log('O id do usuário : ' + req.body.id_usuario);
+        console.log('O id do evento : ' + req.body.id_evento);
+        console.log('-----------------------------------------------');
+        console.log('-----------------------------------------------');
+        //console.log('ok')
         ver.destroy();
     }
     
@@ -75,7 +87,7 @@ router.get('/ver_follow/:id_inst/:id_usuario', async(req, res)=>{
     //console.log(req.params.id_inst);
     //console.log(req.params.id_usuario);
     if(ver != null){
-        console.log('true')
+        //console.log('true')
         res.json({ver : true});
     }
     else{
@@ -96,7 +108,7 @@ router.post('/inst', async(req, res)=>{
 
     }
     else{
-        console.log('ok')
+        //console.log('ok')
         OngFollow.create({
             id_ong : req.body.id_inst,
             id_usuario : req.body.id_usuario
