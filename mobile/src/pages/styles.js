@@ -1,5 +1,6 @@
 import {React} from 'react';
 import {StyleSheet} from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const styles = StyleSheet.create({
     container: {
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
         height: 40,
         padding : 10,
         margin : 10,
-        borderWidth: 1,
-        borderColor: 'blue'
+        borderRadius: 15,
+        backgroundColor: '#d7d7d7',
     },
     pickerInput:{
         width : 200,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection : 'row',
         alignItems : 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFF',
     },
     filtros_container:{
         display:'flex',

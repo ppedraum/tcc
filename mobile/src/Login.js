@@ -58,7 +58,10 @@ function Login({navigation}){
                 <TextInput style={styles.input} value={senha} onChangeText={(senha)=>setSenha(senha)} />
             </View>
             <View>
-                <Button title='Login' onPress={()=>login()} />
+                <Button title='Login'
+                color='#FAFA'
+                onPress={()=>login()} 
+                />
             </View>
             <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} ><Text>Não tem conta? Cadastre-se</Text></TouchableOpacity>
             

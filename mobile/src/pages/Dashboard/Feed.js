@@ -6,6 +6,8 @@ import styles from '../styles'
 import AuthContext from '../../contexts/auth';
 import { Ionicons } from '@expo/vector-icons';
 
+//import { AiOutlineSearch } from 'react-icons'; 
+
 /*
     NÃO estou autorizado pela API para pegar as publicações devido à autenticação por token,
     sendo assim, preciso mandar pelo fetch de cada um o header Authorization com o token para conseguir
@@ -29,8 +31,8 @@ function Feed({navigation}) {
 
     const { token, NODE_PORT } = useContext(AuthContext);
 
-    
 
+    
     function getPublicacoes(){
         fetch( NODE_PORT + '/projeto/publicacoes', {
             method:'GET',
@@ -57,17 +59,18 @@ function Feed({navigation}) {
         <View style={styles.container}>
             <Text style={styles.titulo}>Meu Feed</Text>
             <View style={styles.searchContainer} >
-                <TextInput style={styles.input} placeholder='Procurar publicacoes' onChangeText={(text)=>setSearchInput(text)} />
-                <Button title='Procurar' onPress={()=>{
+                <TextInput style={styles.input} placeholder={'Buscar por publicações'} onChangeText={(text)=>setSearchInput(text)} />
+                <Button style={styles.botaofoda} title='Procurar' onPress={()=>{
                     if(searchInput.trim() != 0)
                         navigation.navigate('ResultScreen', { searchInput })
-                    
+                        
                     }
                 } 
-                />
-            </View>
-            
-            {
+                    
+                />                
+        </View>
+                
+                {
                 isLoading ?
                 <ActivityIndicator size='large'/>
                 :

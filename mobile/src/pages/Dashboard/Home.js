@@ -30,7 +30,7 @@ export default function Home({navigation}){
                     <Ionicons
                     name="md-home"
                     size={45}
-                    color="#D0EBFF"
+                    color="#fff"
                     />
                 )}
             }}
@@ -59,7 +59,7 @@ export default function Home({navigation}){
                     <Ionicons
                     name="md-person"
                     size={45}
-                    color="#D0EBFF"
+                    color="#fff"
                     />
                 )},
                 lazy : false
