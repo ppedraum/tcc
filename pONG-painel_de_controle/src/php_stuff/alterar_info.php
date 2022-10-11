@@ -23,25 +23,26 @@ if(isset($_POST["bt_alterar"])){
         $update = 'update ong set ';
 
         if(isset($_POST['chb_foto_perfil'])){
-            $statusMsg = 'erro na imagem'; 
+            $status_img = 'erro na imagem'; 
             if(!empty($_FILES["blob_perfil"]["name"])) { 
-    
-                $fileName = basename($_FILES["blob_perfil"]["name"]); 
-                $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+                
+                $id_publicacao = $conn->insert_id;
+
+                $nome = basename($_FILES["blob_perfil"]["name"]); 
+                $tipo_arquivo = pathinfo($nome, PATHINFO_EXTENSION); 
                 
                 // Allow certain file formats 
-                $allowTypes = array('jpg','png','jpeg'); 
-                if(in_array($fileType, $allowTypes)){ 
-                    $image = $_FILES['blob_perfil']['tmp_name']; 
-                    $imgContent = addslashes(file_get_contents($image)); 
-        
+                $tipos_permitidos = array('jpg','png','jpeg'); 
+                if(in_array($tipo_arquivo, $tipos_permitidos)){ 
+                    $imagem = $_FILES['blob_perfil']['tmp_name']; 
+                    $foto_base = base64_encode(file_get_contents($imagem));
                 }else{ 
-                    $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
+                    $status_img = 'Desculpe, apenas imagens são suportadas.'; 
                 }
             }else{ 
-                $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
+                $status_img = 'Por favor, selecione uma imagem para o evento.'; 
             }
-            $update .= "foto_perfil = '$imgContent', " ;
+            $update .= "foto_perfil = '$foto_base', " ;
         }
 
         if(isset($_POST['chb_apresentacao'])){

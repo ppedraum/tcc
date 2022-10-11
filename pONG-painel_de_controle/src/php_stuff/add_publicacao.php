@@ -130,36 +130,35 @@ if(isset($_POST['bt_submit_publicacao'])){
 
 
 if (mysqli_query($conn, $query_publicacao)) {
-    debug_log( "Valores alterados com sucesso!");
-    $statusMsg = 'erro na imagem'; 
+    $status_img = 'erro na imagem'; 
     if(!empty($_FILES["blob_publicacao"]["name"])) { 
         
         $id_publicacao = $conn->insert_id;
 
-        $fileName = basename($_FILES["blob_publicacao"]["name"]); 
-        $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+        $nome = basename($_FILES["blob_publicacao"]["name"]); 
+        $tipo_arquivo = pathinfo($nome, PATHINFO_EXTENSION); 
         
         // Allow certain file formats 
-        $allowTypes = array('jpg','png','jpeg'); 
-        if(in_array($fileType, $allowTypes)){ 
-            $image = $_FILES['blob_publicacao']['tmp_name']; 
-            $imgContent = addslashes(file_get_contents($image)); 
-
+        $tipos_permitidos = array('jpg','png','jpeg'); 
+        if(in_array($tipo_arquivo, $tipos_permitidos)){ 
+            $imagem = $_FILES['blob_publicacao']['tmp_name']; 
+            $foto_base = base64_encode(file_get_contents($imagem));
         }else{ 
-            $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
+            $status_img = 'Desculpe, apenas imagens são suportadas.'; 
         }
         
+        
+
         $query_foto = mysqli_query($conn, "insert into foto_publicacao(foto, descricao, id_publicacao) values (
-            '$imgContent',
+            '$foto_base',
             'Uma Foto',
             $id_publicacao
         )
         ");
 
     }else{ 
-        $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
+        $status_img = 'Por favor, selecione uma imagem para o evento.'; 
     }
-    echo "<script>alert($statusMsg)</script>";
 } else {
     debug_log( "Erro: ".$query_publicacao."<br>".mysqli_error($conn));
 }

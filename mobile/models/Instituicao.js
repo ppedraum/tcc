@@ -60,7 +60,7 @@ const Instituicao = db.sequelize.define('ong',
         null: false,
     },
     foto_perfil:{
-        type: db.Sequelize.BLOB('medium'),
+        type: db.Sequelize.TEXT,
         null: true,
     },
 

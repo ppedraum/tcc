@@ -40,7 +40,7 @@
 
     if($foto != null){
         echo "<h3> Mídia: </h3>";
-        echo "<img width='750' src='data:image/jpeg;base64,".base64_encode($foto['foto'])."'>";
+        echo "<img width='750' src='data:image/jpeg;base64,".$foto['foto']."'>";
     }
 
     if($query_publicacao['id_evento'] != null){

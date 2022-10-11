@@ -15,7 +15,7 @@ function Publicacao({ route, navigation }){
 
     const [isLoading, setLoading] = useState(true);
     const [publicacao, setPublicacao] = useState([]);
-    const [fotoPublicacao, setFotoPublicacao] = useState([]);
+    const [fotoPublicacao, setFotoPublicacao] = useState('');
     const [inst, setInst] = useState([]);
     const [evento, setEvento] = useState([]);
     const [msgEvento, setMsgEvento] = useState('');
@@ -42,13 +42,8 @@ function Publicacao({ route, navigation }){
             setPublicacao(result.publicacao);
 
             if(result.foto_publicacao != null){
-                let fotoStr = '';
-                for(let i = 0; i < result.foto_publicacao.foto.data.length; i++){
-                    fotoStr += result.foto_publicacao.foto.data[i];
-                }
-                let fotoBase = base64.encode(fotoStr);
-                setFotoPublicacao(fotoBase);
-                console.log(fotoBase);
+                const foto = result.foto_publicacao.foto;
+                setFotoPublicacao('data:image/jpeg;base64,'+foto);
             }
                 
 
@@ -220,7 +215,13 @@ function Publicacao({ route, navigation }){
                     <Text style={styles.titulo}>{inst.nome_fantasia}</Text>
                 </TouchableOpacity>
             </View>
-            {/* <Image source={{uri:fotoPublicacao}} style={{width:100, height:100}}  /> */}
+            {
+                fotoPublicacao != '' ?
+                <Image source={{ uri: fotoPublicacao }} style={{ width: 300, height: 300 }}/>
+                :
+                null
+            }
+            
             <Text style={styles.titulo}>{publicacao.titulo} </Text>
             <Text style={styles.conteudo}>{publicacao.descricao} </Text>
             <TouchableOpacity onPress={isLiked? unlike : like}>

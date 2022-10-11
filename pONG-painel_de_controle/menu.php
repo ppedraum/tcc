@@ -23,7 +23,7 @@
         <a href="./src/webpages/pg_perfil.php">
         <?php
         if($_SESSION['inst']['foto_perfil'] != null){
-            echo " <img width='100' src='data:image/jpeg;base64,".base64_encode($_SESSION['inst']['foto_perfil'])."'> ";
+            echo " <img width='100' src='data:image/jpeg;base64,".$_SESSION['inst']['foto_perfil']."'> ";
         }
         else{
             echo "<img src='user.png' width=100 height=100>";

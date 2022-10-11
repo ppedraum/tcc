@@ -9,7 +9,7 @@ const Foto_Publicacao = db.sequelize.define('Foto_Publicacao',
             null : false
         },
         foto:{
-            type : db.Sequelize.BLOB('medium'),
+            type : db.Sequelize.TEXT,
             null : false
         },
         descricao:{
