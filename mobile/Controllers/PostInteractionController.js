@@ -92,7 +92,7 @@ router.get('/comentarios/:id_publicacao', async(req, res)=>{
 
 router.post('/comentarios', async(req, res)=>{
     
-    const comentario = await Comentario.create({
+    await Comentario.create({
         conteudo : req.body.conteudo,
         id_publicacao : req.body.id_publicacao,
         id_usuario : req.body.id_usuario,
@@ -100,12 +100,15 @@ router.post('/comentarios', async(req, res)=>{
         datetime_post : new Date()
     })
 
+
+
     //console.log('comentario criado');
 
 })
 
 router.delete('/comentarios', async(req, res)=>{
-    
+    console.log('Id do usuario : ' + req.body.id_usuario);
+    console.log('Id do comentario : ' + req.body.id);
     const ver = await Comentario.findOne({
         where:{
             id : req.body.id,

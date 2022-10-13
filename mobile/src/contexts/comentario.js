@@ -1,8 +1,9 @@
 import { createContext, useState } from 'react';
 
 const CommContext = createContext({
-    comentarios : [],
-    getComentarios : ()=>{}
+    refresh : false,
+    toRefresh : ()=>{},
+    stopRefresh : ()=>{}
 })
 
 export function CommProvider({children}){
@@ -10,12 +11,16 @@ export function CommProvider({children}){
     const [refresh, setRefresh] = useState(false);
     
 
-    function toRefresh(bool){
-        setRefresh(bool);
+    function toRefresh(){
+        setRefresh(true);
+    }
+
+    function stopRefresh(){
+        setRefresh(false);
     }
 
     return (
-        <CommContext.Provider value={{refresh, toRefresh}} >
+        <CommContext.Provider value={{refresh, toRefresh, stopRefresh}} >
             {children}
         </CommContext.Provider>
     );

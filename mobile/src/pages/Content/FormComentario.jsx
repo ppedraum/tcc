@@ -1,5 +1,5 @@
 import { React, useState, useContext } from 'react';
-import { Text, TextInput, View, Button, KeyboardAvoidingView, Touchable, TouchableOpacity, Modal } from 'react-native';
+import { Text, TextInput, View, Button, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 
@@ -27,10 +27,12 @@ function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
                     id_pai: id_pai
                 })
             })
-            .catch(err => alert(err));
+            .then(res=>res.json())
+            .then(res=>console.log('refresh no form ' + refresh))
+            .catch(err => console.log(err));
         }
         setCommAreaVisible(false);
-        toRefresh(true);
+        
     }
 
     if(tipo == 'textinput')
