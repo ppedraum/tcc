@@ -8,7 +8,7 @@ import CommContext from '../../contexts/comentario';
 
 function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
     const { usuario, token, NODE_PORT } = useContext(AuthContext);
-    const { refresh, toRefresh } = useContext(CommContext);
+    const { refresh, toRefresh, stopRefresh } = useContext(CommContext);
     const [text, setText] = useState('');
     const [commAreaVisible, setCommAreaVisible] = useState(false);
 
@@ -27,10 +27,13 @@ function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
                     id_pai: id_pai
                 })
             })
-            .then(res=>res.json())
-            .then(res=>console.log('refresh no form ' + refresh))
-            .catch(err => console.log(err));
+            .then(res=>console.log('Status do post comentario: ' + res.status))
+            .catch(err => {
+                console.log(err)
+                stopRefresh();
+            });
         }
+        toRefresh();
         setCommAreaVisible(false);
         
     }

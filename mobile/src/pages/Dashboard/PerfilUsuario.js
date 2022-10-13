@@ -2,13 +2,8 @@ import { React, useContext, useState, useEffect } from 'react'
 import { Text, View, Image, Button, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import styles from '../styles';
 
-var Buffer = require('@craftzdog/react-native-buffer').Buffer;
-
 import AuthContext from '../../contexts/auth';
 import { useIsFocused } from '@react-navigation/native';
-
-import {decode as atob, encode as btoa} from 'base-64';
-import arrayBufferToBase64 from '../../handy_tools/imgManipulation';
 
 function PerfilUsuario({navigation}){
 

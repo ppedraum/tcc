@@ -22,9 +22,9 @@ function Comentarios({id_publicacao}){
         .then(res=>res.json())
         .then(comentarios=>setComentarios(comentarios))
         .catch(err => console.log(err));
-        console.log(`refresh antes do getComentarios ` + refresh);
-        toRefresh();
-        console.log(`refresh dps do getComentarios ` + refresh);
+        //console.log(`refresh antes do getComentarios ` + refresh);
+        stopRefresh();
+        //console.log(`refresh dps do getComentarios ` + refresh);
     }
 
     function deleteComentario(id_comentario){
@@ -41,34 +41,32 @@ function Comentarios({id_publicacao}){
                 id_usuario: usuario.id
             })
         })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-            toRefresh();
-            setDelDialogVisible(false);
-        })
+        .then(res => console.log('Status da delecao: ' + res.status))
         .catch(err => console.log(err));
-        
+        toRefresh();
     }
 
     function HandleComentarios(){
-        const filhos = comentarios.filter(comentario=>comentario.id_pai != null).sort((a, b) => a.datetime_post - b.datetime_post >= 0);
-        const pais = comentarios.filter(comentario=>comentario.id_pai == null).sort((a, b) => a.datetime_post - b.datetime_post >= 0);
+        const filhos = comentarios.filter(comentario=>comentario.estrutura.id_pai != null)
+                       .sort((a, b) => a.estrutura.datetime_post - b.estrutura.datetime_post >= 0);
+        const pais = comentarios.filter(comentario=>comentario.estrutura.id_pai == null)
+                       .sort((a, b) => a.estrutura.datetime_post - b.estrutura.datetime_post >= 0);
         return pais.map((commPai)=>(
-            <View key={commPai.id} style={styles.post_cell} >
+            <View key={commPai.estrutura.id} style={styles.post_cell} >
                 <Text>
-                    {new Date(commPai.datetime_post).toLocaleDateString()} {'- '}
-                    {new Date(commPai.datetime_post).toLocaleTimeString()}
+                    {commPai.nome_usuario + ': ' }
+                    {new Date(commPai.estrutura.datetime_post).toLocaleDateString() + ' - '}
+                    {new Date(commPai.estrutura.datetime_post).toLocaleTimeString()}
                 </Text>
-                <Text style={styles.conteudo}>{commPai.conteudo}</Text>
-                <FormComentario id_publicacao={id_publicacao} id_pai={commPai.id} tipo='icon' />
+                <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
+                <FormComentario id_publicacao={id_publicacao} id_pai={commPai.estrutura.id} tipo='icon' />
                 {
-                    commPai.id_usuario == usuario.id ? 
+                    commPai.estrutura.id_usuario == usuario.id ? 
                     <>
                     <Dialog.Container visible={delDialogVisible}>
                         <Dialog.Title>Deletar Publicacao</Dialog.Title>
                         <Dialog.Description>Voce realmente quer deletar essa publicacao?</Dialog.Description>
-                        <Dialog.Button label='Sim' onPress={()=>deleteComentario(commPai.id)} />
+                        <Dialog.Button label='Sim' onPress={()=>deleteComentario(commPai.estrutura.id)} />
                         <Dialog.Button label='Nao' onPress={()=>setDelDialogVisible(false)} />
                     </Dialog.Container>
                     <Button title='Deletar' onPress={()=>setDelDialogVisible(true)}/>
@@ -79,21 +77,22 @@ function Comentarios({id_publicacao}){
                 <View style={{marginLeft:20}} >
                 {
                     filhos.map(commFilho=>{
-                        if(commFilho.id_pai == commPai.id)
+                        if(commFilho.estrutura.id_pai == commPai.estrutura.id)
                             return(
-                                <View key={commFilho.id} >
+                                <View key={commFilho.estrutura.id} >
                                     <Text>
-                                        {new Date(commFilho.datetime_post).toLocaleDateString()} {'- '}
-                                        {new Date(commFilho.datetime_post).toLocaleTimeString()}
+                                        {commFilho.nome_usuario} {'- '}
+                                        {new Date(commFilho.estrutura.datetime_post).toLocaleDateString() + ' - ' }
+                                        {new Date(commFilho.estrutura.datetime_post).toLocaleTimeString()}
                                     </Text>
-                                    <Text style={styles.conteudo} >{commFilho.conteudo}</Text>
+                                    <Text style={styles.conteudo} >{commFilho.estrutura.conteudo}</Text>
                                 {
-                                    commFilho.id_usuario == usuario.id ? 
+                                    commFilho.estrutura.id_usuario == usuario.id ? 
                                     <>
                                     <Dialog.Container visible={delDialogVisible}>
                                         <Dialog.Title>Deletar Publicacao</Dialog.Title>
                                         <Dialog.Description>Voce realmente quer deletar essa publicacao?</Dialog.Description>
-                                        <Dialog.Button label='Sim' onPress={()=>deleteComentario(commFilho.id)} />
+                                        <Dialog.Button label='Sim' onPress={()=>deleteComentario(commFilho.estrutura.id)} />
                                         <Dialog.Button label='Nao' onPress={()=>setDelDialogVisible(false)} />
                                     </Dialog.Container>
                                     <Button title='Deletar' onPress={()=>setDelDialogVisible(true)}/>
@@ -111,7 +110,7 @@ function Comentarios({id_publicacao}){
         ));
     }
 
-    useEffect(()=>{getComentarios()}, [/* refresh */]);
+    useEffect(()=>{getComentarios()}, [refresh]);
 
 /*     function handleComentarios(){
         const filhos = comentarios.filter(comentario=>comentario)

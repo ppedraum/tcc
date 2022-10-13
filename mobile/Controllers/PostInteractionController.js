@@ -74,32 +74,42 @@ router.get('/comentarios/:id_publicacao', async(req, res)=>{
     });
     for(let i = 0; i<comentarios.length;i++){
         
-        const commUser = await Usuario.findAll({
+        const commUser = await Usuario.findOne({
             where:{
                 id : comentarios[i].id_usuario
             }
         })
-        /* const commFinal = [];
-        commFinal['estrutura'] = comentarios[i];
-        commFinal['nome_usuario'] = commUser.nome;
-        commFinal['foto_perfil'] = commUser.foto_perfil; */
         commFinais.push({estrutura:comentarios[i], nome_usuario:commUser.nome, foto_perfil:commUser.foto_perfil});
     }
-    //console.log(commFinais);
-    res.json(comentarios);
+    console.log('Comentarios finais: ', commFinais);
+    res.json(commFinais);
 
 });
 
 router.post('/comentarios', async(req, res)=>{
     
-    await Comentario.create({
+    const comentario = await Comentario.create({
         conteudo : req.body.conteudo,
         id_publicacao : req.body.id_publicacao,
         id_usuario : req.body.id_usuario,
         id_pai : req.body.id_pai,
         datetime_post : new Date()
     })
+    
+    console.log(comentario.id);
 
+    const ver = await Comentario.findOne({
+        where:{
+            id : comentario.id
+        }
+    });
+
+    if(ver != null)
+        res.status(200);
+    else
+        res.status(400);
+
+    
 
 
     //console.log('comentario criado');
