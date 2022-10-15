@@ -64,10 +64,12 @@ router.get('/publicacao/:id', async (req, res)=>{
             id_publicacao : req.params.id,
         }
     });
+    
+    /* 
     console.log('--------------------------------------------------------------------------------------');
     console.log(foto);
     console.log('--------------------------------------------------------------------------------------');
-
+    */
     res.json({publicacao: publicacao, foto_publicacao : foto});
 });
 

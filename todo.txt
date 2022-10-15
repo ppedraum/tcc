@@ -10,8 +10,14 @@ Coisas para terminar
 
 -------------------------Aplicativo-------------------------
 
-* Colocar as imagens
 * Estilo
 * Eventos inscritos
 * Editar info. do perfil
 * LGPD
+
+Consertar Bugs -----------]
+
+* Deletar em uma lista deleta o ultimo item quando se usa um modal
+* O servidor cai constantemente por causa de bugs ao se inscrever em eventos, deletar comentarios, desinscrever-se de eventos (provavelmente por causa da lista, que pega um evento que nao existe ou um comentario que voce nao esta permitido a deletar)
+* react-native-dialog da um bug que pede para deletar os comentarios em loop
+

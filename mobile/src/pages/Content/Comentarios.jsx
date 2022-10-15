@@ -1,4 +1,4 @@
-import { React, useState, useContext, useEffect } from 'react';
+import { React, useState, useContext, useEffect,  } from 'react';
 import { Text, View, Button, Modal } from 'react-native';
 import FormComentario from './FormComentario';
 import Dialog from 'react-native-dialog';
@@ -22,9 +22,35 @@ function Comentarios({id_publicacao}){
         .then(res=>res.json())
         .then(comentarios=>setComentarios(comentarios))
         .catch(err => console.log(err));
-        //console.log(`refresh antes do getComentarios ` + refresh);
         stopRefresh();
-        //console.log(`refresh dps do getComentarios ` + refresh);
+    }
+
+    function comentar(texto, id_pai){
+        if(texto.trim() !=0){
+            fetch(NODE_PORT + '/postinteraction/comentarios', {
+                method:'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                    Authorization : `Bearer ${token}`,
+                },
+                body:JSON.stringify({
+                    conteudo: texto,
+                    id_publicacao: id_publicacao,
+                    id_usuario: usuario.id,
+                    id_pai: id_pai
+                })
+            })
+            .then(res=>{
+                console.log('Status do post comentario: ' + res.status)
+                
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        }
+        toRefresh();
+        getComentarios();
+        
     }
 
     function deleteComentario(id_comentario){
@@ -59,7 +85,7 @@ function Comentarios({id_publicacao}){
                     {new Date(commPai.estrutura.datetime_post).toLocaleTimeString()}
                 </Text>
                 <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
-                <FormComentario id_publicacao={id_publicacao} id_pai={commPai.estrutura.id} tipo='icon' />
+                <FormComentario onComentar={comentar} tipo='icon' id_pai={commPai.estrutura.id} />
                 {
                     commPai.estrutura.id_usuario == usuario.id ? 
                     <>
@@ -119,7 +145,7 @@ function Comentarios({id_publicacao}){
     return (
         <View>
             <View>
-                <FormComentario id_publicacao={id_publicacao} id_pai={null} tipo='textinput' />
+                <FormComentario onComentar={comentar} tipo='textinput' id_pai={null} />
                 <Text style={styles.titulo} >Comentários</Text>
             </View>
             {

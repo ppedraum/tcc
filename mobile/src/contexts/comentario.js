@@ -11,8 +11,8 @@ export function CommProvider({children}){
     const [refresh, setRefresh] = useState(false);
     
 
-    function toRefresh(){
-        setRefresh(true);
+    async function toRefresh(){
+        setTimeout(()=>{setRefresh(true)}, 200);
     }
 
     function stopRefresh(){

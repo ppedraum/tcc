@@ -6,37 +6,18 @@ import styles from '../styles';
 import AuthContext from '../../contexts/auth';
 import CommContext from '../../contexts/comentario';
 
-function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
+function FormComentario({onComentar, tipo='textinput', id_pai}){
     const { usuario, token, NODE_PORT } = useContext(AuthContext);
-    const { refresh, toRefresh, stopRefresh } = useContext(CommContext);
-    const [text, setText] = useState('');
+    //const { refresh, toRefresh, stopRefresh } = useContext(CommContext);
+    const [texto, setTexto] = useState('');
     const [commAreaVisible, setCommAreaVisible] = useState(false);
 
-    function comentar(){
-        if(text.trim() !=0){
-            fetch(NODE_PORT + '/postinteraction/comentarios', {
-                method:'POST',
-                headers:{
-                    'Content-Type': 'application/json',
-                    Authorization : `Bearer ${token}`,
-                },
-                body:JSON.stringify({
-                    conteudo: text,
-                    id_publicacao: id_publicacao,
-                    id_usuario: usuario.id,
-                    id_pai: id_pai
-                })
-            })
-            .then(res=>console.log('Status do post comentario: ' + res.status))
-            .catch(err => {
-                console.log(err)
-                stopRefresh();
-            });
-        }
-        toRefresh();
+    function handleComentar(){
+        onComentar(texto, id_pai);
+        setTexto('');
         setCommAreaVisible(false);
-        
     }
+
 
     if(tipo == 'textinput')
         return(
@@ -45,12 +26,12 @@ function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
                 <TextInput 
                 multiline={true} 
                 numberOfLines={5} 
-                onChangeText={(text)=>setText(text)}
-                value={text}
+                onChangeText={(texto)=>setTexto(texto)}
+                value={texto}
                 placeholder='Comentar...'
                 style={{maxWidth:200}}
                 />
-                <Button title='Comentar...' onPress={comentar} />
+                <Button title='Comentar...' onPress={handleComentar} />
             </KeyboardAvoidingView>
 
 
@@ -67,12 +48,12 @@ function FormComentario({id_publicacao, id_pai, tipo='textinput'}){
                 <TextInput 
                 multiline={true} 
                 numberOfLines={5} 
-                onChangeText={(text)=>setText(text)}
-                value={text}
+                onChangeText={(texto)=>setTexto(texto)}
+                value={texto}
                 placeholder='Comentar...'
                 style={{maxWidth:200}}
                 />
-                <Button title='Comentar...' onPress={comentar} />
+                <Button title='Comentar...' onPress={handleComentar} />
             </KeyboardAvoidingView>
             :
             null
