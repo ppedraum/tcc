@@ -204,7 +204,7 @@ function Publicacao({ route, navigation }){
     }, []);
 
     return (
-        <View style={styles.container} >
+        <View style={styles.container}>
         {
         isLoading ? <ActivityIndicator size='large' color='blue'/>
         :
