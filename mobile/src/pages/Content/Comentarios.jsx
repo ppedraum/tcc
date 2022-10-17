@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect,  } from 'react';
-import { Text, View, Button, Modal } from 'react-native';
+import { Text, View, Button, Modal, Image } from 'react-native';
 import FormComentario from './FormComentario';
 import Dialog from 'react-native-dialog';
 import AuthContext from '../../contexts/auth';
@@ -79,6 +79,7 @@ function Comentarios({id_publicacao}){
                        .sort((a, b) => a.estrutura.datetime_post - b.estrutura.datetime_post >= 0);
         return pais.map((commPai)=>(
             <View key={commPai.estrutura.id} style={styles.post_cell} >
+                <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={{width:50, height:50}} />
                 <Text>
                     {commPai.nome_usuario + ': ' }
                     {new Date(commPai.estrutura.datetime_post).toLocaleDateString() + ' - '}
@@ -106,6 +107,7 @@ function Comentarios({id_publicacao}){
                         if(commFilho.estrutura.id_pai == commPai.estrutura.id)
                             return(
                                 <View key={commFilho.estrutura.id} >
+                                    <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={{width:50, height:50}} />
                                     <Text>
                                         {commFilho.nome_usuario} {'- '}
                                         {new Date(commFilho.estrutura.datetime_post).toLocaleDateString() + ' - ' }

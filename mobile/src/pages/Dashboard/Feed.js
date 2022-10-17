@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList, TouchableOpacity, Image } from 'react-native';
 import styles from '../styles'
 
 import AuthContext from '../../contexts/auth';
@@ -83,14 +83,29 @@ function Feed({navigation}) {
                 */
                 <FlatList
                 data={publicacoes}
-                keyExtractor={(item)=>item.id}
+                keyExtractor={(item)=>item.publicacao.id}
                 renderItem={({ item, index })=> (
-                    <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.id})} >
+                    <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.publicacao.id})} >
                         <View style={styles.post_cell}>
-                            <Text style={styles.titulo} >{item.titulo}</Text>
-                            <Text style={styles.conteudo} >{item.descricao}</Text>
+                            {
+                                item.foto_publicacao != null ?
+                                <View style={styles.flatlist_cell} >
+                                    <Text>{item.publicacao.tipo_publicacao}</Text>
+                                    <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
+                                    <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
+                                </View>
+                                :
+                                <View style={styles.flatlist_cell}  >
+                                    <Text>{item.publicacao.tipo_publicacao}</Text>
+                                    <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
+                                    <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
+                                    <Text style={styles.conteudo} >{item.preview_text}</Text>
+                                </View>
+                            }
+                            
 
-                            </View>
+                        </View>
                     </TouchableOpacity>
                 )}
                 refreshing={isLoading}

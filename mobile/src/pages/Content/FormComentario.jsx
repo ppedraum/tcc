@@ -4,11 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
-import CommContext from '../../contexts/comentario';
 
 function FormComentario({onComentar, tipo='textinput', id_pai}){
     const { usuario, token, NODE_PORT } = useContext(AuthContext);
-    //const { refresh, toRefresh, stopRefresh } = useContext(CommContext);
     const [texto, setTexto] = useState('');
     const [commAreaVisible, setCommAreaVisible] = useState(false);
 
