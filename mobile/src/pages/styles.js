@@ -32,8 +32,15 @@ const styles = StyleSheet.create({
       fontWeight : 'bold',
       fontSize : 30
     },
+    titulo_galeria:{
+      fontWeight : 'bold',
+      fontSize : 15
+    },
     conteudo:{
       fontSize : 20
+    },
+    conteudo_galeria:{
+      fontSize : 15
     },
     input:{
         width : 200,
@@ -73,6 +80,30 @@ const styles = StyleSheet.create({
         width: 130,
         height: 'auto'
     },
+    galeria_cell_foto:{
+      borderColor: '#4490F5',
+      borderWidth: 1,
+      display: 'flex',
+      alignItems: 'flex-start',
+      width: 230,
+      height: 'auto'
+  },
+    flatlist_cell:{
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      marginVertical: 5,
+      backgroundColor : '#99B3FF',
+      minWidth: 370
+    },
+    foto_perfil:{
+      width:200,
+      height:200,
+      marginVertical:20,
+    },
+    foto_galeria:{
+      width:150,
+      height:150,
+    }
   });
 
   export default styles;

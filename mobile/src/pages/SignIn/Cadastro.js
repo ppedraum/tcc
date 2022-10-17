@@ -1,50 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView, Image, Platform } from 'react-native';
 import { RNDateTimePicker, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper';
-
+import base64 from 'react-native-base64';
 import * as ImagePicker from 'expo-image-picker';
-import mime from "mime";
-
 import styles from '../styles';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+const { NODE_PORT } = require('../../../config/port.json');
 
 function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario){
 
-    /* function handleCadastro(){
-        let regSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
-        if(!regSenha.test(senha)){
-            console.log('senha inválida')
-        }
-    } */
-    
-    const createFormData = (foto_perfil, body = {}) => {
-        const data = new FormData();
-        
-        const fotoUri = Platform.OS === 'ios' ? foto_perfil.uri.replace('file://', '') : foto_perfil.uri
 
-        data.append('foto_perfil', {
-          name: fotoUri.split('/').pop,
-          type: mime.getType(fotoUri),
-          uri: fotoUri
-        });
-      
-        Object.keys(body).forEach((key) => {
-          data.append(key, body[key]);
-        });
-      
-        return data;
-      };
-
-    fetch('http://192.168.0.111:3001/auth/cadastro', {
+    fetch(NODE_PORT + '/auth/cadastro', {
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
         },
-        body: createFormData(foto_perfil, {
+        body: JSON.stringify({
             nome : nome,
             e_mail : e_mail,
             senha : senha,
@@ -55,13 +29,13 @@ function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, ci
             cidade : cidade,
             uf : uf,
             cpf : cpf,
+            foto_perfil : foto_perfil,
             is_voluntario : is_voluntario,
         })
 
-    }).then(res => res.json())
-    .then(res=>alert(res))
-    .catch(err => alert(err))
-    ;
+    })
+    .then(res => console.log('status cadastro: ', res.status))
+    .catch(err => console.log('Erro no cadastro: ' + err));
 }
 
 function CadastroBasico({navigation}){
@@ -107,9 +81,14 @@ function CadastroDados({ route, navigation }){
     const [ cidade, setCidade] = useState('');
     const [ uf, setUf] = useState('');
     const [ cpf, setCpf] = useState('');
-    const [ foto_perfil, setFotoperfil] = useState(null);
+    const [ foto_perfil, setFotoperfil] = useState('');
     const [ is_voluntario, setIsvoluntario] = useState(false);
     /* const [errMsg, setErrMsg] = useState([]); */
+
+    function HandleCadastro(){
+        cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario);
+        navigation.navigate('Login');
+    }
 
     function showDatePicker(){
         DateTimePickerAndroid.open({
@@ -122,17 +101,18 @@ function CadastroDados({ route, navigation }){
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
+        let foto = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
           aspect: [4, 4],
           quality: 1,
         });
     
-        console.log(result);
+        const fotoBase = base64.encode(foto.uri);
+        console.log('fotoBase: ' + fotoBase);
     
-        if (!result.cancelled) {
-            setFotoperfil(result);
+        if (!foto.cancelled) {
+            setFotoperfil(fotoBase);
         }
       };
 
@@ -227,7 +207,7 @@ function CadastroDados({ route, navigation }){
             <View>
                 <Text>Foto de Perfil</Text>
                 <Button title='escolha' onPress={pickImage} />
-                {foto_perfil && <Image source={{ uri: foto_perfil.uri }} style={{ width: 200, height: 200 }} />}
+                {foto_perfil != '' && <Image source={{ uri: 'data:image/jpeg;base64,'+ foto_perfil }} style={{ width: 200, height: 200 }} />}
 
             </View>
             <View style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
@@ -240,9 +220,9 @@ function CadastroDados({ route, navigation }){
                 />
             </View>
             <Button onPress={()=>{
-                cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario)
+                //HandleCadastro()
                 console.log('cadastrado!');
-                navigation.navigate('Login');
+                //navigation.navigate('Login');
 
             }}  title='Completar Iscrição'/>
             </KeyboardAvoidingView>

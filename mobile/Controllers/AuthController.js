@@ -35,6 +35,7 @@ function gerarToken(params = {}){
     });
 }
 
+/* 
 const multer = require('multer');
 const path = require('path')
 const multerStorage = multer.diskStorage({
@@ -44,7 +45,7 @@ const multerStorage = multer.diskStorage({
     }
 });
 const upload = multer({multerStorage});
-
+ */
 
 router.get('/usuarios', async (req, res)=>{
     let usuarios = await Usuario.findAll();
@@ -85,7 +86,7 @@ router.post('/login', async (req, res)=>{
 // Cadastros
 
 
-router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
+router.post('/cadastro', async (req, res)=>{
     let ver = await Usuario.findOne({
         where:{
             [Op.or]:[
@@ -95,7 +96,7 @@ router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
         }
     })
     if (ver != null){
-        res.send(JSON.stringify('error'))
+        res.status(400);
     }else{
         Usuario.create({
             nome : req.body.nome,
@@ -108,27 +109,12 @@ router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
             cidade : req.body.cidade,
             uf : req.body.uf,
             cpf : req.body.cpf,
-            foto_perfil : req.files.foto_perfil,
+            foto_perfil : req.body.foto_perfil,
             is_voluntario : req.body.is_voluntario,
         })
-        
-        const usuario = await Usuario.findOne({
-            order: [
-                [ 'id', 'DESC' ]
-            ],
-        });
-        //console.log(usuario);
-        res.send({
-            usuario,
-            token: gerarToken({ id: usuario.id })
-        })
+        res.status(200);
     }
 })
-
-/* router.post('/cadastro', upload.single('foto_perfil'), async (req, res)=>{
-    console.log(req.files);
-    console.log(req.body);
-}) */
 
 module.exports = app => app.use('/auth', router);
 

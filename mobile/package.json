@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "dev" : "nodemon --inspect ./Index.js"
   },
   "dependencies": {
     "@craftzdog/react-native-buffer": "^6.0.5",
@@ -42,6 +43,7 @@
     "react-native": "0.68.2",
     "react-native-base64": "^0.2.1",
     "react-native-date-picker": "^4.2.5",
+    "react-native-dialog": "^9.2.2",
     "react-native-paper": "^5.0.0-rc.4",
     "react-native-picker-select": "^8.0.4",
     "react-native-quick-base64": "^2.0.5",

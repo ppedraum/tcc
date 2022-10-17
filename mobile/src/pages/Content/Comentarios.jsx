@@ -1,6 +1,7 @@
-import { React, useState, useContext, useEffect } from 'react';
-import { Text, View, Button, Modal } from 'react-native';
+import { React, useState, useContext, useEffect,  } from 'react';
+import { Text, View, Button, Modal, Image } from 'react-native';
 import FormComentario from './FormComentario';
+import Dialog from 'react-native-dialog';
 import AuthContext from '../../contexts/auth';
 import CommContext from '../../contexts/comentario';
 import styles from '../styles';
@@ -8,9 +9,9 @@ import styles from '../styles';
 function Comentarios({id_publicacao}){
 
     const { NODE_PORT, token, usuario } = useContext(AuthContext);
-    const { refresh, toRefresh } = useContext(CommContext);
+    const { refresh, toRefresh, stopRefresh } = useContext(CommContext);
     const [comentarios, setComentarios] = useState([]);
-    const [deleteModalVisible, setDelModalVisible] = useState(false);
+    const [delDialogVisible, setDelDialogVisible] = useState(false);
 
 
     function getComentarios(){
@@ -19,11 +20,42 @@ function Comentarios({id_publicacao}){
             headers:{Authorization: `Bearer ${token}`}
         })
         .then(res=>res.json())
-        .then(comentarios=>setComentarios(comentarios));
-        toRefresh(false);
+        .then(comentarios=>setComentarios(comentarios))
+        .catch(err => console.log(err));
+        stopRefresh();
+    }
+
+    function comentar(texto, id_pai){
+        if(texto.trim() !=0){
+            fetch(NODE_PORT + '/postinteraction/comentarios', {
+                method:'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                    Authorization : `Bearer ${token}`,
+                },
+                body:JSON.stringify({
+                    conteudo: texto,
+                    id_publicacao: id_publicacao,
+                    id_usuario: usuario.id,
+                    id_pai: id_pai
+                })
+            })
+            .then(res=>{
+                console.log('Status do post comentario: ' + res.status)
+                
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        }
+        toRefresh();
+        getComentarios();
+        
     }
 
     function deleteComentario(id_comentario){
+        console.log('Id do usuario : ' + usuario.id);
+        console.log('Id do comentario : ' + id_comentario);
         fetch(NODE_PORT + '/postinteraction/comentarios',{
             method: 'DELETE',
             headers:{
@@ -35,70 +67,64 @@ function Comentarios({id_publicacao}){
                 id_usuario: usuario.id
             })
         })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res)
-            
-        })
-        .catch(err => console.log(err))
-        toRefresh(true);
-        setDelModalVisible(false);
-    }
-
-    function DeleteModal({id_comentario}){
-        return(
-            <Modal
-            visible={deleteModalVisible}
-            transparent
-            animationType='fade'
-            onRequestClose={()=>setDelModalVisible(false)}
-            >
-                <View style={styles.container}>
-                    <Text style={styles.conteudo} >
-                        Você tem certeza que deseja excluir esse comentário?
-                    </Text>
-                    <View style={styles.filtros_container} >
-                        <Button title='Sim' onPress={()=>deleteComentario(id_comentario)} />
-                        <Button title='Não' onPress={()=>setDelModalVisible(false)} />
-                    </View>
-                </View>
-            </Modal>
-        );
+        .then(res => console.log('Status da delecao: ' + res.status))
+        .catch(err => console.log(err));
+        toRefresh();
     }
 
     function HandleComentarios(){
-        const filhos = comentarios.filter(comentario=>comentario.id_pai != null);
-        const pais = comentarios.filter(comentario=>comentario.id_pai == null);
+        const filhos = comentarios.filter(comentario=>comentario.estrutura.id_pai != null)
+                       .sort((a, b) => a.estrutura.datetime_post - b.estrutura.datetime_post >= 0);
+        const pais = comentarios.filter(comentario=>comentario.estrutura.id_pai == null)
+                       .sort((a, b) => a.estrutura.datetime_post - b.estrutura.datetime_post >= 0);
         return pais.map((commPai)=>(
-            <View key={commPai.id} style={styles.post_cell} >
-                <DeleteModal id_comentario={commPai.id} />
+            <View key={commPai.estrutura.id} style={styles.post_cell} >
+                <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={{width:50, height:50}} />
                 <Text>
-                    {new Date(commPai.datetime_post).toLocaleDateString()} {'- '}
-                    {new Date(commPai.datetime_post).toLocaleTimeString()}
+                    {commPai.nome_usuario + ': ' }
+                    {new Date(commPai.estrutura.datetime_post).toLocaleDateString() + ' - '}
+                    {new Date(commPai.estrutura.datetime_post).toLocaleTimeString()}
                 </Text>
-                <Text style={styles.conteudo} >{commPai.conteudo}</Text>
-                <FormComentario id_publicacao={id_publicacao} id_pai={commPai.id} tipo='icon' />
+                <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
+                <FormComentario onComentar={comentar} tipo='icon' id_pai={commPai.estrutura.id} />
                 {
-                    commPai.id_usuario == usuario.id ? 
-                    <Button title='Deletar' onPress={()=>{setDelModalVisible(true)}}/>
+                    commPai.estrutura.id_usuario == usuario.id ? 
+                    <>
+                    <Dialog.Container visible={delDialogVisible}>
+                        <Dialog.Title>Deletar Publicacao</Dialog.Title>
+                        <Dialog.Description>Voce realmente quer deletar essa publicacao?</Dialog.Description>
+                        <Dialog.Button label='Sim' onPress={()=>deleteComentario(commPai.estrutura.id)} />
+                        <Dialog.Button label='Nao' onPress={()=>setDelDialogVisible(false)} />
+                    </Dialog.Container>
+                    <Button title='Deletar' onPress={()=>setDelDialogVisible(true)}/>
+                    </>
                     :
                     null
                 }
                 <View style={{marginLeft:20}} >
                 {
                     filhos.map(commFilho=>{
-                        if(commFilho.id_pai == commPai.id)
+                        if(commFilho.estrutura.id_pai == commPai.estrutura.id)
                             return(
-                                <View key={commFilho.id} >
-                                    <DeleteModal id_comentario={commFilho.id} />
+                                <View key={commFilho.estrutura.id} >
+                                    <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={{width:50, height:50}} />
                                     <Text>
-                                        {new Date(commFilho.datetime_post).toLocaleDateString()} {'- '}
-                                        {new Date(commFilho.datetime_post).toLocaleTimeString()}
+                                        {commFilho.nome_usuario} {'- '}
+                                        {new Date(commFilho.estrutura.datetime_post).toLocaleDateString() + ' - ' }
+                                        {new Date(commFilho.estrutura.datetime_post).toLocaleTimeString()}
                                     </Text>
-                                    <Text style={styles.conteudo} >{commFilho.conteudo}</Text>
+                                    <Text style={styles.conteudo} >{commFilho.estrutura.conteudo}</Text>
                                 {
-                                    commFilho.id_usuario == usuario.id ? 
-                                    <Button title='Deletar' onPress={()=>{setDelModalVisible(true)}}/>
+                                    commFilho.estrutura.id_usuario == usuario.id ? 
+                                    <>
+                                    <Dialog.Container visible={delDialogVisible}>
+                                        <Dialog.Title>Deletar Publicacao</Dialog.Title>
+                                        <Dialog.Description>Voce realmente quer deletar essa publicacao?</Dialog.Description>
+                                        <Dialog.Button label='Sim' onPress={()=>deleteComentario(commFilho.estrutura.id)} />
+                                        <Dialog.Button label='Nao' onPress={()=>setDelDialogVisible(false)} />
+                                    </Dialog.Container>
+                                    <Button title='Deletar' onPress={()=>setDelDialogVisible(true)}/>
+                                    </>
                                     :
                                     null
                                 }
@@ -121,7 +147,7 @@ function Comentarios({id_publicacao}){
     return (
         <View>
             <View>
-                <FormComentario id_publicacao={id_publicacao} id_pai={null} tipo='textinput' />
+                <FormComentario onComentar={comentar} tipo='textinput' id_pai={null} />
                 <Text style={styles.titulo} >Comentários</Text>
             </View>
             {

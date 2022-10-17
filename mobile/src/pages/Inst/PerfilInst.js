@@ -1,5 +1,5 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Button, Modal } from 'react-native'
+import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Button, Modal, Image } from 'react-native'
 import AuthContext from '../../contexts/auth';
 import styles from '../styles';
 
@@ -152,15 +152,23 @@ function PerfilInst({route, navigation}){
                 />
                 <Text>{msgFollow}</Text>
                 <FlatList 
-                numColumns={3}
+                numColumns={2}
                 data={galeria}
-                keyExtractor={item=>item.id}
+                keyExtractor={item=>item.publicacao.id}
                 renderItem={({item, index}) =>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.id})} >
-                        <View style={styles.galeria_cell}>
-                            <Text style={{fontWeight:'bold'}}>{item.titulo}</Text>
-                            <Text >{item.descricao}</Text>
-                            </View>
+                    <TouchableOpacity onPress={()=>navigation.push('Publicacao', {id:item.publicacao.id})} >
+                            {
+                                item.foto_publicacao != null ?
+                                <View style={styles.galeria_cell_foto} >
+                                    <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_galeria}/>
+                                    <Text style={styles.titulo_galeria} >{item.publicacao.titulo}</Text>
+                                </View>
+                                :
+                                <View style={styles.galeria_cell}  >
+                                    <Text style={styles.titulo_galeria} >{item.publicacao.titulo}</Text>
+                                    <Text style={styles.conteudo_galeria} >{item.preview_text}</Text>
+                                </View>
+                            }
                     </TouchableOpacity>
                 }
                 refreshing={isLoading}

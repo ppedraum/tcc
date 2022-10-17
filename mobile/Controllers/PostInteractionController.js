@@ -18,7 +18,7 @@ router.post('/like', async(req, res)=>{
         }
     })
     if(ver != null)
-        res.status(400).json('error')
+        res.status(400).json('error');
     else{
         Like.create({
             id_publicacao : req.body.id_publicacao,
@@ -65,7 +65,13 @@ router.get('/ver_like/:id_publicacao/:id_usuario', async(req, res)=>{
 
 router.get('/comentarios/:id_publicacao', async(req, res)=>{
 
-    var commFinais = []
+    console.log('------------------------------------------');
+    console.log('Iniciando rotina de pegar os comentarios');
+    console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
+    console.log('');
+
+
+    var commFinais = [];
 
     const comentarios = await Comentario.findAll({
         where:{
@@ -74,24 +80,27 @@ router.get('/comentarios/:id_publicacao', async(req, res)=>{
     });
     for(let i = 0; i<comentarios.length;i++){
         
-        const commUser = await Usuario.findAll({
+        const commUser = await Usuario.findOne({
             where:{
                 id : comentarios[i].id_usuario
             }
         })
-        /* const commFinal = [];
-        commFinal['estrutura'] = comentarios[i];
-        commFinal['nome_usuario'] = commUser.nome;
-        commFinal['foto_perfil'] = commUser.foto_perfil; */
         commFinais.push({estrutura:comentarios[i], nome_usuario:commUser.nome, foto_perfil:commUser.foto_perfil});
     }
-    //console.log(commFinais);
-    res.json(comentarios);
+    console.log('');
+    console.log('Comentarios finais foram pegos');
+    console.log('------------------------------------------');
+    res.status(200).json(commFinais);
 
 });
 
 router.post('/comentarios', async(req, res)=>{
     
+    console.log('------------------------------------------');
+    console.log('Iniciando rotina de Postar um comentario');
+    console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
+    console.log('');
+
     const comentario = await Comentario.create({
         conteudo : req.body.conteudo,
         id_publicacao : req.body.id_publicacao,
@@ -99,13 +108,46 @@ router.post('/comentarios', async(req, res)=>{
         id_pai : req.body.id_pai,
         datetime_post : new Date()
     })
+    
+    //console.log(comentario.id);
+
+    const ver = await Comentario.findOne({
+        where:{
+            id : comentario.id
+        }
+    });
+
+    if(ver != null){
+        res.status(200);
+        console.log('');
+        console.log('Comentarios postados');
+        console.log('------------------------------------------');
+    }
+        
+    else{
+        res.status(400);
+        console.log('');
+        console.log('Comentario deu erro pois ja existia');
+        console.log('------------------------------------------');
+    }
+        
+
+    
+
 
     //console.log('comentario criado');
 
 })
 
 router.delete('/comentarios', async(req, res)=>{
-    
+
+    console.log('------------------------------------------');
+    console.log('Iniciando rotina de deletar um comentario');
+    console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
+    console.log('');
+
+    console.log('Id do usuario : ' + req.body.id_usuario);
+    console.log('Id do comentario : ' + req.body.id);
     const ver = await Comentario.findOne({
         where:{
             id : req.body.id,
@@ -116,6 +158,9 @@ router.delete('/comentarios', async(req, res)=>{
     if(ver == null){
         //console.log('a')
         res.status(400).json({err:'user not allowed'});
+        console.log('');
+        console.log('O usuario nao esta permitido a excluir o comm com este ID');
+        console.log('------------------------------------------');
     }
     else{
         //console.log('b')
@@ -133,6 +178,10 @@ router.delete('/comentarios', async(req, res)=>{
         ver.destroy();
         //console.log('comentario deletado');
         res.status(200).json({msg:'deletion complete'});
+
+        console.log('');
+        console.log('Comentario deletado');
+        console.log('------------------------------------------');
     }
 
 })

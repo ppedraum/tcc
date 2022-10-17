@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect } from 'react';
-import { View, Text, FlatList, TextInput, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, FlatList, TextInput, Button, TouchableOpacity, ScrollView, Image } from 'react-native';
 import styles from '../styles';
 import AuthContext from '../../contexts/auth';
 import { ActivityIndicator } from 'react-native-paper';
@@ -145,21 +145,35 @@ function ResultScreen({ route, navigation }){
                         Não foi encontrado nenhuma publicação com essa pesquisa. Tente refazê-la com outras palavras. 
                     </Text>
                     :
-                    <FlatList 
+                    <FlatList
                     data={publicacoes}
-                    keyExtractor={(item)=>item.id}
-                    renderItem={({item})=>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {
-                        id:item.id
-                    })} >
-                        <View>
-                            <Text style={styles.titulo} >{item.titulo}</Text>
-                            <Text style={styles.conteudo}>{item.descricao}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    }
+                    keyExtractor={(item)=>item.publicacao.id}
+                    renderItem={({ item, index })=> (
+                        <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.publicacao.id})} >
+                            <View style={styles.post_cell}>
+                                {
+                                    item.foto_publicacao != null ?
+                                    <View style={styles.flatlist_cell} >
+                                        <Text>{item.publicacao.tipo_publicacao}</Text>
+                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
+                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
+                                    </View>
+                                    :
+                                    <View style={styles.flatlist_cell}  >
+                                        <Text>{item.publicacao.tipo_publicacao}</Text>
+                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
+                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
+                                        <Text style={styles.conteudo} >{item.preview_text}</Text>
+                                    </View>
+                                }
+                                
+    
+                            </View>
+                        </TouchableOpacity>
+                    )}
                     refreshing={isLoading}
-                    onRefresh={getPublicacoesByName}
+                    onRefresh={()=>getPublicacoesByName()}
                     />
                 :
                 null
