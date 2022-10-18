@@ -31,7 +31,7 @@ CREATE TABLE `area_atuacao` (
   `id` int(11) NOT NULL,
   `titulo` varchar(50) NOT NULL,
   `descricao` varchar(144) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `area_atuacao`
@@ -50,7 +50,7 @@ CREATE TABLE `cargo_voluntario` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `descricao` varchar(144) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `cargo_voluntario`
@@ -77,7 +77,7 @@ CREATE TABLE `comentario` (
   `id_usuario` int(11) NOT NULL,
   `id_pai` int(15) DEFAULT NULL,
   `datetime_post` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `comentario`
@@ -111,7 +111,7 @@ CREATE TABLE `evento` (
   `is_terminado` tinyint(1) DEFAULT NULL,
   `id_tipo_evento` int(11) NOT NULL,
   `id_ONG` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `evento`
@@ -136,7 +136,7 @@ CREATE TABLE `foto_ong` (
   `foto` mediumblob NOT NULL,
   `descricao` varchar(144) NOT NULL,
   `id_ONG` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -149,7 +149,7 @@ CREATE TABLE `foto_publicacao` (
   `foto` text NOT NULL,
   `descricao` varchar(144) DEFAULT NULL,
   `id_publicacao` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `foto_publicacao`
@@ -167,7 +167,7 @@ INSERT INTO `foto_publicacao` (`id`, `foto`, `descricao`, `id_publicacao`) VALUE
 CREATE TABLE `inscricao` (
   `id_evento` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `inscricao`
@@ -191,7 +191,7 @@ INSERT INTO `inscricao` (`id_evento`, `id_usuario`) VALUES
 CREATE TABLE `like` (
   `id_publicacao` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `like`
@@ -227,7 +227,7 @@ CREATE TABLE `ong` (
   `data_abertura` date NOT NULL,
   `id_area_atuacao` int(11) NOT NULL,
   `foto_perfil` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `ong`
@@ -247,7 +247,7 @@ INSERT INTO `ong` (`id`, `CNPJ`, `login`, `e_mail`, `senha`, `nome`, `nome_fanta
 CREATE TABLE `ong_follow` (
   `id_ONG` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `ong_follow`
@@ -278,7 +278,7 @@ CREATE TABLE `ong_unchecked` (
   `data_abertura` date NOT NULL,
   `id_area_atuacao` int(11) NOT NULL,
   `foto_perfil` mediumblob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `ong_unchecked`
@@ -306,7 +306,7 @@ CREATE TABLE `publicacao` (
   `id_ONG` int(11) NOT NULL,
   `id_evento` int(11) DEFAULT NULL,
   `id_req_voluntariado` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `publicacao`
@@ -332,7 +332,7 @@ CREATE TABLE `requisicao_voluntariado` (
   `qtd_requisicoes_vagas` int(11) NOT NULL,
   `is_terminado` tinyint(1) NOT NULL,
   `id_cargo_voluntario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `requisicao_voluntariado`
@@ -351,7 +351,7 @@ INSERT INTO `requisicao_voluntariado` (`id`, `qtd_requisicoes`, `qtd_requisicoes
 CREATE TABLE `tipo_evento` (
   `id` int(11) NOT NULL,
   `titulo` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `tipo_evento`
@@ -382,7 +382,7 @@ CREATE TABLE `usuario` (
   `cpf` varchar(14) NOT NULL,
   `foto_perfil` longblob DEFAULT NULL,
   `is_voluntario` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Extraindo dados da tabela `usuario`
@@ -402,7 +402,7 @@ INSERT INTO `usuario` (`id`, `nome`, `e_mail`, `senha`, `telefone`, `data_nasc`,
 CREATE TABLE `voluntario` (
   `id_cargo_voluntario` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Índices para tabelas despejadas
