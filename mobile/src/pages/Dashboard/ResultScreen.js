@@ -81,15 +81,11 @@ function ResultScreen({ route, navigation }){
                     :
                     instituicoes.map((inst)=>
                     <TouchableOpacity key={inst.id} onPress={()=>navigation.navigate('PerfilInst', {
-                        id: inst.id
+                        id:inst.id
                     })} >
-                        <View >
-                            <Text style={styles.titulo} >
-                                {inst.nome_fantasia}
-                            </Text>
-                            <Text style={styles.conteudo}>
-                                {inst.apresentacao}
-                            </Text>
+                        <View style={styles.flatlist_cell} >
+                            <Image source={{uri: 'data:image/jpeg;base64,' + inst.foto_perfil}} style={styles.foto_perfil} />
+                            <Text style={styles.titulo} >{inst.nome_fantasia}</Text>
                         </View>
                     </TouchableOpacity>
                     )
@@ -100,17 +96,39 @@ function ResultScreen({ route, navigation }){
                     publicacoes.length == 0 ?
                     <Text style={styles.conteudo} >Não foi encontrado nehuma publicação.</Text>
                     :
-                    publicacoes.map((publi)=>
-                    <TouchableOpacity key={publi.id} onPress={()=>navigation.navigate('Publicacao', {
-                        id: publi.id
-                    })} >
-                        <View>
-                            <Text style={styles.titulo} >
-                                {publi.titulo}
-                            </Text>
-                            <Text style={styles.conteudo} >
-                                {publi.descricao}
-                            </Text>
+                    publicacoes.map((publicacao)=>
+                    <TouchableOpacity key={publicacao.publicacao.id} onPress={()=>navigation.navigate('Publicacao', {id:publicacao.publicacao.id})} >
+                        <View style={styles.post_cell}>
+                            {
+                                publicacao.foto_publicacao != null ?
+                                <View style={
+                                publicacao.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                styles.flatlist_cell
+                                :
+                                styles.flatlist_cell_evento
+                                }
+                                >
+                                    <Text>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
+                                    <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
+                                </View>
+                                :
+                                <View style={
+                                publicacao.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                styles.flatlist_cell
+                                :
+                                styles.flatlist_cell_evento
+                                }
+                                >
+                                    <Text>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
+                                    <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
+                                    <Text style={styles.conteudo} >{publicacao.preview_text}</Text>
+                                </View>
+                            }
+                            
+
                         </View>
                     </TouchableOpacity>
                     )
@@ -153,14 +171,26 @@ function ResultScreen({ route, navigation }){
                             <View style={styles.post_cell}>
                                 {
                                     item.foto_publicacao != null ?
-                                    <View style={styles.flatlist_cell} >
+                                    <View style={
+                                    item.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                    styles.flatlist_cell
+                                    :
+                                    styles.flatlist_cell_evento
+                                    }
+                                    >
                                         <Text>{item.publicacao.tipo_publicacao}</Text>
                                         <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
                                         <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                         <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
                                     </View>
                                     :
-                                    <View style={styles.flatlist_cell}  >
+                                    <View style={
+                                    item.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                    styles.flatlist_cell
+                                    :
+                                    styles.flatlist_cell_evento
+                                    }
+                                    >
                                         <Text>{item.publicacao.tipo_publicacao}</Text>
                                         <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                         <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
@@ -192,9 +222,9 @@ function ResultScreen({ route, navigation }){
                     <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {
                         id:item.id
                     })} >
-                        <View>
+                        <View style={styles.flatlist_cell} >
+                            <Image source={{uri: 'data:image/jpeg;base64,' + item.foto_perfil}} style={styles.foto_perfil} />
                             <Text style={styles.titulo} >{item.nome_fantasia}</Text>
-                            <Text style={styles.conteudo}>{item.apresentacao}</Text>
                         </View>
                     </TouchableOpacity>
                     }

@@ -1,5 +1,5 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Button, Modal, Image } from 'react-native'
+import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Button, Modal, Image, ScrollView } from 'react-native'
 import AuthContext from '../../contexts/auth';
 import styles from '../styles';
 
@@ -34,6 +34,28 @@ function PerfilInst({route, navigation}){
         .catch(err => console.log(err))
         getPublicacoesInst();
         setTimeout(()=>{setLoading(false)}, 200);
+    }
+
+    function HandleGaleriaRender(){
+        return(
+        galeria.map(publicacao => (
+            <TouchableOpacity key={publicacao.publicacao.id} onPress={()=>navigation.push('Publicacao', {id:publicacao.publicacao.id})} >
+                    {
+                        publicacao.foto_publicacao != null ?
+                        <View style={styles.galeria_cell_foto} >
+                            <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_galeria}/>
+                            <Text style={styles.titulo_galeria} >{publicacao.publicacao.titulo}</Text>
+                        </View>
+                        :
+                        <View style={styles.galeria_cell}  >
+                            <Text style={styles.titulo_galeria} >{publicacao.publicacao.titulo}</Text>
+                            <Text style={styles.conteudo_galeria} >{publicacao.preview_text}</Text>
+                        </View>
+                    }
+            </TouchableOpacity>
+        ))
+        );
+        
     }
 
     function getPublicacoesInst(){
@@ -119,7 +141,9 @@ function PerfilInst({route, navigation}){
     }, [])
 
     return(
+        <ScrollView>
         <View style={styles.container} >
+        
         {
             isLoading ? <ActivityIndicator size='large' color='blue'/>
             :
@@ -145,38 +169,21 @@ function PerfilInst({route, navigation}){
                         
                     </View>
                 </Modal>
+                <Image source={{uri:'data:image/jpeg;base64,' + inst.foto_perfil}} style={styles.foto_perfil} /> 
                 <Text style={styles.titulo} >{inst.nome_fantasia}</Text>
                 <Text style={styles.conteudo}>{inst.apresentacao}</Text>
                 <Button  
                 color={isFollowing?'#bbb':'#6399FA' }  title={isFollowing? 'seguindo':'Seguir'} onPress={()=>setFolModalVisible(true)}
                 />
                 <Text>{msgFollow}</Text>
-                <FlatList 
-                numColumns={2}
-                data={galeria}
-                keyExtractor={item=>item.publicacao.id}
-                renderItem={({item, index}) =>
-                    <TouchableOpacity onPress={()=>navigation.push('Publicacao', {id:item.publicacao.id})} >
-                            {
-                                item.foto_publicacao != null ?
-                                <View style={styles.galeria_cell_foto} >
-                                    <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_galeria}/>
-                                    <Text style={styles.titulo_galeria} >{item.publicacao.titulo}</Text>
-                                </View>
-                                :
-                                <View style={styles.galeria_cell}  >
-                                    <Text style={styles.titulo_galeria} >{item.publicacao.titulo}</Text>
-                                    <Text style={styles.conteudo_galeria} >{item.preview_text}</Text>
-                                </View>
-                            }
-                    </TouchableOpacity>
-                }
-                refreshing={isLoading}
-                onRefresh={getPublicacoesInst}
-                />
+                <View style={galeria} >
+                <HandleGaleriaRender/>
+                </View>
+                
             </View>
         }
         </View>
+        </ScrollView>
     );
 }
 
