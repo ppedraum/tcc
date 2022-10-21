@@ -78,8 +78,7 @@ function ResultScreen({ route, navigation }){
         
         else
             return (
-            <>
-            
+            <ScrollView>
                 <Text style={styles.titulo} >Instituições</Text>
 
                 {
@@ -146,7 +145,7 @@ function ResultScreen({ route, navigation }){
                     </TouchableOpacity>
                     )
                 }
-            </>    
+            </ScrollView>    
             );
     }
 
@@ -258,97 +257,13 @@ function ResultScreen({ route, navigation }){
                 />
                 <Button title='Procurar' onPress={handleSearchAll} />
             </View>
-            <View style={styles.filtros_container} >
-            <Button title='Tudo' onPress={handleSearchAll} />
-            <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
-            <Button title='Instituições' onPress={getInstituicoesByName}/>
-                
+                <View style={styles.filtros_container} >
+                <Button title='Tudo' onPress={handleSearchAll} />
+                <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
+                <Button title='Instituições' onPress={getInstituicoesByName}/>
             </View>
-            
-            {
-                tipoResultado == 'Publicacao' ? 
-                    publicacoes.length == 0 ?
-                    <Text style={styles.conteudo} >
-                        Não foi encontrado nenhuma publicação com essa pesquisa. Tente refazê-la com outras palavras. 
-                    </Text>
-                    :
-                    <FlatList
-                    data={publicacoes}
-                    keyExtractor={(item)=>item.publicacao.id}
-                    renderItem={({ item, index })=> (
-                        <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.publicacao.id})} >
-                            <View style={styles.post_cell}>
-                                {
-                                    item.foto_publicacao != null ?
-                                    <View style={
-                                    item.publicacao.tipo_publicacao == 'PUBLICACAO'?
-                                    styles.flatlist_cell
-                                    :
-                                    styles.flatlist_cell_evento
-                                    }
-                                    >
-                                        <Text>{item.publicacao.tipo_publicacao}</Text>
-                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
-                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
-                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
-                                    </View>
-                                    :
-                                    <View style={
-                                    item.publicacao.tipo_publicacao == 'PUBLICACAO'?
-                                    styles.flatlist_cell
-                                    :
-                                    styles.flatlist_cell_evento
-                                    }
-                                    >
-                                        <Text>{item.publicacao.tipo_publicacao}</Text>
-                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
-                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
-                                        <Text style={styles.conteudo} >{item.preview_text}</Text>
-                                    </View>
-                                }
-                                
-    
-                            </View>
-                        </TouchableOpacity>
-                    )}
-                    refreshing={isLoading}
-                    onRefresh={()=>getPublicacoesByName()}
-                    />
-                :
-                null
-            }
-            {
-                tipoResultado == 'Instituicao' ? 
-                    instituicoes.length == 0 ?
-                    <Text style={styles.conteudo} >
-                        Não foi encontrado nenhuma instituição com essa pesquisa. Tente refazê-la com outras palavras. 
-                    </Text>
-                    :
-                    <FlatList 
-                    data={instituicoes}
-                    keyExtractor={(item)=>item.id}
-                    renderItem={({item})=>
-                    <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {
-                        id:item.id
-                    })} >
-                        <View style={styles.flatlist_cell} >
-                            <Image source={{uri: 'data:image/jpeg;base64,' + item.foto_perfil}} style={styles.foto_perfil} />
-                            <Text style={styles.titulo} >{item.nome_fantasia}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    }
-                    refreshing={isLoading}
-                    onRefresh={getInstituicoesByName}
-                    />
-                :
-                null
-            }
-            {
-                tipoResultado == 'All' ?
-                <HandleListAll/>
-                :
-                null
-            }
+
+            <HandleListFilters/>
             
         </View>
     );

@@ -70,6 +70,7 @@ function Publicacao({ route, navigation }){
         })
         .then(res => res.json())
         .then(inst => setInst(inst))
+        .catch(err => console.log(err));
     }
 
     function verInscEvento(id_usuario, id_evento){
