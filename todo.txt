@@ -16,8 +16,24 @@ Coisas para terminar
 
 * Estilo
 * LGPD
-* Deletar em uma lista deleta o ultimo item quando se usa um modal
-* react-native-dialog da um bug que pede para deletar os comentarios em loop
+
+* Deletar em uma lista deleta o ultimo item quando se usa um modal 	     (RESOLVIDO)
+* react-native-dialog da um bug que pede para deletar os comentarios em loop (RESOLVIDO)
+
+	Para evitar isso, não podemos utilizar o modal dentro do renderItem da FlatList, pois assim
+	acionamos os modais de todos os comentários, começando do último até o primeiro. Isso causa
+	com que a deleção do comentário comece pelo primeiro, inclusive quando não é um comentário
+	nosso causa um erro de autorização e trava o servidor.
+	A solução é colocar o modal único como return do componente principal. Aí, usamos uma função
+	no botão que faz aparecer o modal para
+		1. Fazer aparecer o modal
+		2. Setar o item selecionado num useState
+	Com isso, conseguimos jogar o "itemSelecionado" para dentro do modal, que aparece na tela
+	normalmente, e podemos realizar as modificações com ele a partir daí. Massa, não é?
+	
+	fonte: https://stackoverflow.com/questions/63517418/react-native-flatlist-opens-modal-for-all-items-instead-of-selected-item
+
+
 
 
 Consertar Bugs -----------]

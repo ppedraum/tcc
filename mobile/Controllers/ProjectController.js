@@ -173,16 +173,16 @@ router.get('/publicacao/:id', async (req, res)=>{
 });
 
 router.get('/evento/:id', async(req, res)=>{
+    
     let evento = await Evento.findOne({
         where:{
             id : req.params.id
         }
     })
 
-    
-
-    res.json(evento);
-})
+    if(evento != null)
+        res.status(200).json(evento);
+});
 
 router.get('/voluntariado', async (req, res)=>{
     let publicacoes = await Publicacao.findAll({
