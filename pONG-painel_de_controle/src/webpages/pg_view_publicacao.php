@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste view</title>
+    <link rel="stylesheet" href="./estiloviewpub.css" type="text/css">
     <!-- <link rel="stylesheet" href="estilopubs.css" type="text/css"> -->
     <?php
     require_once('../php_stuff/datab.php');
@@ -25,7 +26,9 @@
 
 </head>
 <body>
-
+<div class="logo">
+<h2>MUNDO - Visualizar Publicação<br><a href="../../menu.php"><img src = "logo.svg" alt="LOGO" width="300" height="150"></a></h2></div>
+<div class="container">
     <h3>Título: </h3>
     <?php echo $query_publicacao['titulo'] ?>
 
@@ -101,7 +104,8 @@
     }
 
     ?>
-    <button onclick='showDelForm(true)' id='bt_del_form' >Deletar Publicação</button>
+    </div><div class="botaodel">
+    <button onclick='showDelForm(true)' id='bt_del_form' >Deletar Publicação</button></div>
     <div id='del_form' hidden>
         <form method="POST" >
             <p>Você realmente quer deletar essa publicação? Esse processo não pode ser desfeito!</p>
@@ -109,7 +113,6 @@
         </form>
         <button onclick='showDelForm(false)'>Não Deletar</button>
         <?php
-        
         if(isset($_POST['bt_deletar'])){
             $del_likes = mysqli_query($conn, "delete from `like` where id_publicacao = $id_publicacao");
             if($foto != null){
