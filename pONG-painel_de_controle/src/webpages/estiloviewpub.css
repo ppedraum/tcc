@@ -1,0 +1,35 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin : 0px ;
+    background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
+    font-family: 'Arial';
+    font-size: 18px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: block;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 400px;
+
+}
+
+.container img {
+    max-width:600px;
+    max-height:400px;
+    width: auto;
+    height: auto;
+}
+
+.logo{
+    margin-left: 30px;
+}
+
+.botaodel{
+    margin-left: 400px;
+}
