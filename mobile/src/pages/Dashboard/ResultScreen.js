@@ -1,8 +1,13 @@
 import { React, useState, useContext, useEffect } from 'react';
-import { View, Text, FlatList, TextInput, Button, TouchableOpacity, ScrollView, Image } from 'react-native';
+
+import { View, Text, FlatList, TextInput, Button, 
+         TouchableOpacity, ScrollView, Image, ActivityIndicator} 
+         from 'react-native';
+
 import styles from '../styles';
+
 import AuthContext from '../../contexts/auth';
-import { ActivityIndicator } from 'react-native-paper';
+
 
 function ResultScreen({ route, navigation }){
 
@@ -51,8 +56,8 @@ function ResultScreen({ route, navigation }){
             setLoading(false);
         })
         .catch(err => console.log(err));
-        setTipoResultado('Instituicao');
 
+        setTipoResultado('Instituicao');
     }
 
     function handleSearchAll(){
@@ -75,42 +80,67 @@ function ResultScreen({ route, navigation }){
             return (
             <ScrollView>
                 <Text style={styles.titulo} >Instituições</Text>
+
                 {
                     instituicoes.length == 0 ?
                     <Text style={styles.conteudo} >Não foi encontrado nehuma instituição.</Text>
                     :
                     instituicoes.map((inst)=>
                     <TouchableOpacity key={inst.id} onPress={()=>navigation.navigate('PerfilInst', {
-                        id: inst.id
+                        id:inst.id
                     })} >
-                        <View >
-                            <Text style={styles.titulo} >
-                                {inst.nome_fantasia}
-                            </Text>
-                            <Text style={styles.conteudo}>
-                                {inst.apresentacao}
-                            </Text>
+                        <View style={styles.flatlist_cell} >
+                            <Image source={{uri: 'data:image/jpeg;base64,' + inst.foto_perfil}} style={styles.foto_perfil} />
+                            <Text style={styles.titulo} >{inst.nome_fantasia}</Text>
                         </View>
                     </TouchableOpacity>
                     )
-
                 }
+
                 <Text style={styles.titulo} >Publicações</Text>
+
                 {
                     publicacoes.length == 0 ?
                     <Text style={styles.conteudo} >Não foi encontrado nehuma publicação.</Text>
                     :
-                    publicacoes.map((publi)=>
-                    <TouchableOpacity key={publi.id} onPress={()=>navigation.navigate('Publicacao', {
-                        id: publi.id
-                    })} >
-                        <View>
-                            <Text style={styles.titulo} >
-                                {publi.titulo}
-                            </Text>
-                            <Text style={styles.conteudo} >
-                                {publi.descricao}
-                            </Text>
+                    publicacoes.map((publicacao)=>
+                    <TouchableOpacity key={publicacao.publicacao.id} onPress={()=>navigation.navigate('Publicacao', {id:publicacao.publicacao.id})} >
+                        <View style={styles.post_cell}>
+                            {
+                                publicacao.foto_publicacao != null ?
+                                <View 
+                                    style={
+                                        publicacao.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                        styles.flatlist_cell
+                                        :
+                                        styles.flatlist_cell_evento
+                                    }
+                                >
+                                    <Text>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
+                                    <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
+
+                                </View>
+                                :
+                                <View style={
+                                publicacao.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                styles.flatlist_cell
+
+                                :
+                                styles.flatlist_cell_evento
+                                }
+                                >
+                                    <Text>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
+                                    <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
+                                    <Text style={styles.conteudo} >{publicacao.preview_text}</Text>
+
+                                </View>
+
+                            }
+                            
+
                         </View>
                     </TouchableOpacity>
                     )
@@ -119,8 +149,104 @@ function ResultScreen({ route, navigation }){
             );
     }
 
+    function HandleListFilters(){
+        if(tipoResultado == 'Publicacao'){
+            if(publicacoes.length == 0)
+                return(
+                    <Text style={styles.conteudo} >
+                        Não foi encontrado nenhuma publicação com essa pesquisa. Tente refazê-la com outras palavras. 
+                    </Text>
+                );
+                
+            else
+                return(
+                    <FlatList
+                    data={publicacoes}
+                    keyExtractor={(item)=>item.publicacao.id}
+                    renderItem={({ item, index })=> (
+                        <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.publicacao.id})} >
+                            <View style={styles.post_cell}>
+                                {
+                                    item.foto_publicacao != null ?
+                                    <View 
+                                        style={
+                                            item.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                            styles.flatlist_cell
+                                            :
+                                            styles.flatlist_cell_evento
+                                        }
+                                    >
+                                        <Text>{item.publicacao.tipo_publicacao}</Text>
+                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
+                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
+
+                                    </View>
+                                    :
+                                    <View 
+                                        style={
+                                            item.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                            styles.flatlist_cell
+                                            :
+                                            styles.flatlist_cell_evento
+                                        }
+                                    >
+                                        <Text>{item.publicacao.tipo_publicacao}</Text>
+                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
+                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
+                                        <Text style={styles.conteudo} >{item.preview_text}</Text>
+
+                                    </View>
+                                }
+                                
+    
+                            </View>
+                            
+                        </TouchableOpacity>
+                    )}
+                    refreshing={isLoading}
+                    onRefresh={()=>getPublicacoesByName()}
+                    />
+                );
+
+        }
+        else if(tipoResultado == 'Instituicao'){
+            if(instituicoes.length == 0)
+                return(
+                    <Text style={styles.conteudo} >
+                        Não foi encontrado nenhuma instituição com essa pesquisa. Tente refazê-la com outras palavras. 
+                    </Text>
+                );
+            
+            else
+                return(
+                    <FlatList 
+                    data={instituicoes}
+                    keyExtractor={(item)=>item.id}
+                    renderItem={({item})=>
+                    <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {
+                        id:item.id
+                    })} >
+                        <View style={styles.flatlist_cell} >
+                            <Image source={{uri: 'data:image/jpeg;base64,' + item.foto_perfil}} style={styles.foto_perfil} />
+                            <Text style={styles.titulo} >{item.nome_fantasia}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    }
+                    refreshing={isLoading}
+                    onRefresh={getInstituicoesByName}
+                    />
+                );
+        }
+        else if(tipoResultado == 'All'){
+            return <HandleListAll/>
+            
+        }
+            
+    }
+
     return(
-        isLoading ? <ActivityIndicator size='Large'/> : 
+        isLoading ? <ActivityIndicator size='large'/> : 
         <View style={styles.container}>
             <Text style={styles.titulo}>Resultados</Text>
             <View style={styles.searchContainer} >
@@ -131,85 +257,13 @@ function ResultScreen({ route, navigation }){
                 />
                 <Button title='Procurar' onPress={handleSearchAll} />
             </View>
-            <View style={styles.filtros_container} >
-            <Button title='Tudo' onPress={handleSearchAll} />
-            <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
-            <Button title='Instituições' onPress={getInstituicoesByName}/>
-                
+                <View style={styles.filtros_container} >
+                <Button title='Tudo' onPress={handleSearchAll} />
+                <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
+                <Button title='Instituições' onPress={getInstituicoesByName}/>
             </View>
-            
-            {
-                tipoResultado == 'Publicacao' ? 
-                    publicacoes.length == 0 ?
-                    <Text style={styles.conteudo} >
-                        Não foi encontrado nenhuma publicação com essa pesquisa. Tente refazê-la com outras palavras. 
-                    </Text>
-                    :
-                    <FlatList
-                    data={publicacoes}
-                    keyExtractor={(item)=>item.publicacao.id}
-                    renderItem={({ item, index })=> (
-                        <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.publicacao.id})} >
-                            <View style={styles.post_cell}>
-                                {
-                                    item.foto_publicacao != null ?
-                                    <View style={styles.flatlist_cell} >
-                                        <Text>{item.publicacao.tipo_publicacao}</Text>
-                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
-                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
-                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
-                                    </View>
-                                    :
-                                    <View style={styles.flatlist_cell}  >
-                                        <Text>{item.publicacao.tipo_publicacao}</Text>
-                                        <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
-                                        <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
-                                        <Text style={styles.conteudo} >{item.preview_text}</Text>
-                                    </View>
-                                }
-                                
-    
-                            </View>
-                        </TouchableOpacity>
-                    )}
-                    refreshing={isLoading}
-                    onRefresh={()=>getPublicacoesByName()}
-                    />
-                :
-                null
-            }
-            {
-                tipoResultado == 'Instituicao' ? 
-                    instituicoes.length == 0 ?
-                    <Text style={styles.conteudo} >
-                        Não foi encontrado nenhuma instituição com essa pesquisa. Tente refazê-la com outras palavras. 
-                    </Text>
-                    :
-                    <FlatList 
-                    data={instituicoes}
-                    keyExtractor={(item)=>item.id}
-                    renderItem={({item})=>
-                    <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {
-                        id:item.id
-                    })} >
-                        <View>
-                            <Text style={styles.titulo} >{item.nome_fantasia}</Text>
-                            <Text style={styles.conteudo}>{item.apresentacao}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    }
-                    refreshing={isLoading}
-                    onRefresh={getInstituicoesByName}
-                    />
-                :
-                null
-            }
-            {
-                tipoResultado == 'All' ?
-                <HandleListAll/>
-                :
-                null
-            }
+
+            <HandleListFilters/>
             
         </View>
     );

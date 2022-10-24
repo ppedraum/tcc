@@ -87,13 +87,23 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
       width: 230,
       height: 'auto'
-  },
+    },
     flatlist_cell:{
       paddingHorizontal: 20,
       paddingVertical: 10,
       marginVertical: 5,
       backgroundColor : '#99B3FF',
       minWidth: 370
+    },
+    flatlist_cell_evento:{
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      marginVertical: 5,
+      backgroundColor : '#5BF085',
+      minWidth: 370
+    },
+    bt_desinscrever:{
+      backgroundColor:'#2B703E'
     },
     foto_perfil:{
       width:200,

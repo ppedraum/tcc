@@ -89,12 +89,12 @@ function Inscricoes({navigation}){
             data={publiInscritas}
             keyExtractor={(item)=>item.id}
             renderItem={({item, index})=>
-                <View key={item.id_evento} >
+                <View key={item.id_evento} style={styles.flatlist_cell_evento}>
                     {/* <DesinscreverModal id_evento={item.id_evento} /> */}
                     <TouchableOpacity onPress={()=>navigation.navigate('Publicacao', {id:item.id})}>
                     <Text style={styles.titulo} >{item.titulo}</Text>
                     </TouchableOpacity>
-                    <Button title='Desinscrever'/>
+                    <Button color={'#2B703E'} title='Desinscrever'/>
                 </View>
             }
             />

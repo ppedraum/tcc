@@ -11,11 +11,11 @@ Coisas para terminar
 
 -------------------------Aplicativo-------------------------
 
-* Estilo
-* Eventos inscritos
-* Editar info. do perfil
-* LGPD
 * Cadastro
+* Editar info. do perfil
+
+* Estilo
+* LGPD
 * Deletar em uma lista deleta o ultimo item quando se usa um modal
 * react-native-dialog da um bug que pede para deletar os comentarios em loop
 

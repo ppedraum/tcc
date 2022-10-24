@@ -2,6 +2,10 @@ import {React} from 'react';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+    containerLogo: {
+      flex:1,
+      justifyContent: 'center'
+    },
     container: {
       flex: 1,
       backgroundColor: '#FFFFFF',
@@ -35,6 +39,18 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection : 'row',
         alignItems : 'center',
+    },
+    btnlogin :{
+      backgroundColor: '#004475',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 7
+    },
+    btncadas: {
+      marginTop: 10,
+    },
+    registerText: {
+      color: '#000000'
     }
   });
 

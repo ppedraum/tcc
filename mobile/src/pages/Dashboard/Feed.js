@@ -89,14 +89,26 @@ function Feed({navigation}) {
                         <View style={styles.post_cell}>
                             {
                                 item.foto_publicacao != null ?
-                                <View style={styles.flatlist_cell} >
+                                <View style={
+                                item.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                styles.flatlist_cell
+                                :
+                                styles.flatlist_cell_evento
+                                }
+                                >
                                     <Text>{item.publicacao.tipo_publicacao}</Text>
                                     <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
                                 </View>
                                 :
-                                <View style={styles.flatlist_cell}  >
+                                <View style={
+                                item.publicacao.tipo_publicacao == 'PUBLICACAO'?
+                                styles.flatlist_cell
+                                :
+                                styles.flatlist_cell_evento
+                                }
+                                >
                                     <Text>{item.publicacao.tipo_publicacao}</Text>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>

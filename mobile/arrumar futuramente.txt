@@ -1,0 +1,16 @@
+Melhorar a flexibilidade do codigo pra mais manutencao
+
+padronizar todos as async functions
+criar componentes reutilizaveis quando o cod existe em mais de um lugar
+tirar alguns componentes do mesmo arquivo para melhorar a visualizacao
+padronizar os nomes das variaveis e a lingua do cod (ingles/portugues)
+usar os metodos que foram utilizados durante a aprendizagem para organizar os componentes e rotas
+Organizar os controllers
+tirar aquele context chato do comentario
+comentar partes importantes do codigo para acessar futuramente e ajudar o Felipe a se organizar para o estilo
+tirar os componentes dentro de componentes principais para evitar bugs e erros logicos
+deixar os fetches mais limpos e otimizar o transito de dados
+colocar consts ao inves de vars nos controllers
+padronizar o uso de consts() e functions
+
+trocar o no get da publicacao, a publicacao por estrutura
