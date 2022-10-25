@@ -40,9 +40,19 @@ Consertar Bugs -----------]
 
 * Consertar os delays para que tudo carregue de "uma vez so" na pagina
 * O servidor cai constantemente por causa de bugs ao se inscrever em eventos, deletar comentarios, desinscrever-se de eventos (provavelmente por causa da lista, que pega um evento que nao existe ou um comentario que voce nao esta permitido a deletar)
+Solução 
+
+Quando o estado de um componente muda, ao inves de pedir pra pegar do back e dps mostrar, mudar primeiro no front para que não aconteça uma requisição errada
+ex.: mudar o state do isFollowing pra true quando da follow ao invés de pedir para verFollow e deixar mudar sozinho
+
+* Navegacao Publicacao -> Instituicao -> Publicacao -> back retorna pra home
+* O texto breve da uma bugada intensa, provavelmente pq nao foi colocado nenhum parametro de parada quando a string atingia o limite maximo
+
 * Seguir instituicoes nao atualiza
 * A merda da flatlist da pagina de inscricoes nao da reload, e por algum motivo fica pegando 
   as inscricoes sem parar.
+
+
 
 
 
