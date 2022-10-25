@@ -40,7 +40,10 @@ Consertar Bugs -----------]
 
 * Consertar os delays para que tudo carregue de "uma vez so" na pagina
 * O servidor cai constantemente por causa de bugs ao se inscrever em eventos, deletar comentarios, desinscrever-se de eventos (provavelmente por causa da lista, que pega um evento que nao existe ou um comentario que voce nao esta permitido a deletar)
-* Navegacao Publicacao -> Instituicao -> Publicacao -> back retorna pra home
-
 * Seguir instituicoes nao atualiza
+* A merda da flatlist da pagina de inscricoes nao da reload, e por algum motivo fica pegando 
+  as inscricoes sem parar.
+
+
+
 

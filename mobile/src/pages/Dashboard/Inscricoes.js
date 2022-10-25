@@ -59,8 +59,8 @@ function Inscricoes({navigation}){
     }
 
     useEffect(()=>{
-        getInscricoes();
-    }, [isFocused]);
+        
+    }, []);
 
     return(
         isLoading ? <ActivityIndicator size='large'/>

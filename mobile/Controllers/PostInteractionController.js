@@ -109,35 +109,13 @@ router.post('/comentarios', async(req, res)=>{
         datetime_post : new Date()
     })
     
-    //console.log(comentario.id);
-
-    const ver = await Comentario.findOne({
-        where:{
-            id : comentario.id
-        }
-    });
-
-    if(ver != null){
-        res.status(200);
-        console.log('');
-        console.log('Comentarios postados');
-        console.log('------------------------------------------');
+    if(comentario != null){
+        res.json(200);
     }
-        
     else{
-        res.status(400);
-        console.log('');
-        console.log('Comentario deu erro pois ja existia');
-        console.log('------------------------------------------');
+        res.json(400);
     }
-        
-
-    
-
-
-    //console.log('comentario criado');
-
-})
+});
 
 router.delete('/comentarios', async(req, res)=>{
 

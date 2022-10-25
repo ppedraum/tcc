@@ -28,6 +28,7 @@ function Comentarios({id_publicacao}){
     }
 
     function comentar(texto, id_pai){
+        /*Tomar cuidado para colocar tudo dentro do if, para nao causar problemas de promise*/
         if(texto.trim() !=0){
             fetch(NODE_PORT + '/postinteraction/comentarios', {
                 method:'POST',
@@ -49,11 +50,10 @@ function Comentarios({id_publicacao}){
             .catch(err => {
                 console.log(err)
             });
+            toRefresh();
+            {/* Toda vez que fazemos uma alteração, atualizamos os comentários */}
+            getComentarios();
         }
-        toRefresh();
-
-        {/* Toda vez que fazemos uma alteração, atualizamos os comentários */}
-        getComentarios();
         
     }
 

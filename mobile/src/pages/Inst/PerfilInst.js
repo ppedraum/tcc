@@ -28,8 +28,6 @@ function PerfilInst({route, navigation}){
         .then(inst => {
             setInst(inst);
             verFollow(inst.id, usuario.id);
-            //console.log(inst.id)
-            //console.log(usuario.id)
         })
         .catch(err => console.log(err))
         getPublicacoesInst();
@@ -67,8 +65,7 @@ function PerfilInst({route, navigation}){
         })
         .then(res => res.json())
         .then(galeria => setGaleria(galeria))
-        .catch(err => console.log(err))
-        console.log(galeria)
+        .catch(err => console.log(err));
     }
 
     function verFollow(id_inst, id_usuario){
@@ -80,10 +77,9 @@ function PerfilInst({route, navigation}){
         } )
         .then(res => res.json())
         .then(result => {
-            /* console.log('Follow? ' + result.ver); */
             setFollowing(result.ver);
         })
-        .catch(err => alert(err))
+        .catch(err => alert(err));
     }
 
     function unfollow(){
@@ -100,9 +96,9 @@ function PerfilInst({route, navigation}){
         })
         .then(()=>console.log('Unfollow Sucesso!'))
         .catch(err => console.log('Houve um problema no Unfollow.'));
-        
+
+        verFollow();
         setMsgFollow('Você parou de seguir ' + inst.nome_fantasia + '.'  );
-        getPerfilById();
         setTimeout(()=>{setMsgFollow('')}, 5000);
     }
 
@@ -118,11 +114,10 @@ function PerfilInst({route, navigation}){
                 id_usuario : usuario.id
             })
         })
-        .then(()=>console.log('Follow Sucesso!'))
-        .catch(err => console.log('Houve um problema no Follow.'));
-        
+        .then(res=>console.log('status follow' + res.status))
+        .catch(err => console.log(err));
+        verFollow();
         setMsgFollow('Você está seguindo ' + inst.nome_fantasia + '!'  );
-        getPerfilById();
         setTimeout(()=>{setMsgFollow('')}, 5000);
     }
 
@@ -132,7 +127,6 @@ function PerfilInst({route, navigation}){
         
         else
             follow(); 
-        
         setFolModalVisible(!folModalVisible);
     }
 

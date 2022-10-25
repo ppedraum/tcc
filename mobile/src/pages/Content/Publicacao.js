@@ -46,9 +46,9 @@ function Publicacao({ route, navigation }){
                 setFotoPublicacao('data:image/jpeg;base64,'+foto);
             }
                 
-
             verLike(result.publicacao.id, usuario.id);
-            getInstById(result.publicacao.id_ong)
+            getInstById(result.publicacao.id_ong);
+
             if(result.publicacao.tipo_publicacao == 'EVENTO'){
                 getEventoById(result.publicacao.id_evento);
                 verInscEvento(usuario.id, result.publicacao.id_evento);
