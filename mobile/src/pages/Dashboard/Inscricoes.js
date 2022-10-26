@@ -13,7 +13,7 @@ function Inscricoes({navigation}){
     const [publiInscritas, setPubliInscritas] = useState([]);
     const [inscSelecionada, setInscSelecionada] = useState([]);
     const isFocused = useIsFocused();
-    
+
     function getInscricoes(){
         fetch(NODE_PORT + '/perfil/inscricoes/' + usuario.id, {
             method : 'GET',
@@ -36,7 +36,28 @@ function Inscricoes({navigation}){
     }
 
     function desinscrever(id_evento){
+
         setLoading(true);
+
+        /*
+        Para evitar um possivel problema de tentar se desinscrever duas vezes, aqui criamos uma cópia das publiInscritas,
+        e setamos ela com setPubliInscritas só que sem o evento que vamos nos desinscrever no array. Assim temos certeza
+        que o item desaparecerá na lista e que poderemos fazer a requisição normalmente.
+        */
+
+        //Pegamos o index da publi que queremos tirar do array filtrando ela pelo id do evento dela
+        const index = publiInscritas.indexOf(publiInscritas.filter(publi=>publi.id_evento == id_evento)[0]);
+        //Fazemos uma deep copy das nossas publiInscritas
+        let copia = JSON.parse(JSON.stringify(publiInscritas));
+        
+        //Se conseguimos pegar o index (se a publi existir), tiramos ela do nosso array copiado
+        if(index > -1)
+            copia.splice(index, 1);
+
+        //Setamos as publiInscritas com o nosso array com a publi alvo ja excluida
+        setPubliInscritas(copia);
+
+        //Fazemos a deleção da inscrição normalmente.
         fetch(NODE_PORT + '/perfil/inscricao', {
             method: 'DELETE',
             headers:{
@@ -50,8 +71,15 @@ function Inscricoes({navigation}){
         .then(res => console.log('Status da delecao da insc: ' + res.status))
         .catch(err => console.log('Erro delecao insc: ' + err));
         setDesDialogVisible(false);
-        getInscricoes();
-    }
+        setLoading(false);
+       
+        /*
+        Note que náo pegamos de volta as publiInscritas com getInscricoes, isso é porque deixamos o
+        array com apenas a atualização local, deixando o app mais leve e garantindo que nao volte
+        a publi com o evento ja desinscrito.
+        
+        */
+    }   
 
     function handleDelecaoInscricao(insc){
         setInscSelecionada(insc);
@@ -59,8 +87,13 @@ function Inscricoes({navigation}){
     }
 
     useEffect(()=>{
-        
-    }, []);
+
+        let abortController = new AbortController();
+
+        getInscricoes();
+        return ()=>abortController.abort();
+
+    }, [isFocused]);
 
     return(
         isLoading ? <ActivityIndicator size='large'/>

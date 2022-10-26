@@ -14,12 +14,12 @@ router.get('/ver_evento/:id_usuario/:id_evento', async(req, res)=>{
             id_evento : req.params.id_evento
         }
     });
+    
     if(ver != null){
-        //console.log('true')
-        res.json({ver : true});
+        res.status(200).json({ver : true});
     }
     else{
-        res.json({ver : false});
+        res.status(200).json({ver : false});
     }
 });
 
@@ -47,6 +47,7 @@ router.post('/evento', async(req, res)=>{
             id_usuario : req.body.id_usuario
             
         });
+        res.status(200);
     }
     
 });
@@ -61,7 +62,7 @@ router.delete('/evento', async(req, res)=>{
 
     if (ver == null){
         
-        res.status(400).send(JSON.stringify({'error': 'Você não está inscrito!'}));
+        res.status(400);
 
     }
     else{
@@ -73,6 +74,7 @@ router.delete('/evento', async(req, res)=>{
         console.log('-----------------------------------------------');
         //console.log('ok')
         ver.destroy();
+        res.status(200);
     }
     
 });
@@ -84,15 +86,14 @@ router.get('/ver_follow/:id_inst/:id_usuario', async(req, res)=>{
             id_usuario : req.params.id_usuario
         }
     });
-    //console.log(req.params.id_inst);
-    //console.log(req.params.id_usuario);
+
     if(ver != null){
-        //console.log('true')
-        res.json({ver : true});
+        res.status(200).json({ver : true});
     }
     else{
-        res.json({ver : false});
+        res.status(200).json({ver : false});
     }
+
 });
 
 router.post('/inst', async(req, res)=>{
@@ -105,15 +106,14 @@ router.post('/inst', async(req, res)=>{
 
     if (ver != null){
         res.status(400).send(JSON.stringify({'error': 'Você ja se inscreveu!'}));
-
     }
     else{
-        //console.log('ok')
         OngFollow.create({
             id_ong : req.body.id_inst,
             id_usuario : req.body.id_usuario
             
         });
+        res.status(200).json('sucesso');
     }
     
 });

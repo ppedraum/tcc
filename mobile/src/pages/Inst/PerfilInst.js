@@ -76,10 +76,8 @@ function PerfilInst({route, navigation}){
             },
         } )
         .then(res => res.json())
-        .then(result => {
-            setFollowing(result.ver);
-        })
-        .catch(err => alert(err));
+        .then(result => setFollowing(result.ver))
+        .catch(err => console.log('erro em verFollow (PerfilInst): ', err));
     }
 
     function unfollow(){
@@ -94,10 +92,10 @@ function PerfilInst({route, navigation}){
                 id_usuario : usuario.id
             })
         })
-        .then(()=>console.log('Unfollow Sucesso!'))
-        .catch(err => console.log('Houve um problema no Unfollow.'));
+        .catch(err => console.log('Erro em unfollow (PerfilInst):', err));
 
-        verFollow();
+        setFollowing(false);
+
         setMsgFollow('Você parou de seguir ' + inst.nome_fantasia + '.'  );
         setTimeout(()=>{setMsgFollow('')}, 5000);
     }
@@ -114,9 +112,11 @@ function PerfilInst({route, navigation}){
                 id_usuario : usuario.id
             })
         })
-        .then(res=>console.log('status follow' + res.status))
-        .catch(err => console.log(err));
-        verFollow();
+        .then(res=>console.log('Follow: ', res.status))
+        .catch(err => console.log('Erro em follow (PerfilInst): ', err));
+        
+        setFollowing(true);
+
         setMsgFollow('Você está seguindo ' + inst.nome_fantasia + '!'  );
         setTimeout(()=>{setMsgFollow('')}, 5000);
     }
@@ -131,7 +131,13 @@ function PerfilInst({route, navigation}){
     }
 
     useEffect(()=>{
+
+        let abortController = new AbortController();
+
         getPerfilById();
+
+        return ()=>abortController.abort();
+
     }, [])
 
     return(

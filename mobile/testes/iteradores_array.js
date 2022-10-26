@@ -13,13 +13,13 @@ empresas.forEach((empresa)=>console.log(empresa));
 
 //-----Alteração usando map (retorna o mesmo número de itens do array)-------//
 
-uppEmpresas = empresas.map((empresa)=>{return empresa.nome.toUpperCase()});
+let uppEmpresas = empresas.map((empresa)=>{return empresa.nome.toUpperCase()});
 console.log(uppEmpresas);
 
 //-----Filtrando com filter-------//
 
-empMenosSamsung = empresas.filter((empresa)=>empresa.nome != 'Samsung');
-empNovas = empresas.filter((empresa)=>empresa.anoDeCriacao >= 2000);
+let empMenosSamsung = empresas.filter((empresa)=>empresa.nome != 'Samsung');
+let empNovas = empresas.filter((empresa)=>empresa.anoDeCriacao >= 2000);
 
 console.log(empMenosSamsung);
 console.log(empNovas);

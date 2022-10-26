@@ -110,9 +110,14 @@ function Publicacao({ route, navigation }){
                     id_usuario : usuario.id
                 })
             })
-            .then(()=>setMsgEvento('Sucesso!'))
-            .catch(err => setMsgEvento('Houve um problema na inscrição.'));
-        getPublicacaoById();
+            .then(res=>console.log('status insc' + res.status))
+            .catch(err => console.log(err));
+
+            /*
+            Setar a inscricao ajuda a evitar erros como mandar duas requisicoes de follow
+            quando ja esta seguindo e dar erro no sistema.
+            */
+            setInscrito(true);
     }
 
 /*     function cancelInscricao(){
@@ -201,7 +206,13 @@ function Publicacao({ route, navigation }){
     }
 
     useEffect(()=>{
+
+        let abortController = new AbortController();
+
         getPublicacaoById();
+
+        return ()=> abortController.abort();
+
     }, []);
 
     return (
