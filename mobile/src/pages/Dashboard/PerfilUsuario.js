@@ -1,5 +1,6 @@
 import { React, useContext, useState, useEffect } from 'react'
 import { Text, View, Image, Button, FlatList, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
@@ -56,6 +57,9 @@ function PerfilUsuario({navigation}){
         
         <View style={styles.container} >
             <ScrollView contentContainerStyle={styles.container} >
+                <TouchableOpacity onPress={()=>navigation.navigate('EditarPerfil')}>
+                    <Ionicons name='md-pencil-sharp' size={30} />
+                </TouchableOpacity>
                 <Image source={{uri:"data:image/jpeg;base64," + usuario.foto_perfil}} style={styles.foto_perfil} />
                 <Text style={styles.conteudo} >Olá {usuario.nome}!</Text>
                 <Text style={styles.conteudo} >Dados Básicos</Text>

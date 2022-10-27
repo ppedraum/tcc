@@ -29,7 +29,7 @@ function Inscricoes({navigation}){
         2. Ao dar o setPubliInscritas, é necessário uma função que retorna, ao invés da variável em si, um array
         onde os itens do array atualizado são colocados dentro dele (com o ... + o array, passamos os itens ao invés do array) 
         */
-        .then(publiInscritas => setPubliInscritas(()=>{return [...publiInscritas]}))
+        .then(publiInscritas => setPubliInscritas(publiInscritas))
         .catch(err => console.log(err));
 
         setLoading(false);

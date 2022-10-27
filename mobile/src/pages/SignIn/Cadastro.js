@@ -1,118 +1,105 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView, Image, Platform } from 'react-native';
+
 import { RNDateTimePicker, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper';
-import base64 from 'react-native-base64';
+
 import * as ImagePicker from 'expo-image-picker';
+import base64 from 'react-native-base64';
+var utf8 = require('utf8');
+
 import styles from '../styles';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import CadContext, { CadProvider } from '../../contexts/cadastro';
 
 const { NODE_PORT } = require('../../../config/port.json');
 
-function cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario){
-
-
-    fetch(NODE_PORT + '/auth/cadastro', {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            nome : nome,
-            e_mail : e_mail,
-            senha : senha,
-            telefone : telefone,
-            data_nasc : data_nasc,
-            sexo : sexo,
-            profissao : profissao,
-            cidade : cidade,
-            uf : uf,
-            cpf : cpf,
-            foto_perfil : foto_perfil,
-            is_voluntario : is_voluntario,
-        })
-
-    })
-    .then(res => console.log('status cadastro: ', res.status))
-    .catch(err => console.log('Erro no cadastro: ' + err));
-}
-
 function CadastroBasico({navigation}){
-    const [ nome, setNome] = useState('');
-    const [ e_mail, setEmail] =  useState('');
-    const [ senha, setSenha] = useState('');
-    /* const [errMsg, setErrMsg] = useState([]) */
-    
-    // regex senha ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/
+
+    const { dados, setDado } = useContext(CadContext);
+
     return (
     <View style={styles.container}>       
         <View>
             <Text>nome</Text>
-            <TextInput style={styles.input} onChangeText={(nome)=>setNome(nome)} />
+            <TextInput style={styles.input} onChangeText={(nome)=>setDado('nome', nome)} />
         </View>
         <View>
             <Text>e-mail</Text>
-            <TextInput style={styles.input} onChangeText={(e_mail)=>setEmail(e_mail)} />
+            <TextInput style={styles.input} onChangeText={(e_mail)=>setDado('e_mail', e_mail)} />
         </View>
         <View>
             <Text>senha</Text>
-            <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
+            <TextInput style={styles.input} onChangeText={(senha)=>setDado('senha', senha)} />
         </View>
-        <Button onPress={()=>
-            navigation.navigate('CadastroDados', {
-                nome:nome,
-                e_mail:e_mail,
-                senha:senha
-
-            })}
-        title='Seguinte'/>
+        <Button onPress={()=>navigation.navigate('CadastroDados')} title='Seguinte'/>
     </View> 
     );
 }
 
-function CadastroDados({ route, navigation }){
+function CadastroDados({ navigation }){
 
-    const { nome, e_mail, senha } = route.params;
-    const [ telefone, setTelefone] = useState('');
-    const [ data_nasc, setDatanasc] = useState(new Date(2022, 1, 1));
-    const [ sexo, setSexo] = useState('');
-    const [ profissao, setProfissao] = useState('');
-    const [ cidade, setCidade] = useState('');
-    const [ uf, setUf] = useState('');
-    const [ cpf, setCpf] = useState('');
-    const [ foto_perfil, setFotoperfil] = useState('');
-    const [ is_voluntario, setIsvoluntario] = useState(false);
-    /* const [errMsg, setErrMsg] = useState([]); */
-
+    const { dados, setDado } = useContext(CadContext);
+    const [foto, setFoto] = useState({});
     function HandleCadastro(){
-        cadastrar(nome, e_mail, senha, telefone, data_nasc, sexo, profissao, cidade, uf, cpf, foto_perfil, is_voluntario);
+        console.log('cadastro: ', dados)
+        cadastrar();
         navigation.navigate('Login');
     }
 
+    function cadastrar(){
+
+        fetch(NODE_PORT + '/auth/cadastro', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nome : dados.nome,
+                e_mail : dados.e_mail,
+                senha : dados.senha,
+                telefone : dados.telefone,
+                data_nasc : dados.data_nasc,
+                sexo : dados.sexo,
+                profissao : dados.profissao,
+                cidade : dados.cidade,
+                uf : dados.uf,
+                cpf : dados.cpf,
+                foto_perfil : dados.foto_perfil,
+                is_voluntario : dados.is_voluntario,
+            })
+    
+        })
+        .then(res => console.log('status cadastro: ', res.status))
+        .catch(err => console.log('Erro no cadastro: ' + err));
+    }
+   
     function showDatePicker(){
         DateTimePickerAndroid.open({
-            value: data_nasc,
+            value: new Date(),
             onChange: (event, date)=>{
-                setDatanasc(date);
+                setDado('data_nasc', date);
             },
           });
     }
 
-    const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
+    async function pickImage(){
         let foto = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
           aspect: [4, 4],
           quality: 1,
+          base64: true
         });
-    
-        const fotoBase = base64.encode(foto.uri);
-        console.log('fotoBase: ' + fotoBase);
+        
+        console.log('fotoBase: ' + foto.base64);
     
         if (!foto.cancelled) {
-            setFotoperfil(fotoBase);
+            setFoto(foto);
+            setDado('foto_perfil', foto.base64);
         }
       };
 
@@ -124,23 +111,24 @@ function CadastroDados({ route, navigation }){
             <KeyboardAvoidingView>
             <View>
                 <Text>telefone</Text>
-                <TextInput style={styles.input} onChangeText={(telefone)=>setTelefone(telefone)} />
+                <TextInput style={styles.input} onChangeText={(telefone)=>setDado('telefone', telefone)} />
             </View>
             <View>
                 <Text>data de nascimento</Text>
                 <Button title='Selecione...' onPress={()=>showDatePicker()}/>
-                <Text>{data_nasc.toISOString()}</Text>
+                {/* <Text>{dados.data_nasc}</Text> */}
             </View> 
             <View>
                 <Text>Sexo</Text>
                 <Picker
                 style={styles.pickerInput} 
                 dropdownIconColor='white'
-                selectedValue={sexo}
+                selectedValue={dados.sexo}
                 onValueChange={(value, index) =>{
-                    if(value == null){
-                        alert('Selecione um valor!')
-                    }else setSexo(value)
+                    if(value == null)
+                        alert('Selecione um valor!');
+                    else 
+                        setDado('sexo', value);
                     
                 }
                 }>
@@ -152,22 +140,23 @@ function CadastroDados({ route, navigation }){
             </View>
             <View>
                 <Text>Profissão</Text>
-                <TextInput style={styles.input} onChangeText={(profissao)=>setProfissao(profissao)} />
+                <TextInput style={styles.input} onChangeText={(profissao)=>setDado('profissao', profissao)} />
             </View>
             <View>
                 <Text>Cidade</Text>
-                <TextInput style={styles.input} onChangeText={(cidade)=>setCidade(cidade)} />
+                <TextInput style={styles.input} onChangeText={(cidade)=>setDado('cidade', cidade)} />
             </View>
             <View>
                 <Text>UF</Text>
                 <Picker 
                 style={styles.pickerInput} 
                 dropdownIconColor='white'
-                selectedValue={uf}
+                selectedValue={dados.uf}
                 onValueChange={(value, index) =>{
-                    if(value == null){
-                        alert('Selecione um valor!')
-                    }else setUf(value)
+                    if(value == null)
+                        alert('Selecione um valor!');
+                    else 
+                        setDado('uf', value);
                 
                 }
                 }>
@@ -202,29 +191,24 @@ function CadastroDados({ route, navigation }){
             </View>
             <View>
                 <Text>CPF</Text>
-                <TextInput style={styles.input} onChangeText={(cpf)=>setCpf(cpf)} />
+                <TextInput style={styles.input} onChangeText={(cpf)=>setDado('cpf', cpf)} />
             </View>
             <View>
                 <Text>Foto de Perfil</Text>
                 <Button title='escolha' onPress={pickImage} />
-                {foto_perfil != '' && <Image source={{ uri: 'data:image/jpeg;base64,'+ foto_perfil }} style={{ width: 200, height: 200 }} />}
+                {dados.foto != '' && <Image source={{ uri: 'data:image/jpeg;base64,' + dados.foto_perfil }} style={{ width: 200, height: 200 }} />}
 
             </View>
             <View style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
                 <Text>Você é um profissional voluntário?</Text>
                 <Checkbox
-                status={is_voluntario ? 'checked' : 'unchecked'}
+                status={dados.is_voluntario ? 'checked' : 'unchecked'}
                 onPress={() => {
-                    setIsvoluntario(!is_voluntario);
+                    setDado('is_voluntario', !dados.is_voluntario);
                 }}
                 />
             </View>
-            <Button onPress={()=>{
-                //HandleCadastro()
-                console.log('cadastrado!');
-                //navigation.navigate('Login');
-
-            }}  title='Completar Iscrição'/>
+            <Button onPress={HandleCadastro}  title='Completar Iscrição'/>
             </KeyboardAvoidingView>
         </ScrollView>
     );
@@ -237,14 +221,18 @@ function Cadastro({navigation}){
 
 
     return (
-        <Stack.Navigator
-        initialRouteName='CadastroBasico'
-        >
-            <Stack.Screen name='CadastroBasico' component={CadastroBasico} 
-            />
-            <Stack.Screen name='CadastroDados' component={CadastroDados}
-            />
+        <CadProvider>
+            <Stack.Navigator
+            initialRouteName='CadastroBasico'
+            >
+                <Stack.Screen name='CadastroBasico' component={CadastroBasico} 
+                />
+                <Stack.Screen name='CadastroDados' component={CadastroDados}
+                />
         </Stack.Navigator>
+        </CadProvider>
+        
+
     );
 }
 
