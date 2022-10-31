@@ -19,9 +19,10 @@ const AuthContext = createContext({
     usuario:{}, 
     login:()=>{},
     logout:()=>{},
+    refresh:()=>{},
     isLoading:true,
     token:'',
-    NODE_PORT: '',
+    NODE_PORT: ''
 });
 
 
@@ -71,6 +72,7 @@ export function AuthProvider({children}){
     Movemos a responsabilidade do login para o contexto, para assim 
     mandá-lo pelo AuthProvider
     */
+
     function login(email, senha){
         fetch( NODE_PORT + '/auth/login', {
             method: 'POST',
@@ -104,6 +106,14 @@ export function AuthProvider({children}){
     
     }
 
+    function refresh(token_recebido, dados){
+        if(token === token_recebido)
+            setUsuario(dados);
+        else
+            return {err:'Token Inválido'};
+        
+    }
+
     /*
     O logout apenas troca o isSigned de true pra false e o usuário fica nulo, assim no nosso componente
     index.routes.js, como isSigned é false, troca da rota do App para a rota de Autenticação
@@ -119,7 +129,7 @@ export function AuthProvider({children}){
     }
 
     return (
-        <AuthContext.Provider value={{isSigned, usuario, login, logout, isLoading, token, NODE_PORT }} >
+        <AuthContext.Provider value={{isSigned, usuario, login, logout, refresh, isLoading, token, NODE_PORT }} >
             {children}
         </AuthContext.Provider>
     );

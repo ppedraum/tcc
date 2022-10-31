@@ -1,6 +1,7 @@
 import {React} from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -114,6 +115,17 @@ const styles = StyleSheet.create({
       width:150,
       height:150,
     },
+    sanfona:{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      marginVertical: 5,
+      backgroundColor : '#99B3FF',
+      width: Dimensions.get('window').width - 20
+    }
   });
 
   export default styles;
