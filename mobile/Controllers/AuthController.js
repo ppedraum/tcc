@@ -109,7 +109,7 @@ router.post('/cadastro', async (req, res)=>{
             cidade : req.body.cidade,
             uf : req.body.uf,
             cpf : req.body.cpf,
-            foto_perfil : req.body.foto_perfil,
+            foto_perfil : req.body.foto_perfil.parte1 + req.body.foto_perfil.parte2,
             is_voluntario : req.body.is_voluntario,
         })
         res.status(200);
