@@ -114,7 +114,7 @@
                     <input type="submit" name="bt_submit_publicacao" id="bt_submit_publicacao" value="Enviar">
                     <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar" onclick="">
                 </div>
-                <p>Entradas com * no final são obrigatórias.</p>
+                <p><b>Entradas com * no final são obrigatórias.</b></p>
             </div>
             <div id="div_form_evento" class='cell' hidden>
                 <div class='cell' >

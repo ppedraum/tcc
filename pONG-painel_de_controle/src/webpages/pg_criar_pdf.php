@@ -15,7 +15,7 @@
 <body>
     <div>
     <h2>
-        MUNDO - Painel de Controle<br>
+        MUNDO - Criar PDF<br>
         <a href="../../menu.php">
             <img src = "./logo.svg" alt="LOGO" width="300" height="150">
         </a>

@@ -1,13 +1,14 @@
 body {
-    display: flex;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
-    align-content: center;
-    justify-content: center;
-    align-items: center;
     font-family: 'Arial';
     font-size: 18px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 h2{
