@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     foto_galeria:{
       width:150,
       height:150,
-    }
+    },
   });
 
   export default styles;

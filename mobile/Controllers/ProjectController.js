@@ -34,10 +34,16 @@ router.get('/publicacoes', async (req, res)=>{
         let str_arr = publicacoes[i].descricao.split('');
         let preview_text = '';
 
-        for(let i = 0; i < 80; i++){
-            preview_text += str_arr[i];
+        if(str_arr.length > 80){
+            for(let i = 0; i < 80; i++){
+                preview_text += str_arr[i];
+            }
+            preview_text += '...';
         }
-        preview_text += '...';
+        else{
+            preview_text = publicacoes[i].descricao;
+        }
+        
         
         publiFinais.push(
             {
@@ -88,10 +94,15 @@ router.get('/publicacoes/:titulo', async (req, res)=>{
         let str_arr = publicacoes[i].descricao.split('');
         let preview_text = '';
 
-        for(let i = 0; i < 80; i++){
-            preview_text += str_arr[i];
+        if(str_arr.length > 80){
+            for(let i = 0; i < 80; i++){
+                preview_text += str_arr[i];
+            }
+            preview_text += '...';
         }
-        preview_text += '...';
+        else{
+            preview_text = publicacoes[i].descricao;
+        }
         
         publiFinais.push(
             {
@@ -132,10 +143,16 @@ router.get('/galeria/:id_ong', async (req, res)=>{
         let str_arr = publicacoes[i].descricao.split('');
         let preview_text = '';
 
-        for(let i = 0; i < 80; i++){
-            preview_text += str_arr[i];
+        if(str_arr.length > 80){
+            for(let i = 0; i < 80; i++){
+                preview_text += str_arr[i];
+            }
+            preview_text += '...';
         }
-        preview_text += '...';
+        else{
+            preview_text = publicacoes[i].descricao;
+        }
+        
         
         publiFinais.push(
             {
@@ -146,7 +163,7 @@ router.get('/galeria/:id_ong', async (req, res)=>{
             }
         );
     }
-    res.json(publiFinais);
+    res.status(200).json(publiFinais);
 });
 
 //sendo assim, essa rota tem que ser /publicacao e não /publicacoes
@@ -163,26 +180,21 @@ router.get('/publicacao/:id', async (req, res)=>{
             id_publicacao : req.params.id,
         }
     });
-    
-    /* 
-    console.log('--------------------------------------------------------------------------------------');
-    console.log(foto);
-    console.log('--------------------------------------------------------------------------------------');
-    */
-    res.json({publicacao: publicacao, foto_publicacao : foto});
+
+    res.status(200).json({publicacao: publicacao, foto_publicacao : foto});
 });
 
 router.get('/evento/:id', async(req, res)=>{
+    
     let evento = await Evento.findOne({
         where:{
             id : req.params.id
         }
     })
 
-    
-
-    res.json(evento);
-})
+    if(evento != null)
+        res.status(200).json(evento);
+});
 
 router.get('/voluntariado', async (req, res)=>{
     let publicacoes = await Publicacao.findAll({

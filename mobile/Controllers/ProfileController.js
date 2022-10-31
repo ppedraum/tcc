@@ -72,5 +72,22 @@ router.get('/inscricoes/:id_usuario', async(req, res)=>{
     
 });
 
+router.delete('/inscricao', async(req, res)=>{
+    
+    let inscricao = await Inscricao.findOne({
+        where:{
+            id_evento : req.body.id_evento
+        }
+    })
+
+    if(inscricao != null){
+        
+        inscricao.destroy();
+        res.status(200);
+    }
+    else
+        res.status(400);
+});
+
 
 module.exports = app => app.use('/perfil', router);

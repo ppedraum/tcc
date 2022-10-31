@@ -46,9 +46,9 @@ function Publicacao({ route, navigation }){
                 setFotoPublicacao('data:image/jpeg;base64,'+foto);
             }
                 
-
             verLike(result.publicacao.id, usuario.id);
-            getInstById(result.publicacao.id_ong)
+            getInstById(result.publicacao.id_ong);
+
             if(result.publicacao.tipo_publicacao == 'EVENTO'){
                 getEventoById(result.publicacao.id_evento);
                 verInscEvento(usuario.id, result.publicacao.id_evento);
@@ -110,9 +110,14 @@ function Publicacao({ route, navigation }){
                     id_usuario : usuario.id
                 })
             })
-            .then(()=>setMsgEvento('Sucesso!'))
-            .catch(err => setMsgEvento('Houve um problema na inscrição.'));
-        getPublicacaoById();
+            .then(res=>console.log('status insc' + res.status))
+            .catch(err => console.log(err));
+
+            /*
+            Setar a inscricao ajuda a evitar erros como mandar duas requisicoes de follow
+            quando ja esta seguindo e dar erro no sistema.
+            */
+            setInscrito(true);
     }
 
 /*     function cancelInscricao(){
@@ -201,7 +206,13 @@ function Publicacao({ route, navigation }){
     }
 
     useEffect(()=>{
+
+        let abortController = new AbortController();
+
         getPublicacaoById();
+
+        return ()=> abortController.abort();
+
     }, []);
 
     return (
