@@ -1,17 +1,23 @@
 body {
+    height: 100%;
+    width: 100%;
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
-    font-family: Arial;
+    font-family: 'Arial';
     font-size: 18px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 h2{
     padding-left: 30px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     filter: saturate(150%);
-
+    line-height: 0.1;
 }
-.container {
+
+.container{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -22,53 +28,26 @@ h2{
     margin-right: auto;
 }
 
-.echo{
-    color: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-}
-.fundo{
-    height: auto;
-    background: #61b3ed;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2.5px solid #3f78a0;
-    margin-bottom: 450px;
-    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
-}
-
-.escrita{
-    font-size: 20px;
-    font-size: bold;
+.quadrado{
+    background-color: #61b3ed;
     display: block;
-    flex-direction: row;
-    justify-content: left;
-    align-items: left;
-    color : black ;
-    padding-bottom: 400px;
-}
-
-.botoes {
-    border-radius: 30px;
-    border: 1px #3f78a0;
-    display: flex;
-    flex-direction: row;
+    flex-direction:column;
     justify-content: center;
-    align-items: left;
-    padding: 5px 5px;
+    align-items: center;
+    border-radius: 30px;
+    border: 2.5px solid #3f78a0;
+    margin-bottom: 300px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
+    margin-top: 150px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-a{
-    text-decoration: none;
-}
-
-button{
+button, input[type="submit"], input[type="reset"]{
     font-style: none;
     font-size: bold;
     border-radius: 30px;
@@ -85,7 +64,21 @@ button{
     font-size: 18px;
 }
 
-input[type="submit"]:hover {
+button:hover, input[type="submit"]:hover {
     color : black;
     background: #6dabd6;
-}       
+}
+
+button:hover, input[type="reset"]:hover {
+    color : black;
+    background: #6dabd6;
+}
+
+.conteudo{
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}

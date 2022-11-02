@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar perfil</title>
     <?php
     require("../php_stuff/ver_session.php");
     ver_session("../../index.php");
@@ -23,14 +23,18 @@
 
 
     ?>
+<link rel="stylesheet" href="estiloeditarperfil.css" type="text/css">
 </head>
 <body>
     <h2>
-        MUNDO - Painel de Controle<br>
+        MUNDO - Editar perfil<br>
         <a href="../../menu.php"><img src = "../webpages/logo.svg" alt="LOGO" width="300" height="150"></a>
     </h2>
+    <div class="container">
+    <div class='quadrado'>
+    <div class='conteudo'>
     <form action="../php_stuff/alterar_info.php" method="POST" autocomplete="off" enctype="multipart/form-data" >
-        <div>
+        <div id='fotoperfil'>
             Foto de Perfil
             <input onclick="enable('chb_foto_perfil', 'blob_perfil')" type="checkbox" name="chb_foto_perfil" id="chb_foto_perfil">
             <br>
@@ -90,6 +94,7 @@
         <div>
             Para alterar as demais informações da sua instituição, entre em contato conosco.
         </div>
+        </div>
     </form>
     <script type="text/javascript">
 
@@ -126,6 +131,6 @@
         }
 
     </script>
-
+</div></div>
 </body>
 </html>

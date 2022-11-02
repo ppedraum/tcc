@@ -1,3 +1,10 @@
+Apresentacao -> descomentar o ignoreAllLogs
+
+Coisas para estudar
+
+* Pesquisar sobre AbortController e return do useState();
+
+------------------------------------------------------------
 
 
 Coisas para terminar
@@ -7,7 +14,7 @@ Coisas para terminar
 * Estilização
 * Organização dos estilos
 * Fotos estao sendo cortadas ao fazer upload
-
+* Deletar os comentarios e likes juntos a publicacao
 
 -------------------------Aplicativo-------------------------
 
@@ -16,15 +23,55 @@ Coisas para terminar
 
 * Estilo
 * LGPD
-* Deletar em uma lista deleta o ultimo item quando se usa um modal
-* react-native-dialog da um bug que pede para deletar os comentarios em loop
+
+* Deletar em uma lista deleta o ultimo item quando se usa um modal 	     (RESOLVIDO)
+* react-native-dialog da um bug que pede para deletar os comentarios em loop (RESOLVIDO)
+
+	Para evitar isso, não podemos utilizar o modal dentro do renderItem da FlatList, pois assim
+	acionamos os modais de todos os comentários, começando do último até o primeiro. Isso causa
+	com que a deleção do comentário comece pelo primeiro, inclusive quando não é um comentário
+	nosso causa um erro de autorização e trava o servidor.
+	A solução é colocar o modal único como return do componente principal. Aí, usamos uma função
+	no botão que faz aparecer o modal para
+		1. Fazer aparecer o modal
+		2. Setar o item selecionado num useState
+	Com isso, conseguimos jogar o "itemSelecionado" para dentro do modal, que aparece na tela
+	normalmente, e podemos realizar as modificações com ele a partir daí. Massa, não é?
+	
+	fonte: https://stackoverflow.com/questions/63517418/react-native-flatlist-opens-modal-for-all-items-instead-of-selected-item
+
+
 
 
 Consertar Bugs -----------]
 
 * Consertar os delays para que tudo carregue de "uma vez so" na pagina
 * O servidor cai constantemente por causa de bugs ao se inscrever em eventos, deletar comentarios, desinscrever-se de eventos (provavelmente por causa da lista, que pega um evento que nao existe ou um comentario que voce nao esta permitido a deletar)
-* Navegacao Publicacao -> Instituicao -> Publicacao -> back retorna pra home
+Solução 
 
-* Seguir instituicoes nao atualiza
+* O preview text da publicacao fica aparecendo undefined quando eh menor que 80 caracteres.
 
+Quando o estado de um componente muda, ao inves de pedir pra pegar do back e dps mostrar, mudar primeiro no front para que não aconteça uma requisição errada
+ex.: mudar o state do isFollowing pra true quando da follow ao invés de pedir para verFollow e deixar mudar sozinho
+
+* O texto breve da uma bugada intensa, provavelmente pq nao foi colocado nenhum parametro de parada quando a string atingia o limite maximo
+
+* Deletar um comentario com filhos dentro causa com que o servidor va abaixo
+	Isso se dava pois esqueci de colocar o await antes do ver.destroy(), o que fazia com que os comentarios
+	nao fossem apagados em ordem, causando o comentario principal a nao ser apagado e dar um erro.
+
+
+* A tela de inscrições não atualiza
+	Para isso criei um array local e substitui as publiInscritas por ele, só que sem a que desinscrevemos,
+	ao invés de tentar dar reload. Isso ainda aumentou a eficiência do código porque não foi preciso dar mais
+	uma requisição, deixando o app mais leve. Fazer esse modelo para outras partes também :-)
+	
+	Fonte: https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+
+* Cannot update an unmounted react component (causa o app a ficar instavel, perder eficiencia e até foder
+  com tudo)
+
+	usar o AbortController.abort faz com que o efeito seja terminado. Não sei ao certo como isso funciona
+	mas funciona
+	
+	Fonte: https://www.loginradius.com/blog/engineering/how-to-fix-memory-leaks-in-react/

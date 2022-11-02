@@ -2,8 +2,8 @@ body {
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
     font-family: Arial;
-    font-size: 18px;
-    
+    font-size: 18px;    
+    background-repeat: space;
 }
 
 h2{
@@ -13,19 +13,31 @@ h2{
     line-height: 0.1;
 }
 
+.logo{
+    width: auto;
+    height: auto;
+}
 .container{
-    width: 100vw;
-    height: 100vh;
+    width: auto;
+    height: auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 300px;
 }
 
-.addpub{
-    border-radius: 30px;
-    border: 1px #3f78a0;
-    margin: 20px;
+.container img {
+    max-width: 300px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #quadrado{
@@ -36,51 +48,19 @@ h2{
     align-items: center;
     border-radius: 30px;
     border: 2.5px solid #3f78a0;
-    margin-bottom: 300px;
     padding-left: 10px;
     padding-right: 10px;
     box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
-}
-
-table, td{
-    border: 1px solid;
-    border-collapse: collapse;
-    padding:10px;
-    background: #afd3eb ;
-    border-color: #3f78a0 ;
-}
-
-th{
-    background: #3f78a0
-}
-
-input[type="text"], textarea {
-    justify-content : center;
-    align-items: center;
-    border-radius: 30px;
-    background : #ffffff;
-    border: 2.5px solid #3f78a0;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 18px;
-}
-
-.cell{
-    margin: 10px;
-}
-
-.heading{
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    width: 550px;
+    height: auto;
 }
 
 button, input[type="submit"]{
     font-style: none;
     font-size: bold;
     border-radius: 30px;
-    width : 170px;
-    height : auto;
+    width : 150px;
+    height : 56px;
     margin: 10px;
     padding: 5px 10px 5px 10px;
     justify-content : center;
@@ -90,6 +70,9 @@ button, input[type="submit"]{
     border: 2.5px solid #3f78a0;
     font-family: Arial;
     font-size: 18px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button:hover, input[type="submit"]:hover {
@@ -97,26 +80,28 @@ button:hover, input[type="submit"]:hover {
     background: #6dabd6;
 }
 
-input[type="date"]{
-    margin-right: 40;
-    justify-content : center;
+#conteudo {
+    margin-left: auto;
+    margin-right: auto;    
+    display: block;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    border-radius: 30px;
-    width : auto;
-    height : auto;
-    background : #ffffff;
+}
+
+#quadrado2{
+    background-color: #3badff;
+    display: block;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
     border: 2.5px solid #3f78a0;
-    font-family: Arial;
-    font-size: 18px;
     padding-left: 10px;
     padding-right: 10px;
+    width: 550px;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
-
-select{
-    font-family: Arial;
-    font-size: 18px;
-}
-
-
-
-

@@ -7,16 +7,17 @@ const styles = StyleSheet.create({
     container: {
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: '#004475',
+      backgroundColor: '#fff',
       width: '100%',
       height: '100%',
       alignItems: 'center',
       justifyContent: 'center',
+
     },
     scrollContainer: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#004475',
+        backgroundColor: '#fff',
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
@@ -30,8 +31,7 @@ const styles = StyleSheet.create({
     },
     titulo:{
       fontWeight : 'bold',
-      fontSize : 30,
-      color: 'white'
+      fontSize : 30
     },
     titulo_galeria:{
       fontWeight : 'bold',
@@ -49,18 +49,18 @@ const styles = StyleSheet.create({
         padding : 10,
         margin : 10,
         borderRadius: 15,
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#d7d7d7',
     },
     pickerInput:{
         width : 200,
-        height: 20,
+        height: 30,
         padding : 10,
         margin : 10,
         backgroundColor: '#99B3FF',
         color: 'white',
         borderWidth: 1,
-        borderColor: 'blue',
-        borderRadius: 15,
+        borderColor: 'blue'
+
     },
     searchContainer:{
         display: 'flex',
@@ -125,38 +125,6 @@ const styles = StyleSheet.create({
       marginVertical: 5,
       backgroundColor : '#99B3FF',
       width: Dimensions.get('window').width - 20
-    },
-    containerLogo:{
-      flex:1,
-      justifyContent: 'center',
-      backgroundColor: 'red',
-      width:10,
-      height:10,
-    },
-    botao:{
-      alignItems: 'center',
-      backgroundColor: '#D0EBFF',
-      padding: 10,
-      borderRadius:15,
-      width: 100,
-      margin:10,
-      border: 2,
-      borderStyle: 'solid',
-      borderColor: 'black',
-      color: 'black'
-    },
-    botaoC:{
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#D0EBFF',
-      padding: 10,
-      borderRadius:15,
-      width: 150,
-      margin:10,
-      border: 2,
-      borderStyle: 'solid',
-      borderColor: 'black',
-      color: 'black'
     }
   });
 
