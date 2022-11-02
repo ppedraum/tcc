@@ -4,12 +4,46 @@ const router = Express.Router();
 const authMiddleware = require('../middlewares/auth')
 router.use(authMiddleware);
 
+const Usuario = require('../models/Usuario');
 const Inscricao = require('../models/Inscricao');
 const Instituicao = require('../models/Instituicao');
 const OngFollow = require('../models/OngFollow');
 const Evento = require('../models/Evento');
 const Publicacao = require('../models/Publicacao');
 const { Op } = require("sequelize");
+
+
+router.put('/alterar_dados', async(req, res)=>{
+    const dados = req.body.dados;
+    const id_usuario = req.body.id_usuario;
+    const edicao = await Usuario.update({
+        nome : dados.nome,
+        e_mail : dados.e_mail,
+        senha : dados.senha,
+        telefone : dados.telefone,
+        data_nasc : dados.data_nasc,
+        sexo : dados.sexo,
+        profissao : dados.profissao,
+        cidade : dados.cidade,
+        uf : dados.uf,
+        cpf : dados.cpf,
+        foto_perfil : dados.foto_perfil,
+        is_voluntario : dados.is_voluntario,
+    },
+    {
+        where:{
+            id : id_usuario
+        }
+    }
+    );
+
+    console.log(req.body.dados);
+
+    if(edicao)
+        res.status(200).json({res:'update feito'});
+    else
+        res.status(400).json({res:'algo deu errado'});
+})
 
 router.get('/follows/:id_usuario', async(req, res)=>{
     const insts = await Instituicao.findAll();
@@ -70,6 +104,23 @@ router.get('/inscricoes/:id_usuario', async(req, res)=>{
     }
     res.json(publiInscritas);
     
+});
+
+router.delete('/inscricao', async(req, res)=>{
+    
+    let inscricao = await Inscricao.findOne({
+        where:{
+            id_evento : req.body.id_evento
+        }
+    })
+
+    if(inscricao != null){
+        
+        inscricao.destroy();
+        res.status(200);
+    }
+    else
+        res.status(400);
 });
 
 

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import styles from '../styles'
 
 function Login({navigation}){
@@ -47,12 +47,7 @@ function Login({navigation}){
     return (
 
         <View style={styles.container}>
-            <View style={styles.containerLogo}>
-                <Image
-                source={require('./src/assets/logo.svg')}
-                />
-            </View>
-
+            
             <Text style={styles.titulo}>Olá!</Text>
             <View>
                 <Text>E-Mail</Text>
@@ -63,15 +58,12 @@ function Login({navigation}){
                 <TextInput style={styles.input} value={senha} onChangeText={(senha)=>setSenha(senha)} />
             </View>
             <View>
-                <Button style={styles.btnlogin} 
-                title='Login'
+                <Button title='Login'
                 color='#FAFA'
                 onPress={()=>login()} 
                 />
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} style={styles.btncadas}>
-                <Text>Não poussui conta ? Cadastre-se</Text>
-            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} ><Text>Não tem conta? Cadastre-se</Text></TouchableOpacity>
             
         </View>
 
