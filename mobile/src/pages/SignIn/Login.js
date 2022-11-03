@@ -28,7 +28,7 @@ function Login({route, navigation}){
             <View style={styles.container}>
                 <View>
                     <Image
-                    source={require('C:/xampp/htdocs/mobile/src/assets/logo.png')}
+                    source={require('C:/xampp/htdocs/tcc/mobile/src/assets/logo.png')}
                     style={{width: 190, height: 60}}
                     />
                 </View>
