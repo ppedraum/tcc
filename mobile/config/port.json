@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "NODE_PORT" : "192.168.0.15:3001"
+=======
+    "NODE_PORT" : "http://192.168.0.107:3001"
+>>>>>>> parent of 4d4e1b0 (finalizando edição de perfil e ACABOUUUUUUUUU UHUUUUL)
 }

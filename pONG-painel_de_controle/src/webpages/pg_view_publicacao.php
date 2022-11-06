@@ -40,7 +40,7 @@
         <h3>Tipo de publicação: </h3>
         <?php echo $query_publicacao['tipo_publicacao']; ?>
 
-
+        <div id="midia">
         <?php
 
         if($foto != null){
@@ -106,6 +106,7 @@
         }
 
         ?>
+        </div>
         </div><div id="botaodel">
         <button onclick='showDelForm(true)' id='bt_del_form' >Deletar Publicação</button></div>
         <div id='del_form' hidden>

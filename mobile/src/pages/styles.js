@@ -1,7 +1,6 @@
 import {React} from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-
 
 const styles = StyleSheet.create({
     container: {
@@ -116,6 +115,7 @@ const styles = StyleSheet.create({
       width:150,
       height:150,
     },
+<<<<<<< HEAD
     sanfona:{
       display: 'flex',
       flexDirection: 'row',
@@ -159,6 +159,8 @@ const styles = StyleSheet.create({
       borderColor: 'black',
       color: 'black'
     }
+=======
+>>>>>>> parent of 4d4e1b0 (finalizando edição de perfil e ACABOUUUUUUUUU UHUUUUL)
   });
 
   export default styles;

@@ -20,7 +20,7 @@ body {
     max-height:300px;
     width: auto;
     height: auto;
-    display: flex;
+    display: block;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -36,15 +36,15 @@ body {
     align-items: center;
     border-radius: 30px;
     border: 2.5px solid #3f78a0;
-    margin-bottom: 150px;
     padding-left: 10px;
     padding-right: 10px;
     box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
     margin-top: 30px;
+    margin-bottom: 300px;
 }
 
 .tudo{    
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: center;
     text-align: left;
@@ -97,4 +97,12 @@ table, td{
 
 th{
     background: #3f78a0
+}
+
+#midia{
+    display:block;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
