@@ -98,11 +98,3 @@ table, td{
 th{
     background: #3f78a0
 }
-
-#midia{
-    display:block;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-}

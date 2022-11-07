@@ -37,14 +37,13 @@
         <h3>Descrição: </h3>
         <?php echo $query_publicacao['descricao'] ?>
 
-        <h3>Tipo de publicação: </h3>
+        <h3>Tipo de postagem: </h3>
         <?php echo $query_publicacao['tipo_publicacao']; ?>
 
-        <div id="midia">
         <?php
-
+        
         if($foto != null){
-            echo "<h3> Mídia: </h3>";
+            echo " <center><h3> Mídia: </h3>";
             echo "<img width='750' src='data:image/jpeg;base64,".$foto['foto']."'>";
         }
 
@@ -106,7 +105,6 @@
         }
 
         ?>
-        </div>
         </div><div id="botaodel">
         <button onclick='showDelForm(true)' id='bt_del_form' >Deletar Publicação</button></div>
         <div id='del_form' hidden>

@@ -22,7 +22,9 @@
     <div class="container">
         <div id='quadrado'>
         <div id='conteudo'>
-        <h1>Seu Perfil</h1>
+        <div id='words'>
+        <text><b>Seu Perfil</b></text>
+        </div>
         <div>
         <?php
         if($_SESSION['inst']['foto_perfil'] != null){
@@ -42,42 +44,49 @@
             echo $_SESSION["inst"]["login"];
             ?>
         </div>
+        _______________________________________________________
         <div>
         <b>E-Mail:</b> <br>
             <?php
             echo $_SESSION["inst"]["e_mail"];
             ?>
         </div>
+        _______________________________________________________
         <div>
         <b> Telefone:</b> <br>
             <?php
             echo $_SESSION["inst"]["telefone"];
             ?>
         </div>
+        _______________________________________________________
         <div id="apresentacao" >
         <b>Apresentação do Perfil:</b> <br>
             <?php
             echo $_SESSION["inst"]["apresentacao"];
             ?>
         </div>
+        _______________________________________________________
         <div>
         <b>CNPJ:</b> <br>
             <?php
             echo $_SESSION["inst"]["CNPJ"];
             ?>
         </div>
+        _______________________________________________________
         <div>
         <b> Nome:</b> <br>
             <?php
             echo $_SESSION["inst"]["nome"]
             ?>
         </div>
+        _______________________________________________________
         <div>
         <b>  Nome Fantasia:</b> <br>
             <?php
             echo $_SESSION["inst"]["nome_fantasia"]
             ?>
         </div>
+        _______________________________________________________
         <div>
         <b>Sede:</b> <br>
             <?php

@@ -6,6 +6,8 @@ import AuthContext from '../../contexts/auth'
 
 import styles from '../styles'
 
+import logo from '../../assets/logo.png'
+
 function Login({route, navigation}){
 
     
@@ -28,7 +30,7 @@ function Login({route, navigation}){
             <View style={styles.container}>
                 <View>
                     <Image
-                    source={require('C:/xampp/htdocs/tcc/mobile/src/assets/logo.png')}
+                    source={logo}
                     style={{width: 190, height: 60}}
                     />
                 </View>

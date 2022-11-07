@@ -1,16 +1,25 @@
 body {
+    height: 100%;
+    width: 100%;
     margin : 0px ;
+    background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
+    font-family: 'Arial';
+    font-size: 18px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 
 .container {
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 img{ 
     filter: saturate(140%)
@@ -63,6 +72,7 @@ input[type="text"] {
     font-size: 15px;
     padding-left: 10px;
     padding-right: 10px;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
 
 input[type="password"] {
@@ -74,6 +84,7 @@ input[type="password"] {
     font-size: 15px;
     padding-left: 10px;
     padding-right: 10px;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
 input[type="submit"]{
     font-size: bold;
@@ -89,6 +100,7 @@ input[type="submit"]{
     cursor: pointer;
     transition: .5s;
     border: 2.5px solid black;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
 input[type="submit"]:hover {
     color : black;

@@ -34,14 +34,15 @@
     <div class='quadrado'>
     <div class='conteudo'>
     <form action="../php_stuff/alterar_info.php" method="POST" autocomplete="off" enctype="multipart/form-data" >
+        <div class="meinho">
         <div id='fotoperfil'>
-            Foto de Perfil
+            <b>Foto de Perfil</b>
             <input onclick="enable('chb_foto_perfil', 'blob_perfil')" type="checkbox" name="chb_foto_perfil" id="chb_foto_perfil">
             <br>
             <input type="file" name="blob_perfil" id="blob_perfil" disabled >
         </div>
         <div>
-            Apresentação
+        <b>Apresentação</b>
             <input onclick="enable('chb_apresentacao', 'txt_apresentacao')" type="checkbox" name="chb_apresentacao" id="chb_apresentacao">
             <br>
             <textarea id="txt_apresentacao" name="txt_apresentacao" id="" cols="30" rows="10" disabled >
@@ -49,19 +50,19 @@
             </textarea> 
         </div>
         <div>
-            Email
+        <b>Email</b>
             <input onclick="enable('chb_email', 'txt_email')" type="checkbox" name="chb_email" id="chb_email">
             <br>
             <input type="text" name="txt_email" id="txt_email" value="<?php echo $_SESSION["inst"]["e_mail"] ?>" disabled >
         </div>
         <div>
-            Login
+        <b>Login</b>
             <input type="checkbox" onclick="enable('chb_login', 'txt_login')" name="chb_login" id="chb_login">
             <br>
             <input type="text" name="txt_login" id="txt_login" value="<?php echo $_SESSION["inst"]["login"] ?>" disabled >
         </div>
         <div>
-            Telefone
+        <b>Telefone</b>
             <input type="checkbox" onclick="enable('chb_telefone', 'txt_telefone')" name="chb_telefone" id="chb_telefone">
             <br>
             <input type="text" name="txt_telefone" id="txt_telefone" value="<?php echo $_SESSION["inst"]["telefone"] ?>" disabled >
@@ -69,24 +70,25 @@
         <div>
             <div>
                 <?php /* echo $curr_errs['senha'].'<br>' */ ?>
-                Senha
+                <b>Senha</b>
                 <input type="checkbox" onclick="show_senha()" name="chb_senha" id="chb_senha">
                 <br>
                 <input type="password" name="txt_nova_senha" id="txt_nova_senha" disabled >
             </div>
             <div id="confirmar_senha" hidden >
-                Confirmar Senha: <br>
+            <b>Confirmar Senha:</b> <br>
                 <input type="password" name="txt_confirmar_senha" >
             </div>
             
         </div>
         <div>
         <div>
-            Digite sua senha atual para alterar seu perfil <br>
+        <b>Digite sua senha atual para alterar seu perfil</b> <br>
             <input type="password" name="txt_ver_senha" value="" >
             </div>
         </div>
-        <div>
+        </div>
+        <div class="botaozao">
             <input name="bt_alterar" type="submit" value="Alterar">
             <input type="reset" value="Resetar">
             <input name="bt_cancelar" type="submit" value="Cancelar">

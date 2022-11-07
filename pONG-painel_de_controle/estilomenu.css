@@ -1,8 +1,13 @@
 body {
+    height: 100%;
+    width: 100%;
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
-    font-family: Arial;
+    font-family: 'Arial';
     font-size: 18px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 h2{
@@ -84,9 +89,11 @@ button{
     border: 2.5px solid #3f78a0;
     font-family: Arial;
     font-size: 18px;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
 
 input[type="submit"]:hover {
     color : black;
     background: #6dabd6;
+    box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }       
