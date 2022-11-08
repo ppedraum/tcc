@@ -1,6 +1,6 @@
 import { ReactComponentElement, useContext } from 'react';
 import {View, Text} from 'react-native';
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Feed from './Feed';
 import PerfilUsuario from './PerfilUsuario';
@@ -27,6 +27,7 @@ export default function Home({navigation}){
         >
             <Bttn.Screen name='Feed' component={Feed} 
             options={{
+                tabBarLabel: () => null,
                 tabBarIcon: home => {return(
                     <Ionicons
                     name="md-home"
@@ -56,6 +57,7 @@ export default function Home({navigation}){
             } */}
             <Bttn.Screen name='PerfilUsuario' component={PerfilUsuario} 
             options={{
+                tabBarLabel: () => null,
                 tabBarIcon : home => {return(
                     <Ionicons
                     name="md-person"
@@ -68,11 +70,12 @@ export default function Home({navigation}){
             />
             <Bttn.Screen name='Inscricoes' component={Inscricoes} 
             options={{
+                tabBarLabel: () => null,
                 tabBarIcon : home => {return(
-                    <Ionicons
-                    name="md-person"
-                    size={28}
-                    color="#3F3F3F"
+                    <MaterialCommunityIcons
+                    name="clipboard-text-multiple"
+                    size={45}
+                    color="#fff"
                     />
                 )},
                 lazy : false

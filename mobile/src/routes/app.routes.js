@@ -12,14 +12,7 @@ export default function AppRoutes(){
     return (
         <AppStack.Navigator screenOptions={
             {
-                headerStyle: {
-                    backgroundColor: '#004475',
-                    height: 350
-                  },
-                  headerTintColor: '#D0EBFF',
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
+               headerShown: false
             }
         } >
             <AppStack.Screen name='Home' component={Home} />

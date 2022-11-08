@@ -56,20 +56,22 @@ function Feed({navigation}) {
     }, [token]);
 
     return(
-        <View style={styles.container}>
-            <Text style={styles.titulo}>Meu Feed</Text>
+        <View style={styles.containerfeed}>
+            <View style={styles.titulocontainer}>
+                <Text style={styles.titulofeed}>Meu Feed</Text>
+            </View>
             <View style={styles.searchContainer} >
-                <TextInput style={styles.input} placeholder={'Buscar por publicações'} onChangeText={(text)=>setSearchInput(text)} />
-                <Button style={styles.botaofoda} title='Procurar' onPress={()=>{
-                    if(searchInput.trim() != 0)
-                        navigation.navigate('ResultScreen', { searchInput })
-                        
-                    }
-                } 
-                    
-                />                
-        </View>
-                
+                <TextInput style={styles.input}
+                 placeholder={'Buscar por publicações'}
+                  onChangeText={(text)=>setSearchInput(text)} 
+                />
+                <TouchableOpacity style={styles.botaofeed1}
+                    onPress={()=>{
+                        if(searchInput.trim() != 0)
+                            navigation.navigate('ResultScreen', { searchInput })}}>
+                <Text>Procurar</Text>                    
+                </TouchableOpacity>                
+            </View>    
                 {
                 isLoading ?
                 <ActivityIndicator size='large'/>
@@ -118,6 +120,7 @@ function Feed({navigation}) {
                             
 
                         </View>
+                        
                     </TouchableOpacity>
                 )}
                 refreshing={isLoading}
@@ -125,7 +128,7 @@ function Feed({navigation}) {
                 />
                 
             }
-        </View>
+</View> 
     )
 
 
