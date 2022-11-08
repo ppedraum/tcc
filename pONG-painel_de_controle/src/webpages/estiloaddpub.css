@@ -1,4 +1,11 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 body {
+    height: 100vw;
+    width: 100vh;
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
     font-family: 'Arial';
@@ -6,7 +13,21 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.container {
+    width: 100vw;
+    height: auto;
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header_logo{
+    width: fit-content;
 }
 
 h2{
@@ -16,6 +37,7 @@ h2{
 }
 
 .border_container{
+    width: fit-content;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -88,14 +110,6 @@ select {
 
 #pch_conteudo{
     font-size: 18px;
-}
-.preview{
-    background-color: #3297df;
-    text-align: center;
-    width: 494;
-    height: 691;
-    margin: 50px;
-    scale: 1.2;
 }
 
 .prev_header{

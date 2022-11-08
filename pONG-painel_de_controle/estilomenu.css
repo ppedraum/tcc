@@ -38,6 +38,9 @@ h2{
 .fundo{
     padding-top: 10px;
     height: auto;
+    width: fit-content;
+    margin: 0px auto 100px auto;
+    padding: 50px 0px 50px 0px;
     background: #61b3ed;
     border-radius: 30px;
     display: flex;
@@ -45,7 +48,6 @@ h2{
     justify-content: center;
     align-items: center;
     border: 2.5px solid #3f78a0;
-    margin-bottom: 450px;
     box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }
 
@@ -97,3 +99,4 @@ input[type="submit"]:hover {
     background: #6dabd6;
     box-shadow: 7px 7px 5px rgba(32, 32, 32, 0.3);
 }       
+

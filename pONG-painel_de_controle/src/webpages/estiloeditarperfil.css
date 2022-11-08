@@ -1,6 +1,6 @@
 body {
     height: 100%;
-    width: 100%;
+    width: 100vw;
     margin : 0px ;
     background-image: linear-gradient(to bottom right, #afd3eb, #3297df );
     font-family: 'Arial';

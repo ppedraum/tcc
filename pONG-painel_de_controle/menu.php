@@ -13,12 +13,13 @@
     ?>
 </head>
 <body>
-    <h2>MUNDO - Painel de Controle<br><img src = "./src/webpages/logo.svg" alt="LOGO" width="300" height="150"></h2>
-
-<div class="container"> 
+    <header class='header_logo'>
+        <img src = "./src/webpages/logo.svg" alt="LOGO" width="300" height="150">
+        <h2>MUNDO - Painel de Controle</h2>
+    </header>
+    
 <div class="fundo">
-  <?php echo "<div class=\"echo\"> <font size=6>",("Olá, ".$_SESSION['inst']['nome_fantasia']."!"),"</font></div>"; ?>
-    <br><br>
+    <?php echo "<div class=\"echo\"> <font size=6>",("Olá, ".$_SESSION['inst']['nome_fantasia']."!"),"</font></div>"; ?>
     <div>
         <a href="./src/webpages/pg_perfil.php">
         <?php
@@ -31,15 +32,13 @@
         ?>
         </a>
     </div>
-    <br><br>
     <div class="botoes">
-    <a href="src\webpages\pg_publicacoes.php"><button>Gerenciar Publicações</button></a>
-    <a href="src\webpages\pg_ferramentas_ong.php"><button>Ferramentas da instituição</button></a>
-    </div><br><br>
+        <a href="src\webpages\pg_publicacoes.php"><button>Gerenciar Publicações</button></a>
+        <a href="src\webpages\pg_ferramentas_ong.php"><button>Ferramentas da instituição</button></a>
+    </div>
     <div class="botoes">
-    <a href="./src/php_stuff/logout.php"><button>Sair</button></a>
-</div>
-</div>
+        <a href="./src/php_stuff/logout.php"><button>Sair</button></a>
+    </div>
 </div>
 </body>
 </html>

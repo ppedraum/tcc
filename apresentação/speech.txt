@@ -1,0 +1,86 @@
+Apresentação
+Inicio da ideia
+Mundo speech
+3 minutos
+
+Análise de requisitos
+Fala do jaka?
+Banco
+Figma
+Outras abordagens ao longo do curso (aplicamos o que aprendemos no curso em nosso tcc e blablabla)
+7 minutos
+
+Apresentação do painel e do app
+Conclusão
+5 minutos
+
+O que é o mundo?
+O nosso mundo é feito de pessoas. Essas pessoas, ao longo da nossa história, evoluíram ajudando uns aos outros, usando a natureza para construir os abrigos e ferramentas que precisavam. Mas a história do ser humano, com toda a evolução tecnologica, deixou de lado a evolução social, e aos poucos fomos sendo cada vez mais egoístas e isolados. Hoje estamos em um momento onde temos tanta informação, mas mesmo assim somos cegos às mazelas sociais, às pessoas invisíveis que não possuem o que comer ou beber, que não possuem ajuda. Por isso precisamos focar a tecnologia e o poder em nossas mãos para mudar isso.
+
+Quando começamos a pensar no tcc, eu sabia que queria ajudar pessoas; não no sentido utilitário, como um ERP, mas algo que pudesse ajudar a sociedade num todo. Foi aí que pensei nas ONGs e, após pesquisar, vi que elas não tinham muito suporte tecnológico: a maioria não tinha nem um site próprio e as suas mídias sociais eram pouco usadas. Com isso, me encontrei com o presidente da ASCADIM (Associação Sul Catarinense de Amigos e Familiares de Portadores de Distrofias Musculares Progressivas) e meu professor de história do ensino médio, o Jaka, e conversei com ele sobre o assunto. 
+*Quero convidá-lo a subir ao palco para falar um pouquinho sobre.
+Ele me contou que era muito difícil manter páginas e redes sociais pois não existia muitos voluntários para isso, além de ser algo caro de se fazer e manter. Também relatou a dificuldade em encontrar profissionais formados que se voluntariassem para ajudar como psicólogos e fisioterapeutas, pois a rotatividade desses era muito grande.  Pensando nisso, percebi uma oportunidade de ajudar não só a ASCADIM, mas todas as instituições: Montar uma plataforma integrada que fizesse tudo isso, uma rede social onde as instituições pudessem manter facilmente uma página, fazer a manutenção de eventos, efetuar publicações e ver o engajamento do público com likes e comentários, procurar futuros profissionais voluntários e até abrir seu perfil para doações.
+Com tudo isso em mente, comecei a produzir.
+
+O nosso projeto consiste em duas principais partes: Uma é o painel de controle onde a instituição poderá visualizar e lançar publicações e eventos, bem como visualizar as pessoas que se inscreveram e também ferramentas a mais para auxiliá-la, como gerador de planilha das pessoas inscritas e um montador de flyers para divulgação.
+A outra é a rede social, onde as pessoas poderão ver e interagir com as publicações da instituição, e descobrir novas instituições para fazer parte e ajudar.
+
+As linguagens, plataformas e frameworks que utilizamos foi:
+
+Mobile:
+Node.JS, react native, Javascript (back e front)
+
+Web:
+HTML, CSS, Javascript (front)
+PHP (back)
+
+banco de dados:
+MySQL
+
+A primeira coisa que foi feita após a análise de requisitos foi um modelo no FIGMA de como seria o aplicativo e o painel de controle.
+Tivemos como base o instagram para montar a navegação e a organização do app.
+Após ter uma visão melhor de como o app seria, começamos a fazer a modelagem dos dados, com um modelo de casos de uso e um ER. Quando terminamos, pudemos então fazer o banco de dados do projeto.
+
+Após terminar o banco de dados, fizemos o painel de controle. 
+
+Após terminarmos o painel de controle, fizemos o aplicativo.
+
+Tivemos algumas dificuldades durante a execução do aplicativo e infelizmente tivemos que tirar algumas ideias para serem implementadas futuramente.
+
+Algumas outras atividades feitas em sala ajudaram muito a ter uma visão melhor do projeto, como
+A disciplina de Design de Interação da Profa. Mariane, onde aprendemos melhor como organizar e estruturar nosso app, desde a ideia até a execução.
+
+Iceberg
+UX research
+
+A disciplina de empreendedorismo da Profa. Maíra, onde tivemos uma ideação mais aberta ao mercado, procurando competidores e pensando em formas de transformar isso em um negócio.
+
+Tabelinha que a gente fez
+
+Agora mostraremos nosso aplicativo
+
+Implementações Futuras
+
+Profissional Voluntário
+Doações
+Chats e comunidades
+Intervenções e notificações
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

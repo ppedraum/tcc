@@ -68,15 +68,14 @@
 
 
 <body onload="mudarForm()">
-    <div>
-        <h2>
-            MUNDO - Adicionar Publicações<br>
-            <a href="../../menu.php">
-                <img src = "logo.svg" alt="LOGO" width="300" height="150">
-            </a>
-        </h2>
-    </div>
+    <header class="header_logo" >
+        <h2>MUNDO - Adicionar Publicações<br></h2>
+        <a href="../../menu.php">
+            <img src = "logo.svg" alt="LOGO" width="300" height="150" >
+        </a>
+    </header>
 
+    <div class="container" >
     <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php">
         <div class="border_container" >
             <div class='cell' >
@@ -202,5 +201,7 @@
         </div> 
         -->
     </form>
+    </div>
+    
 </body>
 </html>
