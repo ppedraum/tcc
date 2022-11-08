@@ -39,13 +39,30 @@ MySQL
 
 A primeira coisa que foi feita após a análise de requisitos foi um modelo no FIGMA de como seria o aplicativo e o painel de controle.
 Tivemos como base o instagram para montar a navegação e a organização do app.
+
 Após ter uma visão melhor de como o app seria, começamos a fazer a modelagem dos dados, com um modelo de casos de uso e um ER. Quando terminamos, pudemos então fazer o banco de dados do projeto.
+
+* Regras de Normalização
+* Buscando a maior simplicidade
+
 
 Após terminar o banco de dados, fizemos o painel de controle. 
 
+* Utilizamos o Vendor para baixar bibliotecas que nos permitiram fazer o gerador de excel e pdf
+
 Após terminarmos o painel de controle, fizemos o aplicativo.
 
+* Utilizamos o Node.js para desenvolver o back-end, com a biblioteca do Express e o Sequelize, uma ORM para fazer consultas de forma simples e rápida no banco
+* Utilizamos o Expo para lidar com React Native e o Android Studio para emular o celular.
+
+* Utilizamos sistema de token de sessão JWT, para ter maior segurança na requisição de dados.
+* Os maiores desafios nessa etapa foi desenvolver o sistema de token e aplicar as imagens dentro do React Native.
+
 Tivemos algumas dificuldades durante a execução do aplicativo e infelizmente tivemos que tirar algumas ideias para serem implementadas futuramente.
+
+* Doações -> APIs de cartão de crédito, que requer maior atenção na segurança dos dados.
+* Dados profissionais -> Devido ao tempo que ia ser levado para analizar quais tipos de dados seriam necessários para cada cargo.
+
 
 Algumas outras atividades feitas em sala ajudaram muito a ter uma visão melhor do projeto, como
 A disciplina de Design de Interação da Profa. Mariane, onde aprendemos melhor como organizar e estruturar nosso app, desde a ideia até a execução.
@@ -59,19 +76,18 @@ Tabelinha que a gente fez
 
 Agora mostraremos nosso aplicativo
 
+
 Implementações Futuras
 
-Profissional Voluntário
-Doações
-Chats e comunidades
-Intervenções e notificações
+* Doações -> APIs de cartão de crédito, que requer maior atenção na segurança dos dados.
+* Dados profissionais -> Devido ao tempo que ia ser levado para analizar quais tipos de dados seriam necessários para cada cargo.
+* A aplicação da LGPD no projeto, como a criptografia das senhas, maior segurança no servidor e nas requisições, devido a bastantes dados sensíveis serem utilizados.
+* Intervenções que vão aparecer como um Pop-Up, movimentos sociais que estão acontecendo e que merecem atenção (ex.: Movimento Salve o Morro do Céu)
+* Comunidades e chats de bate-papo para os usuários terem mais interação entre si e fazer movimentos eles mesmos dentro da comunidade local.
+* Maior contato entre a Ong e o usuário, por meio de chat direto.
+* Mais ferramentas dentro do painel de controle, como uma aba de doações e transações, uma aba de equipe e gerenciamento de profissionais da ong.
 
-
-
-
-
-
-
+Gibi turma da mônica
 
 
 
