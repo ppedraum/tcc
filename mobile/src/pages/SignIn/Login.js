@@ -1,12 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator,KeyboardAvoidingView, Button, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, TouchableOpacity } from 'react-native';
 
 import AuthContext from '../../contexts/auth'
 
 import styles from '../styles'
-
-import logo from '../../assets/logo.png'
 
 function Login({route, navigation}){
 
@@ -26,43 +24,29 @@ function Login({route, navigation}){
     }
 
     return (
-        <KeyboardAvoidingView style={styles.background}>
-            <View style={styles.container}>
-                <View>
-                    <Image
-                    source={logo}
-                    style={{width: 190, height: 60}}
-                    />
-                </View>
-                    <Text style={styles.titulo}>Bem vindo ao Mundo!</Text>
-                    <View style={{paddingTop: 10,}}>
-                        <Text style={{color:'white'}}>E-Mail</Text>
-                        <TextInput style={styles.input} placeholder='exemplo@mail.com' onChangeText={(email)=>setEmail(email)} />
-                        <Text>{errMsg[0]}</Text>
-                    </View>
-                    <View>
-                        <Text style={{color:'white'}}>Senha</Text>
-                        <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
-                        <Text>{errMsg[1]}</Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={styles.botao}
-                            onPress={()=>handleLogin()}>
-                            <Text>Login</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{margin:20}} >
-                        <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} >
-                            <Text>
-                                <Text style={{color:'white'}}>Não tem uma conta?</Text>
-                                <Text style={{fontWeight: "bold", color:'white'}}> Cadastre-se</Text>
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                </KeyboardAvoidingView>
-
         
+        <View style={styles.container}>
+            
+            <Text style={styles.titulo}>Olá!</Text>
+            <View>
+                <Text>E-Mail</Text>
+                <TextInput style={styles.input} placeholder='exemplo@mail.com' onChangeText={(email)=>setEmail(email)} />
+                <Text>{errMsg[0]}</Text>
+            </View>
+            <View>
+                <Text>Senha</Text>
+                <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
+                <Text>{errMsg[1]}</Text>
+            </View>
+            <View>
+                <Button title='Login' onPress={()=>handleLogin()} />
+            </View>
+            <View style={{margin:20}} >
+                <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} ><Text>Não tem conta? Cadastre-se</Text></TouchableOpacity>
+            </View>
+            
+        </View>
+
     )
 
 }

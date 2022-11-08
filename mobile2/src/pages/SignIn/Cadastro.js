@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView, Image, Platform, TouchableOpacity } from 'react-native';
 
 import { RNDateTimePicker, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
@@ -22,20 +22,26 @@ function CadastroBasico({navigation}){
     const { dados, setDado } = useContext(CadContext);
 
     return (
-    <View style={styles.container}>       
+    <View style={styles.container}>  
+   
         <View>
-            <Text>nome</Text>
+            <Text style={{color:'white'}}>Nome</Text>
             <TextInput style={styles.input} onChangeText={(nome)=>setDado('nome', nome)} />
         </View>
         <View>
-            <Text>e-mail</Text>
+            <Text style={{color:'white'}}>E-mail</Text>
             <TextInput style={styles.input} onChangeText={(e_mail)=>setDado('e_mail', e_mail)} />
         </View>
         <View>
-            <Text>senha</Text>
+            <Text style={{color:'white'}}>Senha</Text>
             <TextInput style={styles.input} onChangeText={(senha)=>setDado('senha', senha)} />
         </View>
-        <Button onPress={()=>navigation.navigate('CadastroDados')} title='Seguinte'/>
+        <View styles={styles.botao}>
+        <TouchableOpacity style={styles.botao}
+        onPress={()=>navigation.navigate('CadastroDados')}>
+            <Text>Enviar</Text>
+        </TouchableOpacity>
+        </View>
     </View> 
     );
 }
@@ -110,16 +116,20 @@ function CadastroDados({ navigation }){
         <ScrollView contentContainerStyle={styles.scrollContainer} >
             <KeyboardAvoidingView>
             <View>
-                <Text>telefone</Text>
+                <Text style={{color:'white'}}>Telefone</Text>
                 <TextInput style={styles.input} onChangeText={(telefone)=>setDado('telefone', telefone)} />
             </View>
             <View>
-                <Text>data de nascimento</Text>
-                <Button title='Selecione...' onPress={()=>showDatePicker()}/>
+                <Text style={{color:'white'}}>Data de nascimento</Text>
+                <TouchableOpacity 
+                style={styles.botao} 
+                onPress={()=>showDatePicker()}> 
+                <Text>Selecione</Text>
+                </TouchableOpacity>
                 {/* <Text>{dados.data_nasc}</Text> */}
             </View> 
             <View>
-                <Text>Sexo</Text>
+                <Text style={{color:'white'}}>Sexo</Text>
                 <Picker
                 style={styles.pickerInput} 
                 dropdownIconColor='white'
@@ -139,15 +149,15 @@ function CadastroDados({ navigation }){
                 </Picker>
             </View>
             <View>
-                <Text>Profissão</Text>
+                <Text style={{color:'white'}}>Profissão</Text>
                 <TextInput style={styles.input} onChangeText={(profissao)=>setDado('profissao', profissao)} />
             </View>
             <View>
-                <Text>Cidade</Text>
+                <Text style={{color:'white'}}>Cidade</Text>
                 <TextInput style={styles.input} onChangeText={(cidade)=>setDado('cidade', cidade)} />
             </View>
             <View>
-                <Text>UF</Text>
+                <Text style={{color:'white'}}>UF</Text>
                 <Picker 
                 style={styles.pickerInput} 
                 dropdownIconColor='white'
@@ -190,17 +200,20 @@ function CadastroDados({ navigation }){
                 </Picker>
             </View>
             <View>
-                <Text>CPF</Text>
+                <Text style={{color:'white'}}>CPF</Text>
                 <TextInput style={styles.input} onChangeText={(cpf)=>setDado('cpf', cpf)} />
             </View>
             <View>
-                <Text>Foto de Perfil</Text>
-                <Button title='escolha' onPress={pickImage} />
-                {dados.foto != '' && <Image source={{ uri: 'data:image/jpeg;base64,' + dados.foto_perfil }} style={{ width: 200, height: 200 }} />}
+                <Text style={{color:'white'}}>Foto de Perfil</Text>
+                <TouchableOpacity style={styles.botao}
+                    onPress={pickImage}>
+                    <Text>Enviar</Text>
+                    {dados.foto != '' && <Image source={{ uri: 'data:image/jpeg;base64,' + dados.foto_perfil }} />}
+                </TouchableOpacity>
 
             </View>
             <View style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
-                <Text>Você é um profissional voluntário?</Text>
+                <Text style={{color:'white'}}>Você é um profissional voluntário?</Text>
                 <Checkbox
                 status={dados.is_voluntario ? 'checked' : 'unchecked'}
                 onPress={() => {
@@ -208,7 +221,12 @@ function CadastroDados({ navigation }){
                 }}
                 />
             </View>
-            <Button onPress={HandleCadastro}  title='Completar Iscrição'/>
+            <View style={{display:'flex', justifyContent: 'center', alignItems:'center'}}>
+            <TouchableOpacity style={styles.botaoC}
+            onPress={HandleCadastro}>
+            <Text>Completar Cadastro</Text>
+            </TouchableOpacity>
+            </View>
             </KeyboardAvoidingView>
         </ScrollView>
     );
@@ -223,9 +241,12 @@ function Cadastro({navigation}){
     return (
         <CadProvider>
             <Stack.Navigator
+            screenOptions={{ headerTitleStyle: {
+                color: 'white'
+              },headerStyle: { backgroundColor: '#004475' } }}
             initialRouteName='CadastroBasico'
             >
-                <Stack.Screen name='CadastroBasico' component={CadastroBasico} 
+                <Stack.Screen name='Cadastro Mundo' component={CadastroBasico} 
                 />
                 <Stack.Screen name='CadastroDados' component={CadastroDados}
                 />
