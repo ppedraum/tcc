@@ -74,6 +74,9 @@ export function AuthProvider({children}){
     */
 
     function login(email, senha){
+
+        let err = '';
+
         fetch( NODE_PORT + '/auth/login', {
             method: 'POST',
             headers: { 
@@ -87,7 +90,7 @@ export function AuthProvider({children}){
         .then(res => res.json())
         .then(result=>{
             if(result.error != null){
-                console.log('O usuário não foi encontrado!');
+                err = 'Usuário ou Senha estão incorretos.';
             }else{
                 console.log('ok')
                 setSigned('true');
@@ -103,7 +106,8 @@ export function AuthProvider({children}){
             alert(err);
         })
         ;
-    
+        
+        return err;
     }
 
     function refresh(token_recebido, dados){
