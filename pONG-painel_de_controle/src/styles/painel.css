@@ -1,0 +1,5 @@
+
+.conteudo_painel{
+    display: flex;
+    justify-content: space-between;
+}

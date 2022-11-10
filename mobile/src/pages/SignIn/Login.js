@@ -24,15 +24,8 @@ function Login({route, navigation}){
     function handleLogin(){
 
         
-        setErrs(login, login(email, senha));
+       login(email, senha);
         
-    }
-
-    function setErrs(chave, valor){
-        const errCopia = JSON.parse(JSON.stringify(errMsg));
-        errCopia[chave] = valor;
-        setErrMsg(errCopia);
-        console.log(errMsg)
     }
 
     return (
