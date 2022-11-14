@@ -9,7 +9,7 @@ import AuthContext from '../../contexts/auth';
 import Comentarios from './Comentarios';
 import { CommProvider } from '../../contexts/comentario';
 
-
+    
 
 function Publicacao({ route, navigation }){
 
@@ -216,96 +216,117 @@ function Publicacao({ route, navigation }){
     }, []);
 
     return (
-        <View style={styles.container}>
-        {
-        isLoading ? <ActivityIndicator size='large' color='blue'/>
-        :
-        <ScrollView>  
-            <View style={styles.filtros_container} >
-                <Text style={styles.titulo}>Por: </Text>
-                <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {id : inst.id})}>
-                    <Text style={styles.titulo}>{inst.nome_fantasia}</Text>
-                </TouchableOpacity>
-            </View>
+        <View style={styles.containerpub}>
+
             {
-                fotoPublicacao != '' ?
-                <Image source={{ uri: fotoPublicacao }} style={{ width: 300, height: 300 }}/>
-                :
-                null
-            }
-            
-            <Text style={styles.titulo}>{publicacao.titulo} </Text>
-            <Text style={styles.conteudo}>{publicacao.descricao} </Text>
-            <TouchableOpacity onPress={isLiked? unlike : like}>
-                <Ionicons name='thumbs-up' size={24} color={isLiked? '#4490F5' : '#666'} />
-            </TouchableOpacity>
-            {
-                publicacao.tipo_publicacao == 'EVENTO' && publicacao.id_evento != null ?
-                (
-                <View>
-                    <Modal
-                    visible={inscModalVisible}
-                    transparent={true}
-                    animationType='fade'
-                    onRequestClose={()=>setInscModalVisible(!inscModalVisible)}
-                    >
-                        <View style={styles.container} >
-                            <Text style={styles.conteudo} >
-                                O nosso app pega as informações recebidas por você para fazer uma inscrição
-                                rápida e, ao clicar em 'Ciente', você concorda com nossos termos de uso.
-                            </Text>
-                            <Text style={styles.conteudo}>
-                                Seus dados irão para a instituição dona do evento, bom proveito!
-                            </Text>
-                            <View style={styles.filtros_container}>
-                            <Button title='Ciente' onPress={handleInscricao}/>
-                            <Button title='Cancelar' onPress={()=>setInscModalVisible(!inscModalVisible)}/>
-                            </View>
-                        </View>
-                    </Modal>
-                    <View>
-                        <Text style={styles.titulo}>
-                            Detalhes do Evento
-                        </Text>
-                        <Text style={styles.conteudo}>
-                            Endereço: {evento.endereco}
-                        </Text>
-                        <Text style={styles.conteudo}>
-                            Cidade: {evento.cidade}
-                        </Text>
-                        <Text style={styles.conteudo}>
-                            Estado: {evento.uf}
-                        </Text>
-                        <Text style={styles.conteudo}>
-
-                            {/*Ver certinho como formata essa bagaça*/}
-
-                            Horário : {'\n'}
-                            De {new Date(evento.datetime_inicio).toLocaleDateString()} às {''}
-                            {new Date(evento.datetime_inicio).toLocaleTimeString()} {'\n'}
-                            
-                            Até {new Date(evento.datetime_fim).toLocaleDateString()} às {''}
-                            {new Date(evento.datetime_fim).toLocaleTimeString()} {'\n'}
-
-                        </Text>
+            isLoading ? <ActivityIndicator size='large' color='white'/>
+            :
+            <ScrollView>  
+                <View style={styles.alinharmeio}>
+                    <View style={styles.filtros_container} >
+                        <Text style={styles.titulo}>Por: </Text>
+                        <TouchableOpacity onPress={()=>navigation.navigate('PerfilInst', {id : inst.id})}>
+                            <Text style={styles.titulo}>{inst.nome_fantasia}</Text>
+                        </TouchableOpacity>
                     </View>
-                    <Button color={isInscrito?'#bbb':'#6399FA' }
-                    title={isInscrito?'Inscrito':'Inscrever-se'} 
-                    onPress={handleInscModal} 
-                    />
+                    {
+                        fotoPublicacao != '' ?
+                        <Image source={{ uri: fotoPublicacao }} style={{ width: 300, height: 300 }}/>
+                        :
+                        null
+                    }
+                    
+                    <Text style={styles.titulo}>{publicacao.titulo} </Text>
+                    <Text style={styles.conteudo}>{publicacao.descricao} </Text>
+                    <TouchableOpacity 
+                        onPress={isLiked? unlike : like}>
+                        <Ionicons 
+                        name='thumbs-up'
+                        size={45}
+                        color={isLiked? '#4490F5' : '#666'} 
+                        />
+                    </TouchableOpacity>
+                    {
+                        publicacao.tipo_publicacao == 'EVENTO' && publicacao.id_evento != null ?
+                        (
+                        <View>
+                            <Modal
+                            visible={inscModalVisible}
+                            transparent={true}
+                            animationType='fade'
+                            onRequestClose={()=>setInscModalVisible(!inscModalVisible)}
+                            >
+                                <View style={styles.containeraviso} >
+                                    <Text style={styles.conteudo}>
+                                        O nosso app pega as informações recebidas por você para fazer uma inscrição
+                                        rápida e, ao clicar em 'Ciente', você concorda com nossos termos de uso.
+                                    </Text>
+                                    <Text style={styles.conteudo}>
+                                        Seus dados irão para a instituição dona do evento, bom proveito!
+                                    </Text>
+                                    <View style={styles.filtros_container}>
+                                    <TouchableOpacity style={styles.botao}
+                                    onPress={handleInscricao}>
+                                        <Text>Ciente</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.botao}
+                                    onPress={()=>setInscModalVisible(!inscModalVisible)}>
+                                        <Text>Cancelar</Text>
+                                    </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </Modal>
+                            <View>
+                                <Text style={styles.titulo}>
+                                    Detalhes do Evento
+                                </Text>
+                                <Text style={styles.conteudo}>
+                                    <Text style={styles.conteudobold}>Endereço:</Text> {evento.endereco}
+                                </Text>
+                                <Text style={styles.conteudo}>
+                                    <Text style={styles.conteudobold}>Cidade:</Text> {evento.cidade}
+                                </Text>
+                                <Text style={styles.conteudo}>
+                                    <Text style={styles.conteudobold}>Estado:</Text> {evento.uf}
+                                </Text>
+                                <Text style={styles.conteudo}>
 
-                    <Text>{msgEvento}</Text>
-                </View>
-                )
-                :
-                null
+                                    {/*Ver certinho como formata essa bagaça*/}
+
+                                    <Text style={styles.conteudobold}>Horário</Text> : {'\n'}
+                                        <Text style={styles.conteudobold}>De</Text> {new Date(evento.datetime_inicio).toLocaleDateString()} <Text style={styles.conteudobold}>até</Text> {''}
+                                        {new Date(evento.datetime_inicio).toLocaleTimeString()} {'\n'}
+                                        
+                                        <Text style={styles.conteudobold}>Até</Text> {new Date(evento.datetime_fim).toLocaleDateString()} <Text style={styles.conteudobold}>até</Text> {''}
+                                        {new Date(evento.datetime_fim).toLocaleTimeString()} {'\n'}
+                                        </Text>
+                                    </View>
+
+                                <TouchableOpacity style={isInscrito ? styles.botaoinscrito : styles.botaoinscrever}
+                                onPress={handleInscModal} 
+                                >
+                                    {
+                                        isInscrito ?
+                                        <Text style={styles.botaotext2}>Inscrito</Text>
+                                        :
+                                        <Text style={styles.botaotext1}>Inscrever-se</Text>
+                                    }
+                                </TouchableOpacity>
+
+                            <Text>{msgEvento}</Text>
+                        </View>
+                        )
+                        :
+                        null
+                    }
+                    </View>
+                    <CommProvider>
+                        <Comentarios id_publicacao={idPublicacao} />
+                    </CommProvider>
+                
+            </ScrollView>
             }
-            <CommProvider>
-                <Comentarios id_publicacao={idPublicacao} />
-            </CommProvider>
-            
-        </ScrollView>
-        }
+
         </View>
     );
 }

@@ -246,9 +246,11 @@ function Cadastro({navigation}){
     return (
         <CadProvider>
             <Stack.Navigator
-            screenOptions={{ headerTitleStyle: {
+            screenOptions={{
+            headerTitleStyle: {
                 color: 'white'
-              },headerStyle: { backgroundColor: '#004475' } }}
+            },
+            headerStyle: { backgroundColor: '#004475' } }}
             initialRouteName='CadastroBasico'
             >
                 <Stack.Screen 

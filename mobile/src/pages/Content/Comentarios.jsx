@@ -1,5 +1,6 @@
 import { React, useState, useContext, useEffect,  } from 'react';
-import { Text, View, Button, Modal, Image, Touchable } from 'react-native';
+import { Text, View, Button, Modal, Image, TouchableOpacity, Touchable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import FormComentario from './FormComentario';
 import Dialog from 'react-native-dialog';
 import AuthContext from '../../contexts/auth';
@@ -26,7 +27,7 @@ function Comentarios({id_publicacao}){
         .catch(err => console.log(err));
         stopRefresh();
     }
-
+    
     function comentar(texto, id_pai){
         /*Tomar cuidado para colocar tudo dentro do if, para nao causar problemas de promise*/
         if(texto.trim() !=0){
@@ -92,10 +93,11 @@ function Comentarios({id_publicacao}){
         {/*
         Para cada pai, renderizamos ele e, se possuir filhos, renderizamos logo abaixo do pai
         */}
+        
         return pais.map((commPai)=>(
             <View key={commPai.estrutura.id} style={styles.post_cell} >
                 <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={{width:50, height:50}} />
-                <Text>
+                <Text style={styles.conteudobold}>
                     {commPai.nome_usuario + ': ' }
                     {new Date(commPai.estrutura.datetime_post).toLocaleDateString() + ' - '}
                     {new Date(commPai.estrutura.datetime_post).toLocaleTimeString()}
@@ -106,7 +108,15 @@ function Comentarios({id_publicacao}){
                     /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
                     commPai.estrutura.id_usuario == usuario.id ? 
                     <>
-                    <Button title='Deletar' onPress={()=>handleSetCommselecionado(commPai)}/>
+                    <TouchableOpacity 
+                        onPress={()=>handleSetCommselecionado(commPai)}>
+                        <Ionicons 
+                        name='trash'
+                        size={25}
+                        color={'#fff'} 
+                        />
+                    </TouchableOpacity> 
+                            
                     </>
                     :
                     null
@@ -153,27 +163,25 @@ function Comentarios({id_publicacao}){
 
 
     return (
-        <View>
-            <View>
+            <View style={styles.containercmt}>
+                <Text style={styles.titulo} >Comentários</Text>
                 <FormComentario onComentar={comentar} tipo='textinput' id_pai={null} />
 
                 {/* Modal personalizada para podermos confirmar a deleção do comentário */}
                 <Dialog.Container visible={delDialogVisible}>
-                    <Dialog.Title>Deletar Publicacao</Dialog.Title>
-                    <Dialog.Description>Voce realmente quer deletar essa publicacao?</Dialog.Description>
+                    <Dialog.Title>Deletar Comentário</Dialog.Title>
+                    <Dialog.Description>Voce realmente quer deletar seu comentário ? </Dialog.Description>
                     <Dialog.Button label='Sim' onPress={()=>deleteComentario(commSelecionado.estrutura.id)} />
                     <Dialog.Button label='Nao' onPress={()=>setDelDialogVisible(false)} />
                 </Dialog.Container>
-
-                <Text style={styles.titulo} >Comentários</Text>
-            </View>
+                
+            
             {
                 comentarios.length != 0 ?
                 <HandleComentarios/>
                 :
                 <Text style={styles.conteudo} >Ainda não há comentários para essa publicação.</Text>
             }
-            
         </View>
 
     );

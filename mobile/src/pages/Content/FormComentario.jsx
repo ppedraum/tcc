@@ -21,15 +21,19 @@ function FormComentario({onComentar, tipo='textinput', id_pai}){
         return(
 
             <KeyboardAvoidingView>
-                <TextInput 
-                multiline={true} 
-                numberOfLines={5} 
-                onChangeText={(texto)=>setTexto(texto)}
-                value={texto}
-                placeholder='Comentar...'
-                style={{maxWidth:200}}
-                />
-                <Button title='Comentar...' onPress={handleComentar} />
+                <View style={styles.filtros_container}>
+                    <TextInput style={styles.inputcmt}
+                    multiline={true} 
+                    numberOfLines={5} 
+                    onChangeText={(texto)=>setTexto(texto)}
+                    value={texto}
+                    placeholder='Comentar...'
+                    />
+                    <TouchableOpacity style={styles.botaocmt}
+                    onPress={handleComentar}>
+                        <Text>Comentar</Text>
+                    </TouchableOpacity>
+                </View>
             </KeyboardAvoidingView>
 
 

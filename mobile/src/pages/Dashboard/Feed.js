@@ -98,8 +98,10 @@ function Feed({navigation}) {
                                 styles.flatlist_cell_evento
                                 }
                                 >
-                                    <Text>{item.publicacao.tipo_publicacao}</Text>
+                                    <Text style={styles.conteudobold}>{item.publicacao.tipo_publicacao}</Text>
+                                    <View style={styles.filtros_container}>
                                     <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    </View>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
                                 </View>
@@ -111,7 +113,7 @@ function Feed({navigation}) {
                                 styles.flatlist_cell_evento
                                 }
                                 >
-                                    <Text>{item.publicacao.tipo_publicacao}</Text>
+                                    <Text style={styles.conteudobold}>{item.publicacao.tipo_publicacao}</Text>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
                                     <Text style={styles.conteudo} >{item.preview_text}</Text>

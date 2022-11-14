@@ -26,7 +26,7 @@ function Login({route, navigation}){
     return (
         
         <View style={styles.container}>
-            <Text style={styles.titulo}>Bem vindo ao MUNDO</Text>
+            <Text style={styles.titulologin}>Bem vindo ao MUNDO</Text>
             <View>
                 <Text style={styles.conteudo}>E-Mail</Text>
                 <TextInput style={styles.input} placeholder='exemplo@mail.com' onChangeText={(email)=>setEmail(email)} />
