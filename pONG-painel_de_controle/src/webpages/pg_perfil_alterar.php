@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar perfil</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/perfil_alterar.css">
     <?php
     require("../php_stuff/ver_session.php");
     ver_session("../../index.php");
@@ -27,9 +28,11 @@
 <header>
     <div class="mundo" >
         <img src = "../imgs/logo_cut.svg" alt="LOGO" width="200">
-        <h2>
-            Painel de Controle MUNDO
-        </h2>
+        <a href="./index.php">
+            <h2>
+                Painel de Controle MUNDO
+            </h2>
+        </a>
     </div>
     <div class="perfil" >
         <?php
@@ -43,76 +46,85 @@
         <div class="nome_inst" >
             <?php echo $_SESSION["inst"]["nome_fantasia"] ?>
         </div>
-        <a href="./pg_perfil.php">
-            Gerenciar Perfil
-        </a>
     </div>
 
 </header>
 
+
 <form action="../php_stuff/alterar_info.php" method="POST" autocomplete="off" enctype="multipart/form-data" >
+<div id="conteudo_alterar">
     <div>
-        <b>Foto de Perfil</b>
-        <input onclick="enable('chb_foto_perfil', 'blob_perfil')" type="checkbox" name="chb_foto_perfil" id="chb_foto_perfil">
-        <br>
-        <input type="file" name="blob_perfil" id="blob_perfil" disabled >
-    </div>
-    <div>
-        <b>Apresentação</b>
-        <input onclick="enable('chb_apresentacao', 'txt_apresentacao')" type="checkbox" name="chb_apresentacao" id="chb_apresentacao">
-        <br>
-        <textarea id="txt_apresentacao" name="txt_apresentacao" id="" cols="30" rows="10" disabled >
-            <?php echo $_SESSION["inst"]["apresentacao"] ?>
-        </textarea> 
-    </div>
-    <div>
-        <b>Email</b>
-        <input onclick="enable('chb_email', 'txt_email')" type="checkbox" name="chb_email" id="chb_email">
-        <br>
-        <input type="text" name="txt_email" id="txt_email" value="<?php echo $_SESSION["inst"]["e_mail"] ?>" disabled >
-    </div>
-    <div>
-        <b>Login</b>
-        <input type="checkbox" onclick="enable('chb_login', 'txt_login')" name="chb_login" id="chb_login">
-        <br>
-        <input type="text" name="txt_login" id="txt_login" value="<?php echo $_SESSION["inst"]["login"] ?>" disabled >
-    </div>
-    <div>
-        <b>Telefone</b>
-        <input type="checkbox" onclick="enable('chb_telefone', 'txt_telefone')" name="chb_telefone" id="chb_telefone">
-        <br>
-        <input type="text" name="txt_telefone" id="txt_telefone" value="<?php echo $_SESSION["inst"]["telefone"] ?>" disabled >
-    </div>
-    <div>
-        <div>
-            <?php /* echo $curr_errs['senha'].'<br>' */ ?>
-            <b>Senha</b>
-            <input type="checkbox" onclick="show_senha()" name="chb_senha" id="chb_senha">
+        <div class="item" >
+            <b>Login</b>
+            <input type="checkbox" onclick="enable('chb_login', 'txt_login')" name="chb_login" id="chb_login">
             <br>
-            <input type="password" name="txt_nova_senha" id="txt_nova_senha" disabled >
+            <input type="text" name="txt_login" id="txt_login" value="<?php echo $_SESSION["inst"]["login"] ?>" disabled >
         </div>
-        <div id="confirmar_senha" hidden >
-        <b>Confirmar Senha:</b> <br>
-            <input type="password" name="txt_confirmar_senha" >
+
+        <div class="item" >
+            <b>Email</b>
+            <input onclick="enable('chb_email', 'txt_email')" type="checkbox" name="chb_email" id="chb_email">
+            <br>
+            <input type="text" name="txt_email" id="txt_email" value="<?php echo $_SESSION["inst"]["e_mail"] ?>" disabled >
+        </div>
+
+        <div class="item" >
+            <div>
+                <?php /* echo $curr_errs['senha'].'<br>' */ ?>
+                <b>Senha</b>
+                <input type="checkbox" onclick="show_senha()" name="chb_senha" id="chb_senha">
+                <br>
+                <input type="password" name="txt_nova_senha" id="txt_nova_senha" disabled >
+            </div>
+            <div id="confirmar_senha" hidden >
+                <b>Confirmar Senha:</b> <br>
+                <input type="password" name="txt_confirmar_senha" >
+            </div>
+        </div>
+
+    </div>
+    <div class="separador" ></div>
+    <div>
+        <div class="item" >
+            <b>Foto de Perfil</b>
+            <input onclick="enable('chb_foto_perfil', 'blob_perfil')" type="checkbox" name="chb_foto_perfil" id="chb_foto_perfil">
+            <br>
+            <input type="file" name="blob_perfil" id="blob_perfil" disabled >
+        </div>
+        <div class="item" >
+            <div>
+                <b>Apresentação</b>
+                <input onclick="enable('chb_apresentacao', 'txt_apresentacao')" type="checkbox" name="chb_apresentacao" id="chb_apresentacao">
+            </div>
+            <textarea id="txt_apresentacao" name="txt_apresentacao" id="" cols="30" rows="10" disabled >
+                <?php echo $_SESSION["inst"]["apresentacao"] ?>
+            </textarea> 
         </div>
         
-    </div>
-    <div>
-    <div>
-        <b>Digite sua senha atual para alterar seu perfil</b> <br>
-        <input type="password" name="txt_ver_senha" value="" >
+        
+        <div class="item" >
+            <b>Telefone</b>
+            <input type="checkbox" onclick="enable('chb_telefone', 'txt_telefone')" name="chb_telefone" id="chb_telefone">
+            <br>
+            <input type="text" name="txt_telefone" id="txt_telefone" value="<?php echo $_SESSION["inst"]["telefone"] ?>" disabled >
         </div>
     </div>
-    <div>
+</div>
+<div>
+    <div class="item" >
+        <b>Digite sua senha atual para alterar seu perfil</b> <br>
+        <input type="password" name="txt_ver_senha" value="" >
+    </div>
+
+    <div class="item" >
         <input name="bt_alterar" type="submit" value="Alterar">
         <input type="reset" value="Resetar">
         <input name="bt_cancelar" type="submit" value="Cancelar">
     </div>
-    <div>
-        Para alterar as demais informações da sua instituição, entre em contato conosco.
-    </div>
-    </div>
+    Para alterar as demais informações da sua instituição, entre em contato conosco.
+</div>
 </form>
+
 <script type="text/javascript">
 
     function enable(id, target){

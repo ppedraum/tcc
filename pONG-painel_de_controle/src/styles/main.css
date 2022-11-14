@@ -17,6 +17,10 @@ header{
     margin-bottom: 100px;
 }
 
+.item_margin{
+    margin: 10px 0px;
+}
+
 a{
     color: black;
 }
@@ -53,7 +57,8 @@ h2{
     margin-bottom: 5px 0px;
 }
 
-button, select, input[type=text], input[type=submit], input[type=reset]{
+button, select, input[type=text], input[type=submit], input[type=reset], input[type=password],
+input[type=date], input[type=time]{
     font-size: 17px;
     height: 30px;
     padding: 0px 5px;
@@ -67,4 +72,12 @@ input[type=checkbox]{
     transform: scale(1.5);
 
     padding: 10px;
+}
+
+.separador{
+    margin: 100px;
+}
+
+hr{
+    border: 1px solid #3E769E;
 }

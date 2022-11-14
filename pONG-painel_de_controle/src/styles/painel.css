@@ -9,12 +9,12 @@
     flex-direction: column;
 }
 
-.separador{
-    margin: 100px;
-}
-
 #sct_ger_publicacoes .item, #sct_view_publicacoes, #filtros{
     margin: 10px 0px;
+}
+
+.filtro{
+    margin: 20px 0px;
 }
 
 .lista_ferramentas{
@@ -29,10 +29,7 @@ table{
     color: white;
     border-collapse: collapse;
     margin-top: 10px;
-}
-
-.filtro{
-    margin: 20px 0px;
+    width: 45vw;
 }
 
 table a{
