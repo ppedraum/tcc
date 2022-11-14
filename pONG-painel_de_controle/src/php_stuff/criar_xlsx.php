@@ -1,6 +1,5 @@
 <?php
 require '../../vendor/autoload.php';
-
 require_once('./datab.php');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -129,7 +128,10 @@ header('Content-Disposition: attachment; filename=hello world.xlsx');
 header('Pragma: no-cache');
 readfile("./hello world.xlsx");
 
+die;
+
 echo '<script>window.close();</script>';
+
 
 ?>
 

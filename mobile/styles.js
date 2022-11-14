@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection : 'row',
         alignItems : 'center',
-    },
+    }
   });
 
   export default styles;
