@@ -42,7 +42,7 @@
             $query = $query->fetch_assoc();
             session_start();
             $_SESSION['inst'] = $query;
-            header('Location:menu.php');
+            header('Location:./src/webpages/index.php');
         }else{
             echo('Login ou senha inválidos!');
         }

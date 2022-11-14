@@ -1,27 +1,8 @@
-
-#conteudo_painel{
-    display: flex;
-    
+#conteudo_perfil{
+    margin: 0px 100px;
 }
 
-#sct_ger_publicacoes{
-    display: flex;
-    flex-direction: column;
-}
-
-.separador{
-    margin: 100px;
-}
-
-#sct_ger_publicacoes .item, #sct_view_publicacoes, #filtros{
-    margin: 10px 0px;
-}
-
-.lista_ferramentas{
-    list-style: none;
-}
-
-.lista_ferramentas li{
+.item{
     margin: 10px 0px;
 }
 
@@ -29,10 +10,6 @@ table{
     color: white;
     border-collapse: collapse;
     margin-top: 10px;
-}
-
-.filtro{
-    margin: 20px 0px;
 }
 
 table a{
