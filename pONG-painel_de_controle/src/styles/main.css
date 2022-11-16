@@ -17,6 +17,17 @@ header{
     margin-bottom: 100px;
 }
 
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.sair{
+    margin: 10px 0px;
+}
+
 .item_margin{
     margin: 10px 0px;
 }

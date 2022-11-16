@@ -38,6 +38,11 @@
         <a href="./pg_perfil.php">
             Gerenciar Perfil
         </a>
+        <div class="sair" >
+            <a href="../php_stuff/logout.php">
+                Sair
+            </a>
+        </div>
     </div>
 
 </header>
@@ -60,5 +65,15 @@
         <input type="reset" value="Resetar">
     </div>
 </form>
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>

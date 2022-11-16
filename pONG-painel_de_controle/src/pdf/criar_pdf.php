@@ -25,7 +25,7 @@ if(!empty($blob_poster)){
     $blob_poster = file_get_contents($blob_poster);
     $blob_poster = base64_encode($blob_poster);
 
-    $conteudos[2] = "<img src='data:image/jpeg;base64,$blob_poster' width='700' >";
+    $conteudos[2] = "<img src='data:image/jpeg;base64,$blob_poster' width='500' >";
 }
 
 

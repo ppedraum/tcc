@@ -150,7 +150,7 @@
                 <td>
                     <?php
                     echo $_SESSION["inst"]["sede"]." - ".$_SESSION["inst"]["cidade"].", ".$_SESSION["inst"]["UF"];
-                    echo "CEP ".$_SESSION["inst"]["CEP"];
+                    echo " - CEP ".$_SESSION["inst"]["CEP"];
                     ?>
                 </td>
 
@@ -158,5 +158,15 @@
         </table>
 </div>
 
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>

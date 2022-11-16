@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="../styles/painel.css">
     <?php
     require_once('../php_stuff/datab.php');
-    session_start();
-    $id_inst = $_SESSION['inst']['id'];
-
+    
     require "../php_stuff/ver_session.php";
     ver_session("../../index.php");
+    $id_inst = $_SESSION['inst']['id'];
 
     ?>
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
@@ -42,6 +41,11 @@
         <a href="./pg_perfil.php">
             Gerenciar Perfil
         </a>
+        <div class="sair" >
+            <a href="../php_stuff/logout.php">
+                Sair
+            </a>
+        </div>
     </div>
 
 </header>
@@ -207,5 +211,15 @@
 
 
     <script>keyBindAll()</script>
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>

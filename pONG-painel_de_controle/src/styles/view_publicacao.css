@@ -40,3 +40,11 @@ td{
     height: 50vh;
     background-color: white;
 }
+
+.comentario{
+    margin: 20px 20px;
+}
+
+.comentario_filho{
+    margin: 20px 40px;
+}

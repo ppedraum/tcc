@@ -90,6 +90,11 @@
         <a href="./pg_perfil.php">
             Gerenciar Perfil
         </a>
+        <div class="sair" >
+            <a href="../php_stuff/logout.php">
+                Sair
+            </a>
+        </div>
     </div>
 
 </header>
@@ -129,7 +134,7 @@
             </section>
             <div class="item_margin" >
                 <input type="submit" name="bt_submit_publicacao" id="bt_submit_publicacao" value="Enviar">
-                <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar" onclick="">
+                <input type="reset" id="bt_reset_publicacao" value="Resetar">
             </div>
             <p><b>Entradas com * no final são obrigatórias.</b></p>
         </div>
@@ -220,5 +225,15 @@
     </div> 
     -->
 </form>
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>

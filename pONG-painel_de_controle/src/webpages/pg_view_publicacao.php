@@ -52,6 +52,11 @@
         <a href="./pg_perfil.php">
             Gerenciar Perfil
         </a>
+        <div class="sair" >
+            <a href="../php_stuff/logout.php">
+                Sair
+            </a>
+        </div>
     </div>
 
 </header>
@@ -73,7 +78,57 @@
             <?php echo $query_publicacao['tipo_publicacao']; ?>
         </div>
         <div class="scroll_div">
-        <?php //comentarios($query_publicacao['id']) ?>
+            <div class="comentario" >
+            <b>Comentários</b>
+            <hr>
+            </div>
+            <?php 
+            $arr = gerar_comentarios($conn, $query_publicacao["id"]); 
+
+            if($arr !== null){
+                $pais = $arr["pais"];
+                $filhos = $arr["filhos"];
+
+                foreach($pais as $pai){             
+                                    
+                    echo "
+                    <div class='comentario' >
+                        <div>
+                            <b> ".$pai["nome_usuario"]." - ".$pai["datetime_post"]." </b>
+                            <button onclick='showDelComm(".$pai["id"].")' > x </button>
+                        </div>
+                        <div>
+                            ".$pai["conteudo"]."
+                        </div>
+                    </div>
+                    ";
+                    foreach($filhos as $filho){
+                        if($filho["id_pai"] == $pai["id"]){
+
+                            echo"
+                            <div class='comentario_filho' >
+                                <div>
+                                    <b> ".$filho["nome_usuario"]." - ".$filho["datetime_post"]." </b>
+                                    <button onclick='showDelComm(".$filho["id"].")' > x </button>
+                                </div>
+                                <div>
+                                    ".$filho["conteudo"]."
+                                </div>
+                            </div>
+                            
+                            ";
+                        }
+                    }
+                }
+            }
+            else{
+                echo "
+                <div class='comentario'>
+                    Nenhum Comentário foi feito ainda! <br>
+                    Quando houver algum, eles aparecerão aqui.
+                </div>";
+            }
+            ?>
         </div>
     </div>
     <div>
@@ -174,7 +229,7 @@
 
             if($del_likes){
                 if($del_publicacao){
-                    echo "<script>window.location.assign('./pg_publicacoes.php')</script>";
+                    echo "<script>window.location.assign('./index.php')</script>";
                 }
             }
 
@@ -203,7 +258,24 @@
             document.getElementById('bt_del_form').removeAttribute('hidden');
         }
     }
+
+    function showDelComm(id){
+        if(confirm("Você deseja excluir esse comentário?")){
+            window.location.assign("../php_stuff/exc_comentario.php?id_comentario=" + id + "&id_publicacao=<?php echo $id_publicacao ?>");
+        }
+    }
+
 </script>
 
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>
