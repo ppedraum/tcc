@@ -18,5 +18,15 @@
     <a href="./pg_criar_pdf.php"><button>Criar PDF</button></a>
 </div>
 </div>
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>

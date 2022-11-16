@@ -163,7 +163,7 @@ if (mysqli_query($conn, $query_publicacao)) {
     debug_log( "Erro: ".$query_publicacao."<br>".mysqli_error($conn));
 }
 mysqli_close($conn); 
-echo "<script>window.location.assign('../webpages/pg_publicacoes.php')</script>";
+echo "<script>window.location.assign('../webpages/index.php')</script>";
 
 ?>
 

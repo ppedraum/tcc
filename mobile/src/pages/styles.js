@@ -1,6 +1,5 @@
 import {React} from 'react';
 import {StyleSheet, Dimensions} from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const styles = StyleSheet.create({
     container: {
@@ -35,21 +34,28 @@ const styles = StyleSheet.create({
     },
     titulo_galeria:{
       fontWeight : 'bold',
+      color: 'white',
       fontSize : 15
     },
     conteudo:{
+      color: 'white',
       fontSize : 20
+    },
+    subtexto:{
+      color: 'white',
+      fontSize : 15
     },
     conteudo_galeria:{
       fontSize : 15
     },
     input:{
-        width : 200,
-        height: 40,
+        width : Dimensions.get('window').width * 0.7,
+        height: 45,
         padding : 10,
         margin : 10,
         borderRadius: 15,
         backgroundColor: '#FAFAFA',
+        fontSize : 20
     },
     pickerInput:{
         width : 200,
@@ -111,6 +117,10 @@ const styles = StyleSheet.create({
       height:200,
       marginVertical:20,
     },
+    logo:{
+      width: 190, 
+      height: 60
+    },
     foto_galeria:{
       width:150,
       height:150,
@@ -135,7 +145,7 @@ const styles = StyleSheet.create({
     },
     botao:{
       alignItems: 'center',
-      backgroundColor: '#D0EBFF',
+      backgroundColor: 'white',
       padding: 10,
       borderRadius:15,
       width: 100,
@@ -143,20 +153,9 @@ const styles = StyleSheet.create({
       border: 2,
       borderStyle: 'solid',
       borderColor: 'black',
-      color: 'black'
     },
-    botaoC:{
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#D0EBFF',
-      padding: 10,
-      borderRadius:15,
-      width: 150,
-      margin:10,
-      border: 2,
-      borderStyle: 'solid',
-      borderColor: 'black',
-      color: 'black'
+    bt_label:{
+      fontSize : 20
     }
   });
 

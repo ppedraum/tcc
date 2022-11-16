@@ -1,0 +1,51 @@
+
+#conteudo_painel{
+    display: flex;
+    
+}
+
+#sct_ger_publicacoes{
+    display: flex;
+    flex-direction: column;
+}
+
+#sct_ger_publicacoes .item, #sct_view_publicacoes, #filtros{
+    margin: 10px 0px;
+}
+
+.filtro{
+    margin: 20px 0px;
+}
+
+.lista_ferramentas{
+    list-style: none;
+}
+
+.lista_ferramentas li{
+    margin: 10px 0px;
+}
+
+table{
+    color: white;
+    border-collapse: collapse;
+    margin-top: 10px;
+    width: 45vw;
+}
+
+table a{
+    color: white;
+}
+
+th{
+    background-color: #004475;
+    
+    padding: 5px 5px;
+}
+
+td{
+    border: 2px solid #3E769E;
+    border-right: none;
+    border-left: none;
+    background-color: #52A5E0;
+    padding: 7px 7px;
+}

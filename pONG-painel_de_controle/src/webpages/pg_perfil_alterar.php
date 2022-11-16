@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar perfil</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/perfil_alterar.css">
     <?php
     require("../php_stuff/ver_session.php");
     ver_session("../../index.php");
@@ -20,54 +22,53 @@
             }
         }
     } */
-
-
     ?>
-<link rel="stylesheet" href="estiloeditarperfil.css" type="text/css">
 </head>
 <body>
-    <h2>
-        MUNDO - Editar perfil<br>
-        <a href="../../menu.php"><img src = "../webpages/logo.svg" alt="LOGO" width="300" height="150"></a>
-    </h2>
-    <div class="container">
-    <div class='quadrado'>
-    <div class='conteudo'>
-    <form action="../php_stuff/alterar_info.php" method="POST" autocomplete="off" enctype="multipart/form-data" >
-        <div class="meinho">
-        <div id='fotoperfil'>
-            <b>Foto de Perfil</b>
-            <input onclick="enable('chb_foto_perfil', 'blob_perfil')" type="checkbox" name="chb_foto_perfil" id="chb_foto_perfil">
-            <br>
-            <input type="file" name="blob_perfil" id="blob_perfil" disabled >
+<header>
+    <div class="mundo" >
+        <img src = "../imgs/logo_cut.svg" alt="LOGO" width="200">
+        <a href="./index.php">
+            <h2>
+                Painel de Controle MUNDO
+            </h2>
+        </a>
+    </div>
+    <div class="perfil" >
+        <?php
+        if($_SESSION['inst']['foto_perfil'] != null){
+            echo " <img class='foto_perfil' src='data:image/jpeg;base64,".$_SESSION['inst']['foto_perfil']."'> ";
+        }
+        else{
+            echo "<img class='foto_perfil' src='user.png'>";
+        }
+        ?>
+        <div class="nome_inst" >
+            <?php echo $_SESSION["inst"]["nome_fantasia"] ?>
         </div>
-        <div>
-        <b>Apresentação</b>
-            <input onclick="enable('chb_apresentacao', 'txt_apresentacao')" type="checkbox" name="chb_apresentacao" id="chb_apresentacao">
-            <br>
-            <textarea id="txt_apresentacao" name="txt_apresentacao" id="" cols="30" rows="10" disabled >
-                <?php echo $_SESSION["inst"]["apresentacao"] ?>
-            </textarea> 
-        </div>
-        <div>
-        <b>Email</b>
-            <input onclick="enable('chb_email', 'txt_email')" type="checkbox" name="chb_email" id="chb_email">
-            <br>
-            <input type="text" name="txt_email" id="txt_email" value="<?php echo $_SESSION["inst"]["e_mail"] ?>" disabled >
-        </div>
-        <div>
-        <b>Login</b>
+    </div>
+
+</header>
+
+
+<form action="../php_stuff/alterar_info.php" method="POST" autocomplete="off" enctype="multipart/form-data" >
+<div id="conteudo_alterar">
+    <div>
+        <div class="item" >
+            <b>Login</b>
             <input type="checkbox" onclick="enable('chb_login', 'txt_login')" name="chb_login" id="chb_login">
             <br>
             <input type="text" name="txt_login" id="txt_login" value="<?php echo $_SESSION["inst"]["login"] ?>" disabled >
         </div>
-        <div>
-        <b>Telefone</b>
-            <input type="checkbox" onclick="enable('chb_telefone', 'txt_telefone')" name="chb_telefone" id="chb_telefone">
+
+        <div class="item" >
+            <b>Email</b>
+            <input onclick="enable('chb_email', 'txt_email')" type="checkbox" name="chb_email" id="chb_email">
             <br>
-            <input type="text" name="txt_telefone" id="txt_telefone" value="<?php echo $_SESSION["inst"]["telefone"] ?>" disabled >
+            <input type="text" name="txt_email" id="txt_email" value="<?php echo $_SESSION["inst"]["e_mail"] ?>" disabled >
         </div>
-        <div>
+
+        <div class="item" >
             <div>
                 <?php /* echo $curr_errs['senha'].'<br>' */ ?>
                 <b>Senha</b>
@@ -76,63 +77,98 @@
                 <input type="password" name="txt_nova_senha" id="txt_nova_senha" disabled >
             </div>
             <div id="confirmar_senha" hidden >
-            <b>Confirmar Senha:</b> <br>
+                <b>Confirmar Senha:</b> <br>
                 <input type="password" name="txt_confirmar_senha" >
             </div>
-            
         </div>
-        <div>
-        <div>
-        <b>Digite sua senha atual para alterar seu perfil</b> <br>
-            <input type="password" name="txt_ver_senha" value="" >
+
+    </div>
+    <div class="separador" ></div>
+    <div>
+        <div class="item" >
+            <b>Foto de Perfil</b>
+            <input onclick="enable('chb_foto_perfil', 'blob_perfil')" type="checkbox" name="chb_foto_perfil" id="chb_foto_perfil">
+            <br>
+            <input type="file" name="blob_perfil" id="blob_perfil" disabled >
+        </div>
+        <div class="item" >
+            <div>
+                <b>Apresentação</b>
+                <input onclick="enable('chb_apresentacao', 'txt_apresentacao')" type="checkbox" name="chb_apresentacao" id="chb_apresentacao">
             </div>
+            <textarea id="txt_apresentacao" name="txt_apresentacao" id="" cols="30" rows="10" disabled >
+                <?php echo $_SESSION["inst"]["apresentacao"] ?>
+            </textarea> 
         </div>
+        
+        
+        <div class="item" >
+            <b>Telefone</b>
+            <input type="checkbox" onclick="enable('chb_telefone', 'txt_telefone')" name="chb_telefone" id="chb_telefone">
+            <br>
+            <input type="text" name="txt_telefone" id="txt_telefone" value="<?php echo $_SESSION["inst"]["telefone"] ?>" disabled >
         </div>
-        <div class="botaozao">
-            <input name="bt_alterar" type="submit" value="Alterar">
-            <input type="reset" value="Resetar">
-            <input name="bt_cancelar" type="submit" value="Cancelar">
-        </div>
-        <div>
-            Para alterar as demais informações da sua instituição, entre em contato conosco.
-        </div>
-        </div>
-    </form>
-    <script type="text/javascript">
+    </div>
+</div>
+<div>
+    <div class="item" >
+        <b>Digite sua senha atual para alterar seu perfil</b> <br>
+        <input type="password" name="txt_ver_senha" value="" >
+    </div>
 
-        function enable(id, target){
-            if(document.getElementById(id).checked){
-                document.getElementById(target).removeAttribute('disabled');
-            }
-            else{
-                document.getElementById(target).setAttribute('disabled', true);
-            }
+    <div class="item" >
+        <input name="bt_alterar" type="submit" value="Alterar">
+        <input type="reset" value="Resetar">
+        <input name="bt_cancelar" type="submit" value="Cancelar">
+    </div>
+    Para alterar as demais informações da sua instituição, entre em contato conosco.
+</div>
+</form>
+
+<script type="text/javascript">
+
+    function enable(id, target){
+        if(document.getElementById(id).checked){
+            document.getElementById(target).removeAttribute('disabled');
+        }
+        else{
+            document.getElementById(target).setAttribute('disabled', true);
+        }
+    }
+
+    function show_senha(){
+
+        enable('chb_senha', 'txt_nova_senha');
+        if(document.getElementById('chb_senha').checked){
+            document.getElementById('confirmar_senha').removeAttribute('hidden');
+            document.getElementById('txt_confirmar_senha').removeAttribute('disabled');
+        }
+        else{
+            document.getElementById('confirmar_senha').setAttribute('hidden', true);
+            document.getElementById('txt_confirmar_senha').setAttribute('disabled', true);
+        }
+    }
+
+    function match_senha(){
+        let nova_senha = document.getElementById('txt_nova_senha').value;
+        let ver = document.getElementById('txt_confirmar_senha').value;
+
+        if(nova_senha != ver){
+
         }
 
-        function show_senha(){
+    }
 
-            enable('chb_senha', 'txt_nova_senha');
-            if(document.getElementById('chb_senha').checked){
-                document.getElementById('confirmar_senha').removeAttribute('hidden');
-                document.getElementById('txt_confirmar_senha').removeAttribute('disabled');
-            }
-            else{
-                document.getElementById('confirmar_senha').setAttribute('hidden', true);
-                document.getElementById('txt_confirmar_senha').setAttribute('disabled', true);
-            }
-        }
-
-        function match_senha(){
-            let nova_senha = document.getElementById('txt_nova_senha').value;
-            let ver = document.getElementById('txt_confirmar_senha').value;
-
-            if(nova_senha != ver){
-
-            }
-
-        }
-
-    </script>
-</div></div>
+</script>
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>

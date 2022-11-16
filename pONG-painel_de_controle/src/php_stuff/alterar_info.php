@@ -110,3 +110,6 @@ if(isset($_POST["bt_alterar"])){
 
 
 }
+else if(isset($_POST['bt_cancelar'])){
+    header('Location: ../webpages/pg_perfil.php');
+}

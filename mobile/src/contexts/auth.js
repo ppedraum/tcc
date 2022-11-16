@@ -19,9 +19,10 @@ const AuthContext = createContext({
     usuario:{}, 
     login:()=>{},
     logout:()=>{},
+    refresh:()=>{},
     isLoading:true,
     token:'',
-    NODE_PORT: '',
+    NODE_PORT: ''
 });
 
 
@@ -71,7 +72,11 @@ export function AuthProvider({children}){
     Movemos a responsabilidade do login para o contexto, para assim 
     mandá-lo pelo AuthProvider
     */
+
     function login(email, senha){
+
+        let err = '';
+
         fetch( NODE_PORT + '/auth/login', {
             method: 'POST',
             headers: { 
@@ -85,7 +90,7 @@ export function AuthProvider({children}){
         .then(res => res.json())
         .then(result=>{
             if(result.error != null){
-                console.log('O usuário não foi encontrado!');
+                err = 'Usuário ou Senha estão incorretos.';
             }else{
                 console.log('ok')
                 setSigned('true');
@@ -101,7 +106,16 @@ export function AuthProvider({children}){
             alert(err);
         })
         ;
-    
+        
+        return err;
+    }
+
+    function refresh(token_recebido, dados){
+        if(token === token_recebido)
+            setUsuario(dados);
+        else
+            return {err:'Token Inválido'};
+        
     }
 
     /*
@@ -119,7 +133,7 @@ export function AuthProvider({children}){
     }
 
     return (
-        <AuthContext.Provider value={{isSigned, usuario, login, logout, isLoading, token, NODE_PORT }} >
+        <AuthContext.Provider value={{isSigned, usuario, login, logout, refresh, isLoading, token, NODE_PORT }} >
             {children}
         </AuthContext.Provider>
     );

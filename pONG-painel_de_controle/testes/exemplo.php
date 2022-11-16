@@ -8,5 +8,15 @@
 </head>
 <body>
     <a href="./pagina_get.php"><button>CLique-me</button></a>
+<footer>
+    <div>
+        2022 - MUNDO
+    </div>
+    <div>
+        <b>Criado Por:</b><br>
+        Pedro Henrique Martins Virtuozo<br>
+        Felipe Rodrigues Rossoni
+    </div>
+</footer>
 </body>
 </html>
