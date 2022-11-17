@@ -144,7 +144,7 @@ function Publicacao({ route, navigation }){
 
     function handleInscModal(){
         if(isInscrito){
-            setMsgEvento('Você já está inscrito :D');
+            setMsgEvento('Você já está inscrito para esse evento.');
             setTimeout(()=>setMsgEvento(''), 5000);
         }
         else

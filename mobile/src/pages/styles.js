@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       backgroundColor: '#004475',
       width: '100%',
-      height: '100%',
+      paddingVertical: 20,
+      height: Dimensions.get('window').height,
       alignItems: 'center',
-      justifyContent: 'center',
     },
     containeraviso: {
       display: 'flex',
@@ -34,13 +34,20 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    containerpinst: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     containercmt: {
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: '#075F8C',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingHorizontal: 0
     },
     containerpub: {
       display: 'flex',
@@ -62,17 +69,15 @@ const styles = StyleSheet.create({
     },
     post_cell:{
       display: 'flex',
-      alignItems: 'flex-start',
       margin: 10,
       color:'white',
-      backgroundColor:'#075F8C',
     },
     titulo:{
       fontWeight : 'bold',
       fontSize : 30,
       color:'white',
       paddingBottom:10,
-      paddingTop:20
+      paddingTop:10
     },
     titulologin:{
       fontWeight : 'bold',
@@ -91,16 +96,16 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       display:'flex',
     },
+    logo:{
+      width: 190, 
+      height: 60
+    },
     titulocontainer: {
       display:'flex',
       alignItems:'center',
       justifyContent: 'center',
       width: '100%',
       backgroundColor: '#004475',
-    },
-    titulo_galeria:{
-      fontWeight : 'bold',
-      fontSize : 15
     },
     conteudo:{
       fontSize : 20,
@@ -170,38 +175,51 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     },
-    galeria_cell:{
-        borderColor: '#4490F5',
-        borderWidth: 1,
-        display: 'flex',
-        alignItems: 'flex-start',
-        width: 130,
-        height: 'auto'
+    galeria:{
+      display: "flex",
+      alignItems: "flex-start",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      width: Dimensions.get('window').width
     },
-    galeria_cell_foto:{
-      borderColor: '#4490F5',
-      borderWidth: 1,
-      display: 'flex',
-      alignItems: 'flex-start',
-      width: 230,
-      height: 'auto',
-      marginLeft: 30
+    titulo_galeria:{
+      fontWeight : 'bold',
+      fontSize : 15
+    },
+    galeria_cell:{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: '#4490F5',
+        width: Dimensions.get('window').width * 0.30,
+        height: Dimensions.get('window').width * 0.30,
+        margin: 6
     },
     flatlist_cell:{
+      display: "flex",
+      alignItems: "center",
       paddingHorizontal: 20,
-      paddingVertical: 10,
+      paddingVertical: 20,
       marginVertical: 5,
       backgroundColor : '#0882A3',
       minWidth: 370,
       color: '#FFF'
     },
     flatlist_cell_evento:{
+      display: "flex",
+      alignItems: "center",
       paddingHorizontal: 20,
-      paddingVertical: 10,
+      paddingVertical: 20,
       marginVertical: 5,
       backgroundColor : '#2B9972',
       minWidth: 370,
       color: '#FFF'
+    },
+    flatlist_text:{
+      width: 300,
+      display: "flex",
+      alignItems: "flex-start",
     },
     bt_desinscrever:{
       backgroundColor:'#2B703E'
@@ -209,13 +227,26 @@ const styles = StyleSheet.create({
     foto_perfil:{
       width:200,
       height:200,
+      borderRadius: 100,
       marginVertical:20,
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+    },
+    foto_icon:{
+      width: 50,
+      height: 50,
+      borderRadius: 100,
+    },
+    foto_publicacao:{
+      width:300,
+      height:300,
+      marginVertical:20,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     foto_galeria:{
-      width:150,
-      height:150,
+      width: Dimensions.get('window').width * 0.30,
+      height: Dimensions.get('window').width * 0.30,
     },
     sanfona:{
       display: 'flex',
@@ -310,6 +341,40 @@ const styles = StyleSheet.create({
       fontSize: 10,
       paddingRight: 5,
       height: 40,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    },
+    botaoseguindo: {
+      alignItems: 'center',
+      backgroundColor: '#bbb',
+      padding: 10,
+      borderRadius:15,
+      width: 150,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      color: 'black',
+      fontSize: 10,
+      paddingRight: 5,
+      height: 40,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    },
+    botaoseguir: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#6399FA',
+      padding: 10,
+      borderRadius:15,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      fontSize: 10,
+      height: 40,
+      width: 150,
       marginLeft: 'auto',
       marginRight: 'auto'
     },
