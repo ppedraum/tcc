@@ -22,6 +22,21 @@
 
     $foto = mysqli_query($conn, 'select * from foto_publicacao where id_publicacao = '.$query_publicacao['id']);
     $foto = $foto->fetch_assoc();
+
+    if($query_publicacao["id_evento"] != null){
+        $query_evento = mysqli_query($conn, "
+        select * from evento as e where e.id = ".$query_publicacao['id_evento']);
+        $query_evento = $query_evento->fetch_assoc();
+
+        $query_tipo_evento = mysqli_query($conn, "select titulo from tipo_evento where id=".$query_evento['id_tipo_evento']);
+        $query_tipo_evento = $query_tipo_evento->fetch_assoc();
+
+        $query_inscricoes = mysqli_query($conn, "
+        select usuario.* from inscricao, usuario
+        where inscricao.id_usuario = usuario.id and inscricao.id_evento = ".$query_evento['id']);
+    }
+
+
     ?>
 
 </head>
@@ -77,6 +92,7 @@
             <b>Tipo de Publicação: </b> <br>
             <?php echo $query_publicacao['tipo_publicacao']; ?>
         </div>
+
         <div class="scroll_div">
             <div class="comentario" >
             <b>Comentários</b>
@@ -130,6 +146,33 @@
             }
             ?>
         </div>
+        <div class="evento" >
+            
+                <?php
+                if($query_publicacao['id_evento'] != null){
+
+                    echo "<div class='item_margin' >";
+                        echo "<b> Tipo do evento: </b><br>";
+                        echo $query_tipo_evento['titulo'];
+                        echo "<br>";
+                    echo "</div>";
+
+                    echo "<div class='item_margin' >";
+                        echo "<b>Endereço: </b><br>";
+                        echo $query_evento["endereco"];
+                        echo " - ";
+                        echo $query_evento["cidade"].", ".$query_evento["UF"];
+                    echo "</div>";
+
+                    echo "<div class='item_margin' >";
+                        echo "<b>Data: </b><br>";
+                        echo "De: ".$query_evento["datetime_inicio"];
+                        echo "<br>Até: ".$query_evento["datetime_fim"];
+                    echo "</div>";
+
+                }
+                ?>
+        </div>
     </div>
     <div>
         <div class="item_margin" >
@@ -139,77 +182,57 @@
             }
             ?>
         </div>
-        <div class="evento" >
-            <div class="item_margin" >
-                <?php
-                if($query_publicacao['id_evento'] != null){
-                    $query_evento = mysqli_query($conn, "
-                    select * from evento as e where e.id = ".$query_publicacao['id_evento']);
-                    $query_evento = $query_evento->fetch_assoc();
-
-                    $query_tipo_evento = mysqli_query($conn, "select titulo from tipo_evento where id=".$query_evento['id_tipo_evento']);
-                    $query_tipo_evento = $query_tipo_evento->fetch_assoc();
-
-                    $query_inscricoes = mysqli_query($conn, "
-                    select usuario.* from inscricao, usuario
-                    where inscricao.id_usuario = usuario.id and inscricao.id_evento = ".$query_evento['id']);
-
-                    echo "<b> Tipo do evento: </b><br>";
-                    echo $query_tipo_evento['titulo'];
-                    echo "<br>";
-
-                    echo "
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='inscricoes' >
-                    <b>Inscrições</b>
-                    <table>
-
-                    <th></th>
-                    <th>Nome</th>
-                    <th>E-Mail</th>
-                    <th>Telefone</th>
-                    <th>Data de Nascimento</th>
-                    <th>Profissão</th>
-                    <th>Sexo</th>
-                    <th>Cidade</th>
-                    <th>Estado</th>
-                    ";
-
-                    $num = 1;
-                    while($row = $query_inscricoes->fetch_assoc()){
-                        
-                        echo "<tr>";
-                        echo "<td>".$num."</td>";
-                        echo "<td>".$row['nome']."</td>";
-                        echo "<td>".$row['e_mail']."</td>";
-                        echo "<td>".$row['telefone']."</td>";
-                        echo "<td>".$row['data_nasc']."</td>";
-                        echo "<td>".$row['profissao']."</td>";
-                        echo "<td>".$row['sexo']."</td>";
-                        echo "<td>".$row['cidade']."</td>";
-                        echo "<td>".$row['UF']."</td>";
-                        echo "</tr>";
-                        $num++;
-
-                        if($num == 10){
-                            break;
-                        }
-                    }
-
-                    echo "
-                    </table>
-                    <button onclick='openTab()' >Gerar Excel</button>
-                    </div>
-                    ";
-                }
-
-                ?>
-            </div>
-        </div>
     </div>
+</div>
+<div>
+    <?php
+        if($query_publicacao["id_evento"] != null){
+            
+            echo "
+            <div class='inscricoes' >
+            <b>Inscrições</b>
+            <table>
+    
+            <th></th>
+            <th>Nome</th>
+            <th>E-Mail</th>
+            <th>Telefone</th>
+            <th>Data de Nascimento</th>
+            <th>Profissão</th>
+            <th>Sexo</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            ";
+    
+            $num = 1;
+            while($row = $query_inscricoes->fetch_assoc()){
+    
+                echo "<tr>";
+                echo "<td>".$num."</td>";
+                echo "<td>".$row['nome']."</td>";
+                echo "<td>".$row['e_mail']."</td>";
+                echo "<td>".$row['telefone']."</td>";
+                echo "<td>".$row['data_nasc']."</td>";
+                echo "<td>".$row['profissao']."</td>";
+                echo "<td>".$row['sexo']."</td>";
+                echo "<td>".$row['cidade']."</td>";
+                echo "<td>".$row['UF']."</td>";
+                echo "</tr>";
+                $num++;
+        
+                if($num == 10){
+                    break;
+                }
+            }
+    
+            echo "
+            </table>
+            <button onclick='openTab()' >Gerar Excel</button>
+            </div>
+            ";
+        }
+        
+    ?>
 </div>
 <button onclick='showDelForm(true)' id='bt_del_form' >Deletar Publicação</button>
 <div class="item_margin" >

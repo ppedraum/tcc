@@ -75,6 +75,11 @@ input[type=date], input[type=time]{
     padding: 0px 5px;
 }
 
+textarea{
+    font-size: 17px;
+    padding: 5px 5px;
+}
+
 input[type=checkbox]{
     -ms-transform: scale(1.5); /* IE */
     -moz-transform: scale(1.5); /* FF */
