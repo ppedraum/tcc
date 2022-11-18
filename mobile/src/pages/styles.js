@@ -10,7 +10,16 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       backgroundColor: '#004475',
       width: '100%',
-      paddingVertical: 20,
+      paddingTop: 30,
+      height: Dimensions.get('window').height,
+      alignItems: 'center',
+    },
+    containerlogin: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#004475',
+      width: '100%',
+      paddingTop: 150,
       height: Dimensions.get('window').height,
       alignItems: 'center',
     },
@@ -56,6 +65,8 @@ const styles = StyleSheet.create({
 
     },
     alinharmeio:{
+      display: 'flex',
+      alignItems: 'center',
       paddingLeft: 20,
       paddingRight: 20
     },
@@ -160,6 +171,17 @@ const styles = StyleSheet.create({
         borderColor: 'blue',
         borderRadius: 15
     },
+    pickerInputperfil:{
+        width : Dimensions.get('window').width * 0.7,
+        height: 20,
+        padding : 10,
+        margin : 10,
+        backgroundColor: '#0882A3',
+        color: 'white',
+        borderWidth: 1,
+        borderColor: 'blue',
+        borderRadius: '50%'
+    },
     searchContainer:{
         display: 'flex',
         flexDirection : 'row',
@@ -256,8 +278,9 @@ const styles = StyleSheet.create({
       paddingHorizontal: 20,
       paddingVertical: 10,
       marginVertical: 5,
-      backgroundColor : '#99B3FF',
-      width: Dimensions.get('window').width - 20
+      backgroundColor : '#0882A3',
+      width: Dimensions.get('window').width - 20,
+      borderRadius: 15
     },
     botao:{
       alignItems: 'center',
@@ -325,7 +348,7 @@ const styles = StyleSheet.create({
     botaotext1: {
       color: 'white',
       fontWeight: 'bold',
-      fontSize: 16
+      fontSize: 16,
     },
     botaoinscrito: {
       alignItems: 'center',
@@ -396,6 +419,14 @@ const styles = StyleSheet.create({
       color: 'black',
       fontSize: 10
     }, 
+    likepubY:{
+      color: '#E10B00',
+      paddingLeft: 20
+    },
+    likepubN:{
+      color: 'black',
+      paddingLeft: 20
+    },
   });
 
   export default styles;

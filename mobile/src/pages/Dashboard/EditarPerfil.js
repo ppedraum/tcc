@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Text, View, Image, Button, ScrollView, TextInput, Modal, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from '../styles';
 import AuthContext from '../../contexts/auth';
 
@@ -117,7 +117,7 @@ function EditarPerfil({navigation}){
                 <Text style={styles.titulo}>Editar Perfil</Text>
                 <TouchableOpacity onPress={()=>setSanfBasicos(!isSanfBasicos)}>
                     <View style={styles.sanfona} >
-                        <Text style={styles.titulo} >Dados Básicos</Text>
+                        <Text style={styles.conteudobold} >Dados Básicos</Text>
                         <Ionicons name={isSanfBasicos ? 'md-chevron-down' : 'md-chevron-up' } size={20} />
                     </View>
                 </TouchableOpacity>
@@ -125,7 +125,7 @@ function EditarPerfil({navigation}){
                         !isSanfBasicos && <>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>Nome</Text>
+                                <Text style={styles.conteudo}>Nome</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -146,7 +146,7 @@ function EditarPerfil({navigation}){
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>e_mail</Text>
+                                <Text style={styles.conteudo}>E_mail</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -167,7 +167,7 @@ function EditarPerfil({navigation}){
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>telefone</Text>
+                                <Text style={styles.conteudo}>Telefone</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -188,11 +188,11 @@ function EditarPerfil({navigation}){
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>sexo</Text>
+                                <Text style={styles.conteudo}>Gênero</Text>
                             </View>
                             <Picker 
-                            style={styles.pickerInput} 
-                            dropdownIconColor='white'
+                            style={styles.pickerInputperfil} 
+                            dropdownIconColor='black'
                             selectedValue={edicao.sexo}
                             onValueChange={(value, index) =>{
                                 if(value == null)
@@ -202,14 +202,14 @@ function EditarPerfil({navigation}){
                             
                             }
                             }>
-                                <Picker.Item label='Masculino' value='MASC'/>
+                                <Picker.Item style={{color:'black'}} label='Masculino' value='MASC'/>
                                 <Picker.Item label='Feminino' value='FEMN'/>
                                 <Picker.Item label='Outro/Não Binário' value='OUTR'/>
                             </Picker>
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>profissao</Text>
+                                <Text style={styles.conteudo}>Profissão</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -233,7 +233,7 @@ function EditarPerfil({navigation}){
 
                     <TouchableOpacity onPress={()=>setSanfLocalizacao(!isSanfLocalizacao)}>
                         <View style={styles.sanfona} >
-                            <Text style={styles.titulo} >Dados De Localização</Text>
+                            <Text style={styles.conteudobold} >Dados De Localização</Text>
                             <Ionicons name={isSanfLocalizacao ? 'md-chevron-down' : 'md-chevron-up' } size={20} />
                         </View>
                     </TouchableOpacity>
@@ -241,7 +241,7 @@ function EditarPerfil({navigation}){
                         !isSanfLocalizacao && <>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>cidade</Text>
+                                <Text style={styles.conteudo}>Cidade</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -252,7 +252,11 @@ function EditarPerfil({navigation}){
                                     editable={isConfAppendVisible.cidade} 
                                 />
                                 <TouchableOpacity onPress={()=>setAppends('cidade', true)} >
-                                    <Ionicons name='md-pencil-sharp' size={20}/>
+                                    <MaterialCommunityIcons 
+                                    name='pencil-outline' 
+                                    size={28}
+                                    color='white'
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <ConfAppend 
@@ -262,7 +266,7 @@ function EditarPerfil({navigation}){
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>uf</Text>
+                                <Text style={styles.conteudo}>Uf</Text>
                             </View>
                             <Picker 
                             style={styles.pickerInput} 

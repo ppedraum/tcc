@@ -26,7 +26,7 @@ function Login({route, navigation}){
 
     return (
         
-        <View style={styles.container}>
+        <View style={styles.containerlogin}>
 
             <Image
                 source={logo}
@@ -41,7 +41,9 @@ function Login({route, navigation}){
             </View>
             <View>
                 <Text style={styles.conteudo}>Senha</Text>
-                <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
+                <TextInput style={styles.input} 
+                secureTextEntry={true}
+                onChangeText={(senha)=>setSenha(senha)} />
                 <Text>{errMsg[1]}</Text>
             </View>
             <View>
