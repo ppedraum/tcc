@@ -276,15 +276,16 @@ function Publicacao({ route, navigation }){
                                     <View style={styles.filtros_container}>
                                     <TouchableOpacity style={styles.botao}
                                     onPress={handleInscricao}>
-                                        <Text>Ciente</Text>
+                                        <Text style={styles.conteudobotao}>Ciente</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.botao}
                                     onPress={()=>setInscModalVisible(!inscModalVisible)}>
+                                        <Text style={styles.conteudobotao}>Cancelar</Text>
                                     </TouchableOpacity>
                                     </View>
                                 </View>
                             </Modal>
-                            <View>
+                            <View style={styles.margemdetalhes}>
                                 <Text style={styles.titulo}>
                                     Detalhes do Evento
                                 </Text>

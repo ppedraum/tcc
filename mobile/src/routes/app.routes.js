@@ -13,12 +13,11 @@ export default function AppRoutes(){
         <AppStack.Navigator
         screenOptions={{
             headerTitleStyle: {
-                color: 'white'
+                color: 'white',
             },
             headerStyle:{
                 height:'9%',
                 backgroundColor: '#004475',
-
             }
         }}>
             <AppStack.Screen name='Home' component={Home}
@@ -30,18 +29,26 @@ export default function AppRoutes(){
             />
             <AppStack.Screen name='Publicacao' component={Publicacao}
             options={{
-                title:'Publicação'
+                title:'Publicação',
+                headerTintColor: '#fff',
             }}
             />
-            <AppStack.Screen name='ResultScreen' component={ResultScreen} />
+            <AppStack.Screen name='ResultScreen' component={ResultScreen}
+            options={{
+                title:'Pesquisar',
+                headerTintColor: '#fff',
+            }}
+            />
             <AppStack.Screen name='PerfilInst' component={PerfilInst}
             options={{
-                title:'Perfil Instituição'
+                title:'Perfil Instituição',
+                headerTintColor: '#fff',
             }}           
             />
             <AppStack.Screen name='EditarPerfil' component={EditarPerfil} 
             options={{
-                title:'Editar Perfil'
+                title:'Editar Perfil',
+                headerTintColor: '#fff',
             }} 
             />
         </AppStack.Navigator>

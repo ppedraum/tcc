@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, ScrollView, KeyboardAvoidingView, Image, Platform, TouchableOpacity } from 'react-native';
-
+import { Ionicons} from '@expo/vector-icons';
 import { RNDateTimePicker, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { Checkbox } from 'react-native-paper';
@@ -37,7 +37,7 @@ function CadastroBasico({navigation}){
         </View>
         <TouchableOpacity style={styles.botao}
         onPress={()=>navigation.navigate('CadastroDados')}>
-            <Text>Enviar</Text>
+            <Text style={styles.conteudobotao}>Enviar</Text>
         </TouchableOpacity>
     </View> 
     );
@@ -119,10 +119,12 @@ function CadastroDados({ navigation }){
             <View>
                 <Text style={styles.conteudo}>Data de nascimento</Text>
                 <View style={styles.bt_container}>
-                    <TouchableOpacity 
-                        style={styles.botao} 
-                        onPress={()=>showDatePicker()}> 
-                        <Text>Selecione</Text>
+                    <TouchableOpacity onPress={()=>showDatePicker()}> 
+                    <Ionicons
+                        name='md-calendar-sharp' 
+                        size={50}
+                        color='white' 
+                    />
                     </TouchableOpacity>
                     {/* <Text>{dados.data_nasc}</Text> */}
                 </View> 
@@ -130,8 +132,8 @@ function CadastroDados({ navigation }){
             <View>
                 <Text style={styles.conteudo}>Sexo</Text>
                 <Picker
-                style={styles.pickerInput} 
-                dropdownIconColor='white'
+                style={styles.pickerInputperfil} 
+                dropdownIconColor='black'
                 selectedValue={dados.sexo}
                 onValueChange={(value, index) =>{
                     if(value == null)
@@ -158,8 +160,8 @@ function CadastroDados({ navigation }){
             <View>
                 <Text style={styles.conteudo}>UF</Text>
                 <Picker 
-                style={styles.pickerInput} 
-                dropdownIconColor='white'
+                style={styles.pickerInputperfil} 
+                dropdownIconColor='black'
                 selectedValue={dados.uf}
                 onValueChange={(value, index) =>{
                     if(value == null)
@@ -207,7 +209,7 @@ function CadastroDados({ navigation }){
                 <View  style={styles.bt_container}> 
                     <TouchableOpacity style={styles.botao}
                         onPress={pickImage}>
-                        <Text>Enviar</Text>
+                        <Text style={styles.conteudobotao}>Enviar</Text>
                     {dados.foto != '' && <Image source={{ uri: 'data:image/jpeg;base64,' + dados.foto_perfil }} />}
                     </TouchableOpacity>
                 </View>
@@ -228,7 +230,7 @@ function CadastroDados({ navigation }){
             <View style={styles.bt_container} >
                 <TouchableOpacity style={styles.botaoC}
                     onPress={HandleCadastro}>
-                    <Text>Completar Cadastro</Text>
+                    <Text style={styles.conteudobotao}>Completar Cadastro</Text>
                 </TouchableOpacity>
             </View>
 
@@ -257,14 +259,16 @@ function Cadastro({navigation}){
                     name='CadastroBasico'
                     component={CadastroBasico} 
                     options={{
-                        title:'Cadastro'
+                        title:'Cadastro',
+                        headerTintColor: '#fff',
                     }}
                 />
                 <Stack.Screen 
                     name='CadastroDados' 
                     component={CadastroDados}
                     options={{
-                        title:'Cadastro'
+                        title:'Cadastro',
+                        headerTintColor: '#fff',
                     }}
                 />
         </Stack.Navigator>
