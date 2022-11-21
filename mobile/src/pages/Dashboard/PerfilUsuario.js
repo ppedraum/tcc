@@ -57,14 +57,27 @@ function PerfilUsuario({navigation}){
         
         <View style={styles.container} >
             <ScrollView contentContainerStyle={styles.container} >
-                <TouchableOpacity onPress={()=>navigation.navigate('EditarPerfil')}>
-                    <MaterialCommunityIcons 
-                    name='account-edit-outline' 
-                    size={60}
-                    color='white' 
-                    />
-                </TouchableOpacity>
-                <Image source={{uri:"data:image/jpeg;base64," + usuario.foto_perfil}} style={styles.foto_perfil} />
+                <View style={styles.bt_perfil} >
+                    <TouchableOpacity onPress={()=>navigation.navigate('EditarPerfil')}>
+                        <MaterialCommunityIcons 
+                        name='account-edit-outline' 
+                        size={60}
+                        color='white' 
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={logout}>
+                        <MaterialCommunityIcons 
+                            name='logout' 
+                            size={50}
+                            color='white' 
+                        />
+                    </TouchableOpacity>
+                </View>
+                
+                {
+                    usuario.foto_perfil != '' &&
+                    <Image source={{uri:"data:image/jpeg;base64," + usuario.foto_perfil}} style={styles.foto_perfil} />
+                }
                 <Text style={styles.conteudo}><Text style={styles.conteudobold}>Olá</Text> {usuario.nome} !</Text>
                 <Text style={styles.titulo}>Dados Básicos</Text>
                 <Text style={styles.conteudo}><Text style={styles.conteudobold}>E-Mail :</Text> {usuario.e_mail}</Text>
@@ -77,13 +90,7 @@ function PerfilUsuario({navigation}){
                 :
                 <Text>Você ainda não está seguindo nenhuma instituição!</Text>
                 }
-                <TouchableOpacity onPress={logout}>
-                    <MaterialCommunityIcons 
-                        name='logout' 
-                        size={50}
-                        color='white' 
-                    />
-                </TouchableOpacity>
+                
             </ScrollView>
         </View>
         

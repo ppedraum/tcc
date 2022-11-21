@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#004475',
       width: '100%',
       paddingTop: 30,
-      height: Dimensions.get('window').height,
+      height: '100%',
       alignItems: 'center',
     },
     containerlogin: {
@@ -130,6 +130,17 @@ const styles = StyleSheet.create({
       color:'white',
       fontWeight:'bold'
     },
+    header_comm:{
+      display:'flex',
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent: 'space-between'
+    },
+    nome_comm:{
+      fontSize : 17,
+      color:'white',
+      fontWeight:'bold'
+    },
     smalltext:{
       fontSize:17,
       color:'white'
@@ -189,8 +200,6 @@ const styles = StyleSheet.create({
         flexDirection : 'row',
         alignItems : 'center',
         backgroundColor: '#004475',
-        paddingLeft:30,
-        paddingRight:30,
         paddingBottom: 20,
         height: Dimensions.get('window').height * 0.1,
     },
@@ -198,6 +207,14 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         alignItems:'center'
+    },
+    bt_perfil:{
+      display:'flex',
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent: 'space-between',
+      width: Dimensions.get('window').width,
+      paddingHorizontal: 20
     },
     galeria:{
       display: "flex",
@@ -430,7 +447,7 @@ const styles = StyleSheet.create({
       paddingLeft: 20
     },
     likepubN:{
-      color: 'black',
+      color: 'white',
       paddingLeft: 20
     },
   });

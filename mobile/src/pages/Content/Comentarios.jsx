@@ -96,11 +96,9 @@ function Comentarios({id_publicacao}){
         
         return pais.map((commPai)=>(
             <View key={commPai.estrutura.id} style={styles.post_cell} >
-                <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={styles.foto_icon} />
-                <Text style={styles.conteudobold}>
-                    {commPai.nome_usuario + ': ' }
-                    {new Date(commPai.estrutura.datetime_post).toLocaleDateString() + ' - '}
-                    {new Date(commPai.estrutura.datetime_post).toLocaleTimeString()}
+                
+                <View style={styles.header_comm} >
+                    <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={styles.foto_icon} />
                     {
                     /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
                     commPai.estrutura.id_usuario == usuario.id ? 
@@ -117,7 +115,12 @@ function Comentarios({id_publicacao}){
                     </>
                     :
                     null
-                }
+                    }
+                </View>
+                <Text style={styles.nome_comm}>
+                    {commPai.nome_usuario + ': ' }
+                    {new Date(commPai.estrutura.datetime_post).toLocaleDateString()}
+                    
                 </Text>
                
                 <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
@@ -129,11 +132,9 @@ function Comentarios({id_publicacao}){
                         if(commFilho.estrutura.id_pai == commPai.estrutura.id)
                             return(
                                 <View key={commFilho.estrutura.id} >
-                                    <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={styles.foto_icon} />
-                                    <Text style={styles.conteudobold}>
-                                        {commFilho.nome_usuario} {'- '}
-                                        {new Date(commFilho.estrutura.datetime_post).toLocaleDateString() + ' - ' }
-                                        {new Date(commFilho.estrutura.datetime_post).toLocaleTimeString()}
+                                    
+                                    <View style={styles.header_comm} >
+                                        <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={styles.foto_icon} />
                                         {
                                             /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
                                             commPai.estrutura.id_usuario == usuario.id ? 
@@ -151,7 +152,12 @@ function Comentarios({id_publicacao}){
                                             :
                                             null
                                         }
+                                    </View>
+                                    <Text style={styles.nome_comm}>
+                                        {commFilho.nome_usuario} {': '}
+                                        {new Date(commFilho.estrutura.datetime_post).toLocaleDateString()}
                                     </Text>
+                                    
                                     <Text style={styles.conteudo} >{commFilho.estrutura.conteudo}</Text>
 
                                 

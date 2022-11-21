@@ -124,6 +124,11 @@ function CadastroDados({ navigation }){
                         onPress={()=>showDatePicker()}> 
                         <Text>Selecione</Text>
                     </TouchableOpacity>
+                    <Text style={styles.smalltext} >
+                    {
+                        new Date(dados.data_nasc).toLocaleDateString('en-GB')
+                    }
+                    </Text>
                     {/* <Text>{dados.data_nasc}</Text> */}
                 </View> 
             </View>
@@ -208,8 +213,8 @@ function CadastroDados({ navigation }){
                     <TouchableOpacity style={styles.botao}
                         onPress={pickImage}>
                         <Text>Enviar</Text>
-                    {dados.foto != '' && <Image source={{ uri: 'data:image/jpeg;base64,' + dados.foto_perfil }} />}
                     </TouchableOpacity>
+                    {dados.foto != '' && <Image style={styles.foto_perfil} source={{ uri: 'data:image/jpeg;base64,' + dados.foto_perfil }} />}
                 </View>
             </View>
             <View style={styles.filtros_container}>
