@@ -10,23 +10,40 @@ import EditarPerfil from '../pages/Dashboard/EditarPerfil';
 const AppStack = createNativeStackNavigator();
 export default function AppRoutes(){
     return (
-        <AppStack.Navigator screenOptions={
-            {
-                headerStyle: {
-                    backgroundColor: '#004475',
-                    height: 350
-                  },
-                  headerTintColor: '#D0EBFF',
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
+        <AppStack.Navigator
+        screenOptions={{
+            headerTitleStyle: {
+                color: 'white'
+            },
+            headerStyle:{
+                height:'9%',
+                backgroundColor: '#004475',
+
             }
-        } >
-            <AppStack.Screen name='Home' component={Home} />
-            <AppStack.Screen name='Publicacao' component={Publicacao} />
+        }}>
+            <AppStack.Screen name='Home' component={Home}
+            options={
+                {
+                    headerShown: false
+                 }
+            }
+            />
+            <AppStack.Screen name='Publicacao' component={Publicacao}
+            options={{
+                title:'Publicação'
+            }}
+            />
             <AppStack.Screen name='ResultScreen' component={ResultScreen} />
-            <AppStack.Screen name='PerfilInst' component={PerfilInst} />
-            <AppStack.Screen name='EditarPerfil' component={EditarPerfil} />
+            <AppStack.Screen name='PerfilInst' component={PerfilInst}
+            options={{
+                title:'Perfil Instituição'
+            }}           
+            />
+            <AppStack.Screen name='EditarPerfil' component={EditarPerfil} 
+            options={{
+                title:'Editar Perfil'
+            }} 
+            />
         </AppStack.Navigator>
     );
 }

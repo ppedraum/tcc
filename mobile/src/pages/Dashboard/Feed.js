@@ -56,20 +56,22 @@ function Feed({navigation}) {
     }, [token]);
 
     return(
-        <View style={styles.container}>
-            <Text style={styles.titulo}>Meu Feed</Text>
+        <View style={styles.containerfeed}>
+            <View style={styles.titulocontainer}>
+                <Text style={styles.titulofeed}>Meu Feed</Text>
+            </View>
             <View style={styles.searchContainer} >
-                <TextInput style={styles.input} placeholder={'Buscar por publicações'} onChangeText={(text)=>setSearchInput(text)} />
-                <Button style={styles.botaofoda} title='Procurar' onPress={()=>{
-                    if(searchInput.trim() != 0)
-                        navigation.navigate('ResultScreen', { searchInput })
-                        
-                    }
-                } 
-                    
-                />                
-        </View>
-                
+                <TextInput style={styles.input}
+                 placeholder={'Buscar por publicações'}
+                  onChangeText={(text)=>setSearchInput(text)} 
+                />
+                <TouchableOpacity style={styles.botaofeed1}
+                    onPress={()=>{
+                        if(searchInput.trim() != 0)
+                            navigation.navigate('ResultScreen', { searchInput })}}>
+                <Text>Procurar</Text>                    
+                </TouchableOpacity>                
+            </View>    
                 {
                 isLoading ?
                 <ActivityIndicator size='large'/>
@@ -96,8 +98,10 @@ function Feed({navigation}) {
                                 styles.flatlist_cell_evento
                                 }
                                 >
-                                    <Text>{item.publicacao.tipo_publicacao}</Text>
+                                    <Text style={styles.conteudobold}>{item.publicacao.tipo_publicacao}</Text>
+                                    <View style={styles.filtros_container}>
                                     <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    </View>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
                                 </View>
@@ -109,7 +113,7 @@ function Feed({navigation}) {
                                 styles.flatlist_cell_evento
                                 }
                                 >
-                                    <Text>{item.publicacao.tipo_publicacao}</Text>
+                                    <Text style={styles.conteudobold}>{item.publicacao.tipo_publicacao}</Text>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
                                     <Text style={styles.conteudo} >{item.preview_text}</Text>
@@ -118,6 +122,7 @@ function Feed({navigation}) {
                             
 
                         </View>
+                        
                     </TouchableOpacity>
                 )}
                 refreshing={isLoading}
@@ -125,7 +130,7 @@ function Feed({navigation}) {
                 />
                 
             }
-        </View>
+</View> 
     )
 
 

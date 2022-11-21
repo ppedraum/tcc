@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, TouchableOpacity, Pressable, Image } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, TouchableOpacity, Image } from 'react-native';
 
 import AuthContext from '../../contexts/auth';
 
@@ -31,33 +31,30 @@ function Login({route, navigation}){
     return (
         
         <View style={styles.container}>
-
-            <Image
-                source={logo}
-                style={styles.logo}
-            />
-            <Text style={styles.titulo}>Bem vindo ao Mundo!</Text>
-            
+            <Text style={styles.titulologin}>Bem vindo ao MUNDO</Text>
             <View>
-                <Text style={styles.conteudo} >E-Mail</Text>
+                <Text style={styles.conteudo}>E-Mail</Text>
                 <TextInput style={styles.input} placeholder='exemplo@mail.com' onChangeText={(email)=>setEmail(email)} />
                 <Text style={styles.conteudo}>{errMsg[0]}</Text>
             </View>
             <View>
-                <Text style={styles.conteudo} >Senha</Text>
+                <Text style={styles.conteudo}>Senha</Text>
                 <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
                 <Text>{errMsg[1]}</Text>
             </View>
             <View>
-                <Pressable style={styles.botao} onPress={()=>handleLogin()}>
-                    <Text style={styles.bt_label}>Login</Text>
-                </Pressable>
-                <Text style={styles.conteudo} >{errMsg.login}</Text>
+                <TouchableOpacity style={styles.botao}
+                    onPress={()=>handleLogin()}>
+                    <Text>Login</Text>
+                </TouchableOpacity>
             </View>
             <View style={{margin:20}} >
-                <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} >
-                    <Text style={styles.subtexto} >Não tem conta? Cadastre-se</Text>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} >
+                            <Text>
+                                <Text style={styles.conteudo}>Não tem uma conta?</Text>
+                                <Text style={styles.conteudobold}> Cadastre-se</Text>
+                            </Text>
+                        </TouchableOpacity>
             </View>
             
         </View>

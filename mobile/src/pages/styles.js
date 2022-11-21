@@ -1,3 +1,4 @@
+import { BottomTabBarHeightCallbackContext } from '@react-navigation/bottom-tabs';
 import {React} from 'react';
 import {StyleSheet, Dimensions} from 'react-native';
 
@@ -11,6 +12,44 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    containeraviso: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#004475',
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingLeft: 10,
+      paddingRight: 10
+    },
+    containerfeed: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#fff',
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    containercmt: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#075F8C',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 0
+    },
+    containerpub: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#004475',
+
+    },
+    alinharmeio:{
+      paddingLeft: 20,
+      paddingRight: 20
+    },
     scrollContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -18,19 +57,44 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-  
     },
     post_cell:{
       display: 'flex',
       alignItems: 'flex-start',
       margin: 10,
-  
+      color:'white',
+      backgroundColor:'#075F8C',
     },
     titulo:{
       fontWeight : 'bold',
       fontSize : 30,
-      color: 'white',
-      marginBottom: 30,
+      color:'white',
+      paddingBottom:10,
+      paddingTop:20
+    },
+    titulologin:{
+      fontWeight : 'bold',
+      fontSize : 30,
+      color:'white',
+      paddingBottom:40,
+      paddingTop:10
+    },
+    titulofeed: {
+      fontWeight : 'bold',
+      fontSize : 30,
+      color:'white',
+      paddingBottom:10,
+      paddingTop:40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      display:'flex',
+    },
+    titulocontainer: {
+      display:'flex',
+      alignItems:'center',
+      justifyContent: 'center',
+      width: '100%',
+      backgroundColor: '#004475',
     },
     titulo_galeria:{
       fontWeight : 'bold',
@@ -38,8 +102,22 @@ const styles = StyleSheet.create({
       fontSize : 15
     },
     conteudo:{
-      color: 'white',
-      fontSize : 20
+      fontSize : 20,
+      color:'white',
+    },
+    timelocal:{
+      fontSize : 20,
+      color:'white',
+      paddingLeft: 20
+    },
+    conteudobold:{
+      fontSize : 20,
+      color:'white',
+      fontWeight:'bold'
+    },
+    smalltext:{
+      fontSize:17,
+      color:'white'
     },
     subtexto:{
       color: 'white',
@@ -50,29 +128,45 @@ const styles = StyleSheet.create({
     },
     input:{
         width : Dimensions.get('window').width * 0.7,
-        height: 45,
+        height: 40,
         padding : 10,
         margin : 10,
         borderRadius: 15,
-        backgroundColor: '#FAFAFA',
-        fontSize : 20
+        backgroundColor: '#fff',
+        fontSize: 20,
+        paddingBottom:5,
+        paddingTop: 5
+    },
+    inputcmt:{
+        width: 200,
+        height: 40,
+        padding : 10,
+        margin : 10,
+        borderRadius: 15,
+        backgroundColor: '#fff',
+        fontSize: 20,
+        paddingBottom:10,
     },
     pickerInput:{
-        width : 200,
-        height: 20,
+        width : Dimensions.get('window').width * 0.7,
+        height: 40,
         padding : 10,
         margin : 10,
-        backgroundColor: '#99B3FF',
-        color: 'white',
+        backgroundColor: '#D0EBFF',
+        color: 'black',
         borderWidth: 1,
         borderColor: 'blue',
-        borderRadius: 15,
+        borderRadius: 15
     },
     searchContainer:{
         display: 'flex',
         flexDirection : 'row',
         alignItems : 'center',
-        backgroundColor: '#FFF',
+        backgroundColor: '#004475',
+        paddingLeft:30,
+        paddingRight:30,
+        paddingBottom: 20,
+        height: Dimensions.get('window').height * 0.1,
     },
     filtros_container:{
         display:'flex',
@@ -93,21 +187,24 @@ const styles = StyleSheet.create({
       display: 'flex',
       alignItems: 'flex-start',
       width: 230,
-      height: 'auto'
+      height: 'auto',
+      marginLeft: 30
     },
     flatlist_cell:{
       paddingHorizontal: 20,
       paddingVertical: 10,
       marginVertical: 5,
-      backgroundColor : '#99B3FF',
-      minWidth: 370
+      backgroundColor : '#0882A3',
+      minWidth: 370,
+      color: '#FFF'
     },
     flatlist_cell_evento:{
       paddingHorizontal: 20,
       paddingVertical: 10,
       marginVertical: 5,
-      backgroundColor : '#5BF085',
-      minWidth: 370
+      backgroundColor : '#2B9972',
+      minWidth: 370,
+      color: '#FFF'
     },
     bt_desinscrever:{
       backgroundColor:'#2B703E'
@@ -116,6 +213,8 @@ const styles = StyleSheet.create({
       width:200,
       height:200,
       marginVertical:20,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     logo:{
       width: 190, 
@@ -136,16 +235,9 @@ const styles = StyleSheet.create({
       backgroundColor : '#99B3FF',
       width: Dimensions.get('window').width - 20
     },
-    containerLogo:{
-      flex:1,
-      justifyContent: 'center',
-      backgroundColor: 'red',
-      width:10,
-      height:10,
-    },
     botao:{
       alignItems: 'center',
-      backgroundColor: 'white',
+      backgroundColor: '#D0EBFF',
       padding: 10,
       borderRadius:15,
       width: 100,
@@ -153,10 +245,99 @@ const styles = StyleSheet.create({
       border: 2,
       borderStyle: 'solid',
       borderColor: 'black',
+      color: 'black',
+      fontSize: 10
+    }, 
+    botaoC:{
+      backgroundColor: '#D0EBFF',
+      padding: 10,
+      borderRadius:15,
+      width: 150,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      color: 'black',
+      display:'flex',
+      justifyContent: 'center',
+      alignItems:'center'
     },
-    bt_label:{
-      fontSize : 20
-    }
+    bt_container:{
+      display:'flex', 
+      alignItems:'center'
+    },
+    botaofeed1: {
+      alignItems: 'center',
+      backgroundColor: '#D0EBFF',
+      padding: 10,
+      borderRadius:15,
+      width: 90,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      color: 'black',
+      fontSize: 10,
+      paddingRight: 5,
+      height: 40
+    },
+    botaoinscrever: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#6399FA',
+      padding: 10,
+      borderRadius:15,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      fontSize: 10,
+      height: 40,
+      width: 150,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    },
+    botaotext1: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 16
+    },
+    botaoinscrito: {
+      alignItems: 'center',
+      backgroundColor: '#bbb',
+      padding: 10,
+      borderRadius:15,
+      width: 150,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      color: 'black',
+      fontSize: 10,
+      paddingRight: 5,
+      height: 40,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    },
+    botaotext2: {
+      color: 'black',
+      fontWeight: 'bold',
+      fontSize: 16
+    },
+    botaocmt:{
+      alignItems: 'center',
+      backgroundColor: '#D0EBFF',
+      padding: 10,
+      borderRadius:15,
+      width: 100,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      color: 'black',
+      fontSize: 10
+    }, 
   });
 
   export default styles;
