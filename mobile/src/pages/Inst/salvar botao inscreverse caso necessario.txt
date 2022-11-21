@@ -1,0 +1,67 @@
+salvar botao inscreverse caso necessario
+
+PERFILINST.JS
+
+                <Image source={{uri:'data:image/jpeg;base64,' + inst.foto_perfil}} style={styles.foto_perfil} /> 
+                <Text style={styles.titulo} >{inst.nome_fantasia}</Text>
+                <Text style={styles.conteudo}>{inst.apresentacao}</Text>
+                <TouchableOpacity style={isFollowing ? styles.botaoseguindo : styles.botaoseguir}
+                onPress={()=>setFolModalVisible(true)}>
+                    {
+                        isFollowing ?
+                        <Text style={styles.botaotext2}>Seguindo</Text>
+                        :
+                        <Text style={styles.botaotext1}>Inscrever-se</Text>
+                    }
+                </TouchableOpacity>
+                <Text>{msgFollow}</Text>
+                <View style={styles.galeria} >
+                <HandleGaleriaRender/>
+                </View>
+
+----------------------------------
+
+botaoseguindo: {
+    alignItems: 'center',
+    backgroundColor: '#bbb',
+    padding: 10,
+    borderRadius:15,
+    width: 150,
+    margin:10,
+    border: 2,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    color: 'black',
+    fontSize: 10,
+    paddingRight: 5,
+    height: 40,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  botaoseguir: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#6399FA',
+    padding: 10,
+    borderRadius:15,
+    margin:10,
+    border: 2,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    fontSize: 10,
+    height: 40,
+    width: 150,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  botaotext2: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16
+  },   
+  botaotext1: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16
+  },

@@ -1,6 +1,7 @@
 import { React, useContext, useEffect, useState } from 'react';
 import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Button, Modal, Image, ScrollView } from 'react-native'
 import AuthContext from '../../contexts/auth';
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from '../styles';
 
 
@@ -40,14 +41,12 @@ function PerfilInst({route, navigation}){
             <TouchableOpacity key={publicacao.publicacao.id} onPress={()=>navigation.push('Publicacao', {id:publicacao.publicacao.id})} >
                     {
                         publicacao.foto_publicacao != null ?
-                        <View style={styles.galeria_cell_foto} >
+                        <View style={styles.galeria_cell} >
                             <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_galeria}/>
-                            <Text style={styles.titulo_galeria} >{publicacao.publicacao.titulo}</Text>
                         </View>
                         :
                         <View style={styles.galeria_cell}  >
                             <Text style={styles.titulo_galeria} >{publicacao.publicacao.titulo}</Text>
-                            <Text style={styles.conteudo_galeria} >{publicacao.preview_text}</Text>
                         </View>
                     }
             </TouchableOpacity>
@@ -145,9 +144,9 @@ function PerfilInst({route, navigation}){
         <View style={styles.container} >
         
         {
-            isLoading ? <ActivityIndicator size='large' color='blue'/>
+            isLoading ? <ActivityIndicator size='large' color='white'/>
             :
-            <View>
+            <View style={styles.containerpinst}>
                 <Modal
                 visible={folModalVisible}
                 transparent={true}
@@ -155,28 +154,49 @@ function PerfilInst({route, navigation}){
                 onRequestClose={()=>setFolModalVisible(!folModalVisible)}
                 >
                     <View style={styles.container}>
-                        <Text>
+                        <Text style={styles.conteudo}>
                             {isFollowing?
                             'Você tem certeza que deseja parar de seguir?'
                             :
-                            'Você quer seguir essa instituição?'
+                            'Você deseja seguir essa instituição?'
                             }
                         </Text>
                         <View  style={styles.filtros_container}>
-                            <Button onPress={handleFollow} title='Sim' />
-                            <Button onPress={()=>setFolModalVisible(!folModalVisible)} title='Não' />
+                            <TouchableOpacity style={styles.botao}
+                                onPress={handleFollow}>
+                                <Text>Sim</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.botao}
+                                onPress={()=>setFolModalVisible(!folModalVisible)}>
+                                <Text>Não</Text>
+                            </TouchableOpacity>
                         </View>
-                        
                     </View>
                 </Modal>
                 <Image source={{uri:'data:image/jpeg;base64,' + inst.foto_perfil}} style={styles.foto_perfil} /> 
                 <Text style={styles.titulo} >{inst.nome_fantasia}</Text>
                 <Text style={styles.conteudo}>{inst.apresentacao}</Text>
-                <Button  
-                color={isFollowing?'#bbb':'#6399FA' }  title={isFollowing? 'seguindo':'Seguir'} onPress={()=>setFolModalVisible(true)}
-                />
+                <TouchableOpacity style={isFollowing ? styles.botaoseguindo : styles.botaoseguir}
+                onPress={()=>setFolModalVisible(true)}>
+                    {
+                        isFollowing ?
+                        <Text style={styles.botaotext2}>Seguindo
+                        <MaterialCommunityIcons
+                            name='account-star'
+                            size={17}
+                        />
+                        </Text>
+                        :
+                        <Text style={styles.botaotext1}>Seguir  
+                        <MaterialCommunityIcons
+                            name='account-outline'
+                            size={17}
+                        /></Text>
+                        
+                    }
+                </TouchableOpacity>
                 <Text>{msgFollow}</Text>
-                <View style={galeria} >
+                <View style={styles.galeria} >
                 <HandleGaleriaRender/>
                 </View>
                 

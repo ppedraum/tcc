@@ -96,19 +96,16 @@ function Comentarios({id_publicacao}){
         
         return pais.map((commPai)=>(
             <View key={commPai.estrutura.id} style={styles.post_cell} >
-                <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={{width:50, height:50}} />
+                <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={styles.foto_icon} />
                 <Text style={styles.conteudobold}>
                     {commPai.nome_usuario + ': ' }
                     {new Date(commPai.estrutura.datetime_post).toLocaleDateString() + ' - '}
                     {new Date(commPai.estrutura.datetime_post).toLocaleTimeString()}
-                </Text>
-                <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
-                <FormComentario onComentar={comentar} tipo='icon' id_pai={commPai.estrutura.id} />
-                {
+                    {
                     /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
                     commPai.estrutura.id_usuario == usuario.id ? 
                     <>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={()=>handleSetCommselecionado(commPai)}>
                         <Ionicons 
                         name='trash'
@@ -121,27 +118,42 @@ function Comentarios({id_publicacao}){
                     :
                     null
                 }
+                </Text>
+               
+                <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
+                <FormComentario onComentar={comentar} tipo='icon' id_pai={commPai.estrutura.id} />
+                
                 <View style={{marginLeft:20}} >
                 {
                     filhos.map(commFilho=>{
                         if(commFilho.estrutura.id_pai == commPai.estrutura.id)
                             return(
                                 <View key={commFilho.estrutura.id} >
-                                    <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={{width:50, height:50}} />
-                                    <Text>
+                                    <Image source={{uri:'data:image/jpeg;base64,' + commPai.foto_perfil}} style={styles.foto_icon} />
+                                    <Text style={styles.conteudobold}>
                                         {commFilho.nome_usuario} {'- '}
                                         {new Date(commFilho.estrutura.datetime_post).toLocaleDateString() + ' - ' }
                                         {new Date(commFilho.estrutura.datetime_post).toLocaleTimeString()}
+                                        {
+                                            /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
+                                            commPai.estrutura.id_usuario == usuario.id ? 
+                                            <>
+                                            <TouchableOpacity
+                                                onPress={()=>handleSetCommselecionado(commPai)}>
+                                                <Ionicons 
+                                                name='trash'
+                                                size={25}
+                                                color={'#fff'} 
+                                                />
+                                            </TouchableOpacity> 
+                                                    
+                                            </>
+                                            :
+                                            null
+                                        }
                                     </Text>
                                     <Text style={styles.conteudo} >{commFilho.estrutura.conteudo}</Text>
-                                {
-                                    commFilho.estrutura.id_usuario == usuario.id ? 
-                                    <>
-                                    <Button title='Deletar' onPress={()=>handleSetCommselecionado(commFilho)}/>
-                                    </>
-                                    :
-                                    null
-                                }
+
                                 
                                 </View>
                             )

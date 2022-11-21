@@ -33,7 +33,7 @@ function CadastroBasico({navigation}){
         </View>
         <View>
             <Text style={styles.conteudo}>Senha</Text>
-            <TextInput style={styles.input} onChangeText={(senha)=>setDado('senha', senha)} />
+            <TextInput style={styles.input} secureTextEntry={true} onChangeText={(senha)=>setDado('senha', senha)} />
         </View>
         <TouchableOpacity style={styles.botao}
         onPress={()=>navigation.navigate('CadastroDados')}>

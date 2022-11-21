@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ActivityIndicator, Button, TextInput, Touchable
 
 import AuthContext from '../../contexts/auth';
 
-import styles from '../styles';
+import styles from '../styles'
 import logo from '../../assets/logo.png';
 
 function Login({route, navigation}){
@@ -30,7 +30,13 @@ function Login({route, navigation}){
 
     return (
         
-        <View style={styles.container}>
+        <View style={styles.containerlogin}>
+
+            <Image
+                source={logo}
+                style={styles.logo}
+            />
+            
             <Text style={styles.titulologin}>Bem vindo ao MUNDO</Text>
             <View>
                 <Text style={styles.conteudo}>E-Mail</Text>
@@ -39,7 +45,9 @@ function Login({route, navigation}){
             </View>
             <View>
                 <Text style={styles.conteudo}>Senha</Text>
-                <TextInput style={styles.input} onChangeText={(senha)=>setSenha(senha)} />
+                <TextInput style={styles.input} 
+                secureTextEntry={true}
+                onChangeText={(senha)=>setSenha(senha)} />
                 <Text>{errMsg[1]}</Text>
             </View>
             <View>

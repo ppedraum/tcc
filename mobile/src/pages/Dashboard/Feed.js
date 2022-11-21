@@ -98,12 +98,16 @@ function Feed({navigation}) {
                                 styles.flatlist_cell_evento
                                 }
                                 >
+                                    <View style={styles.flatlist_text} >
                                     <Text style={styles.conteudobold}>{item.publicacao.tipo_publicacao}</Text>
+                                    </View>
+                                    
                                     <View style={styles.filtros_container}>
-                                    <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_publicacao}/>
                                     </View>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
+                                   
                                 </View>
                                 :
                                 <View style={
@@ -113,10 +117,16 @@ function Feed({navigation}) {
                                 styles.flatlist_cell_evento
                                 }
                                 >
-                                    <Text style={styles.conteudobold}>{item.publicacao.tipo_publicacao}</Text>
+                                    <View style={styles.flatlist_text} >
+                                        <Text style={styles.conteudobold}>{item.publicacao.tipo_publicacao}</Text>
+                                    </View>
                                     <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
-                                    <Text style={styles.conteudo} >{item.preview_text}</Text>
+                                    <View style={styles.flatlist_text}>
+                                        <Text style={styles.conteudo} >{item.preview_text}</Text>
+                                    </View>
+                                    
+                                    
                                 </View>
                             }
                             

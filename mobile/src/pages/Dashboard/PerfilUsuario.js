@@ -1,6 +1,6 @@
 import { React, useContext, useState, useEffect } from 'react'
 import { Text, View, Image, Button, FlatList, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from '../styles';
 
 import AuthContext from '../../contexts/auth';
@@ -58,22 +58,32 @@ function PerfilUsuario({navigation}){
         <View style={styles.container} >
             <ScrollView contentContainerStyle={styles.container} >
                 <TouchableOpacity onPress={()=>navigation.navigate('EditarPerfil')}>
-                    <Ionicons name='md-pencil-sharp' size={30} />
+                    <MaterialCommunityIcons 
+                    name='account-edit-outline' 
+                    size={60}
+                    color='white' 
+                    />
                 </TouchableOpacity>
                 <Image source={{uri:"data:image/jpeg;base64," + usuario.foto_perfil}} style={styles.foto_perfil} />
-                <Text style={styles.conteudo} >Olá {usuario.nome}!</Text>
-                <Text style={styles.conteudo} >Dados Básicos</Text>
-                <Text style={styles.conteudo}>E-Mail : {usuario.e_mail}</Text>
-                <Text style={styles.conteudo}>Telefone : {usuario.telefone}</Text>
-                <Text style={styles.conteudo}>Profissao : {usuario.profissao}</Text>
-                <Text style={styles.titulo}>Instituicoes Seguidas</Text>
+                <Text style={styles.conteudo}><Text style={styles.conteudobold}>Olá</Text> {usuario.nome} !</Text>
+                <Text style={styles.titulo}>Dados Básicos</Text>
+                <Text style={styles.conteudo}><Text style={styles.conteudobold}>E-Mail :</Text> {usuario.e_mail}</Text>
+                <Text style={styles.conteudo}><Text style={styles.conteudobold}>Telefone :</Text> {usuario.telefone}</Text>
+                <Text style={styles.conteudo}><Text style={styles.conteudobold}>Profissão :</Text> {usuario.profissao}</Text>
+                <Text style={styles.titulo}>Instituições Seguidas</Text>
                 {
                 follows.length != 0?
                 <HandleFollowsRender/>
                 :
                 <Text>Você ainda não está seguindo nenhuma instituição!</Text>
                 }
-                <Button title='Logout' onPress={logout}/>
+                <TouchableOpacity onPress={logout}>
+                    <MaterialCommunityIcons 
+                        name='logout' 
+                        size={50}
+                        color='white' 
+                    />
+                </TouchableOpacity>
             </ScrollView>
         </View>
         
