@@ -1,6 +1,7 @@
 import { React, useContext, useEffect, useState } from 'react';
 import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Button, Modal, Image, ScrollView } from 'react-native'
 import AuthContext from '../../contexts/auth';
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from '../styles';
 
 
@@ -179,9 +180,19 @@ function PerfilInst({route, navigation}){
                 onPress={()=>setFolModalVisible(true)}>
                     {
                         isFollowing ?
-                        <Text style={styles.botaotext2}>Seguindo</Text>
+                        <Text style={styles.botaotext2}>Seguindo
+                        <MaterialCommunityIcons
+                            name='account-star'
+                            size={17}
+                        />
+                        </Text>
                         :
-                        <Text style={styles.botaotext1}>Inscrever-se</Text>
+                        <Text style={styles.botaotext1}>Seguir  
+                        <MaterialCommunityIcons
+                            name='account-outline'
+                            size={17}
+                        /></Text>
+                        
                     }
                 </TouchableOpacity>
                 <Text>{msgFollow}</Text>

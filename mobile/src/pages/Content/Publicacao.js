@@ -235,17 +235,26 @@ function Publicacao({ route, navigation }){
                         :
                         null
                     }
-                    
                     <Text style={styles.titulo}>{publicacao.titulo} </Text>
                     <Text style={styles.conteudo}>{publicacao.descricao} </Text>
-                    <TouchableOpacity 
-                        onPress={isLiked? unlike : like}>
-                        <Ionicons 
-                        name='thumbs-up'
-                        size={45}
-                        color={isLiked? '#4490F5' : '#666'} 
-                        />
-                    </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity
+                            onPress={isLiked? unlike : like}>
+                            {   
+                                isLiked ?
+                                <Ionicons style={styles.likepubY}
+                                name='heart'
+                                size={45}
+                                />
+                                :
+                                <Ionicons style={styles.likepubN}
+                                name='heart-outline'
+                                size={45}
+                                />
+                            }   
+                        </TouchableOpacity>
+                    
                     {
                         publicacao.tipo_publicacao == 'EVENTO' && publicacao.id_evento != null ?
                         (
@@ -267,16 +276,16 @@ function Publicacao({ route, navigation }){
                                     <View style={styles.filtros_container}>
                                     <TouchableOpacity style={styles.botao}
                                     onPress={handleInscricao}>
-                                        <Text>Ciente</Text>
+                                        <Text style={styles.conteudobotao}>Ciente</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.botao}
                                     onPress={()=>setInscModalVisible(!inscModalVisible)}>
-                                        <Text>Cancelar</Text>
+                                        <Text style={styles.conteudobotao}>Cancelar</Text>
                                     </TouchableOpacity>
                                     </View>
                                 </View>
                             </Modal>
-                            <View>
+                            <View style={styles.margemdetalhes}>
                                 <Text style={styles.titulo}>
                                     Detalhes do Evento
                                 </Text>

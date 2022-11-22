@@ -101,26 +101,29 @@ function Comentarios({id_publicacao}){
                     {commPai.nome_usuario + ': ' }
                     {new Date(commPai.estrutura.datetime_post).toLocaleDateString() + ' - '}
                     {new Date(commPai.estrutura.datetime_post).toLocaleTimeString()}
-                </Text>
-                <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
-                <FormComentario onComentar={comentar} tipo='icon' id_pai={commPai.estrutura.id} />
-                {
+                    {
                     /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
                     commPai.estrutura.id_usuario == usuario.id ? 
                     <>
-                    <TouchableOpacity 
+                    
+                            
+                    </>
+                    :
+                    null
+                }
+                </Text>
+               <View style={styles.filtros_container}>
+                <Text style={styles.conteudo}>{commPai.estrutura.conteudo} 
+                    <TouchableOpacity style={styles.arrumaicon}
                         onPress={()=>handleSetCommselecionado(commPai)}>
                         <Ionicons 
                         name='trash'
                         size={25}
                         color={'#fff'} 
                         />
-                    </TouchableOpacity> 
-                            
-                    </>
-                    :
-                    null
-                }
+                    </TouchableOpacity> </Text></View>
+                <FormComentario onComentar={comentar} tipo='icon' id_pai={commPai.estrutura.id} />
+                
                 <View style={{marginLeft:20}} >
                 {
                     filhos.map(commFilho=>{
@@ -132,23 +135,26 @@ function Comentarios({id_publicacao}){
                                         {commFilho.nome_usuario} {'- '}
                                         {new Date(commFilho.estrutura.datetime_post).toLocaleDateString() + ' - ' }
                                         {new Date(commFilho.estrutura.datetime_post).toLocaleTimeString()}
+                                        {
+                                            /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
+                                            commPai.estrutura.id_usuario == usuario.id ? 
+                                            <>
+                                            <TouchableOpacity
+                                                onPress={()=>handleSetCommselecionado(commPai)}>
+                                                <Ionicons 
+                                                name='trash'
+                                                size={25}
+                                                color={'#fff'} 
+                                                />
+                                            </TouchableOpacity> 
+                                                    
+                                            </>
+                                            :
+                                            null
+                                        }
                                     </Text>
                                     <Text style={styles.conteudo} >{commFilho.estrutura.conteudo}</Text>
-                                {
-                                    commFilho.estrutura.id_usuario == usuario.id ? 
-                                    <>
-                                    <TouchableOpacity
-                                      onPress={()=>handleSetCommselecionado(commFilho)}>
-                                        <Ionicons 
-                                        name='trash'
-                                        size={25}
-                                        color={'#fff'} 
-                                        />
-                                    </TouchableOpacity>
-                                    </>
-                                    :
-                                    null
-                                }
+
                                 
                                 </View>
                             )

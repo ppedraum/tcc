@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Text, View, Image, Button, ScrollView, TextInput, Modal, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from '../styles';
 import AuthContext from '../../contexts/auth';
 
@@ -99,12 +99,15 @@ function EditarPerfil({navigation}){
         if(isConfAppendVisible[nomeCampo])
             return(
                 <View style={styles.filtros_container} >
-                    <Button title='Confirmar' onPress={()=>setAppends(nomeCampo, false)} />
-                    <Button title='Cancelar' onPress={()=>{
+                    <TouchableOpacity style={styles.botaoeditperfil} onPress={()=>setAppends(nomeCampo, false)}>
+                        <Text style={styles.conteudobotaoperfil}>Confirmar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.botaoeditperfil }onPress={()=>{
                         setEdObj(nomeCampo, objCampo)
                         setAppends(nomeCampo, false);
-                    }} 
-                    />
+                    }}>
+                        <Text style={styles.conteudobotaoperfil}>Cancelar</Text>
+                    </TouchableOpacity>
                 </View>
             );
         else return null;
@@ -117,7 +120,7 @@ function EditarPerfil({navigation}){
                 <Text style={styles.titulo}>Editar Perfil</Text>
                 <TouchableOpacity onPress={()=>setSanfBasicos(!isSanfBasicos)}>
                     <View style={styles.sanfona} >
-                        <Text style={styles.titulo} >Dados Básicos</Text>
+                        <Text style={styles.conteudobold} >Dados Básicos</Text>
                         <Ionicons name={isSanfBasicos ? 'md-chevron-down' : 'md-chevron-up' } size={20} />
                     </View>
                 </TouchableOpacity>
@@ -125,7 +128,7 @@ function EditarPerfil({navigation}){
                         !isSanfBasicos && <>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>Nome</Text>
+                                <Text style={styles.conteudo}>Nome</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -136,7 +139,11 @@ function EditarPerfil({navigation}){
                                     editable={isConfAppendVisible.nome} 
                                 />
                                 <TouchableOpacity onPress={()=>setAppends('nome', true)} >
-                                    <Ionicons name='md-pencil-sharp' size={20}/>
+                                <MaterialCommunityIcons 
+                                    name='pencil-outline' 
+                                    size={28}
+                                    color='white'
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <ConfAppend 
@@ -146,7 +153,7 @@ function EditarPerfil({navigation}){
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>e_mail</Text>
+                                <Text style={styles.conteudo}>E-mail</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -157,7 +164,11 @@ function EditarPerfil({navigation}){
                                     editable={isConfAppendVisible.e_mail} 
                                 />
                                 <TouchableOpacity onPress={()=>setAppends('e_mail', true)} >
-                                    <Ionicons name='md-pencil-sharp' size={20}/>
+                                    <MaterialCommunityIcons 
+                                    name='pencil-outline' 
+                                    size={28}
+                                    color='white'
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <ConfAppend 
@@ -167,7 +178,7 @@ function EditarPerfil({navigation}){
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>telefone</Text>
+                                <Text style={styles.conteudo}>Telefone</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -178,21 +189,25 @@ function EditarPerfil({navigation}){
                                     editable={isConfAppendVisible.telefone} 
                                 />
                                 <TouchableOpacity onPress={()=>setAppends('telefone', true)} >
-                                    <Ionicons name='md-pencil-sharp' size={20}/>
+                                    <MaterialCommunityIcons 
+                                    name='pencil-outline' 
+                                    size={28}
+                                    color='white'
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <ConfAppend 
                                 nomeCampo='telefone'
                                 objCampo={usuario.telefone}
                             />
-                        </View>
+                        
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>sexo</Text>
+                                <Text style={styles.conteudo}>Gênero</Text>
                             </View>
                             <Picker 
-                            style={styles.pickerInput} 
-                            dropdownIconColor='white'
+                            style={styles.pickerInputperfil} 
+                            dropdownIconColor='black'
                             selectedValue={edicao.sexo}
                             onValueChange={(value, index) =>{
                                 if(value == null)
@@ -209,7 +224,7 @@ function EditarPerfil({navigation}){
                         </View>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>profissao</Text>
+                                <Text style={styles.conteudo}>Profissão</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -220,7 +235,11 @@ function EditarPerfil({navigation}){
                                     editable={isConfAppendVisible.profissao} 
                                 />
                                 <TouchableOpacity onPress={()=>setAppends('profissao', true)} >
-                                    <Ionicons name='md-pencil-sharp' size={20}/>
+                                    <MaterialCommunityIcons 
+                                    name='pencil-outline' 
+                                    size={28}
+                                    color='white'
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <ConfAppend 
@@ -228,12 +247,13 @@ function EditarPerfil({navigation}){
                                 objCampo={usuario.profissao}
                             />
                         </View>
+                        </View>
                         </>
                     }
 
                     <TouchableOpacity onPress={()=>setSanfLocalizacao(!isSanfLocalizacao)}>
                         <View style={styles.sanfona} >
-                            <Text style={styles.titulo} >Dados De Localização</Text>
+                            <Text style={styles.conteudobold} >Dados De Localização</Text>
                             <Ionicons name={isSanfLocalizacao ? 'md-chevron-down' : 'md-chevron-up' } size={20} />
                         </View>
                     </TouchableOpacity>
@@ -241,7 +261,7 @@ function EditarPerfil({navigation}){
                         !isSanfLocalizacao && <>
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>cidade</Text>
+                                <Text style={styles.conteudo}>Cidade</Text>
                             </View>
                             <View style={styles.filtros_container} >
                                 <TextInput 
@@ -252,21 +272,25 @@ function EditarPerfil({navigation}){
                                     editable={isConfAppendVisible.cidade} 
                                 />
                                 <TouchableOpacity onPress={()=>setAppends('cidade', true)} >
-                                    <Ionicons name='md-pencil-sharp' size={20}/>
+                                    <MaterialCommunityIcons 
+                                    name='pencil-outline' 
+                                    size={28}
+                                    color='white'
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <ConfAppend 
                                 nomeCampo='cidade'
                                 objCampo={usuario.cidade}
                             />
-                        </View>
+
                         <View>
                             <View style={styles.filtros_container} >
-                                <Text>uf</Text>
+                                <Text style={styles.conteudo}>Estado</Text>
                             </View>
                             <Picker 
-                            style={styles.pickerInput} 
-                            dropdownIconColor='white'
+                            style={styles.pickerInputperfil} 
+                            dropdownIconColor='black'
                             selectedValue={edicao.uf}
                             onValueChange={(value, index) =>{
                                 if(value == null)
@@ -305,28 +329,35 @@ function EditarPerfil({navigation}){
                                 <Picker.Item label="TO" value="TO" />
                             </Picker>
                         </View>
-                        
+                        </View>
                     
                         </>
                     }
                     <View>
-                        <View style={styles.filtros_container} >
-                            <Text style={styles.conteudo} >
-                                foto_perfil
-                            </Text>
+                        <View style={styles.alinharmeio}>
+                            <Text style={styles.conteudo}>
+                                Foto de perfil
+                            </Text>   
+                            <TouchableOpacity style={styles.botao}onPress={pickImage}>
+                                <Text style={styles.conteudobotao}>Escolher</Text>
+                            </TouchableOpacity>
                         </View>
-                        <Button title='Escolher' onPress={pickImage} />
+                         
                         <Image source={{uri: 'data:image/jpeg;base64,' + edicao.foto_perfil }} style={styles.foto_perfil}/>
                     </View>
                     
                 <View style={styles.filtros_container}>
-                    <Button title='Salvar' onPress={()=>{
+                    <TouchableOpacity style={styles.botao} onPress={()=>{
                         let ed = JSON.parse(JSON.stringify(edicao));
                         delete ed.foto_perfil;
                         console.log(ed);
                         editarPerfil();
-                    }} />
-                    <Button title='Cancelar' onPress={()=>navigation.goBack()} />
+                    }}>
+                        <Text style={styles.conteudobotao}>Salvar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.botao} onPress={()=>navigation.goBack()}>
+                        <Text style={styles.conteudobotao}>Cancelar</Text>
+                    </TouchableOpacity>
                 </View>
 
 

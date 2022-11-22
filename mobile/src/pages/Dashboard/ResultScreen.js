@@ -3,6 +3,7 @@ import { React, useState, useContext, useEffect } from 'react';
 import { View, Text, FlatList, TextInput, Button, 
          TouchableOpacity, ScrollView, Image, ActivityIndicator} 
          from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles';
 
@@ -247,21 +248,40 @@ function ResultScreen({ route, navigation }){
 
     return(
         isLoading ? <ActivityIndicator size='large'/> : 
-        <View style={styles.container}>
-            <Text style={styles.titulo}>Resultados</Text>
-            <View style={styles.searchContainer} >
+        <View style={styles.containerfeed}>
+            <View style={styles.titulocontainer}>
+                <Text style={styles.tituloresult}>Resultados</Text>
+            </View>
+            <View style={styles.searchContainerresult}>
                 <TextInput style={styles.input} 
                 value={searchInput} 
                 placeholder='Procurar resultados' 
                 onChangeText={(text)=>setSearchInput(text)} 
                 />
-                <Button title='Procurar' onPress={handleSearchAll} />
+                <TouchableOpacity onPress={handleSearchAll}>
+                    <Ionicons style={styles.arrumaicon}
+                        name='search-outline' 
+                        size={45}
+                        color='white' 
+                    />     
+                </TouchableOpacity>
             </View>
-                <View style={styles.filtros_container} >
-                <Button title='Tudo' onPress={handleSearchAll} />
-                <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
-                <Button title='Instituições' onPress={getInstituicoesByName}/>
-            </View>
+                <View style={styles.containerresults}>
+                    <View style={styles.botoesresults}>
+                    <View style={styles.filtros_container}> 
+                            <TouchableOpacity style={styles.botao} onPress={handleSearchAll}>
+                                <Text style={styles.conteudoresult}>Tudo</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.botao} onPress={getPublicacoesByName}>
+                                <Text style={styles.conteudoresult}>Publicações</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.botao} onPress={getInstituicoesByName}>
+                                <Text style={styles.conteudoresult}>Instituições</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+
 
             <HandleListFilters/>
             

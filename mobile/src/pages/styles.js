@@ -10,7 +10,16 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       backgroundColor: '#004475',
       width: '100%',
-      paddingVertical: 20,
+      paddingTop: 30,
+      height: Dimensions.get('window').height,
+      alignItems: 'center',
+    },
+    containerlogin: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#004475',
+      width: '100%',
+      paddingTop: 150,
       height: Dimensions.get('window').height,
       alignItems: 'center',
     },
@@ -56,10 +65,13 @@ const styles = StyleSheet.create({
 
     },
     alinharmeio:{
+      display: 'flex',
+      alignItems: 'center',
       paddingLeft: 20,
       paddingRight: 20
     },
     scrollContainer: {
+        paddingTop: 30,
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#004475',
@@ -96,6 +108,16 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       display:'flex',
     },
+    tituloresult: {
+      fontWeight : 'bold',
+      fontSize : 30,
+      color:'white',
+      paddingBottom:7,
+      paddingTop:7,
+      alignItems: 'center',
+      justifyContent: 'center',
+      display:'flex',
+    },
     logo:{
       width: 190, 
       height: 60
@@ -111,10 +133,22 @@ const styles = StyleSheet.create({
       fontSize : 20,
       color:'white',
     },
+    conteudobotao:{
+      fontSize : 20,
+      color:'black',
+    },
+    conteudobotaoperfil:{
+      fontSize : 17,
+      color:'black',
+    },
     timelocal:{
       fontSize : 20,
       color:'white',
       paddingLeft: 20
+    },
+    conteudoresult:{
+      fontSize : 14,
+      color:'black',
     },
     conteudobold:{
       fontSize : 20,
@@ -158,7 +192,18 @@ const styles = StyleSheet.create({
         color: 'black',
         borderWidth: 1,
         borderColor: 'blue',
-        borderRadius: 15
+        borderRadius: 15,
+    },
+    pickerInputperfil:{
+        width : Dimensions.get('window').width * 0.7,
+        height: 20,
+        padding : 10,
+        margin : 10,
+        backgroundColor: '#0882A3',
+        color: 'white',
+        borderWidth: 1,
+        borderColor: 'blue',
+        borderRadius: '50%'
     },
     searchContainer:{
         display: 'flex',
@@ -170,6 +215,15 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         height: Dimensions.get('window').height * 0.1,
     },
+    searchContainerresult:{
+      display: 'flex',
+      flexDirection : 'row',
+      alignItems : 'center',
+      backgroundColor: '#004475',
+      paddingLeft:30,
+      paddingRight:30,
+      height: Dimensions.get('window').height * 0.1,
+  },
     filtros_container:{
         display:'flex',
         flexDirection:'row',
@@ -231,6 +285,8 @@ const styles = StyleSheet.create({
       marginVertical:20,
       alignItems: 'center',
       justifyContent: 'center',
+      borderWidth: 3,
+      borderColor: 'white'
     },
     foto_icon:{
       width: 50,
@@ -256,8 +312,9 @@ const styles = StyleSheet.create({
       paddingHorizontal: 20,
       paddingVertical: 10,
       marginVertical: 5,
-      backgroundColor : '#99B3FF',
-      width: Dimensions.get('window').width - 20
+      backgroundColor : '#0882A3',
+      width: Dimensions.get('window').width - 20,
+      borderRadius: 15
     },
     botao:{
       alignItems: 'center',
@@ -272,11 +329,24 @@ const styles = StyleSheet.create({
       color: 'black',
       fontSize: 10
     }, 
+    botaoeditperfil:{
+      alignItems: 'center',
+      backgroundColor: '#D0EBFF',
+      padding: 10,
+      borderRadius:15,
+      width: 100,
+      margin:10,
+      border: 2,
+      borderStyle: 'solid',
+      borderColor: 'black',
+      color: 'black',
+      fontSize: 10
+    },
     botaoC:{
       backgroundColor: '#D0EBFF',
       padding: 10,
       borderRadius:15,
-      width: 150,
+      width: 200,
       margin:10,
       border: 2,
       borderStyle: 'solid',
@@ -325,7 +395,7 @@ const styles = StyleSheet.create({
     botaotext1: {
       color: 'white',
       fontWeight: 'bold',
-      fontSize: 16
+      fontSize: 16,
     },
     botaoinscrito: {
       alignItems: 'center',
@@ -396,6 +466,32 @@ const styles = StyleSheet.create({
       color: 'black',
       fontSize: 10
     }, 
+    likepubY:{
+      color: '#E10B00',
+      paddingLeft: 20
+    },
+    likepubN:{
+      color: 'white',
+      paddingLeft: 20
+    },
+    coricons:{
+      color:'white'
+    },
+    margemdetalhes:{
+      marginLeft: 15
+    },
+    arrumaicon:{
+      paddingLeft: 10,
+    },
+    containerresults:{
+      backgroundColor: '#004475',
+      width: '100%',
+      paddingLeft: 20,
+      paddingRight: 20
+    },
+    botoesresults:{
+      paddingRight: 10
+    }
   });
 
   export default styles;
