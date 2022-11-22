@@ -108,7 +108,7 @@ Implementações Futuras
 * Intervenções que vão aparecer como um Pop-Up, movimentos sociais que estão acontecendo e que merecem atenção (ex.: Movimento Salve o Morro do Céu)
 * Comunidades e chats de bate-papo para os usuários terem mais interação entre si e fazer movimentos eles mesmos dentro da comunidade local.
 * Maior contato entre a Ong e o usuário, por meio de chat direto.
-* Mais ferramentas dentro do painel de controle, como uma aba de doações e transações, uma aba de equipe e gerenciamento de profissionais da ong.
+* Mais ferramentas dentro do painel de controle, como uma aba de doações e transações.
 
 Gibi turma da mônica
 
