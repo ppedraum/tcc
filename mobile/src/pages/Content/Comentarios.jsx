@@ -103,14 +103,7 @@ function Comentarios({id_publicacao}){
                     /* Se o id_usuario do comentário for igual ao id do usuário logado, podemos deletar o comm */
                     commPai.estrutura.id_usuario == usuario.id ? 
                     <>
-                    <TouchableOpacity
-                        onPress={()=>handleSetCommselecionado(commPai)}>
-                        <Ionicons 
-                        name='trash'
-                        size={25}
-                        color={'#fff'} 
-                        />
-                    </TouchableOpacity> 
+                    
                             
                     </>
                     :
@@ -122,8 +115,16 @@ function Comentarios({id_publicacao}){
                     {new Date(commPai.estrutura.datetime_post).toLocaleDateString()}
                     
                 </Text>
-               
-                <Text style={styles.conteudo}>{commPai.estrutura.conteudo}</Text>
+               <View style={styles.filtros_container}>
+                <Text style={styles.conteudo}>{commPai.estrutura.conteudo} 
+                    <TouchableOpacity style={styles.arrumaicon}
+                        onPress={()=>handleSetCommselecionado(commPai)}>
+                        <Ionicons 
+                        name='trash'
+                        size={25}
+                        color={'#fff'} 
+                        />
+                    </TouchableOpacity> </Text></View>
                 <FormComentario onComentar={comentar} tipo='icon' id_pai={commPai.estrutura.id} />
                 
                 <View style={{marginLeft:20}} >

@@ -3,6 +3,7 @@ import { React, useState, useContext, useEffect } from 'react';
 import { View, Text, FlatList, TextInput, Button, 
          TouchableOpacity, ScrollView, Image, ActivityIndicator} 
          from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles';
 
@@ -71,7 +72,7 @@ function ResultScreen({ route, navigation }){
     function HandleListAll(){
         if(instituicoes.length == 0 && publicacoes.length == 0)
             return (
-            <Text style={styles.conteudo}>
+            <Text style={styles.conteudoresult}>
                 Não foi encontrado nenhum resultado para essa pesquisa. Tente refazê-la em outras palavras.
             </Text>
             );
@@ -79,17 +80,18 @@ function ResultScreen({ route, navigation }){
         else
             return (
             <ScrollView>
-                <Text style={styles.titulo} >Instituições</Text>
+                <View style={styles.containerresultados}>
+                <Text style={styles.tituloresultados}>Instituições</Text>
 
                 {
                     instituicoes.length == 0 ?
-                    <Text style={styles.conteudo} >Não foi encontrado nehuma instituição.</Text>
+                    <Text style={styles.conteudoresult}>Não foi encontrado nehuma instituição.</Text>
                     :
                     instituicoes.map((inst)=>
                     <TouchableOpacity key={inst.id} onPress={()=>navigation.navigate('PerfilInst', {
                         id:inst.id
                     })} >
-                        <View style={styles.flatlist_cell} >
+                        <View style={styles.flatlist_cell_result} >
                             <Image source={{uri: 'data:image/jpeg;base64,' + inst.foto_perfil}} style={styles.foto_perfil} />
                             <Text style={styles.titulo} >{inst.nome_fantasia}</Text>
                         </View>
@@ -97,7 +99,7 @@ function ResultScreen({ route, navigation }){
                     )
                 }
 
-                <Text style={styles.titulo} >Publicações</Text>
+                <Text style={styles.tituloresultados}>Publicações</Text>
 
                 {
                     publicacoes.length == 0 ?
@@ -116,8 +118,10 @@ function ResultScreen({ route, navigation }){
                                         styles.flatlist_cell_evento
                                     }
                                 >
-                                    <Text>{publicacao.publicacao.tipo_publicacao}</Text>
-                                    <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    <View style={styles.flatlist_text}>
+                                    <Text style={styles.conteudobold}>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    </View>
+                                    <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_publicacao}/>
                                     <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
 
@@ -131,7 +135,9 @@ function ResultScreen({ route, navigation }){
                                 styles.flatlist_cell_evento
                                 }
                                 >
-                                    <Text>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    <View style={styles.flatlist_text}>
+                                    <Text style={styles.conteudobold}>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    </View>
                                     <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
                                     <Text style={styles.conteudo} >{publicacao.preview_text}</Text>
@@ -145,6 +151,7 @@ function ResultScreen({ route, navigation }){
                     </TouchableOpacity>
                     )
                 }
+                </View>
             </ScrollView>    
             );
     }
@@ -176,8 +183,8 @@ function ResultScreen({ route, navigation }){
                                             styles.flatlist_cell_evento
                                         }
                                     >
-                                        <Text>{item.publicacao.tipo_publicacao}</Text>
-                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                        <Text style={styles.titulo_galeriaresult}>{item.publicacao.tipo_publicacao}</Text>
+                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_publicacao}/>
                                         <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                         <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
 
@@ -191,7 +198,7 @@ function ResultScreen({ route, navigation }){
                                             styles.flatlist_cell_evento
                                         }
                                     >
-                                        <Text>{item.publicacao.tipo_publicacao}</Text>
+                                        <Text style={styles.titulo_galeriaresult}>{item.publicacao.tipo_publicacao}</Text>
                                         <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                         <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
                                         <Text style={styles.conteudo} >{item.preview_text}</Text>
@@ -228,7 +235,7 @@ function ResultScreen({ route, navigation }){
                         id:item.id
                     })} >
                         <View style={styles.flatlist_cell} >
-                            <Image source={{uri: 'data:image/jpeg;base64,' + item.foto_perfil}} style={styles.foto_perfil} />
+                            <Image source={{uri: 'data:image/jpeg;base64,' + item.foto_publicacao}} style={styles.foto_publicacao} />
                             <Text style={styles.titulo} >{item.nome_fantasia}</Text>
                         </View>
                     </TouchableOpacity>
@@ -247,21 +254,40 @@ function ResultScreen({ route, navigation }){
 
     return(
         isLoading ? <ActivityIndicator size='large'/> : 
-        <View style={styles.container}>
-            <Text style={styles.titulo}>Resultados</Text>
-            <View style={styles.searchContainer} >
+        <View style={styles.containerfeed}>
+            <View style={styles.titulocontainer}>
+                <Text style={styles.tituloresult}>Resultados</Text>
+            </View>
+            <View style={styles.searchContainerresult}>
                 <TextInput style={styles.input} 
                 value={searchInput} 
                 placeholder='Procurar resultados' 
                 onChangeText={(text)=>setSearchInput(text)} 
                 />
-                <Button title='Procurar' onPress={handleSearchAll} />
+                <TouchableOpacity onPress={handleSearchAll}>
+                    <Ionicons style={styles.arrumaicon}
+                        name='search-outline' 
+                        size={45}
+                        color='white' 
+                    />     
+                </TouchableOpacity>
             </View>
-                <View style={styles.filtros_container} >
-                <Button title='Tudo' onPress={handleSearchAll} />
-                <Button title='Publicacoes'  onPress={getPublicacoesByName}/>
-                <Button title='Instituições' onPress={getInstituicoesByName}/>
-            </View>
+                <View style={styles.containerresults}>
+                    <View style={styles.botoesresults}>
+                    <View style={styles.filtros_container}> 
+                            <TouchableOpacity onPress={handleSearchAll}>
+                                <Text style={styles.conteudonegrito}>Tudo</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity  onPress={getPublicacoesByName}>
+                                <Text style={styles.conteudonegrito}>Publicações</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={getInstituicoesByName}>
+                                <Text style={styles.conteudonegrito}>Instituições</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+
 
             <HandleListFilters/>
             

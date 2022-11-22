@@ -65,11 +65,15 @@ function Feed({navigation}) {
                  placeholder={'Buscar por publicações'}
                   onChangeText={(text)=>setSearchInput(text)} 
                 />
-                <TouchableOpacity style={styles.botaofeed1}
+                <TouchableOpacity
                     onPress={()=>{
-                        if(searchInput.trim() != 0)
-                            navigation.navigate('ResultScreen', { searchInput })}}>
-                <Text>Procurar</Text>                    
+                    if(searchInput.trim() != 0)
+                    navigation.navigate('ResultScreen', { searchInput })}}>
+                    <Ionicons style={styles.arrumaicon}
+                        name='search-outline' 
+                        size={45}
+                        color='white' 
+                    />                   
                 </TouchableOpacity>                
             </View>    
                 {

@@ -88,7 +88,7 @@ function PerfilUsuario({navigation}){
                 follows.length != 0?
                 <HandleFollowsRender/>
                 :
-                <Text>Você ainda não está seguindo nenhuma instituição!</Text>
+                <Text style={styles.conteudo}>Você ainda não está seguindo nenhuma instituição!</Text>
                 }
                 
             </ScrollView>

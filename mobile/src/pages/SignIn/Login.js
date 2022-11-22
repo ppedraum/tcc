@@ -53,7 +53,7 @@ function Login({route, navigation}){
             <View>
                 <TouchableOpacity style={styles.botao}
                     onPress={()=>handleLogin()}>
-                    <Text>Login</Text>
+                    <Text style={styles.conteudobotao}>Login</Text>
                 </TouchableOpacity>
             </View>
             <View style={{margin:20}} >

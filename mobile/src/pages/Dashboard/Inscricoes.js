@@ -109,7 +109,9 @@ function Inscricoes({navigation}){
             </Dialog.Container>
             {
                 publiInscritas.length == 0 ?
-                <Text style={styles.conteudo} >Você não está inscrito em nenhum evento!</Text>
+                <View style={styles.conteudoinscricao}>
+                <Text style={styles.conteudo}>Você não está inscrito em nenhum evento!</Text>
+                </View>
                 :
                 <FlatList
                 extraData={publiInscritas}
