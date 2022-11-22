@@ -195,7 +195,7 @@ function PerfilInst({route, navigation}){
                         
                     }
                 </TouchableOpacity>
-                <Text>{msgFollow}</Text>
+                <Text style={styles.conteudo}>{msgFollow}</Text>
                 <View style={styles.galeria} >
                 <HandleGaleriaRender/>
                 </View>

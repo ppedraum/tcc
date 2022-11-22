@@ -62,7 +62,15 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: '#004475',
-
+    },
+    containerresultados:{
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#fff',
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     alinharmeio:{
       display: 'flex',
@@ -90,6 +98,11 @@ const styles = StyleSheet.create({
       color:'white',
       paddingBottom:10,
       paddingTop:10
+    },
+    tituloresultados:{
+      fontWeight : 'bold',
+      fontSize : 30,
+      color:'black',
     },
     titulologin:{
       fontWeight : 'bold',
@@ -129,9 +142,24 @@ const styles = StyleSheet.create({
       width: '100%',
       backgroundColor: '#004475',
     },
+    titulocontainer: {
+      display:'flex',
+      alignItems:'center',
+      justifyContent: 'center',
+      width: '100%',
+      backgroundColor: '#004475',
+    },
     conteudo:{
       fontSize : 20,
       color:'white',
+    },
+
+    conteudoinscricao:{
+      paddingTop: '85%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex'
+
     },
     conteudobotao:{
       fontSize : 20,
@@ -148,6 +176,10 @@ const styles = StyleSheet.create({
     },
     conteudoresult:{
       fontSize : 14,
+      color:'black',
+    },
+    conteudoresultados:{
+      fontSize : 20,
       color:'black',
     },
     conteudobold:{
@@ -240,6 +272,11 @@ const styles = StyleSheet.create({
       fontWeight : 'bold',
       fontSize : 15
     },
+    titulo_galeriaresult:{
+      fontWeight : 'bold',
+      fontSize : 15,
+      color:'white'
+    },
     galeria_cell:{
         display: "flex",
         flexDirection: "row",
@@ -257,6 +294,16 @@ const styles = StyleSheet.create({
       paddingVertical: 20,
       marginVertical: 5,
       backgroundColor : '#0882A3',
+      minWidth: 370,
+      color: '#FFF'
+    },
+    flatlist_cell_result:{
+      display: "flex",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginVertical: 5,
+      backgroundColor : '#0044A5',
       minWidth: 370,
       color: '#FFF'
     },
