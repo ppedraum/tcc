@@ -103,6 +103,8 @@ const styles = StyleSheet.create({
       fontWeight : 'bold',
       fontSize : 30,
       color:'black',
+      paddingTop: 5,
+      paddingBottom: 5
     },
     titulologin:{
       fontWeight : 'bold',
@@ -186,6 +188,12 @@ const styles = StyleSheet.create({
       fontSize : 20,
       color:'white',
       fontWeight:'bold'
+    },
+    conteudonegrito:{
+      fontSize : 20,
+      color:'white',
+      fontWeight:'bold',
+      padding: 15,
     },
     smalltext:{
       fontSize:17,
@@ -287,6 +295,16 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').width * 0.30,
         margin: 6
     },
+    galeria_cell_evento:{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: '#2B9972',
+        width: Dimensions.get('window').width * 0.30,
+        height: Dimensions.get('window').width * 0.30,
+        margin: 6
+    },
     flatlist_cell:{
       display: "flex",
       alignItems: "center",
@@ -303,7 +321,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 20,
       paddingVertical: 20,
       marginVertical: 5,
-      backgroundColor : '#0044A5',
+      backgroundColor : '#61407D',
       minWidth: 370,
       color: '#FFF'
     },
@@ -467,7 +485,7 @@ const styles = StyleSheet.create({
       padding: 10,
       borderRadius:15,
       width: 150,
-      margin:10,
+      marginTop:20,
       border: 2,
       borderStyle: 'solid',
       borderColor: 'black',
@@ -485,7 +503,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#6399FA',
       padding: 10,
       borderRadius:15,
-      margin:10,
+      marginTop:20,
       border: 2,
       borderStyle: 'solid',
       borderColor: 'black',

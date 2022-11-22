@@ -118,8 +118,10 @@ function ResultScreen({ route, navigation }){
                                         styles.flatlist_cell_evento
                                     }
                                 >
-                                    <Text style={styles.titulo_galeriaresult}>{publicacao.publicacao.tipo_publicacao}</Text>
-                                    <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                    <View style={styles.flatlist_text}>
+                                    <Text style={styles.conteudobold}>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    </View>
+                                    <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_publicacao}/>
                                     <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
 
@@ -133,7 +135,9 @@ function ResultScreen({ route, navigation }){
                                 styles.flatlist_cell_evento
                                 }
                                 >
-                                    <Text style={styles.titulo_galeriaresult}>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    <View style={styles.flatlist_text}>
+                                    <Text style={styles.conteudobold}>{publicacao.publicacao.tipo_publicacao}</Text>
+                                    </View>
                                     <Text style={styles.titulo} >{publicacao.publicacao.titulo}</Text>
                                     <Text style={styles.conteudo}> Por {publicacao.nome_instituicao}</Text>
                                     <Text style={styles.conteudo} >{publicacao.preview_text}</Text>
@@ -180,7 +184,7 @@ function ResultScreen({ route, navigation }){
                                         }
                                     >
                                         <Text style={styles.titulo_galeriaresult}>{item.publicacao.tipo_publicacao}</Text>
-                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_perfil}/>
+                                        <Image source={{uri:'data:image/jpeg;base64,' + item.foto_publicacao.foto}} style={styles.foto_publicacao}/>
                                         <Text style={styles.titulo} >{item.publicacao.titulo}</Text>
                                         <Text style={styles.conteudo}> Por {item.nome_instituicao}</Text>
 
@@ -231,7 +235,7 @@ function ResultScreen({ route, navigation }){
                         id:item.id
                     })} >
                         <View style={styles.flatlist_cell} >
-                            <Image source={{uri: 'data:image/jpeg;base64,' + item.foto_perfil}} style={styles.foto_perfil} />
+                            <Image source={{uri: 'data:image/jpeg;base64,' + item.foto_publicacao}} style={styles.foto_publicacao} />
                             <Text style={styles.titulo} >{item.nome_fantasia}</Text>
                         </View>
                     </TouchableOpacity>
@@ -271,14 +275,14 @@ function ResultScreen({ route, navigation }){
                 <View style={styles.containerresults}>
                     <View style={styles.botoesresults}>
                     <View style={styles.filtros_container}> 
-                            <TouchableOpacity style={styles.botao} onPress={handleSearchAll}>
-                                <Text style={styles.conteudoresult}>Tudo</Text>
+                            <TouchableOpacity onPress={handleSearchAll}>
+                                <Text style={styles.conteudonegrito}>Tudo</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.botao} onPress={getPublicacoesByName}>
-                                <Text style={styles.conteudoresult}>Publicações</Text>
+                            <TouchableOpacity  onPress={getPublicacoesByName}>
+                                <Text style={styles.conteudonegrito}>Publicações</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.botao} onPress={getInstituicoesByName}>
-                                <Text style={styles.conteudoresult}>Instituições</Text>
+                            <TouchableOpacity onPress={getInstituicoesByName}>
+                                <Text style={styles.conteudonegrito}>Instituições</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

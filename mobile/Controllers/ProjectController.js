@@ -158,8 +158,6 @@ router.get('/galeria/:id_ong', async (req, res)=>{
             {
                 publicacao:publicacoes[i], 
                 foto_publicacao:foto, 
-                nome_instituicao:inst.nome_fantasia,
-                preview_text: preview_text
             }
         );
     }

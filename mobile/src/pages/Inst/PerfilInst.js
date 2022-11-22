@@ -41,11 +41,21 @@ function PerfilInst({route, navigation}){
             <TouchableOpacity key={publicacao.publicacao.id} onPress={()=>navigation.push('Publicacao', {id:publicacao.publicacao.id})} >
                     {
                         publicacao.foto_publicacao != null ?
-                        <View style={styles.galeria_cell} >
+                        <View 
+                            style={
+                            styles.galeria_cell_evento}
+                        >
                             <Image source={{uri:'data:image/jpeg;base64,' + publicacao.foto_publicacao.foto}} style={styles.foto_galeria}/>
                         </View>
                         :
-                        <View style={styles.galeria_cell}  >
+                        <View 
+                        style={
+                            publicacao.publicacao.id_evento != null?
+                            styles.galeria_cell_evento
+                            :
+                            styles.galeria_cell
+                            }  
+                        >
                             <Text style={styles.titulo_galeria} >{publicacao.publicacao.titulo}</Text>
                         </View>
                     }
@@ -153,7 +163,7 @@ function PerfilInst({route, navigation}){
                 animationType='fade'
                 onRequestClose={()=>setFolModalVisible(!folModalVisible)}
                 >
-                    <View style={styles.container}>
+                    <View style={styles.containeraviso}>
                         <Text style={styles.conteudo}>
                             {isFollowing?
                             'Você tem certeza que deseja parar de seguir?'
